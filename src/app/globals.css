@@ -2,7 +2,7 @@
 @source "../**/*.{tsx,ts,jsx,js}";
 
 @theme {
-  --color-background: #FAFAFA;
+  --color-background: #F7F7F7;
   --color-foreground: #0F0C0D;
   --color-accent: #F4CDD4;
   --color-accent-strong: #E8649A;
@@ -39,7 +39,7 @@ html {
 }
 
 body {
-  background-color: #FAFAFA;
+  background-color: #F7F7F7;
   color: #0F0C0D;
   font-family: 'Figtree', sans-serif;
   -webkit-font-smoothing: antialiased;

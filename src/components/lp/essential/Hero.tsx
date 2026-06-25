@@ -14,7 +14,7 @@ export function Hero() {
   ]
 
   return (
-    <section className="pt-24 md:pt-28 px-4 pb-16 md:pb-24 bg-[#FAFAFA]">
+    <section className="pt-24 md:pt-28 px-4 pb-16 md:pb-24 bg-[#F7F7F7]">
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Copy */}

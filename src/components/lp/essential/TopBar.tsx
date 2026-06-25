@@ -90,7 +90,7 @@ export function TopBar() {
       </div>
 
       {/* Logo bar — some quando sticky CTA aparece */}
-      <div className={`bg-[#FAFAFA] border-b border-[#E5E7EB] overflow-hidden flex items-center px-4 transition-all duration-300 ${stickyVisible ? 'max-h-0 opacity-0' : 'max-h-14 opacity-100'}`}>
+      <div className={`bg-[#F7F7F7] overflow-hidden flex items-center px-4 pt-2 transition-all duration-300 ${stickyVisible ? 'max-h-0 opacity-0' : 'max-h-14 opacity-100'}`}>
         <div className="max-w-[1100px] mx-auto w-full">
           <Image
             src="/images/bubbles-logo.svg"

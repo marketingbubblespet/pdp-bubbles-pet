@@ -5,7 +5,7 @@ const paymentMethods = ['Pix', 'Visa', 'Mastercard', 'Amex', 'Boleto']
 
 export function GuaranteeBlock() {
   return (
-    <section className="px-4 py-16 md:py-24 bg-[#FAFAFA]">
+    <section className="px-4 py-16 md:py-24 bg-[#F7F7F7]">
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mb-10">
           {/* Garantia */}

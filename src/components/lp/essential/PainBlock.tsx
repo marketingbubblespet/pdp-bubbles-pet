@@ -21,7 +21,7 @@ const cards = [
 
 export function PainBlock() {
   return (
-    <section className="px-4 py-16 md:py-24 bg-[#FAFAFA]">
+    <section className="px-4 py-16 md:py-24 bg-[#F7F7F7]">
       <div className="max-w-[1100px] mx-auto">
         <h2 className="text-2xl md:text-3xl font-bold leading-tight text-[#0F0C0D] mb-3 text-center">
           O que muda no seu petshop com o shampoo certo.

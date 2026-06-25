@@ -30,7 +30,7 @@ export function BrandBlock() {
       <div className="absolute inset-0 bg-black/70 z-10" />
 
       {/* Conteúdo */}
-      <div className="relative z-20 max-w-[1100px] mx-auto w-full text-[#FAFAFA]">
+      <div className="relative z-20 max-w-[1100px] mx-auto w-full text-[#F7F7F7]">
         <p className="text-xs font-bold uppercase tracking-widest text-[#F4CDD4] mb-3 text-center">
           Bubbles Pet
         </p>

@@ -13,7 +13,7 @@ const rows = [
 
 export function ComparisonBlock() {
   return (
-    <section className="px-4 py-16 md:py-24 bg-[#FAFAFA]">
+    <section className="px-4 py-16 md:py-24 bg-[#F7F7F7]">
       <div className="max-w-[1100px] mx-auto">
         <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           O padrão Bubbles
