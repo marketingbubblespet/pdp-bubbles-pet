@@ -14,11 +14,6 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: 'Shampoo Pet Neutro Essential 5L — Bubbles Pet',
   description: 'Shampoo profissional para groomers. Diluição 1:5, rende 30L e ~300 banhos.',
-  icons: {
-    icon: '/images/groomer-badge.png',
-    shortcut: '/images/groomer-badge.png',
-    apple: '/images/groomer-badge.png',
-  },
 }
 
 export default function RootLayout({
@@ -36,7 +31,7 @@ export default function RootLayout({
         <UTMCapture />
         {children}
 
-        {/* Google Analytics 4 */}
+        {/* Google: GA4 (x2) + Google Ads (conversão e remarketing) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-KLHVV853CE"
           strategy="afterInteractive"
@@ -46,6 +41,8 @@ export default function RootLayout({
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-KLHVV853CE');
+          gtag('config', 'G-10FB3FBV6V');
+          gtag('config', 'AW-10809385596');
         `}</Script>
 
         {/* Facebook Pixel */}

@@ -19,6 +19,7 @@ export function BrandBlock() {
         loop
         playsInline
         preload="none"
+        poster="/images/brand-video-poster.svg"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
         <source
