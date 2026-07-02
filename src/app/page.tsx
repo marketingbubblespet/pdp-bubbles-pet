@@ -6,6 +6,11 @@ const pages = [
     label: 'Essential 5L',
     description: 'Shampoo Neutro Professional — LP de vendas',
   },
+  {
+    href: '/masterclass/spitz-alemao',
+    label: 'MasterClass Spitz Alemão',
+    description: 'Página de captura da aula ao vivo com Guilherme Mendes',
+  },
 ]
 
 export default function Sitemap() {

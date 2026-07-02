@@ -63,7 +63,7 @@ export function ReviewsBlock() {
               <div className="flex gap-0.5 mb-3">
                 {[...Array(r.stars)].map((_, i) => <StarIcon key={i} />)}
               </div>
-              <p className="text-[14px] text-[#0F0C0D] leading-relaxed">"{r.text}"</p>
+              <p className="text-[14px] text-[#0F0C0D] leading-relaxed">&quot;{r.text}&quot;</p>
             </div>
           ))}
         </div>

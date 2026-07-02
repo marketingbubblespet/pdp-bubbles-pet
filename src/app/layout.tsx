@@ -56,6 +56,8 @@ export default function RootLayout({
           fbq('track','PageView');
         `}</Script>
         <noscript>
+          {/* Pixel de fallback do Meta exige <img> nativo: só renderiza sem JS, onde next/image não funciona. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             height="1"
             width="1"
