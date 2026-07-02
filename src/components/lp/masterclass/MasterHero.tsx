@@ -21,6 +21,16 @@ export function MasterHero() {
           <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3">
             {MC.program} · Aula ao vivo e gratuita
           </p>
+
+          {/* Condição de acesso, em destaque logo no topo */}
+          <div className="inline-flex items-center gap-2 bg-[#fdf0f3] border border-[#F4CDD4] rounded-full px-3.5 py-2 mb-4">
+            <span className="text-base leading-none">🔓</span>
+            <p className="text-xs md:text-sm font-bold text-[#0F0C0D]">
+              <HighlightPrice text={`Acesso liberado comprando ${MC.minPurchase}+ até ${MC.purchaseDeadline}`} />
+              <span className="font-medium text-[#6B7280]"> · site, WhatsApp oficial ou distribuidores Bubbles</span>
+            </p>
+          </div>
+
           <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.02] text-[#0F0C0D] mb-4">
             {MC.title}
           </h1>
@@ -78,7 +88,7 @@ export function MasterHero() {
             </MasterCta>
 
             <p className="mt-3 text-xs text-[#9ca3af]">
-              <HighlightPrice text={`Participação gratuita para quem comprar ${MC.minPurchase}+ na loja Bubbles.`} />
+              <HighlightPrice text={`Participação gratuita para quem comprar ${MC.minPurchase}+ até ${MC.purchaseDeadline}.`} />
             </p>
           </EventGate>
         </div>

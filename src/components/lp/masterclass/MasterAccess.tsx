@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { MC, MC_STEPS, MC_PRODUCTS } from '@/lib/masterclass-spitz'
+import { MC, MC_STEPS, MC_PRODUCTS, MC_PURCHASE_CHANNELS } from '@/lib/masterclass-spitz'
 import { CtaLink } from '@/components/ui/CtaLink'
 import { HighlightPrice } from './HighlightPrice'
 import { trackLeadClick } from './trackLead'
@@ -17,12 +17,12 @@ export function MasterAccess() {
         </h2>
         <p className="text-sm md:text-base text-[#6B7280] text-center max-w-[640px] mx-auto mb-10">
           <HighlightPrice
-            text={`Garanta sua vaga comprando qualquer combinação de produtos acima de ${MC.minPurchase} na loja Bubbles. Simples assim.`}
+            text={`Garanta sua vaga comprando qualquer combinação de produtos acima de ${MC.minPurchase} até ${MC.purchaseDeadline}. Simples assim.`}
           />
         </p>
 
         {/* Passo a passo */}
-        <div className="grid md:grid-cols-3 gap-4 mb-12">
+        <div className="grid md:grid-cols-3 gap-4 mb-6">
           {MC_STEPS.map((step) => (
             <div key={step.n} className="bg-[#F7F7F7] rounded-[10px] p-6 border border-[#E5E7EB]">
               <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#E8649A] text-white font-extrabold mb-3">
@@ -35,15 +35,23 @@ export function MasterAccess() {
           ))}
         </div>
 
-        {MC.purchaseDeadline ? (
-          <p className="text-center text-sm font-semibold text-[#E8649A] mb-10">
-            Prazo de compra: {MC.purchaseDeadline}
+        {/* Prazo e canais de compra */}
+        <div className="bg-[#fdf0f3] border border-[#F4CDD4] rounded-[10px] p-5 md:p-6 mb-10">
+          <p className="text-center text-sm font-bold text-[#E8649A] mb-3">
+            Prazo de compra: até {MC.purchaseDeadline}
           </p>
-        ) : (
-          <p className="text-center text-[11px] font-bold uppercase tracking-widest text-[#E8649A] mb-10">
-            [Aguardando prazo de compra]
-          </p>
-        )}
+          <div className="flex flex-wrap justify-center gap-2">
+            {MC_PURCHASE_CHANNELS.map((channel) => (
+              <span
+                key={channel}
+                className="inline-flex items-center gap-1.5 bg-white border border-[#F4CDD4] rounded-full px-3 py-1.5 text-xs font-semibold text-[#0F0C0D]"
+              >
+                <span className="text-[#3DB85C]">✓</span>
+                {channel}
+              </span>
+            ))}
+          </div>
+        </div>
 
         {/* Bloco de produtos (shoppable) */}
         <div className="bg-[#fdf0f3] rounded-[10px] p-6 md:p-8 border border-[#F4CDD4]">
@@ -88,19 +96,6 @@ export function MasterAccess() {
               Ver todos os produtos na loja →
             </CtaLink>
           </div>
-        </div>
-
-        {/* Confirmação de compra */}
-        <div className="mt-8 text-center">
-          <p className="text-sm text-[#6B7280] mb-3">
-            Já comprou? Envie o número do seu pedido para confirmar a sua vaga e receber o link no dia.
-          </p>
-          <CtaLink
-            href={`${MC.whatsapp}?text=${encodeURIComponent(MC.whatsappOrderMsg)}`}
-            className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold rounded-[10px] px-6 py-3.5 hover:brightness-110 active:scale-95 transition-all"
-          >
-            Confirmar compra no WhatsApp
-          </CtaLink>
         </div>
       </div>
     </section>

@@ -28,14 +28,12 @@ export const MC = {
   // Condição de acesso
   minPurchase: 'R$ 499',
   storeUrl: 'https://www.bubbles.com.br',
-  purchaseDeadline: '', // [AGUARDANDO INFORMAÇÕES] prazo de compra para garantir o acesso
+  purchaseDeadline: '31 de julho',
+  purchaseWindow: 'em julho', // usado em frases curtas, ex: "comprando R$ 499+ em julho"
 
   // Contato de dúvidas (WhatsApp geral da marca)
   whatsapp: BRAND.whatsapp,
   whatsappMsg: 'Olá! Tenho uma dúvida sobre a MasterClass de Spitz Alemão.',
-  // Mensagem para quem já comprou confirmar o acesso enviando o número do pedido
-  whatsappOrderMsg:
-    'Olá! Estou vindo do site da MasterClass de Spitz Alemão e já fiz minha compra. Meu número do pedido é: ',
   // Mensagem de quem quer ser avisado da próxima edição (popup de saída / evento encerrado)
   whatsappReminderMsg:
     'Olá! Quero ser avisado(a) quando abrirem as inscrições da próxima MasterClass de Spitz Alemão.',
@@ -45,6 +43,13 @@ export const MC = {
   // Minutos de prévia liberados antes de pausar/mutar automaticamente
   videoPreviewMinutes: 20,
 } as const
+
+// Onde vale a compra que libera o acesso
+export const MC_PURCHASE_CHANNELS = [
+  'Site oficial da Bubbles',
+  'WhatsApp oficial de vendas Bubbles',
+  'Distribuidores autorizados Bubbles',
+] as const
 
 // O que você vai aprender (resultados concretos)
 export const MC_LEARN = [
@@ -95,6 +100,7 @@ export const MC_DETAILS = [
   { label: 'Quando', value: '27 de julho, às 19h (horário de Brasília)' },
   { label: 'Duração', value: 'Aproximadamente 1 hora' },
   { label: 'Onde', value: 'Ao vivo e online, pelo Google Meet' },
+  { label: 'Prazo de compra', value: 'Até 31 de julho, no site, WhatsApp oficial de vendas ou distribuidores autorizados Bubbles' },
   { label: 'Como recebe o link', value: 'Pelo WhatsApp, no dia da aula, após confirmar o número do pedido' },
   { label: 'Lembretes', value: '1 dia antes, 1 hora antes e 15 minutos antes' },
   { label: 'Replay', value: 'A aula fica salva no YouTube depois' },
@@ -102,8 +108,8 @@ export const MC_DETAILS = [
 
 // Passo a passo para garantir o acesso
 export const MC_STEPS = [
-  { n: 1, text: 'Faça uma compra acima de R$ 499 na loja Bubbles (qualquer combinação de produtos).' },
-  { n: 2, text: 'Envie o número do seu pedido no WhatsApp para confirmar a sua vaga.' },
+  { n: 1, text: 'Compre R$ 499 ou mais em produtos Bubbles até 31 de julho: no site, no WhatsApp oficial de vendas ou em distribuidores autorizados.' },
+  { n: 2, text: 'Você recebe automaticamente o link do grupo VIP no WhatsApp.' },
   { n: 3, text: 'Receba o link no dia e participe da aula ao vivo.' },
 ] as const
 
@@ -127,7 +133,7 @@ export const MC_PRODUCTS = [
 export const MC_FAQ = [
   {
     q: 'Preciso comprar para participar? Quanto?',
-    a: 'Sim. O acesso é liberado para compras acima de R$ 499. Você pode montar o seu carrinho com qualquer combinação de produtos da loja Bubbles.',
+    a: 'Sim. O acesso é liberado para compras de R$ 499 ou mais em produtos Bubbles, feitas até 31 de julho. Você pode montar o carrinho como quiser, no site, no WhatsApp oficial de vendas ou em distribuidores autorizados.',
   },
   {
     q: 'A aula é ao vivo ou gravada?',
@@ -158,12 +164,12 @@ export const MC_FAQ = [
     a: 'Sim. Depois do conteúdo principal há um espaço de perguntas e respostas ao vivo com o instrutor.',
   },
   {
-    q: 'A compra pode ser de qualquer produto da loja?',
-    a: 'Sim. Vale qualquer combinação de produtos que somem acima de R$ 499 na loja Bubbles, não precisa ser de uma linha específica.',
+    q: 'A compra pode ser de qualquer produto, em qualquer canal?',
+    a: 'Sim. Vale qualquer combinação de produtos que some R$ 499 ou mais, comprada no site da Bubbles, no WhatsApp oficial de vendas ou em distribuidores autorizados. Não precisa ser de uma linha específica.',
   },
   {
-    q: 'E se eu comprar depois da data da aula?',
-    a: 'O acesso é liberado para compras feitas até a data da aula. Fique atento ao WhatsApp para confirmar o prazo exato.',
+    q: 'Até quando posso comprar para garantir o acesso?',
+    a: 'A compra precisa ser feita dentro do mês de julho, até o dia 31/07. Compras feitas depois dessa data não garantem acesso a esta edição.',
   },
   {
     q: 'Posso participar pelo celular?',
