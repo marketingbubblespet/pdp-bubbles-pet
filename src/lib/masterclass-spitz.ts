@@ -28,8 +28,8 @@ export const MC = {
   // Condição de acesso
   minPurchase: 'R$ 499',
   storeUrl: 'https://www.bubbles.com.br',
-  purchaseDeadline: '31 de julho',
-  purchaseWindow: 'em julho', // usado em frases curtas, ex: "comprando R$ 499+ em julho"
+  purchaseDeadline: '27 de julho',
+  purchaseWindow: 'até o dia da aula', // usado em frases curtas, ex: "comprando R$ 499+ até o dia da aula"
 
   // Contato de dúvidas (WhatsApp geral da marca)
   whatsapp: BRAND.whatsapp,
@@ -100,7 +100,7 @@ export const MC_DETAILS = [
   { label: 'Quando', value: '27 de julho, às 19h (horário de Brasília)' },
   { label: 'Duração', value: 'Aproximadamente 1 hora' },
   { label: 'Onde', value: 'Ao vivo e online, pelo Google Meet' },
-  { label: 'Prazo de compra', value: 'Até 31 de julho, no site, WhatsApp oficial de vendas ou distribuidores autorizados Bubbles' },
+  { label: 'Prazo de compra', value: 'Até 27 de julho (mesmo dia da aula), no site, WhatsApp oficial de vendas ou distribuidores autorizados Bubbles' },
   { label: 'Como recebe o link', value: 'Pelo WhatsApp, no dia da aula, após confirmar o número do pedido' },
   { label: 'Lembretes', value: '1 dia antes, 1 hora antes e 15 minutos antes' },
   { label: 'Replay', value: 'A aula fica salva no YouTube depois' },
@@ -108,7 +108,7 @@ export const MC_DETAILS = [
 
 // Passo a passo para garantir o acesso
 export const MC_STEPS = [
-  { n: 1, text: 'Compre R$ 499 ou mais em produtos Bubbles até 31 de julho: no site, no WhatsApp oficial de vendas ou em distribuidores autorizados.' },
+  { n: 1, text: 'Compre R$ 499 ou mais em produtos Bubbles até 27 de julho, o mesmo dia da aula: no site, no WhatsApp oficial de vendas ou em distribuidores autorizados.' },
   { n: 2, text: 'Você recebe automaticamente o link do grupo VIP no WhatsApp.' },
   { n: 3, text: 'Receba o link no dia e participe da aula ao vivo.' },
 ] as const
@@ -133,7 +133,7 @@ export const MC_PRODUCTS = [
 export const MC_FAQ = [
   {
     q: 'Preciso comprar para participar? Quanto?',
-    a: 'Sim. O acesso é liberado para compras de R$ 499 ou mais em produtos Bubbles, feitas até 31 de julho. Você pode montar o carrinho como quiser, no site, no WhatsApp oficial de vendas ou em distribuidores autorizados.',
+    a: 'Sim. O acesso é liberado para compras de R$ 499 ou mais em produtos Bubbles, feitas até 27 de julho, o mesmo dia da aula. Você pode montar o carrinho como quiser, no site, no WhatsApp oficial de vendas ou em distribuidores autorizados.',
   },
   {
     q: 'A aula é ao vivo ou gravada?',
@@ -169,7 +169,7 @@ export const MC_FAQ = [
   },
   {
     q: 'Até quando posso comprar para garantir o acesso?',
-    a: 'A compra precisa ser feita dentro do mês de julho, até o dia 31/07. Compras feitas depois dessa data não garantem acesso a esta edição.',
+    a: 'A compra precisa ser feita até o dia 27/07, o mesmo dia da aula. Compras feitas depois dessa data não garantem acesso a esta edição.',
   },
   {
     q: 'Posso participar pelo celular?',

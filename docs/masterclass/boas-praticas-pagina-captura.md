@@ -67,6 +67,7 @@ Responder com clareza (é onde as páginas costumam falhar):
 ### 6. Como participar / requisitos
 - No modelo compra-gatilho: explicar o passo a passo ("Compre qualquer item acima de R$X → acesso liberado → entre no grupo VIP → receba o link").
 - Deixar claro prazo de compra e como o acesso é confirmado.
+- **Regra fixa do prazo de compra:** quando o acesso é por compra, o prazo **nunca vai além da data/hora da própria aula** — o prazo é sempre "até o dia da aula" (mesmo dia), nunca uma data posterior (ex: "até 31/07" numa aula que já acontece dia 27/07). Prazo depois da aula permite alguém assistir sem ter comprado, quebrando o modelo de acesso pago.
 - Se houver pré-requisito técnico (app, câmera, etc.), listar aqui.
 
 ### 6b. Bloco de produtos (e-commerce / shoppable) — quando o acesso é por compra

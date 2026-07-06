@@ -56,7 +56,8 @@ Preencher uma cópia deste arquivo por masterclass.
 - **Modelo de acesso:** página é sempre **captura pura** (cadastro grátis). Marcar abaixo se também há gatilho de compra:
   - ( ) Só cadastro ( ) Cadastro + destravado por compra
 - **Se por compra:** valor mínimo ou linha exigida: ______
-- **Prazo de compra para garantir o acesso:**
+- **Prazo de compra para garantir o acesso:** (regra fixa: nunca ultrapassa a data/hora da aula
+  — o prazo é sempre "até o dia da aula", nunca uma data posterior)
 - **Como o acesso é confirmado para quem comprou?** (ex: entra no grupo, recebe e-mail)
 - **Pré-requisitos técnicos:** (app, câmera, material em mãos, produto específico, etc.)
 
