@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizeCss: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/masterclass/spitz-alemao-b',
+        destination: '/masterclass/spitz-alemao',
+        permanent: false,
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'cdn.shopify.com' },
