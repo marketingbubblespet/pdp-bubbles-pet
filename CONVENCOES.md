@@ -41,25 +41,29 @@ O comportamento esperado é parecido com o do Lovable: cirúrgico, previsível e
 20. Páginas novas seguem o padrão da LP `essential/`.
 21. Quando for uma página **estruturalmente diferente**, eu **paro e pergunto**
     se a nova estrutura está aprovada antes de criar qualquer coisa.
+22. **Toda vez que uma página nova for publicada**, atualizo o mapa de páginas
+    (`src/app/page.tsx`, a home "/") adicionando o novo item na lista, inclusive variantes
+    de teste A/B com `noindex` (ex: `-b`) — o `noindex` só impede indexação no Google, não
+    afeta o mapa interno de navegação. Uso um label que deixa claro que é variante de teste.
 
 ## 6. Design
-22. Seguir sempre o `DESIGN-SYSTEM.md`. Uso só os tokens da marca, nunca invento cor nova.
+23. Seguir sempre o `DESIGN-SYSTEM.md`. Uso só os tokens da marca, nunca invento cor nova.
 
 ## 7. Negócio (dados sensíveis)
-23. **Não alterar preço, URL da Shopify, cupom ou cashback** sem confirmar.
-24. **Não mexer em GA4, Facebook Pixel ou UTM** sem pedir (quebra rastreamento de anúncios).
-25. **Confirmar que a imagem existe** em `public/images` antes de referenciá-la.
-26. **Não apagar reviews ou FAQ reais** sem confirmar (é conteúdo de cliente verdadeiro).
+24. **Não alterar preço, URL da Shopify, cupom ou cashback** sem confirmar.
+25. **Não mexer em GA4, Facebook Pixel ou UTM** sem pedir (quebra rastreamento de anúncios).
+26. **Confirmar que a imagem existe** em `public/images` antes de referenciá-la.
+27. **Não apagar reviews ou FAQ reais** sem confirmar (é conteúdo de cliente verdadeiro).
 
 ## 8. Qualidade técnica
-27. **Manter o padrão de código existente** (estilo, formatação, nomes).
-28. **Não trocar versões de libs** por conta própria.
-29. **Reusar componentes existentes** (procurar em `src/components/ui/` antes de criar novo).
-30. **Manter tudo responsivo (mobile-first).** A maioria do tráfego pago é mobile.
-31. **Manter o padrão de performance** (dynamic import / code-split já usado nas LPs).
-32. **Rodar `npm run build`** antes de dizer que está pronto.
+28. **Manter o padrão de código existente** (estilo, formatação, nomes).
+29. **Não trocar versões de libs** por conta própria.
+30. **Reusar componentes existentes** (procurar em `src/components/ui/` antes de criar novo).
+31. **Manter tudo responsivo (mobile-first).** A maioria do tráfego pago é mobile.
+32. **Manter o padrão de performance** (dynamic import / code-split já usado nas LPs).
+33. **Rodar `npm run build`** antes de dizer que está pronto.
 
 ## 9. Idioma e texto
-33. Todo texto visível ao usuário em **pt-BR**.
-34. **Sem travessão "—" em textos visíveis da LP.** Usar vírgula, ":" ou ".".
-35. **Não mudar SEO** (title, description, metadata) sem pedir.
+34. Todo texto visível ao usuário em **pt-BR**.
+35. **Sem travessão "—" em textos visíveis da LP.** Usar vírgula, ":" ou ".".
+36. **Não mudar SEO** (title, description, metadata) sem pedir.

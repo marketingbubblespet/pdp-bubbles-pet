@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import { Check } from 'lucide-react'
 import { MC, MC_STEPS, MC_PRODUCTS, MC_PURCHASE_CHANNELS } from '@/lib/masterclass-spitz'
 import { CtaLink } from '@/components/ui/CtaLink'
 import { HighlightPriceB } from './HighlightPriceB'
@@ -46,7 +47,7 @@ export function MasterAccessB() {
                 key={channel}
                 className="inline-flex items-center gap-1.5 bg-[#111111] border border-white/10 rounded-full px-3 py-1.5 text-xs font-semibold text-white/70"
               >
-                <span className="text-[#F4CDD4]">✓</span>
+                <Check size={14} className="text-[#F4CDD4] shrink-0" />
                 {channel}
               </span>
             ))}

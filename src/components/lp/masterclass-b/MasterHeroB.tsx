@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Calendar, Clock, MapPin, Check, Unlock } from 'lucide-react'
 import { MC, MC_INSTRUCTOR } from '@/lib/masterclass-spitz'
 import { BRAND } from '@/lib/constants'
 import { MasterCtaB } from './MasterCtaB'
@@ -7,9 +8,9 @@ import { HighlightPriceB } from './HighlightPriceB'
 import { EventGate } from '../masterclass/EventGate'
 
 const metaItems = [
-  { icon: '📅', text: `${MC.date} às ${MC.time}` },
-  { icon: '⏱️', text: MC.duration },
-  { icon: '📍', text: `${MC.format}, ${MC.platform}` },
+  { icon: Calendar, text: `${MC.date} às ${MC.time}` },
+  { icon: Clock, text: MC.duration },
+  { icon: MapPin, text: `${MC.format}, ${MC.platform}` },
 ]
 
 export function MasterHeroB() {
@@ -24,7 +25,7 @@ export function MasterHeroB() {
 
           {/* Condição de acesso, em destaque logo no topo */}
           <div className="inline-flex items-center gap-2 bg-[#111111] border border-white/5 rounded-full px-3.5 py-2 mb-4">
-            <span className="text-base leading-none">🔓</span>
+            <Unlock size={16} className="text-[#F4CDD4] shrink-0" />
             <p className="text-xs md:text-sm font-bold text-white">
               <HighlightPriceB text={`Acesso liberado comprando ${MC.minPurchase}+ até ${MC.purchaseDeadline}`} />
               <span className="font-medium text-white/40"> · site, WhatsApp oficial ou distribuidores</span>
@@ -39,7 +40,7 @@ export function MasterHeroB() {
           </p>
 
           <p className="flex items-center gap-1.5 text-xs font-semibold text-white/40 mb-5">
-            <span className="text-[#F4CDD4]">✓</span>
+            <Check size={14} className="text-[#F4CDD4] shrink-0" />
             {BRAND.groomers} groomers parceiros confiam na Bubbles
           </p>
 
@@ -50,7 +51,7 @@ export function MasterHeroB() {
                 key={m.text}
                 className="inline-flex items-center gap-1.5 bg-[#1A1A1A] border border-white/5 rounded-full px-3 py-1.5 text-xs md:text-sm font-semibold text-white/70"
               >
-                <span>{m.icon}</span>
+                <m.icon size={14} className="text-[#F4CDD4] shrink-0" />
                 {m.text}
               </span>
             ))}

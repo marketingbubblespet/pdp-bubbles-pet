@@ -1,3 +1,4 @@
+import { Check, X } from 'lucide-react'
 import { MC_AUDIENCE, MC_NOT_AUDIENCE } from '@/lib/masterclass-spitz'
 
 export function MasterAudienceB() {
@@ -15,12 +16,12 @@ export function MasterAudienceB() {
           {/* Para quem é */}
           <div className="bg-[#111111] rounded-2xl p-6 md:p-8 border border-white/5">
             <h3 className="font-black text-white tracking-tight mb-4 flex items-center gap-2">
-              <span className="text-[#F4CDD4]">✓</span> Para quem é
+              <Check size={18} className="text-[#F4CDD4]" /> Para quem é
             </h3>
             <ul className="flex flex-col gap-3">
               {MC_AUDIENCE.map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-white/70">
-                  <span className="text-[#F4CDD4] mt-0.5 shrink-0">✓</span>
+                  <Check size={16} className="text-[#F4CDD4] mt-0.5 shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -30,13 +31,13 @@ export function MasterAudienceB() {
           {/* Para quem NÃO é */}
           <div className="bg-[#111111] rounded-2xl p-6 md:p-8 border border-white/5">
             <h3 className="font-black text-white tracking-tight mb-4 flex items-center gap-2">
-              <span className="text-white/40">✕</span> Para quem não é
+              <X size={18} className="text-white/40" /> Para quem não é
             </h3>
             {MC_NOT_AUDIENCE.length > 0 ? (
               <ul className="flex flex-col gap-3">
                 {MC_NOT_AUDIENCE.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-white/40">
-                    <span className="text-white/40 mt-0.5 shrink-0">✕</span>
+                    <X size={16} className="text-white/40 mt-0.5 shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}
