@@ -1,25 +1,26 @@
 // src/app/masterclass/spitz-alemao/page.tsx
+// Página principal — visual "Midnight Luxury & Cosmic Rose" (mesmos componentes da variante B).
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { MC, MC_INSTRUCTOR } from '@/lib/masterclass-spitz'
 
 // Above fold — carregamento imediato
-import { MasterHero } from '@/components/lp/masterclass/MasterHero'
-import { MasterLearn } from '@/components/lp/masterclass/MasterLearn'
-import { MasterAudience } from '@/components/lp/masterclass/MasterAudience'
+import { MasterHeroB } from '@/components/lp/masterclass-b/MasterHeroB'
+import { MasterLearnB } from '@/components/lp/masterclass-b/MasterLearnB'
+import { MasterAudienceB } from '@/components/lp/masterclass-b/MasterAudienceB'
 
 // Below fold — code split
-import { MasterInstructor } from '@/components/lp/masterclass/MasterInstructor'
-import { MasterDetails } from '@/components/lp/masterclass/MasterDetails'
-import { MasterAccess } from '@/components/lp/masterclass/MasterAccess'
-import { MasterFinalCta } from '@/components/lp/masterclass/MasterFinalCta'
-import { MasterFooter } from '@/components/lp/masterclass/MasterFooter'
+import { MasterInstructorB } from '@/components/lp/masterclass-b/MasterInstructorB'
+import { MasterDetailsB } from '@/components/lp/masterclass-b/MasterDetailsB'
+import { MasterAccessB } from '@/components/lp/masterclass-b/MasterAccessB'
+import { MasterFinalCtaB } from '@/components/lp/masterclass-b/MasterFinalCtaB'
+import { MasterFooterB } from '@/components/lp/masterclass-b/MasterFooterB'
 import { FloatingWhatsApp } from '@/components/lp/masterclass/FloatingWhatsApp'
 
-const MasterProof     = dynamic(() => import('@/components/lp/masterclass/MasterProof').then(m => ({ default: m.MasterProof })))
-const MasterFaq       = dynamic(() => import('@/components/lp/masterclass/MasterFaq').then(m => ({ default: m.MasterFaq })))
-const MasterStickyBar = dynamic(() => import('@/components/lp/masterclass/MasterStickyBar').then(m => ({ default: m.MasterStickyBar })))
-const ExitPopup       = dynamic(() => import('@/components/lp/masterclass/ExitPopup').then(m => ({ default: m.ExitPopup })))
+const MasterProofB     = dynamic(() => import('@/components/lp/masterclass-b/MasterProofB').then(m => ({ default: m.MasterProofB })))
+const MasterFaqB       = dynamic(() => import('@/components/lp/masterclass-b/MasterFaqB').then(m => ({ default: m.MasterFaqB })))
+const MasterStickyBarB = dynamic(() => import('@/components/lp/masterclass-b/MasterStickyBarB').then(m => ({ default: m.MasterStickyBarB })))
+const ExitPopupB       = dynamic(() => import('@/components/lp/masterclass-b/ExitPopupB').then(m => ({ default: m.ExitPopupB })))
 
 const SITE_URL = 'https://www.bubbles.com.br'
 const PAGE_URL = `${SITE_URL}/masterclass/${MC.slug}`
@@ -106,43 +107,45 @@ export default function MasterclassSpitz() {
 
       {/* Animação de pulse dos CTAs + barra de rolagem rosa (escopo desta página) */}
       <style>{`
-        @keyframes mc-pulse {
-          0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(61,184,92,0.5); }
-          50% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(61,184,92,0); }
+        @keyframes mcb-pulse {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244,205,212,0.4); }
+          50% { transform: scale(1.02); box-shadow: 0 0 0 12px rgba(244,205,212,0); }
         }
         html {
-          scrollbar-color: #E8649A #F4CDD4;
+          scrollbar-color: #F4CDD4 #111111;
           scrollbar-width: thin;
         }
         ::-webkit-scrollbar {
           width: 10px;
         }
         ::-webkit-scrollbar-track {
-          background: #F4CDD4;
+          background: #111111;
         }
         ::-webkit-scrollbar-thumb {
-          background-color: #E8649A;
+          background-color: #F4CDD4;
           border-radius: 10px;
         }
       `}</style>
 
-      <main className="pb-24 md:pb-20">
-        <MasterHero />
-        <MasterLearn />
-        <MasterAudience />
-        <MasterInstructor />
-        <MasterDetails />
-        <MasterAccess />
-        <MasterProof />
-        <MasterFaq />
-        <MasterFinalCta />
-      </main>
-      <MasterFooter />
+      <div className="bg-[#080808] min-h-screen">
+        <main className="pb-24 md:pb-20">
+          <MasterHeroB />
+          <MasterLearnB />
+          <MasterAudienceB />
+          <MasterInstructorB />
+          <MasterDetailsB />
+          <MasterAccessB />
+          <MasterProofB />
+          <MasterFaqB />
+          <MasterFinalCtaB />
+        </main>
+        <MasterFooterB />
 
-      {/* Estímulos de conversão */}
-      <MasterStickyBar />
-      <FloatingWhatsApp />
-      <ExitPopup />
+        {/* Estímulos de conversão */}
+        <MasterStickyBarB />
+        <FloatingWhatsApp />
+        <ExitPopupB />
+      </div>
     </>
   )
 }
