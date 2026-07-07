@@ -158,6 +158,7 @@ export function MasterProof() {
                 src={`https://img.youtube.com/vi/${MC.lastEditionVideoId}/hqdefault.jpg`}
                 alt="Última edição da MasterClass"
                 fill
+                sizes="(max-width: 767px) 343px, 800px"
                 className="object-cover"
               />
               <span className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
@@ -234,10 +235,10 @@ export function MasterProof() {
         {/* Bastidores da última edição */}
         <div className="grid grid-cols-2 gap-3 mt-4">
           <div className="relative aspect-square rounded-[10px] overflow-hidden">
-            <Image src="/images/masterclass/bastidores-1.webp" alt="Bastidores da última MasterClass" fill className="object-cover" />
+            <Image src="/images/masterclass/bastidores-1.webp" alt="Bastidores da última MasterClass" fill sizes="(max-width: 767px) 165px, 394px" className="object-cover" />
           </div>
           <div className="relative aspect-square rounded-[10px] overflow-hidden">
-            <Image src="/images/masterclass/bastidores-2.webp" alt="Bastidores da última MasterClass" fill className="object-cover" />
+            <Image src="/images/masterclass/bastidores-2.webp" alt="Bastidores da última MasterClass" fill sizes="(max-width: 767px) 165px, 394px" className="object-cover" />
           </div>
         </div>
       </div>

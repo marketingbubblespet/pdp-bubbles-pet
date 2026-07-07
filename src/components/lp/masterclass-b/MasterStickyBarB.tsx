@@ -22,7 +22,7 @@ export function MasterStickyBarB() {
           <p className="text-sm font-black text-white tracking-tight leading-tight">
             MasterClass de Spitz Alemão
           </p>
-          <p className="text-xs text-white/40">
+          <p className="text-xs text-white/60">
             {MC.date} às {MC.time}, ao vivo e gratuita
           </p>
         </div>

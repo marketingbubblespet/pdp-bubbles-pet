@@ -73,7 +73,7 @@ export function MasterAccess() {
                 className="group bg-white rounded-[10px] border border-[#E5E7EB] overflow-hidden flex flex-col hover:border-[#E8649A] transition-colors"
               >
                 <div className="relative aspect-square bg-[#F7F7F7]">
-                  <Image src={p.image} alt={p.name} fill className="object-contain p-4" />
+                  <Image src={p.image} alt={p.name} fill sizes="(max-width: 767px) 295px, 460px" className="object-contain p-4" />
                 </div>
                 <div className="p-4 flex flex-col gap-2 flex-1">
                   <p className="font-bold text-[#0F0C0D]">{p.name}</p>

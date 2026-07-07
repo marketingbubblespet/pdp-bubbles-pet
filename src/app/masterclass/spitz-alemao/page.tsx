@@ -21,6 +21,7 @@ const MasterProofB     = dynamic(() => import('@/components/lp/masterclass-b/Mas
 const MasterFaqB       = dynamic(() => import('@/components/lp/masterclass-b/MasterFaqB').then(m => ({ default: m.MasterFaqB })))
 const MasterStickyBarB = dynamic(() => import('@/components/lp/masterclass-b/MasterStickyBarB').then(m => ({ default: m.MasterStickyBarB })))
 const ExitPopupB       = dynamic(() => import('@/components/lp/masterclass-b/ExitPopupB').then(m => ({ default: m.ExitPopupB })))
+const WebMcpTools      = dynamic(() => import('@/components/lp/masterclass-b/WebMcpTools').then(m => ({ default: m.WebMcpTools })))
 
 const SITE_URL = 'https://www.bubbles.com.br'
 const PAGE_URL = `${SITE_URL}/masterclass/${MC.slug}`
@@ -145,6 +146,9 @@ export default function MasterclassSpitz() {
         <MasterStickyBarB />
         <FloatingWhatsApp />
         <ExitPopupB />
+
+        {/* WebMCP: expõe dados/ações da página para agentes de IA (sem renderização visual) */}
+        <WebMcpTools />
       </div>
     </>
   )

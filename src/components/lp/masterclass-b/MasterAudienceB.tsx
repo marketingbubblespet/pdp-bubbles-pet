@@ -31,13 +31,13 @@ export function MasterAudienceB() {
           {/* Para quem NÃO é */}
           <div className="bg-[#111111] rounded-2xl p-6 md:p-8 border border-white/5">
             <h3 className="font-black text-white tracking-tight mb-4 flex items-center gap-2">
-              <X size={18} className="text-white/40" /> Para quem não é
+              <X size={18} className="text-white/60" /> Para quem não é
             </h3>
             {MC_NOT_AUDIENCE.length > 0 ? (
               <ul className="flex flex-col gap-3">
                 {MC_NOT_AUDIENCE.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-white/40">
-                    <X size={16} className="text-white/40 mt-0.5 shrink-0" />
+                  <li key={item} className="flex items-start gap-2 text-sm text-white/60">
+                    <X size={16} className="text-white/60 mt-0.5 shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}

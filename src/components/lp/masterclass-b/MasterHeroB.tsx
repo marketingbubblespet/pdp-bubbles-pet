@@ -19,7 +19,7 @@ export function MasterHeroB() {
       <div className="max-w-[1100px] mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         {/* Coluna de texto */}
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-3">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-3">
             {MC.program} · Aula ao vivo e gratuita
           </p>
 
@@ -28,7 +28,7 @@ export function MasterHeroB() {
             <Unlock size={16} className="text-[#F4CDD4] shrink-0" />
             <p className="text-xs md:text-sm font-bold text-white">
               <HighlightPriceB text={`Acesso liberado comprando ${MC.minPurchase}+ até ${MC.purchaseDeadline}`} />
-              <span className="font-medium text-white/40"> · site, WhatsApp oficial ou distribuidores</span>
+              <span className="font-medium text-white/60"> · site, WhatsApp oficial ou distribuidores</span>
             </p>
           </div>
 
@@ -39,7 +39,7 @@ export function MasterHeroB() {
             {MC.subtitle}
           </p>
 
-          <p className="flex items-center gap-1.5 text-xs font-semibold text-white/40 mb-5">
+          <p className="flex items-center gap-1.5 text-xs font-semibold text-white/60 mb-5">
             <Check size={14} className="text-[#F4CDD4] shrink-0" />
             {BRAND.groomers} groomers parceiros confiam na Bubbles
           </p>
@@ -78,7 +78,7 @@ export function MasterHeroB() {
           >
             {/* Contagem regressiva real para o início da aula */}
             <div className="mb-6">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-2">
                 Faltam
               </p>
               <MasterCountdownB target={MC.targetDateISO} />
@@ -88,7 +88,7 @@ export function MasterHeroB() {
               Garantir meu acesso →
             </MasterCtaB>
 
-            <p className="mt-3 text-xs text-white/40">
+            <p className="mt-3 text-xs text-white/60">
               <HighlightPriceB text={`Participação gratuita para quem comprar ${MC.minPurchase}+ até ${MC.purchaseDeadline}.`} />
             </p>
           </EventGate>
@@ -102,12 +102,13 @@ export function MasterHeroB() {
               alt={MC_INSTRUCTOR.name}
               fill
               priority
+              sizes="(max-width: 767px) 280px, 526px"
               className="object-cover"
             />
           </div>
           <div className="mt-3 text-center">
             <p className="font-black text-white tracking-tight">{MC_INSTRUCTOR.name}</p>
-            <p className="text-sm text-white/40">{MC_INSTRUCTOR.credential}</p>
+            <p className="text-sm text-white/60">{MC_INSTRUCTOR.credential}</p>
           </div>
         </div>
       </div>

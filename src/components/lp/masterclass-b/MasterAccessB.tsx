@@ -59,7 +59,7 @@ export function MasterAccessB() {
           <h3 className="text-lg font-black text-white tracking-tight text-center mb-1">
             Produtos que valem o seu acesso
           </h3>
-          <p className="text-sm text-white/40 text-center mb-6">
+          <p className="text-sm text-white/60 text-center mb-6">
             <HighlightPriceB
               text={`Sugestões para montar seu carrinho. Vale qualquer combinação acima de ${MC.minPurchase}.`}
             />
@@ -74,11 +74,11 @@ export function MasterAccessB() {
                 className="group bg-[#1A1A1A] rounded-2xl border border-white/5 overflow-hidden flex flex-col hover:border-white/10 transition-colors duration-300"
               >
                 <div className="relative aspect-square bg-[#111111]">
-                  <Image src={p.image} alt={p.name} fill className="object-contain p-4" />
+                  <Image src={p.image} alt={p.name} fill sizes="(max-width: 767px) 295px, 460px" className="object-contain p-4" />
                 </div>
                 <div className="p-4 flex flex-col gap-2 flex-1">
                   <p className="font-black text-white tracking-tight">{p.name}</p>
-                  <p className="text-xs text-white/40 leading-relaxed">{p.description}</p>
+                  <p className="text-xs text-white/60 leading-relaxed">{p.description}</p>
                   <span className="mt-auto inline-block text-center bg-[#F4CDD4] text-[#080808] font-black uppercase tracking-widest rounded-xl px-4 py-2.5 text-xs transition-transform duration-150 group-hover:scale-[1.02]">
                     Comprar e participar
                   </span>

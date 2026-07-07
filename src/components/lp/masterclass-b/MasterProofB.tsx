@@ -135,7 +135,7 @@ export function MasterProofB() {
         <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight mb-3">
           Veja um pouco do que já rolou ao vivo
         </h2>
-        <p className="text-xs text-white/40 mb-6">
+        <p className="text-xs text-white/60 mb-6">
           Prévia exclusiva de {MC.videoPreviewMinutes} minutos, disponível apenas nesta página.
           <span className="block mt-0.5">O conteúdo completo é liberado apenas para quem participa ao vivo.</span>
         </p>
@@ -154,6 +154,7 @@ export function MasterProofB() {
                 src={`https://img.youtube.com/vi/${MC.lastEditionVideoId}/hqdefault.jpg`}
                 alt="Última edição da MasterClass"
                 fill
+                sizes="(max-width: 767px) 343px, 800px"
                 className="object-cover"
               />
               <span className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
@@ -209,7 +210,7 @@ export function MasterProofB() {
                   <p className="text-white font-black text-sm md:text-base">
                     Sua prévia de {MC.videoPreviewMinutes} minutos terminou
                   </p>
-                  <p className="text-white/40 text-xs md:text-sm max-w-[380px]">
+                  <p className="text-white/60 text-xs md:text-sm max-w-[380px]">
                     Garanta seu acesso e participe ao vivo da próxima MasterClass.
                   </p>
                   <a
@@ -227,10 +228,10 @@ export function MasterProofB() {
         {/* Bastidores da última edição */}
         <div className="grid grid-cols-2 gap-3 mt-4">
           <div className="relative aspect-square rounded-xl overflow-hidden border border-white/5">
-            <Image src="/images/masterclass/bastidores-1.webp" alt="Bastidores da última MasterClass" fill className="object-cover" />
+            <Image src="/images/masterclass/bastidores-1.webp" alt="Bastidores da última MasterClass" fill sizes="(max-width: 767px) 165px, 394px" className="object-cover" />
           </div>
           <div className="relative aspect-square rounded-xl overflow-hidden border border-white/5">
-            <Image src="/images/masterclass/bastidores-2.webp" alt="Bastidores da última MasterClass" fill className="object-cover" />
+            <Image src="/images/masterclass/bastidores-2.webp" alt="Bastidores da última MasterClass" fill sizes="(max-width: 767px) 165px, 394px" className="object-cover" />
           </div>
         </div>
       </div>

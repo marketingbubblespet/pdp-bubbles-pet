@@ -10,6 +10,7 @@ export function MasterInstructorB() {
             src="/images/masterclass/guilherme-hero.webp"
             alt={MC_INSTRUCTOR.name}
             fill
+            sizes="(max-width: 767px) 343px, 280px"
             className="object-cover"
           />
         </div>

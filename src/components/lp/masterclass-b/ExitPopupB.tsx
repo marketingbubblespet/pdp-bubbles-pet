@@ -57,7 +57,7 @@ export function ExitPopupB() {
         <button
           onClick={() => setOpen(false)}
           aria-label="Fechar"
-          className="absolute top-3 right-3 text-white/40 hover:text-white text-2xl leading-none"
+          className="absolute top-1 right-1 w-11 h-11 flex items-center justify-center text-white/60 hover:text-white text-2xl leading-none"
         >
           ×
         </button>

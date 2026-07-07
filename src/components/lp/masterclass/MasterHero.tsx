@@ -101,6 +101,7 @@ export function MasterHero() {
               alt={MC_INSTRUCTOR.name}
               fill
               priority
+              sizes="(max-width: 767px) 280px, 526px"
               className="object-cover"
             />
           </div>

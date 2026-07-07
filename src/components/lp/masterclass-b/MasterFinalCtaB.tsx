@@ -18,7 +18,7 @@ export function MasterFinalCtaB() {
               <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight mb-4">
                 Essa MasterClass já aconteceu
               </h2>
-              <p className="text-sm md:text-base text-white/40 mb-8 max-w-[560px] mx-auto">
+              <p className="text-sm md:text-base text-white/60 mb-8 max-w-[560px] mx-auto">
                 Deixe seu contato no WhatsApp para ser avisado assim que abrirem as inscrições da
                 próxima edição.
               </p>
@@ -39,7 +39,7 @@ export function MasterFinalCtaB() {
           <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight mb-4">
             Garanta a sua vaga na MasterClass de Spitz Alemão
           </h2>
-          <p className="text-sm md:text-base text-white/40 mb-8 max-w-[560px] mx-auto">
+          <p className="text-sm md:text-base text-white/60 mb-8 max-w-[560px] mx-auto">
             <HighlightPriceB
               text={`Aula ao vivo, gratuita para compras acima de ${MC.minPurchase}. Vagas por tempo limitado até ${MC.purchaseDeadline}.`}
             />

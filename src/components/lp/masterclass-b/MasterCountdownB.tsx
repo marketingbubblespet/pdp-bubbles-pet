@@ -33,7 +33,7 @@ export function MasterCountdownB({ target, className = '' }: { target: string; c
       <span className="font-mono text-xl md:text-2xl font-bold text-[#F4CDD4] tabular-nums">
         {String(n).padStart(2, '0')}
       </span>
-      <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">{l}</span>
+      <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">{l}</span>
     </div>
   )
 

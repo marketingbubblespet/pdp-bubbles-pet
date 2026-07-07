@@ -66,9 +66,14 @@ O comportamento esperado é parecido com o do Lovable: cirúrgico, previsível e
 31. **Reusar componentes existentes** (procurar em `src/components/ui/` antes de criar novo).
 32. **Manter tudo responsivo (mobile-first).** A maioria do tráfego pago é mobile.
 33. **Manter o padrão de performance** (dynamic import / code-split já usado nas LPs).
-34. **Rodar `npm run build`** antes de dizer que está pronto.
+34. **Toda imagem com `fill` no `next/image` precisa do atributo `sizes`**, com recorte
+    para mobile e desktop (ex: `sizes="(max-width: 767px) 280px, 526px"`), batendo com a
+    largura real de exibição em cada breakpoint. Sem isso, o Next assume que a imagem ocupa
+    a tela inteira e baixa uma versão maior do que o necessário, mesmo sem perda de
+    qualidade visual — só desperdício de banda, mais sensível no mobile.
+35. **Rodar `npm run build`** antes de dizer que está pronto.
 
 ## 9. Idioma e texto
-35. Todo texto visível ao usuário em **pt-BR**.
-36. **Sem travessão "—" em textos visíveis da LP.** Usar vírgula, ":" ou ".".
-37. **Não mudar SEO** (title, description, metadata) sem pedir.
+36. Todo texto visível ao usuário em **pt-BR**.
+37. **Sem travessão "—" em textos visíveis da LP.** Usar vírgula, ":" ou ".".
+38. **Não mudar SEO** (title, description, metadata) sem pedir.

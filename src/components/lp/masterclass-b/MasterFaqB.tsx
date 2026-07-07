@@ -43,7 +43,7 @@ export function MasterFaqB() {
         {/* Bloco: dúvidas no WhatsApp */}
         <div className="mt-10 bg-[#080808] rounded-2xl p-6 md:p-8 border border-white/5 text-center">
           <h3 className="font-black text-white tracking-tight mb-2">Ainda tem dúvidas?</h3>
-          <p className="text-sm text-white/40 mb-5">
+          <p className="text-sm text-white/60 mb-5">
             Fale direto com a nossa equipe no WhatsApp e tire qualquer dúvida antes de garantir a sua vaga.
           </p>
           <CtaLink
