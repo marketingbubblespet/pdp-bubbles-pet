@@ -84,8 +84,13 @@ export const MC_AUDIENCE = [
   'Profissional que quer se diferenciar da concorrência',
 ] as const
 
-// Para quem NÃO é (aguardando definição da equipe)
-export const MC_NOT_AUDIENCE: readonly string[] = [] // [AGUARDANDO INFORMAÇÕES]
+// Para quem NÃO é
+export const MC_NOT_AUDIENCE = [
+  'Quem busca fórmula mágica sem prática e dedicação',
+  'Quem não atende ou não pretende atender a raça Spitz',
+  'Quem não está disposto a investir em técnica e evolução profissional',
+  'Quem espera resultado sem repetir a técnica depois da aula',
+] as const
 
 // Instrutor
 export const MC_INSTRUCTOR = {
