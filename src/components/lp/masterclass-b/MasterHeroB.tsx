@@ -102,6 +102,8 @@ export function MasterHeroB() {
               alt={MC_INSTRUCTOR.name}
               fill
               priority
+              fetchPriority="high"
+              quality={70}
               sizes="(max-width: 767px) 280px, 526px"
               className="object-cover"
             />
