@@ -9,3 +9,8 @@ export function trackJoinClick() {
   window.gtag?.('event', 'generate_lead', { event_category: 'live_dia_tosador' })
   window.fbq?.('track', 'Lead')
 }
+
+// Dispara evento quando alguém usa o botão de compartilhar a página com outro groomer.
+export function trackShareClick() {
+  window.gtag?.('event', 'share', { event_category: 'live_dia_tosador' })
+}

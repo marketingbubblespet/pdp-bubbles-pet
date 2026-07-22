@@ -21,17 +21,15 @@ export const LIVE = {
 export const LIVE_HOSTS = [
   {
     name: 'Mariane Gutierres',
+    photo: '/images/live-tosador/mariane.webp',
     bio: 'Gerente de Marketing na Bubbles há 4 anos. Chegou pela área de marketing e acompanha os groomers bem de perto: nos eventos, nas redes sociais e nos treinamentos da marca, incluindo os últimos lançamentos e a feira Pet South.',
     quote: 'Mesmo do lado do marketing, eu vivo de perto a dedicação de cada groomer. Essa live é a nossa forma de celebrar quem faz a Bubbles acontecer todos os dias.',
-    photoSpec: 'Foto quadrada, rosto centralizado, fundo neutro, mín. 400x400px, .webp ou .jpg',
-    bioPending: false,
   },
   {
     name: 'Anna Grandi',
+    photo: '/images/live-tosador/anna.webp',
     bio: 'Analista de Social Commerce na Bubbles há 2 anos e meio. Também chegou pelo marketing e vive o mercado pet nos eventos, nas redes sociais e nos treinamentos, com destaque para a feira Pet South, onde mergulha no dia a dia dos groomers e conhece cada cliente de perto.',
     quote: 'O Dia do Tosador é especial porque é quando a gente reconhece toda a dedicação desses profissionais. Na live, vamos comemorar junto com eles, com descontos especiais pra marcar a data.',
-    photoSpec: 'Foto quadrada, rosto centralizado, fundo neutro, mín. 400x400px, .webp ou .jpg',
-    bioPending: false,
   },
 ] as const
 
