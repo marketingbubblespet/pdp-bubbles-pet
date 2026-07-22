@@ -27,8 +27,8 @@ const CareExitPopup    = dynamic(() => import('@/components/lp/care/CareExitPopu
 const SITE_URL = 'https://ofertas.bubbles.com.br'
 const PAGE_URL = `${SITE_URL}/${CARE.slug}`
 
-const title = 'Bubbles Care: revenda para petshops | A linha que gira sozinha'
-const description = 'Revenda a linha Bubbles Care no seu petshop sem medo de encalhar. A demanda já é gerada por milhares de afiliados. Cadastre-se para as condições de pré-venda de lançamento.'
+const title = 'Bubbles Care: revenda para petshops sem risco'
+const description = 'Revenda a linha Bubbles Care sem medo de encalhar: a demanda já é gerada por milhares de afiliados. Cadastre-se para as condições de pré-venda.'
 
 export const metadata: Metadata = {
   title,
