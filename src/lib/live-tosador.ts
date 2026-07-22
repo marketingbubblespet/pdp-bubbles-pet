@@ -28,7 +28,7 @@ export const LIVE_HOSTS = [
   {
     name: 'Anna Grandi',
     photo: '/images/live-tosador/anna.webp',
-    bio: 'Analista de Social Commerce na Bubbles há 2 anos e meio. Também chegou pelo marketing e vive o mercado pet nos eventos, nas redes sociais e nos treinamentos, com destaque para a feira Pet South, onde mergulha no dia a dia dos groomers e conhece cada cliente de perto.',
+    bio: 'Há 2 anos e meio na Bubbles como Analista de Social Commerce, Anna chegou pelo marketing e nunca parou de se aproximar dos groomers: em eventos, redes sociais e treinamentos. Na feira Pet South, mergulha no dia a dia de cada profissional que atende.',
     quote: 'O Dia do Tosador é o momento de celebrar, com toda a força, a dedicação que esses profissionais mostram o ano inteiro. Na live, vamos comemorar junto com eles, com descontos especiais pra marcar a data.',
   },
 ] as const
