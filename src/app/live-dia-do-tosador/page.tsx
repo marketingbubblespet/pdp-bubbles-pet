@@ -11,7 +11,6 @@ import { LiveGroupBenefits } from '@/components/lp/live-tosador/LiveGroupBenefit
 
 // Below fold — code split
 import { LiveAudience } from '@/components/lp/live-tosador/LiveAudience'
-import { LiveProof } from '@/components/lp/live-tosador/LiveProof'
 import { LiveFinalCta } from '@/components/lp/live-tosador/LiveFinalCta'
 import { LiveFooter } from '@/components/lp/live-tosador/LiveFooter'
 import { LiveFloatingWhatsApp } from '@/components/lp/live-tosador/LiveFloatingWhatsApp'
@@ -73,7 +72,6 @@ export default function LiveDiaDoTosador() {
           <LiveHosts />
           <LiveGroupBenefits />
           <LiveAudience />
-          <LiveProof />
           <LiveFaq />
           <LiveFinalCta />
         </main>

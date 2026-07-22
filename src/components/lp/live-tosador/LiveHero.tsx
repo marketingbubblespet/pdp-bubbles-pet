@@ -24,7 +24,7 @@ export function LiveHero() {
         <div className="mx-auto mb-6 max-w-[560px] rounded-2xl border-2 border-dashed border-white/10 bg-[#1A1A1A] flex flex-col items-center justify-center gap-2 p-5">
           <ImageIcon size={28} className="text-white/40 shrink-0" />
           <span className="text-[11px] text-white/40 text-center leading-relaxed max-w-[440px]">
-            <strong className="text-white/60">Arte oficial do &quot;Dia do Tosador&quot;</strong> — banner 1200x400px, PNG/WebP.
+            <strong className="text-white/60">Arte oficial do &quot;Dia do Tosador&quot;</strong>, banner 1200x400px, PNG/WebP.
             Sugestão de conteúdo: Mariane e Anna juntas (ou uma cena de banho/tosa), clima de celebração
             profissional, paleta Cosmic Rose sobre fundo escuro, com o texto ou selo &quot;Dia do Tosador&quot;
             em destaque. Evitar imagens de banco genéricas.

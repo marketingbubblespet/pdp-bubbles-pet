@@ -18,17 +18,21 @@ export const LIVE = {
 } as const
 
 // Apresentadoras da live
-// bio: [AGUARDANDO INFORMAÇÕES] preencher com cargo, anos de experiência, especialidade/certificação e Instagram
+// Anna: bio ainda [AGUARDANDO INFORMAÇÕES], preencher quando ela responder o briefing.
 export const LIVE_HOSTS = [
   {
     name: 'Mariane Gutierres',
-    bio: '[Mini bio a definir — cargo na Bubbles, anos de experiência, especialidade e Instagram]',
-    photoSpec: 'Foto quadrada, rosto centralizado, fundo neutro — mín. 400x400px, .webp ou .jpg',
+    bio: 'Gerente de Marketing na Bubbles há 4 anos. Entrou pela área de marketing e hoje está em contato direto com os groomers em eventos, redes sociais e treinamentos, incluindo os últimos lançamentos e a feira Pet South.',
+    quote: 'Mesmo do lado do marketing, eu vivo de perto a dedicação de cada groomer. Essa live é uma forma de celebrar quem faz a Bubbles acontecer todos os dias.',
+    photoSpec: 'Foto quadrada, rosto centralizado, fundo neutro, mín. 400x400px, .webp ou .jpg',
+    bioPending: false,
   },
   {
     name: 'Anna Grandi',
-    bio: '[Mini bio a definir — cargo na Bubbles, anos de experiência, especialidade e Instagram]',
-    photoSpec: 'Foto quadrada, rosto centralizado, fundo neutro — mín. 400x400px, .webp ou .jpg',
+    bio: 'Mini bio a definir, aguardando resposta do briefing.',
+    quote: '',
+    photoSpec: 'Foto quadrada, rosto centralizado, fundo neutro, mín. 400x400px, .webp ou .jpg',
+    bioPending: true,
   },
 ] as const
 
