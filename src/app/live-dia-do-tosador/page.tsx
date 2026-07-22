@@ -6,6 +6,7 @@ import { LIVE } from '@/lib/live-tosador'
 // Above fold — carregamento imediato
 import { LiveHero } from '@/components/lp/live-tosador/LiveHero'
 import { LiveReasons } from '@/components/lp/live-tosador/LiveReasons'
+import { LiveHosts } from '@/components/lp/live-tosador/LiveHosts'
 import { LiveGroupBenefits } from '@/components/lp/live-tosador/LiveGroupBenefits'
 
 // Below fold — code split
@@ -59,27 +60,30 @@ export default function LiveDiaDoTosador() {
           0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
           50% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(37,211,102,0); }
         }
-        html { scrollbar-color: #E8649A #F4CDD4; scrollbar-width: thin; }
+        html { scrollbar-color: #F4CDD4 #111111; scrollbar-width: thin; }
         ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #F4CDD4; }
-        ::-webkit-scrollbar-thumb { background-color: #E8649A; border-radius: 10px; }
+        ::-webkit-scrollbar-track { background: #111111; }
+        ::-webkit-scrollbar-thumb { background-color: #F4CDD4; border-radius: 10px; }
       `}</style>
 
-      <main className="pb-24 md:pb-20">
-        <LiveHero />
-        <LiveReasons />
-        <LiveGroupBenefits />
-        <LiveAudience />
-        <LiveProof />
-        <LiveFaq />
-        <LiveFinalCta />
-      </main>
-      <LiveFooter />
+      <div className="bg-[#080808] min-h-screen">
+        <main className="pb-24 md:pb-20">
+          <LiveHero />
+          <LiveReasons />
+          <LiveHosts />
+          <LiveGroupBenefits />
+          <LiveAudience />
+          <LiveProof />
+          <LiveFaq />
+          <LiveFinalCta />
+        </main>
+        <LiveFooter />
 
-      {/* Estímulos de conversão */}
-      <LiveStickyBar />
-      <LiveFloatingWhatsApp />
-      <LiveExitPopup />
+        {/* Estímulos de conversão */}
+        <LiveStickyBar />
+        <LiveFloatingWhatsApp />
+        <LiveExitPopup />
+      </div>
     </>
   )
 }

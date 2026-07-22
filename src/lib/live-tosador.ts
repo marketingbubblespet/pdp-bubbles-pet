@@ -12,10 +12,25 @@ export const LIVE = {
   duration: '1 hora',
   platform: 'Instagram',
   targetDateISO: '2026-07-26T19:00:00-03:00',
-  host: 'Fulano de Tal', // [AGUARDANDO INFORMAÇÕES] apresentador da live
+  host: 'Mariane Gutierres e Anna Grandi',
   whatsappGroupUrl: 'https://chat.whatsapp.com/IB4fWtKySFJ6P5SB9aOXU9',
   socialProof: BRAND.groomers, // '+5.000'
 } as const
+
+// Apresentadoras da live
+// bio: [AGUARDANDO INFORMAÇÕES] preencher com cargo, anos de experiência, especialidade/certificação e Instagram
+export const LIVE_HOSTS = [
+  {
+    name: 'Mariane Gutierres',
+    bio: '[Mini bio a definir — cargo na Bubbles, anos de experiência, especialidade e Instagram]',
+    photoSpec: 'Foto quadrada, rosto centralizado, fundo neutro — mín. 400x400px, .webp ou .jpg',
+  },
+  {
+    name: 'Anna Grandi',
+    bio: '[Mini bio a definir — cargo na Bubbles, anos de experiência, especialidade e Instagram]',
+    photoSpec: 'Foto quadrada, rosto centralizado, fundo neutro — mín. 400x400px, .webp ou .jpg',
+  },
+] as const
 
 // O que vai rolar na live (motivos para comparecer ao vivo)
 export const LIVE_REASONS = [

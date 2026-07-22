@@ -26,6 +26,8 @@
 - **Duração estimada:** ______
 - **Formato:** ( ) Ao vivo no grupo de WhatsApp ( ) Ao vivo no Instagram/YouTube com aviso no grupo ( ) Outro: ______
 - **Quem apresenta a live?** (nome, cargo/credencial, é interno da Bubbles ou um groomer convidado?):
+  Mariane Gutierres e Anna Grandi. Falta: cargo/credencial de cada uma, anos de experiência,
+  especialidade/certificação e Instagram (para a mini bio na página).
 - **Por que "Dia do Tosador"?** É uma data comemorativa reconhecida no mercado pet? Se sim, qual
   a origem/significado que podemos usar na comunicação (ex: "dia de reconhecer o profissional
   que...")? ______
@@ -43,7 +45,7 @@
 
 ## 4. O que vai acontecer na live (conteúdo)
 
-- **Tema/pauta principal da live:**
+- **Tema/pauta principal da live:** Dia do Tosador (celebração).
 - **É uma live de conteúdo técnico (ensinar algo), de celebração/homenagem, ou as duas coisas?**
   ( ) Técnica ( ) Celebração ( ) Ambas
 - **3 a 5 motivos concretos para assistir** (o que o tosador ganha/aprende/sente ao participar):
@@ -72,12 +74,12 @@
 
 - **Quantos groomers já estão na base/já confirmaram interesse?** (se tiver um número, vira
   prova social forte, tipo "junte-se a X profissionais"): ______
-- **Depoimentos ou prints de lives anteriores da Bubbles que possamos reaproveitar?** ( ) Sim, anexar ( ) Não, é a primeira
+- **Depoimentos ou prints de lives anteriores da Bubbles que possamos reaproveitar?** ( ) Sim, anexar (x) Não, é a primeira
 
 ## 8. Anúncios (bloqueante para casar a mensagem)
 
 - **Qual o ângulo/gancho principal do criativo do anúncio?** (precisa bater com o herói da
-  página, senão a pessoa clica confusa): ______
+  página, senão a pessoa clica confusa): a definir, não bloqueante por enquanto.
 - **Em quais plataformas vai rodar** (Meta, TikTok, Google)? ______
 - **Já existe o criativo (vídeo/imagem) ou a página deve ser feita antes pra orientar o
   criativo?** ( ) Criativo já existe, anexar ( ) Página primeiro
@@ -100,7 +102,7 @@
 
 ## 11. Rastreamento e metas
 
-- **Meta de entradas no grupo:** ______
+- **Meta de entradas no grupo:** não haverá meta definida.
 - Pixels: a página herda GA4 + Google Ads + Meta Pixel já configurados no sistema. Precisa de
   evento específico no clique do CTA de WhatsApp? ______
 

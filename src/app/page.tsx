@@ -18,6 +18,11 @@ const pages = [
     label: 'MasterClass Spitz Alemão (versão B)',
     description: 'Variante de teste A/B, tema escuro "Midnight Luxury & Cosmic Rose"',
   },
+  {
+    href: '/live-dia-do-tosador',
+    label: 'Live Dia do Tosador',
+    description: 'Página de captura para a live de 26/07 com Mariane Gutierres e Anna Grandi',
+  },
 ]
 
 const PASSWORD = 'mariane'

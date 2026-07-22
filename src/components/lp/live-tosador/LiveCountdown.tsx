@@ -25,9 +25,9 @@ export function LiveCountdown({ target, className = '' }: { target: string; clas
   if (!t) return null // evita mismatch de hidratação
 
   const box = (n: number, l: string) => (
-    <div className="flex flex-col items-center bg-white rounded-[10px] px-3 py-2 md:px-4 md:py-3 min-w-[56px] md:min-w-[68px] shadow-sm border border-[#E5E7EB]">
-      <span className="text-xl md:text-2xl font-extrabold text-[#0F0C0D] tabular-nums">{String(n).padStart(2, '0')}</span>
-      <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">{l}</span>
+    <div className="flex flex-col items-center bg-[#1A1A1A] rounded-xl px-3 py-2 md:px-4 md:py-3 min-w-[56px] md:min-w-[68px] border border-white/5">
+      <span className="font-mono text-xl md:text-2xl font-bold text-[#F4CDD4] tabular-nums">{String(n).padStart(2, '0')}</span>
+      <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">{l}</span>
     </div>
   )
 

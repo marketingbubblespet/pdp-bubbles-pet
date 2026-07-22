@@ -24,12 +24,12 @@ export function LiveExitPopup() {
 
   if (!open) return null
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60" onClick={() => setOpen(false)}>
-      <div className="relative bg-white rounded-[10px] max-w-[420px] w-full p-6 md:p-8 text-center shadow-2xl" onClick={(e) => e.stopPropagation()}>
-        <button onClick={() => setOpen(false)} aria-label="Fechar" className="absolute top-1 right-1 w-11 h-11 flex items-center justify-center text-[#9ca3af] hover:text-[#0F0C0D] text-2xl leading-none">×</button>
-        <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-2">Espera!</p>
-        <h3 className="text-xl md:text-2xl font-extrabold text-[#0F0C0D] mb-2 leading-tight">A live do Dia do Tosador é domingo e não se repete</h3>
-        <p className="text-sm text-[#6B7280] mb-6">Entre no grupo para receber o aviso na hora e os cupons liberados só ao vivo.</p>
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80" onClick={() => setOpen(false)}>
+      <div className="relative bg-[#1A1A1A] border border-white/10 rounded-3xl max-w-[420px] w-full p-6 md:p-8 text-center" onClick={(e) => e.stopPropagation()}>
+        <button onClick={() => setOpen(false)} aria-label="Fechar" className="absolute top-1 right-1 w-11 h-11 flex items-center justify-center text-white/60 hover:text-white text-2xl leading-none">×</button>
+        <p className="text-[10px] font-bold uppercase tracking-widest text-[#F4CDD4] mb-2">Espera!</p>
+        <h3 className="text-xl md:text-2xl font-black text-white tracking-tight mb-2 leading-tight">A live do Dia do Tosador é domingo e não se repete</h3>
+        <p className="text-sm text-white/70 mb-6">Entre no grupo para receber o aviso na hora e os cupons liberados só ao vivo.</p>
         <LiveCta className="block w-full">Entrar no grupo do WhatsApp</LiveCta>
       </div>
     </div>
