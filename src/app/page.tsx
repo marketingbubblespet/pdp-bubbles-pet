@@ -23,6 +23,11 @@ const pages = [
     label: 'Live Dia do Tosador',
     description: 'Página de captura para a live de 26/07 com Mariane Gutierres e Anna Grandi',
   },
+  {
+    href: '/care',
+    label: 'Bubbles Care (Revenda)',
+    description: 'Pré-lançamento para petshops: cadastro de revenda da linha Care',
+  },
 ]
 
 const PASSWORD = 'mariane'
