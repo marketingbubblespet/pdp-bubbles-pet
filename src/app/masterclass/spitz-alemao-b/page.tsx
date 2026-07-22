@@ -22,7 +22,7 @@ const MasterFaqB       = dynamic(() => import('@/components/lp/masterclass-b/Mas
 const MasterStickyBarB = dynamic(() => import('@/components/lp/masterclass-b/MasterStickyBarB').then(m => ({ default: m.MasterStickyBarB })))
 const ExitPopupB       = dynamic(() => import('@/components/lp/masterclass-b/ExitPopupB').then(m => ({ default: m.ExitPopupB })))
 
-const SITE_URL = 'https://www.bubbles.com.br'
+const SITE_URL = 'https://ofertas.bubbles.com.br'
 const PAGE_URL_A = `${SITE_URL}/masterclass/${MC.slug}`
 const OG_IMAGE = `${SITE_URL}/images/masterclass/guilherme-hero.webp`
 
@@ -33,6 +33,7 @@ const description =
 export const metadata: Metadata = {
   title,
   description,
+  metadataBase: new URL(SITE_URL),
   // Variante de teste A/B: não indexar e apontar o canonical para a versão A,
   // evitando conteúdo duplicado no Google.
   alternates: {

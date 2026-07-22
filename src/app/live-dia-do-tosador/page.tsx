@@ -19,7 +19,7 @@ const LiveFaq       = dynamic(() => import('@/components/lp/live-tosador/LiveFaq
 const LiveStickyBar = dynamic(() => import('@/components/lp/live-tosador/LiveStickyBar').then(m => ({ default: m.LiveStickyBar })))
 const LiveExitPopup = dynamic(() => import('@/components/lp/live-tosador/LiveExitPopup').then(m => ({ default: m.LiveExitPopup })))
 
-const SITE_URL = 'https://www.bubbles.com.br'
+const SITE_URL = 'https://ofertas.bubbles.com.br'
 const PAGE_URL = `${SITE_URL}/${LIVE.slug}`
 
 const title = 'Live Dia do Tosador com a Bubbles | 26/07 às 19h'
@@ -28,6 +28,7 @@ const description = 'Live especial de Dia do Tosador em 26/07 às 19h, ao vivo n
 export const metadata: Metadata = {
   title,
   description,
+  metadataBase: new URL(SITE_URL),
   alternates: { canonical: PAGE_URL },
   robots: { index: true, follow: true },
   openGraph: {

@@ -23,7 +23,7 @@ const MasterStickyBarB = dynamic(() => import('@/components/lp/masterclass-b/Mas
 const ExitPopupB       = dynamic(() => import('@/components/lp/masterclass-b/ExitPopupB').then(m => ({ default: m.ExitPopupB })))
 const WebMcpTools      = dynamic(() => import('@/components/lp/masterclass-b/WebMcpTools').then(m => ({ default: m.WebMcpTools })))
 
-const SITE_URL = 'https://www.bubbles.com.br'
+const SITE_URL = 'https://ofertas.bubbles.com.br'
 const PAGE_URL = `${SITE_URL}/masterclass/${MC.slug}`
 const OG_IMAGE = `${SITE_URL}/images/masterclass/guilherme-hero.webp`
 
@@ -34,6 +34,7 @@ const description =
 export const metadata: Metadata = {
   title,
   description,
+  metadataBase: new URL(SITE_URL),
   keywords: [
     'masterclass spitz alemão',
     'banho e tosa spitz',
