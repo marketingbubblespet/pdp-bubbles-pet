@@ -14,3 +14,9 @@ export function trackJoinClick() {
 export function trackShareClick() {
   window.gtag?.('event', 'share', { event_category: 'live_dia_tosador' })
 }
+
+// Dispara evento de lead quando alguém clica no botão flutuante para ir até a seção de participação.
+export function trackFloatingClick() {
+  window.gtag?.('event', 'generate_lead', { event_category: 'live_dia_tosador_floating' })
+  window.fbq?.('track', 'Lead')
+}
