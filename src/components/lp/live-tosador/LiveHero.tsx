@@ -1,4 +1,5 @@
-import { Image as ImageIcon, Calendar, Clock, MapPin, Gift, PartyPopper, Tag, Sparkles } from 'lucide-react'
+import Image from 'next/image'
+import { Calendar, Clock, MapPin, Gift, PartyPopper, Tag, Sparkles } from 'lucide-react'
 import { LIVE } from '@/lib/live-tosador'
 import { LiveCta } from './LiveCta'
 import { LiveCountdown } from './LiveCountdown'
@@ -20,15 +21,17 @@ export function LiveHero() {
   return (
     <section className="bg-[#080808] pt-12 pb-14 md:pt-20 md:pb-20 px-4">
       <div className="max-w-[820px] mx-auto text-center">
-        {/* Placeholder da arte oficial da campanha — substituir por next/image quando a arte chegar */}
-        <div className="mx-auto mb-6 max-w-[560px] rounded-2xl border-2 border-dashed border-white/10 bg-[#1A1A1A] flex flex-col items-center justify-center gap-2 p-5">
-          <ImageIcon size={28} className="text-white/40 shrink-0" />
-          <span className="text-[11px] text-white/40 text-center leading-relaxed max-w-[440px]">
-            <strong className="text-white/60">Arte oficial do &quot;Dia do Tosador&quot;</strong>, banner 1200x400px, PNG/WebP.
-            Sugestão de conteúdo: Mariane e Anna juntas (ou uma cena de banho/tosa), clima de celebração
-            profissional, paleta Cosmic Rose sobre fundo escuro, com o texto ou selo &quot;Dia do Tosador&quot;
-            em destaque. Evitar imagens de banco genéricas.
-          </span>
+        {/* Arte oficial da campanha */}
+        <div className="relative mx-auto mb-6 max-w-[560px] aspect-[3/1] rounded-2xl overflow-hidden">
+          <Image
+            src="/images/live-tosador/dia-do-tosador-banner.webp"
+            alt="Live Dia do Tosador com a Bubbles, com Mariane e Anna"
+            fill
+            priority
+            fetchPriority="high"
+            sizes="(max-width: 640px) calc(100vw - 32px), 560px"
+            className="object-cover"
+          />
         </div>
 
         <p className="text-xs font-bold uppercase tracking-widest text-[#F4CDD4] mb-3">
