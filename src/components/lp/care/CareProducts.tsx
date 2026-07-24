@@ -35,10 +35,10 @@ export function CareProducts() {
           A linha completa
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F0C0D] text-center mb-4">
-          11 produtos prontos para girar na sua prateleira.
+          11 produtos pensados para gerar banho, cuidado, manutenção e renda extra no seu pet shop.
         </h2>
         <p className="text-sm md:text-base text-[#6B7280] text-center mb-10 max-w-[640px] mx-auto">
-          Escolha uma categoria e veja o que já pode estar na sua prateleira.
+          Escolha uma categoria e veja o que pode estar na sua prateleira.
         </p>
 
         {/* Abas com indicador deslizante */}

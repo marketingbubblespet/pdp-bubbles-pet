@@ -36,7 +36,7 @@ export function CareDemandMachine() {
             A máquina de demanda
           </p>
           <h2 className="text-2xl md:text-4xl font-extrabold leading-tight text-[#0F0C0D] mb-4 text-center max-w-[820px] mx-auto">
-            Enquanto você lê isto, tem gente vendendo Care pra você.
+            Enquanto você vê isso, tem criador gerando conteúdo e desejo para seu negócio.
           </h2>
           <p className="text-sm md:text-base text-[#6B7280] leading-relaxed mb-10 text-center max-w-[720px] mx-auto">
             {CARE_DEMAND.afiliados.toLocaleString('pt-BR')} criadores já estão gerando procura pela Bubbles no TikTok Shop. Os tutores vão procurar os produtos. A pergunta é: vão encontrar na sua prateleira?

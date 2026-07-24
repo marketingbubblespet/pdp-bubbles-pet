@@ -31,10 +31,10 @@ export function CareHero() {
                 Lançamento · Bubbles Care
               </p>
               <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.15] text-[#0F0C0D] mb-4">
-                Revenda sem medo de encalhar. A procura a gente já criou pra você.
+                Revenda sem risco e fature mais com o mais simples: o produto que o tutor já procura.
               </h1>
               <p className="text-base md:text-lg text-[#6B7280] font-medium leading-relaxed mb-6">
-                A linha Care já tem tutor procurando. Você só precisa ter na prateleira. A Bubbles gera a demanda, o lucro fica com o seu petshop.
+                A Linha Care chega pronta pra revenda: condição exclusiva de pré-venda e uma demanda que a gente já criou no digital.
               </p>
             </Reveal>
 

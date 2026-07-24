@@ -136,7 +136,7 @@ export const CARE_WHY_RESELL = [
   { icon: 'Scissors', title: 'Facilita o seu trabalho', text: 'O pet cuidado em casa chega com menos nó, e o banho rende mais na sua bancada.' },
   { icon: 'Handshake', title: 'Complementa, não substitui', text: 'A Care é a manutenção em casa entre um banho profissional e outro. Não tira o seu serviço, valoriza ele.' },
   { icon: 'Award', title: 'Reforça sua autoridade', text: 'Quando você recomenda, o tutor confia. Sua indicação vale mais que qualquer anúncio.' },
-  { icon: 'ShieldCheck', title: 'Margem protegida e PDV pronto', text: 'Você recebe material de ponto de venda e uma condição pensada para o petshop.' },
+  { icon: 'ShieldCheck', title: 'Margem protegida e material para divulgação', text: 'Você recebe material de divulgação pronto, feito pra gerar desejo, e uma condição exclusiva pro seu petshop.' },
 ] as const
 
 // Quem é a Bubbles (referência: captacao.bubbles.com.br)
@@ -161,27 +161,27 @@ export const CARE_TESTIMONIALS_PENDING = true
 
 export const CARE_FAQ = [
   {
-    q: 'Se o tutor compra no site de vocês, por que eu deveria estocar?',
-    a: 'Porque a maioria dos tutores decide na hora, no balcão, com o pet recém-banhado na frente. Quem tem o produto na prateleira captura essa venda por impulso, que o site sozinho não pega.',
+    q: 'Qual a margem real de ganho revendendo a Care?',
+    a: 'A margem é pensada para o petshop, com material de divulgação pronto. No cadastro, nossos consultores passam a condição de lançamento com os números fechados para o seu caso.',
   },
   {
-    q: 'Produto pronto rende pouco, vai encalhar na prateleira?',
-    a: 'É justamente o contrário do que a gente construiu. Tem 2.665 afiliados gerando procura pela linha todos os dias. O tutor já chega querendo. Seu papel é só ter o produto disponível.',
-  },
-  {
-    q: 'Qual a margem real que eu ganho?',
-    a: 'A margem é pensada para o petshop, com material de ponto de venda pronto. No cadastro, nossos consultores passam a condição de lançamento com os números fechados para o seu caso.',
-  },
-  {
-    q: 'Quanto preciso comprar para começar?',
+    q: 'Quanto eu preciso comprar pra começar?',
     a: 'Na pré-venda de lançamento, os consultores montam com você um primeiro pedido no tamanho certo pra sua loja, sem exagero de estoque.',
   },
   {
-    q: 'E se o preço do site ficar mais barato que o meu?',
-    a: 'A política de preço protege quem revende. Isso é parte da conversa com o consultor no seu cadastro.',
+    q: 'Se eu vender o kit pro tutor, eu perco ele do meu banho e tosa?',
+    a: 'Não. A Care é manutenção em casa entre um banho e outro. O pet volta mais fácil de trabalhar, e você segue sendo a referência de cuidado dele.',
   },
   {
-    q: 'Se eu vender o kit para o tutor, eu perco ele do meu banho e tosa?',
-    a: 'Não. A Care é manutenção em casa entre um banho e outro. O pet volta mais fácil de trabalhar, e você segue sendo a referência de cuidado dele.',
+    q: 'Qual a diferença entre a linha profissional e a Care?',
+    a: 'A linha profissional é a que você já usa no banho e tosa, dentro do petshop. A Care é pronta para o tutor usar em casa, pensada para manter o resultado do seu trabalho entre uma visita e outra.',
+  },
+  {
+    q: 'Quais produtos têm mais saída?',
+    a: 'Os shampoos e os itens de manutenção do dia a dia costumam ser a porta de entrada, mas a linha inteira foi pensada para cobrir cada momento do cuidado em casa. No cadastro, os consultores ajudam a montar o mix ideal pro seu público.',
+  },
+  {
+    q: 'Como posicionar os produtos na prateleira?',
+    a: 'Você recebe material de divulgação pronto pra ajudar nisso. E o melhor momento pra oferecer é logo depois do banho, com o pet limpo e cheiroso na frente do tutor.',
   },
 ] as const
