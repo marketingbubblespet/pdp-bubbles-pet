@@ -1,6 +1,6 @@
 // Faixa contínua (marquee) só com CSS, sem JS/dependência. Componente de servidor.
 const PHRASES = [
-  'A demanda já está em movimento',
+  'A demanda já está acontecendo',
   '2.665 afiliados gerando procura',
   'Margem pensada pro seu petshop',
   'Pré-venda de lançamento',

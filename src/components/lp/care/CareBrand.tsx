@@ -28,10 +28,10 @@ export function CareBrand() {
             Quem é a <span className="text-[#F4CDD4]">Bubbles®</span>?
           </h2>
           <p className="text-sm md:text-base text-white/70 text-center leading-relaxed max-w-[720px] mx-auto mb-2">
-            A Bubbles® nasceu da vontade de transformar a experiência de banho e tosa em algo mais profissional, sensorial e consciente, tanto para o groomer quanto para o bem-estar do pet.
+            A Bubbles® nasceu no mercado profissional de banho e tosa. Foi de lá que vimos a lacuna do home care: o tutor sai satisfeito da loja, mas não tinha como continuar esse cuidado em casa.
           </p>
           <p className="text-sm md:text-base text-white/70 text-center leading-relaxed max-w-[720px] mx-auto mb-10">
-            Com <strong className="text-white">mais de 7 anos de história</strong>, elevamos o padrão do mercado, transformando cada atendimento em uma experiência memorável.
+            Pensando nessa necessidade e no faturamento extra que isso representa pro seu negócio, criamos a <strong className="text-white">Linha Care</strong>: a mesma qualidade e performance que você já entrega no pet shop, agora pronta pra continuar em casa e virar uma nova fonte de receita pro seu negócio.
           </p>
         </Reveal>
 

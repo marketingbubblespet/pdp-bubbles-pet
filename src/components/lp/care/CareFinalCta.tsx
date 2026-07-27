@@ -19,10 +19,10 @@ export function CareFinalCta() {
           Pré-venda de lançamento
         </p>
         <h2 className="text-2xl md:text-4xl font-extrabold text-white leading-tight mb-4">
-          Entre agora, com prioridade. Depois, seu concorrente já vai estar revendendo.
+          A demanda já está aí. Falta só você entrar.
         </h2>
         <p className="text-sm md:text-base text-[#9ca3af] mb-8 max-w-[560px] mx-auto">
-          A demanda já está girando. Garanta que ela encontre a sua prateleira primeiro.
+          Milhares de tutores já procurando pela Linha Care. Garanta sua condição de pré-venda e transforme essa demanda em faturamento extra pro seu petshop.
         </p>
         <a
           href="#cadastro"
