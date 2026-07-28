@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { Users, TrendingUp, Video } from 'lucide-react'
-import { CARE_DEMAND } from '@/lib/care'
+import { Users, TrendingUp, Video, Check } from 'lucide-react'
+import { CARE_DEMAND, CARE_QUICK_PROOFS } from '@/lib/care'
 import { Reveal } from './Reveal'
 
 const pills = [
@@ -31,16 +31,28 @@ export function CareHero() {
                 Lançamento · Bubbles Care
               </p>
               <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.15] text-[#0F0C0D] mb-4">
-                Revenda sem risco e fature mais com o mais simples: o produto que o tutor já procura.
+                Transforme cada banho em uma nova oportunidade de venda e fature 2 vezes.
               </h1>
               <p className="text-base md:text-lg text-[#6B7280] font-medium leading-relaxed mb-6">
-                A Linha Care chega pronta pra revenda: condição exclusiva de pré-venda e uma demanda que a gente já criou no digital.
+                A Linha Care chega com uma linha completa para banho, finalização e manutenção em casa, unindo qualidade profissional, design marcante e uma estratégia de marketing pensada para gerar procura, giro e recompra.
               </p>
+            </Reveal>
+
+            {/* Provas rápidas */}
+            <Reveal delay={100}>
+              <ul className="flex flex-col gap-2 mb-6">
+                {CARE_QUICK_PROOFS.map((proof) => (
+                  <li key={proof} className="flex items-start gap-2 text-sm text-[#0F0C0D] font-medium">
+                    <Check size={16} className="text-[#3DB85C] shrink-0 mt-0.5" />
+                    {proof}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
 
             <div className="flex flex-wrap gap-2 mb-8">
               {pills.map((p, i) => (
-                <Reveal key={p.text} delay={150 + i * 100} className="inline-block">
+                <Reveal key={p.text} delay={200 + i * 100} className="inline-block">
                   <span className="inline-flex items-center gap-1.5 bg-white border border-[#E5E7EB] rounded-full px-3 py-1.5 text-xs md:text-sm font-semibold text-[#0F0C0D]">
                     <p.icon size={14} className="text-[#E8649A] shrink-0" />
                     {p.text}
@@ -49,15 +61,15 @@ export function CareHero() {
               ))}
             </div>
 
-            <Reveal delay={400}>
+            <Reveal delay={450}>
               <a
                 href="#cadastro"
                 className="inline-block bg-[#3DB85C] text-white font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 text-center shadow-lg"
               >
-                Quero revender no meu petshop →
+                Quero ser revendedor da Linha Care →
               </a>
               <p className="text-[10px] md:text-xs text-[#6B7280] mt-3">
-                Cadastro sem compromisso. Nossos consultores falam com você.
+                Cadastro sem compromisso. Nossa equipe comercial entrará em contato para apresentar as condições de revenda.
               </p>
             </Reveal>
           </div>

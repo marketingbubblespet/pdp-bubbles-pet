@@ -23,6 +23,14 @@ export function CareCalculator() {
 
   return (
     <section className="bg-[#fdf2f4] py-16 md:py-24 px-4 border-t border-[#E5E7EB]">
+      <style>{`
+        @keyframes care-calc-pop {
+          0% { transform: scale(1); }
+          35% { transform: scale(1.14); color: #3DB85C; }
+          100% { transform: scale(1); }
+        }
+        .care-calc-pop { animation: care-calc-pop 0.4s ease-out; display: inline-block; }
+      `}</style>
       <div className="max-w-[760px] mx-auto">
         <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           Faça a conta
@@ -39,7 +47,7 @@ export function CareCalculator() {
             <label htmlFor="unidades" className="text-sm font-bold text-[#0F0C0D]">
               Unidades por mês
             </label>
-            <span className="text-lg font-extrabold text-[#E8649A]">{unidades}</span>
+            <span key={unidades} className="text-lg font-extrabold text-[#E8649A] care-calc-pop">{unidades}</span>
           </div>
           <input
             id="unidades"
@@ -57,7 +65,7 @@ export function CareCalculator() {
               <p className="text-[10px] font-bold uppercase tracking-widest text-[#6B7280] mb-1">
                 Lucro extra por mês
               </p>
-              <p className="text-2xl md:text-3xl font-extrabold text-[#0F0C0D]">
+              <p key={`mes-${unidades}`} className="text-2xl md:text-3xl font-extrabold text-[#0F0C0D] care-calc-pop">
                 R$ {lucroMes.toLocaleString('pt-BR')}
               </p>
             </div>
@@ -65,7 +73,7 @@ export function CareCalculator() {
               <p className="text-[10px] font-bold uppercase tracking-widest text-[#6B7280] mb-1">
                 Lucro extra por ano
               </p>
-              <p className="text-2xl md:text-3xl font-extrabold text-[#0F0C0D]">
+              <p key={`ano-${unidades}`} className="text-2xl md:text-3xl font-extrabold text-[#0F0C0D] care-calc-pop">
                 R$ {lucroAno.toLocaleString('pt-BR')}
               </p>
             </div>

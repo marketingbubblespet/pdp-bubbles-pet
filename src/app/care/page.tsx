@@ -5,6 +5,8 @@ import { CARE } from '@/lib/care'
 
 // Above fold — carregamento imediato
 import { CareHero } from '@/components/lp/care/CareHero'
+import { CareConnection } from '@/components/lp/care/CareConnection'
+import { CareJourney } from '@/components/lp/care/CareJourney'
 import { CareTicker } from '@/components/lp/care/CareTicker'
 import { CareDemandMachine } from '@/components/lp/care/CareDemandMachine'
 import { CareProducts } from '@/components/lp/care/CareProducts'
@@ -54,6 +56,8 @@ export default function CarePage() {
 
       <main className="pb-24 md:pb-20">
         <CareHero />
+        <CareConnection />
+        <CareJourney />
         <CareTicker />
         <CareDemandMachine />
         <CareProducts />

@@ -20,11 +20,11 @@ export const CARE_DEMAND = {
 } as const
 
 export const CARE_CATEGORIES = [
-  { id: 'shampoo', label: 'Shampoos' },
-  { id: 'condicionamento', label: 'Condicionamento e Hidratação' },
-  { id: 'finalizador', label: 'Finalizadores e Leave-ins' },
-  { id: 'perfume', label: 'Perfumes' },
-  { id: 'cuidado', label: 'Cuidados Específicos' },
+  { id: 'shampoo', label: 'Shampoos', icon: 'Droplets' },
+  { id: 'condicionamento', label: 'Condicionamento e Hidratação', icon: 'Waves' },
+  { id: 'finalizador', label: 'Finalizadores e Leave-ins', icon: 'Wind' },
+  { id: 'perfume', label: 'Perfumes', icon: 'SprayCan' },
+  { id: 'cuidado', label: 'Cuidados Específicos', icon: 'HeartPulse' },
 ] as const
 
 export type CareCategoryId = typeof CARE_CATEGORIES[number]['id']
@@ -129,14 +129,49 @@ export const CARE_PRODUCTS = [
   },
 ] as const
 
-// Por que revender a Care (briefing seção 7, todos os itens marcados como sim)
+// Bloco de conexão com o lojista (roteiro do Ivan)
+export const CARE_CONNECTION = {
+  title: 'Seu cliente já compra o serviço. Agora, ele pode continuar comprando o cuidado.',
+  text: 'O banho e tosa entrega resultado imediato. A linha Bubbles Care ajuda o tutor a manter esse resultado por mais tempo, e cria uma nova oportunidade de venda dentro do pet shop.',
+  bullets: [
+    'Aumenta o valor de cada atendimento',
+    'Transforma a recomendação do profissional em venda',
+    'Fortalece o relacionamento com o tutor',
+    'Estimula novas compras ao longo do tempo',
+    'Amplia o faturamento sem depender apenas de novos agendamentos',
+    'Reduz o risco de o tutor comprar em outro lugar',
+  ],
+  highlight: 'O serviço gera confiança. O home care prolonga o relacionamento.',
+} as const
+
+// Apresentação da oportunidade: jornada antes / durante / depois do banho (roteiro do Ivan)
+export const CARE_JOURNEY = {
+  title: 'Uma linha criada para vender antes, durante e depois do banho',
+  intro: 'A Bubbles Care foi pensada para acompanhar toda a jornada de cuidado do pet:',
+  steps: [
+    { label: 'Antes do atendimento', text: 'Produtos que ajudam o tutor a manter uma rotina adequada.' },
+    { label: 'Durante o serviço', text: 'Soluções de qualidade profissional para banho e finalização.' },
+    { label: 'Depois do atendimento', text: 'Itens para preservar o resultado em casa e incentivar a recompra.' },
+  ],
+  closing: 'Não é apenas uma linha para ocupar espaço na prateleira. É um portfólio que conecta serviço, recomendação e consumo recorrente.',
+} as const
+
+// Provas rápidas do Hero (roteiro do Ivan)
+export const CARE_QUICK_PROOFS = [
+  'Linha completa para a rotina de cuidados',
+  'Produtos desenvolvidos para uso profissional e home care',
+  'Campanha de lançamento para gerar demanda',
+  'Margens competitivas para o canal',
+] as const
+
+// Por que revender a Care (roteiro do Ivan: "o que torna a Care uma oportunidade diferente")
 export const CARE_WHY_RESELL = [
-  { icon: 'TrendingUp', title: 'Nova fonte de lucro sem trabalho extra', text: 'O cliente já está na sua loja. Você só oferece o produto no balcão.' },
-  { icon: 'Clock', title: 'Vende no melhor momento', text: 'Pet recém-banhado e cheiroso: é a hora em que o tutor mais valoriza levar o cuidado pra casa.' },
-  { icon: 'Scissors', title: 'Facilita o seu trabalho', text: 'O pet cuidado em casa chega com menos nó, e o banho rende mais na sua bancada.' },
-  { icon: 'Handshake', title: 'Complementa, não substitui', text: 'A Care é a manutenção em casa entre um banho profissional e outro. Não tira o seu serviço, valoriza ele.' },
-  { icon: 'Award', title: 'Reforça sua autoridade', text: 'Quando você recomenda, o tutor confia. Sua indicação vale mais que qualquer anúncio.' },
-  { icon: 'ShieldCheck', title: 'Margem protegida e material para divulgação', text: 'Você recebe material de divulgação pronto, feito pra gerar desejo, e uma condição exclusiva pro seu petshop.' },
+  { icon: 'Layers', label: 'Portfólio completo', title: 'Do banho à manutenção', text: 'Uma grade pensada para atender diferentes momentos da rotina de cuidados, reduzindo a necessidade de o cliente buscar soluções complementares em outras marcas.' },
+  { icon: 'BadgeCheck', label: 'Qualidade profissional', title: 'Resultado que o profissional reconhece', text: 'Produtos desenvolvidos para entregar uma experiência consistente no banho, na finalização e na manutenção, tanto no uso profissional quanto na recomendação para casa.' },
+  { icon: 'Sparkles', label: 'Design que chama atenção', title: 'Uma apresentação que favorece a escolha', text: 'Em uma categoria com muitas opções parecidas, a identidade visual da Bubbles Care ajuda o produto a se destacar e facilita sua identificação no ponto de venda.' },
+  { icon: 'RefreshCw', label: 'Potencial de recompra', title: 'Cuidado pet é uma rotina, não uma compra única', text: 'Quando o produto entra na rotina do tutor, a oportunidade deixa de ser uma venda pontual e passa a fazer parte de um ciclo de reposição e continuidade.' },
+  { icon: 'Megaphone', label: 'Marketing para gerar procura', title: 'A marca também participa da venda', text: 'A Bubbles investirá em divulgação, conteúdo e presença nas redes sociais para aumentar o reconhecimento da linha e apoiar o trabalho de distribuidores e lojistas.' },
+  { icon: 'TrendingUp', label: 'Margem competitiva', title: 'Mais espaço para rentabilizar cada venda', text: 'Condições comerciais estruturadas para que o parceiro tenha competitividade na revenda e uma operação saudável no ponto de venda.' },
 ] as const
 
 // Quem é a Bubbles (referência: captacao.bubbles.com.br)
@@ -183,5 +218,25 @@ export const CARE_FAQ = [
   {
     q: 'Como posicionar os produtos na prateleira?',
     a: 'Você recebe material de divulgação pronto pra ajudar nisso. E o melhor momento pra oferecer é logo depois do banho, com o pet limpo e cheiroso na frente do tutor.',
+  },
+  {
+    q: 'A Bubbles vai divulgar a linha pros meus clientes, ou fico sozinho nisso?',
+    a: 'As duas frentes trabalham juntas. A Bubbles investe em divulgação, conteúdo e presença nas redes pra gerar reconhecimento da linha, e você recebe material de apoio pronto pra reforçar isso no seu ponto de venda.',
+  },
+  {
+    q: 'Preciso escolher entre vender a linha profissional ou a Care?',
+    a: 'Não. São linhas complementares. A profissional continua sendo usada por você, dentro do petshop. A Care é a extensão desse cuidado pra casa, sem substituir nada do que você já faz.',
+  },
+  {
+    q: 'Como funciona a reposição depois do primeiro pedido?',
+    a: 'Os consultores acompanham com você o ritmo de reposição, alinhado à recompra natural que a rotina de cuidado em casa gera com o tempo.',
+  },
+  {
+    q: 'Vocês oferecem algum treinamento pra minha equipe?',
+    a: 'No cadastro, os consultores explicam como apresentar a linha pro tutor e tiram as principais dúvidas da sua equipe sobre o portfólio.',
+  },
+  {
+    q: 'Tem risco de a Care concorrer com o que eu já vendo hoje?',
+    a: 'Não. A Care ocupa um espaço que hoje não é atendido: o cuidado do tutor em casa. Ela não compete com sua linha profissional nem com outros produtos que você já revende.',
   },
 ] as const

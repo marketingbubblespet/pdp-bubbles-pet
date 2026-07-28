@@ -1,7 +1,16 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { Droplets, Waves, Wind, SprayCan, HeartPulse, type LucideIcon } from 'lucide-react'
 import { CARE_CATEGORIES, CARE_PRODUCTS, type CareCategoryId } from '@/lib/care'
+
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  Droplets,
+  Waves,
+  Wind,
+  SprayCan,
+  HeartPulse,
+}
 
 export function CareProducts() {
   const [active, setActive] = useState<CareCategoryId>(CARE_CATEGORIES[0].id)
@@ -28,6 +37,11 @@ export function CareProducts() {
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
         .care-product-enter { animation: care-product-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        @keyframes care-tab-invite {
+          0%, 85%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(232,100,154,0); }
+          92% { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(232,100,154,0.15); }
+        }
+        .care-tab-invite { animation: care-tab-invite 3.5s ease-in-out infinite; }
       `}</style>
 
       <div className="max-w-[1100px] mx-auto">
@@ -47,18 +61,23 @@ export function CareProducts() {
             className="absolute top-0 h-full bg-[#E8649A] rounded-full transition-all duration-300 ease-out"
             style={{ left: indicator.left, width: indicator.width }}
           />
-          {CARE_CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              ref={(el) => { tabRefs.current[cat.id] = el }}
-              onClick={() => setActive(cat.id)}
-              className={`relative z-10 whitespace-nowrap px-4 py-2 rounded-full text-xs md:text-sm font-bold transition-colors duration-300 ${
-                active === cat.id ? 'text-white' : 'text-[#0F0C0D] hover:bg-[#fdf0f3]'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
+          {CARE_CATEGORIES.map((cat, i) => {
+            const Icon = CATEGORY_ICONS[cat.icon]
+            return (
+              <button
+                key={cat.id}
+                ref={(el) => { tabRefs.current[cat.id] = el }}
+                onClick={() => setActive(cat.id)}
+                style={active === cat.id ? undefined : { animationDelay: `${i * 0.4}s` }}
+                className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap px-4 py-2 rounded-full text-xs md:text-sm font-bold transition-colors duration-300 ${
+                  active === cat.id ? 'text-white' : 'text-[#0F0C0D] hover:bg-[#fdf0f3] care-tab-invite'
+                }`}
+              >
+                {Icon && <Icon size={15} className={active === cat.id ? 'text-white' : 'text-[#E8649A]'} />}
+                {cat.label}
+              </button>
+            )
+          })}
         </div>
 
         {/* Grid com fade/stagger a cada troca de aba (key força remontagem = nova animação) */}
