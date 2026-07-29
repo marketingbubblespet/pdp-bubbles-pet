@@ -21,9 +21,21 @@ const ReviewsBlock    = dynamic(() => import('@/components/lp/essential/ReviewsB
 const FaqBlock        = dynamic(() => import('@/components/lp/essential/FaqBlock').then(m => ({ default: m.FaqBlock })))
 const StickyCtaBar    = dynamic(() => import('@/components/lp/essential/StickyCtaBar').then(m => ({ default: m.StickyCtaBar })))
 
+const SITE_URL = 'https://ofertas.bubbles.com.br'
+const PAGE_URL = `${SITE_URL}/essential`
+
+const title = 'Shampoo Pet Neutro Essential 5L | Bubbles Pet'
+const description = 'Shampoo profissional para groomers. Diluição 1:5, rende 30L e ~300 banhos. Ativos Bioex AO + Extrato de Algas. 100% vegano e hipoalergênico.'
+
 export const metadata: Metadata = {
-  title: 'Shampoo Pet Neutro Essential 5L | Bubbles Pet',
-  description: 'Shampoo profissional para groomers. Diluição 1:5, rende 30L e ~300 banhos. Ativos Bioex AO + Extrato de Algas. 100% vegano e hipoalergênico.',
+  title,
+  description,
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: PAGE_URL },
+  robots: { index: true, follow: true },
+  openGraph: {
+    title, description, url: PAGE_URL, siteName: 'Bubbles Pet', locale: 'pt_BR', type: 'website',
+  },
 }
 
 export default function LandingPage() {
