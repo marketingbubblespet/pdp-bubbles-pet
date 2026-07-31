@@ -4,25 +4,95 @@ import { CheckCircle2 } from 'lucide-react'
 import { loadUtms } from '@/lib/utm'
 import { trackCareLead } from './trackCare'
 
+const SELLUM_WEBHOOK_URL = 'https://api-admin.sellum.app/v1/public/crm/webhooks/captacao-237b5035c0'
+const SELLUM_TOKEN = 'crm_15eb27da51aa452be74dfe4512570c8a7e16acd25f9600a0'
+
+// Codifica um objeto como application/x-www-form-urlencoded, formato que o Netlify Forms espera
+function encodeFormData(data: Record<string, string>): string {
+  return Object.entries(data)
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+    .join('&')
+}
+
 export function CareForm() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
+    setError(false)
 
     const formData = new FormData(e.currentTarget)
-    const lead = Object.fromEntries(formData.entries())
+    const lead = Object.fromEntries(formData.entries()) as Record<string, string>
     const utms = loadUtms()
+    const fullUrl = window.location.href
 
-    // TODO [decidir depois]: destino do lead ainda não definido (Netlify Forms, WhatsApp,
-    // embed externo ou CRM). Por ora só registramos o evento e mostramos sucesso local.
-    // eslint-disable-next-line no-console
-    console.log('Lead Bubbles Care (TODO enviar):', { ...lead, ...utms })
+    const sellumPayload = {
+      contactName: `(care) ${lead.nome}`,
+      companyName: lead.petshop,
+      email: lead.email || undefined,
+      phone: lead.whatsapp,
+      source: 'care',
+      cidade: lead.cidade,
+      banhosMes: lead.banhosMes,
+      clienteBubbles: lead.clienteBubbles,
+      ...utms,
+      full_url: fullUrl,
+    }
+
+    // Backup: mesmo lead também vai pro Netlify Forms (painel Netlify > Forms),
+    // independente do resultado do envio pra Sellum.
+    const netlifyPayload = {
+      'form-name': 'care-lead',
+      nome: lead.nome,
+      petshop: lead.petshop,
+      cidade: lead.cidade,
+      whatsapp: lead.whatsapp,
+      email: lead.email || '',
+      banhosMes: lead.banhosMes || '',
+      clienteBubbles: lead.clienteBubbles || '',
+      full_url: fullUrl,
+      ...utms,
+    }
+
+    const [sellumResult, netlifyResult] = await Promise.allSettled([
+      fetch(SELLUM_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${SELLUM_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sellumPayload),
+      }).then((res) => {
+        if (!res.ok) throw new Error(`Sellum respondeu ${res.status}`)
+      }),
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeFormData(netlifyPayload),
+      }).then((res) => {
+        if (!res.ok) throw new Error(`Netlify Forms respondeu ${res.status}`)
+      }),
+    ])
+
+    if (sellumResult.status === 'rejected') {
+      console.error('Falha ao enviar lead Bubbles Care pra Sellum:', sellumResult.reason)
+    }
+    if (netlifyResult.status === 'rejected') {
+      console.error('Falha ao salvar lead Bubbles Care no Netlify Forms:', netlifyResult.reason)
+    }
+
+    setLoading(false)
+
+    // Só considera falha total se os DOIS destinos falharem; um dos dois já garante o lead salvo.
+    if (sellumResult.status === 'rejected' && netlifyResult.status === 'rejected') {
+      setError(true)
+      return
+    }
 
     trackCareLead()
-    setLoading(false)
     setSubmitted(true)
   }
 
@@ -48,7 +118,20 @@ export function CareForm() {
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-[#F7F7F7] rounded-2xl p-6 md:p-8 border border-[#E5E7EB] flex flex-col gap-4">
+          <form
+            onSubmit={handleSubmit}
+            name="care-lead"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            className="bg-[#F7F7F7] rounded-2xl p-6 md:p-8 border border-[#E5E7EB] flex flex-col gap-4"
+          >
+            <input type="hidden" name="form-name" value="care-lead" />
+            <p className="hidden">
+              <label>
+                Não preencha este campo: <input name="bot-field" />
+              </label>
+            </p>
+
             <div>
               <label htmlFor="nome" className="block text-xs font-bold text-[#0F0C0D] mb-1.5">
                 Nome completo *
@@ -131,6 +214,12 @@ export function CareForm() {
                 </label>
               </div>
             </fieldset>
+
+            {error && (
+              <p className="text-sm text-red-600 text-center">
+                Não conseguimos enviar seu cadastro agora. Tente novamente em instantes.
+              </p>
+            )}
 
             <button
               type="submit"

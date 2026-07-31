@@ -75,13 +75,12 @@ export function CareHero() {
           </div>
 
           <Reveal delay={200} className="relative flex justify-center md:justify-end">
-            <div className="relative w-full max-w-[560px] aspect-square rounded-2xl overflow-hidden bg-[#fdf0f3]">
-              {/* Imagem de exemplo (placeholder): trocar por foto real de herói da linha Care */}
+            <div className="group relative w-full max-w-[560px] aspect-square rounded-2xl overflow-hidden bg-[#fdf0f3]">
               <Image
-                src="/images/hero-produto-5l.jpg"
+                src="/images/care-hero-produtos.jpg"
                 alt="Linha Bubbles Care"
                 fill
-                className="object-contain"
+                className="object-contain transition-transform duration-500 ease-out group-hover:scale-105 group-hover:-rotate-1"
                 priority
                 fetchPriority="high"
                 sizes="(max-width: 480px) calc(100vw - 32px), (max-width: 768px) 560px, 560px"

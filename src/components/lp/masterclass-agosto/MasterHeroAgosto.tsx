@@ -46,10 +46,10 @@ export function MasterHeroAgosto() {
           </div>
 
           <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-[1.02] mb-4">
-            {highlightTerms(MC.title, ['tosa bebê', 'rostinho'])}
+            {highlightTerms(MC.title, ['tosa bebê', 'rostinho bebê', 'rostinho'])}
           </h1>
           <p className="text-xs md:text-sm text-white/70 leading-relaxed mb-3">
-            {highlightTerms(MC.subtitle, ['tosa bebê', 'rostinho'])}
+            {highlightTerms(MC.subtitle, ['tosa bebê', 'rostinho bebê', 'rostinho'])}
           </p>
 
           <p className="flex items-center gap-1.5 text-xs font-semibold text-white/60 mb-5">

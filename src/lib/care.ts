@@ -29,14 +29,6 @@ export const CARE_CATEGORIES = [
 
 export type CareCategoryId = typeof CARE_CATEGORIES[number]['id']
 
-// Imagens placeholder: reaproveitando fotos reais já existentes no projeto (não há fotos
-// dos produtos Care ainda). Trocar por foto real de cada produto assim que chegar.
-const PLACEHOLDER_IMAGES = [
-  '/images/hero-produto-5l.jpg',
-  '/images/masterclass/produto-linha-pro.webp',
-  '/images/masterclass/produto-texturizador.webp',
-] as const
-
 export const CARE_PRODUCTS = [
   {
     id: 'shampoo-limpeza-profunda',
@@ -44,7 +36,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '300ml',
     categoria: 'shampoo',
     descricao: 'Limpa a fundo e ajuda a controlar odores, deixando a pelagem leve, macia e com sensação de limpeza prolongada.',
-    imagem: PLACEHOLDER_IMAGES[0],
+    imagem: '/images/care/care_shampoo-limpeza-profunda_300ml.webp',
   },
   {
     id: 'shampoo-neutro',
@@ -52,7 +44,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '300ml',
     categoria: 'shampoo',
     descricao: 'Limpeza suave para o dia a dia, indicada para todos os tipos de pelagem, com fórmula que contribui para maciez, brilho e toque agradável.',
-    imagem: PLACEHOLDER_IMAGES[1],
+    imagem: '/images/care/care_shampoo-neutro_300ml.webp',
   },
   {
     id: 'shampoo-pelos-claros',
@@ -60,7 +52,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '300ml',
     categoria: 'shampoo',
     descricao: 'Realça a luminosidade da pelagem clara, branca ou grisalha, com tecnologia óptica que ajuda a minimizar o aspecto amarelado.',
-    imagem: PLACEHOLDER_IMAGES[2],
+    imagem: '/images/care/care_shampoo-pelos-claros_300ml.webp',
   },
   {
     id: 'condicionador-hidratante',
@@ -68,7 +60,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '250ml',
     categoria: 'condicionamento',
     descricao: 'Hidrata e desembaraça, reduz os nós e deixa os pelos alinhados, macios e com toque sedoso, com óleo de argan e girassol.',
-    imagem: PLACEHOLDER_IMAGES[0],
+    imagem: '/images/care/care_condicionador-hidratante_300ml.webp',
   },
   {
     id: 'mascara-multifuncional',
@@ -76,7 +68,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '100ml',
     categoria: 'condicionamento',
     descricao: 'Hidratação e nutrição intensivas com manteiga de karité e óleo de abacate, para uma pelagem mais macia, brilhante e resistente.',
-    imagem: PLACEHOLDER_IMAGES[1],
+    imagem: '/images/care/care_mascara-multifuncional_100ml.webp',
   },
   {
     id: 'secagem-rapida',
@@ -84,7 +76,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '100ml',
     categoria: 'finalizador',
     descricao: 'Leave-in que ajuda a reduzir o tempo de secagem e facilita a escovação, deixando os pelos macios, soltos e com toque sedoso, sem pesar.',
-    imagem: PLACEHOLDER_IMAGES[2],
+    imagem: '/images/care/care_acelerador-de-secagem_100ml.webp',
   },
   {
     id: 'limpeza-olhos-ouvidos',
@@ -93,7 +85,7 @@ export const CARE_PRODUCTS = [
     categoria: 'cuidado',
     // Sem ficha técnica disponível: descrição genérica e segura, confirmar com o time.
     descricao: 'Higiene suave e prática da região dos olhos e ouvidos do pet, para incluir na rotina de cuidados do dia a dia. [descrição a confirmar]',
-    imagem: PLACEHOLDER_IMAGES[0],
+    imagem: '/images/care/care_limpeza-olhos-e-ouvidos_100ml.webp',
   },
   {
     id: 'hidratante-patas-focinhos',
@@ -101,7 +93,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '50ml',
     categoria: 'cuidado',
     descricao: 'Balm que hidrata e ajuda a proteger as patinhas e o focinho, reduzindo o ressecamento e deixando a pele macia e confortável.',
-    imagem: PLACEHOLDER_IMAGES[1],
+    imagem: '/images/care/care_hidratante-patas-focinho_50ml.webp',
   },
   {
     id: 'banho-a-seco',
@@ -109,7 +101,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '250ml',
     categoria: 'finalizador',
     descricao: 'Higiene entre banhos: refresca, ajuda a desembaraçar e perfuma suavemente a pelagem seca, sem enxágue e sem deixar resíduos.',
-    imagem: PLACEHOLDER_IMAGES[2],
+    imagem: '/images/care/care_banho-a-seco_300ml.webp',
   },
   {
     id: 'body-splash-flora',
@@ -117,7 +109,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '80ml',
     categoria: 'perfume',
     descricao: 'Perfuma delicadamente a pelagem com fragrância suave e duradoura, deixando uma sensação de frescor sem pesar os pelos.',
-    imagem: PLACEHOLDER_IMAGES[0],
+    imagem: '/images/care/care_body-splash-flora_80ml.webp',
   },
   {
     id: 'body-splash-luna',
@@ -125,7 +117,7 @@ export const CARE_PRODUCTS = [
     apresentacao: '80ml',
     categoria: 'perfume',
     descricao: 'Perfuma delicadamente a pelagem com fragrância marcante e duradoura, deixando uma sensação de frescor sem pesar os pelos.',
-    imagem: PLACEHOLDER_IMAGES[1],
+    imagem: '/images/care/care_body-splash-luna_80ml.webp',
   },
 ] as const
 

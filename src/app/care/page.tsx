@@ -1,7 +1,10 @@
 // src/app/care/page.tsx
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
+import Script from 'next/script'
 import { CARE } from '@/lib/care'
+
+const GTM_ID = 'GTM-N4PHK6DM'
 
 // Above fold — carregamento imediato
 import { CareHero } from '@/components/lp/care/CareHero'
@@ -46,6 +49,25 @@ export const metadata: Metadata = {
 export default function CarePage() {
   return (
     <>
+      {/* Preconnect pro CDN da Shopify (vídeo institucional na seção "Quem é a Bubbles") */}
+      <link rel="preconnect" href="https://cdn.shopify.com" />
+      <link rel="dns-prefetch" href="https://cdn.shopify.com" />
+
+      {/* GTM escopado só nesta página (não entra no layout global) */}
+      <Script id="gtm-care" strategy="afterInteractive">
+        {`
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');
+        `}
+      </Script>
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        />
+      </noscript>
+
       {/* Barra de rolagem no accent da marca (escopo desta página) */}
       <style>{`
         html { scrollbar-color: #E8649A #F4CDD4; scrollbar-width: thin; }

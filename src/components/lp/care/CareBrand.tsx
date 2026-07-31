@@ -52,6 +52,18 @@ export function CareBrand() {
             )
           })}
         </div>
+
+        <Reveal delay={500}>
+          <div className="mt-10 md:mt-14 max-w-[720px] mx-auto rounded-2xl overflow-hidden border border-white/10">
+            <video
+              src="https://cdn.shopify.com/videos/c/vp/6fd9894dcddb47b5883886091db28520/6fd9894dcddb47b5883886091db28520.HD-720p-4.5Mbps-45960585.mp4"
+              controls
+              playsInline
+              preload="metadata"
+              className="w-full h-auto block"
+            />
+          </div>
+        </Reveal>
       </div>
     </section>
   )
