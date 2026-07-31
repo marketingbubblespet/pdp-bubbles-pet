@@ -3,7 +3,6 @@ import { Users, ShoppingBag, Video } from 'lucide-react'
 import { CARE_DEMAND } from '@/lib/care'
 import { Reveal } from './Reveal'
 import { CountUp } from './CountUp'
-import { CareDemandGallery } from './CareDemandGallery'
 
 const stats = [
   { icon: Users, target: CARE_DEMAND.afiliados, prefix: '', label: 'Afiliados ativos divulgando a marca' },
@@ -58,13 +57,9 @@ export function CareDemandMachine() {
         </div>
 
         <Reveal delay={200}>
-          <p className="text-sm md:text-base font-semibold text-[#0F0C0D] text-center mb-10 max-w-[680px] mx-auto">
+          <p className="text-sm md:text-base font-semibold text-[#0F0C0D] text-center max-w-[680px] mx-auto">
             Não é promessa de venda. É venda que já está acontecendo. Cada afiliado é uma pessoa trabalhando, de graça, para levar o tutor até o seu balcão.
           </p>
-        </Reveal>
-
-        <Reveal delay={300}>
-          <CareDemandGallery />
         </Reveal>
       </div>
     </section>

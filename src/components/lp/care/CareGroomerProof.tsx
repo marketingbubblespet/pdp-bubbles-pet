@@ -1,5 +1,6 @@
-import { Star, UserCircle2 } from 'lucide-react'
+import { Star, UserCircle2, BadgeCheck } from 'lucide-react'
 import { BRAND } from '@/lib/constants'
+import { CARE_TESTIMONIALS } from '@/lib/care'
 import { Reveal } from './Reveal'
 
 export function CareGroomerProof() {
@@ -15,22 +16,24 @@ export function CareGroomerProof() {
           </h2>
         </Reveal>
 
-        {/* Depoimentos: placeholder até o time enviar os reais. Não inventar nome/texto de pessoa real. */}
         <div className="grid md:grid-cols-3 gap-4">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <Reveal key={i} delay={i * 100}>
+          {CARE_TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} delay={i * 100}>
               <div className="bg-white rounded-2xl p-6 border border-[#E5E7EB] flex flex-col gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                 <div className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, j) => (
                     <Star key={j} size={14} className="text-[#F4A522] fill-[#F4A522]" />
                   ))}
                 </div>
-                <p className="text-sm text-[#9ca3af] italic leading-relaxed">
-                  [Depoimento a confirmar, aguardando conteúdo real de parceiro groomer]
+                <p className="text-sm text-[#6B7280] italic leading-relaxed line-clamp-[10]">
+                  &ldquo;{t.text}&rdquo;
                 </p>
                 <div className="flex items-center gap-2 mt-1">
                   <UserCircle2 size={28} className="text-[#E5E7EB]" />
-                  <span className="text-xs font-bold text-[#0F0C0D]">Groomer parceiro Bubbles</span>
+                  <span className="text-xs font-bold text-[#0F0C0D]">{t.name}</span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#3DB85C]">
+                    <BadgeCheck size={12} /> Verificado
+                  </span>
                 </div>
               </div>
             </Reveal>

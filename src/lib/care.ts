@@ -136,6 +136,22 @@ export const CARE_CONNECTION = {
   highlight: 'O serviço gera confiança. O home care prolonga o relacionamento.',
 } as const
 
+// Depoimentos reais de distribuidores parceiros Bubbles
+export const CARE_TESTIMONIALS = [
+  {
+    name: 'MANTYPET',
+    text: 'Ser distribuidor da Bubbles tem se mostrado uma experiência extremamente enriquecedora e estratégica, marcada por aprendizado constante e resultados positivos desde o início, mesmo sem experiência prévia no segmento de banho e tosa. O suporte próximo e eficiente da equipe Bubbles, aliado à excelência dos produtos, nos transmite total segurança operacional e fortalece nossa atuação comercial, refletindo diretamente na alta aceitação e satisfação dos clientes.',
+  },
+  {
+    name: 'Assispet',
+    text: 'A Bubbles se tornou em pouco tempo um dos nossos principais fornecedores, um grande parceiro que veio pra somar trabalho e resultado em nossa distribuidora, com excelente atendimento e suporte de toda equipe, uma empresa com um leque imenso de produtos, sempre trazendo novidades ao mercado pet.',
+  },
+  {
+    name: 'SERRAPET',
+    text: 'Ser distribuidor Bubbles vai muito além de vender produtos, é viver, na prática, a transformação que eles causam. É acompanhar de perto aquele pet que chega para o banho e sai renovado, com o pelo macio, brilho evidente e um perfume que realmente marca. É ver o olhar do cliente mudar, o elogio espontâneo surgir e saber que você fez parte daquela experiência. No dia a dia, é sentir a diferença na rotina dos profissionais: produtos que rendem, que facilitam o trabalho e elevam o padrão do atendimento. É perceber que não se trata só de estética, mas de cuidado, bem-estar e valorização do serviço prestado. Ser Bubbles é criar conexão com os pet shops, com os groomers e com cada cliente que volta justamente pela experiência que teve. É ter orgulho de representar algo que entrega resultado de verdade, que fideliza e que faz o negócio crescer junto. No fim, ser distribuidor Bubbles é isso: não é só sobre o que você entrega, é sobre o que as pessoas sentem depois, pois a satisfação do cliente do meu cliente é a minha satisfação.',
+  },
+] as const
+
 // Apresentação da oportunidade: jornada antes / durante / depois do banho (roteiro do Ivan)
 export const CARE_JOURNEY = {
   title: 'Uma linha criada para vender antes, durante e depois do banho',

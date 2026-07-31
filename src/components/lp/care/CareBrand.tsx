@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Clock, Star, Users, Heart, Package, type LucideIcon } from 'lucide-react'
 import { CARE_BRAND_STATS } from '@/lib/care'
 import { Reveal } from './Reveal'
@@ -9,13 +8,15 @@ const ICONS: Record<string, LucideIcon> = { Clock, Star, Users, Heart, Package }
 export function CareBrand() {
   return (
     <section className="relative py-16 md:py-24 px-4 overflow-hidden">
-      {/* Foto de fundo (exemplo/placeholder): trocar por imagem real da marca/ambiente Bubbles */}
-      <Image
-        src="/images/masterclass/bastidores-1.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover z-0"
+      {/* Vídeo de fundo institucional da marca */}
+      <video
+        src="https://cdn.shopify.com/videos/c/vp/6fd9894dcddb47b5883886091db28520/6fd9894dcddb47b5883886091db28520.HD-720p-4.5Mbps-45960585.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className="absolute inset-0 w-full h-full object-cover z-0"
       />
       <div className="absolute inset-0 bg-black/70 z-0" />
 
@@ -52,18 +53,6 @@ export function CareBrand() {
             )
           })}
         </div>
-
-        <Reveal delay={500}>
-          <div className="mt-10 md:mt-14 max-w-[720px] mx-auto rounded-2xl overflow-hidden border border-white/10">
-            <video
-              src="https://cdn.shopify.com/videos/c/vp/6fd9894dcddb47b5883886091db28520/6fd9894dcddb47b5883886091db28520.HD-720p-4.5Mbps-45960585.mp4"
-              controls
-              playsInline
-              preload="metadata"
-              className="w-full h-auto block"
-            />
-          </div>
-        </Reveal>
       </div>
     </section>
   )
