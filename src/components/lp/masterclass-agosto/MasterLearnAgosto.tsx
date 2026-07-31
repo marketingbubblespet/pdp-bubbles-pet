@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Scissors, Ban, Star, GraduationCap, MessageCircle, Link2, PlayCircle, type LucideIcon } from 'lucide-react'
 import { MC, MC_LEARN, MC_DELIVERABLES } from '@/lib/masterclass-agosto'
 
@@ -14,27 +13,29 @@ const DELIVERABLE_ICONS: Record<string, LucideIcon> = {
   '▶️': PlayCircle,
 }
 
+// Grifa em rosa os termos-chave dentro de um texto, mantendo o resto normal
+function highlightTerms(text: string, terms: string[]) {
+  const pattern = new RegExp(`(${terms.join('|')})`, 'gi')
+  return text.split(pattern).map((part, i) =>
+    terms.some((t) => t.toLowerCase() === part.toLowerCase()) ? (
+      <span key={i} className="text-[#F4CDD4]">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  )
+}
+
 export function MasterLearnAgosto() {
   return (
-    <section className="relative bg-[#111111] py-16 md:py-24 px-4 border-t border-white/5 overflow-hidden">
-      {/* Foto do Tio Dan trabalhando, emoldurada na metade direita (sem cortar o pet); metade esquerda fica no preto tradicional */}
-      <div className="hidden md:block absolute top-1/2 right-[6%] -translate-y-1/2 w-[38%] max-w-[420px] aspect-square rounded-3xl overflow-hidden opacity-80 z-0">
-        <Image
-          src="/images/masterclass/tio-dan-trabalho.webp"
-          alt=""
-          fill
-          sizes="420px"
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/60 via-transparent to-transparent" />
-      </div>
-
-      <div className="relative z-10 max-w-[1100px] mx-auto">
+    <section className="bg-[#111111] py-16 md:py-24 px-4 border-t border-white/5">
+      <div className="max-w-[1100px] mx-auto">
         <p className="text-[10px] font-bold uppercase tracking-widest text-[#F4CDD4] mb-3 text-center">
           O que você vai aprender
         </p>
         <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight text-center max-w-[760px] mx-auto mb-4">
-          {MC.transformation}
+          {highlightTerms(MC.transformation, ['rostinho bebê'])}
         </h2>
 
         <div className="grid md:grid-cols-3 gap-4 mt-10">

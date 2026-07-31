@@ -1,20 +1,40 @@
 // Cópia isolada de MasterInstructorB, só pra essa LP: usa a foto do arquivo de dados
 // (MC_INSTRUCTOR.photo) em vez do caminho fixo do componente compartilhado.
+'use client'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { MC_INSTRUCTOR } from '@/lib/masterclass-agosto'
 
+const INSTRUCTOR_PHOTOS = [
+  '/images/masterclass/tio-dan-hero.webp',
+  '/images/masterclass/tio-dan-trabalho.webp',
+  '/images/masterclass/tio-dan-retrato.webp',
+]
+
 export function MasterInstructorAgosto() {
+  const [photoIndex, setPhotoIndex] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPhotoIndex((i) => (i + 1) % INSTRUCTOR_PHOTOS.length)
+    }, 4000)
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <section className="bg-[#111111] py-16 md:py-24 px-4 border-t border-white/5">
       <div className="max-w-[1000px] mx-auto grid md:grid-cols-[280px_1fr] gap-8 md:gap-12 items-center">
         <div className="relative aspect-square rounded-3xl overflow-hidden">
-          <Image
-            src="/images/masterclass/tio-dan-hero.webp"
-            alt={MC_INSTRUCTOR.name}
-            fill
-            sizes="(max-width: 767px) 343px, 280px"
-            className="object-cover object-top"
-          />
+          {INSTRUCTOR_PHOTOS.map((src, i) => (
+            <Image
+              key={src}
+              src={src}
+              alt={MC_INSTRUCTOR.name}
+              fill
+              sizes="(max-width: 767px) 343px, 280px"
+              className={`object-cover object-top transition-opacity duration-700 ${i === photoIndex ? 'opacity-100' : 'opacity-0'}`}
+            />
+          ))}
         </div>
 
         <div>

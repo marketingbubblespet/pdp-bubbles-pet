@@ -97,7 +97,7 @@ export const MC_INSTRUCTOR = {
   name: 'Tio Dan',
   credential: 'Groomer Bubbles e especialista em tosa bebê e rostinho',
   bio: 'Groomer, mais de 10 mil atendimentos, empresário e competidor multipremiado.',
-  tags: ['Groomer', 'Especialista em Rostinho', 'Empresário', 'Competidor'],
+  tags: ['Groomer', 'Especialista em Rostinho', 'Empresário'],
   photo: '/images/masterclass/tio-dan-retrato.webp',
 } as const
 
