@@ -28,6 +28,11 @@ const pages = [
     label: 'Bubbles Care (Revenda)',
     description: 'Pré-lançamento para petshops: cadastro de revenda da linha Care',
   },
+  {
+    href: '/masterclass/rostinho-bebe',
+    label: 'MasterClass Rostinho Bebê',
+    description: 'Aula ao vivo de 24/08 com Tio Dan: a base do banho pro rostinho bebê perfeito',
+  },
 ]
 
 const PASSWORD = 'mariane'

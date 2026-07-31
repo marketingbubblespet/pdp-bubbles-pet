@@ -72,8 +72,11 @@ O comportamento esperado é parecido com o do Lovable: cirúrgico, previsível e
     a tela inteira e baixa uma versão maior do que o necessário, mesmo sem perda de
     qualidade visual — só desperdício de banda, mais sensível no mobile.
 35. **Rodar `npm run build`** antes de dizer que está pronto.
+36. **Não subir o servidor local (`localhost`/preview) sem eu pedir.** Validar com `npm run build`
+    é suficiente na maioria das vezes; só abrir o preview quando eu pedir explicitamente pra ver
+    rodando ou quando for pedido visual (ex: conferir imagem, animação).
 
 ## 9. Idioma e texto
-36. Todo texto visível ao usuário em **pt-BR**.
-37. **Sem travessão "—" em textos visíveis da LP.** Usar vírgula, ":" ou ".".
-38. **Não mudar SEO** (title, description, metadata) sem pedir.
+37. Todo texto visível ao usuário em **pt-BR**.
+38. **Sem travessão "—" em textos visíveis da LP.** Usar vírgula, ":" ou ".".
+39. **Não mudar SEO** (title, description, metadata) sem pedir.
