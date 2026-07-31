@@ -1,24 +1,13 @@
-import Image from 'next/image'
 import { MC_DETAILS } from '@/lib/masterclass-agosto'
 
 export function MasterDetailsAgosto() {
   return (
-    <section className="relative py-16 md:py-24 px-4 overflow-hidden">
-      {/* Foto de fundo (Tio Dan trabalhando), fundida com o preto de fundo da seção */}
-      <Image
-        src="/images/masterclass/tio-dan-trabalho.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover z-0 opacity-35"
-      />
-      <div className="absolute inset-0 bg-[#080808]/75 z-0" />
-
-      <div className="relative z-10 max-w-[800px] mx-auto">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-[#F4CDD4] mb-3 text-center">
+    <section className="bg-[#F4CDD4] py-16 md:py-24 px-4">
+      <div className="max-w-[800px] mx-auto">
+        <p className="text-[10px] font-bold uppercase tracking-widest text-[#0F0C0D]/70 mb-3 text-center">
           Detalhes e logística
         </p>
-        <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight text-center mb-10">
+        <h2 className="text-2xl md:text-3xl font-black text-[#0F0C0D] tracking-tight text-center mb-10">
           Tudo o que você precisa saber
         </h2>
 
