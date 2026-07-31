@@ -17,15 +17,17 @@ const DELIVERABLE_ICONS: Record<string, LucideIcon> = {
 export function MasterLearnAgosto() {
   return (
     <section className="relative bg-[#111111] py-16 md:py-24 px-4 border-t border-white/5 overflow-hidden">
-      {/* Foto de fundo (Tio Dan trabalhando) só na metade direita; metade esquerda fica no preto tradicional */}
-      <Image
-        src="/images/masterclass/tio-dan-trabalho.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover object-bottom z-0 opacity-60"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#111111] from-50% to-transparent z-0" />
+      {/* Foto do Tio Dan trabalhando, emoldurada na metade direita (sem cortar o pet); metade esquerda fica no preto tradicional */}
+      <div className="hidden md:block absolute top-1/2 right-[6%] -translate-y-1/2 w-[38%] max-w-[420px] aspect-square rounded-3xl overflow-hidden opacity-80 z-0">
+        <Image
+          src="/images/masterclass/tio-dan-trabalho.webp"
+          alt=""
+          fill
+          sizes="420px"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/60 via-transparent to-transparent" />
+      </div>
 
       <div className="relative z-10 max-w-[1100px] mx-auto">
         <p className="text-[10px] font-bold uppercase tracking-widest text-[#F4CDD4] mb-3 text-center">

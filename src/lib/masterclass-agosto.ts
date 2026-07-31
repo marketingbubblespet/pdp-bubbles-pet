@@ -83,8 +83,14 @@ export const MC_AUDIENCE = [
   'Profissional que quer se diferenciar da concorrência',
 ] as const
 
-// Para quem NÃO é: [AGUARDANDO INFORMAÇÕES] briefing não especificou
-export const MC_NOT_AUDIENCE = [] as const
+// Para quem NÃO é
+export const MC_NOT_AUDIENCE = [
+  'Quem não trabalha nem pretende trabalhar com banho e tosa',
+  'Quem já domina o corte de rostinho bebê com segurança',
+  'Quem busca receita pronta sem aplicar a técnica na prática',
+  'Quem se contenta com produtos de baixa qualidade no banho',
+  'Quem não pode participar ao vivo nem assistir depois pelo replay',
+] as const
 
 // Instrutor
 export const MC_INSTRUCTOR = {
