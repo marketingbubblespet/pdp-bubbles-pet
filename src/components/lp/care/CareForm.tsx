@@ -68,7 +68,7 @@ export function CareForm() {
       }).then((res) => {
         if (!res.ok) throw new Error(`Sellum respondeu ${res.status}`)
       }),
-      fetch('/', {
+      fetch('/__forms.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encodeFormData(netlifyPayload),
@@ -121,16 +121,9 @@ export function CareForm() {
           <form
             onSubmit={handleSubmit}
             name="care-lead"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
             className="bg-[#F7F7F7] rounded-2xl p-6 md:p-8 border border-[#E5E7EB] flex flex-col gap-4"
           >
             <input type="hidden" name="form-name" value="care-lead" />
-            <p className="hidden">
-              <label>
-                Não preencha este campo: <input name="bot-field" />
-              </label>
-            </p>
 
             <div>
               <label htmlFor="nome" className="block text-xs font-bold text-[#0F0C0D] mb-1.5">
