@@ -23,7 +23,6 @@ import { CareGroomerProof } from '@/components/lp/care/CareGroomerProof'
 import { CareForm } from '@/components/lp/care/CareForm'
 import { CareFinalCta } from '@/components/lp/care/CareFinalCta'
 import { CareFooter } from '@/components/lp/care/CareFooter'
-import { CareFloatingWhatsApp } from '@/components/lp/care/CareFloatingWhatsApp'
 
 const CareFaq          = dynamic(() => import('@/components/lp/care/CareFaq').then(m => ({ default: m.CareFaq })))
 const CareStickyBar    = dynamic(() => import('@/components/lp/care/CareStickyBar').then(m => ({ default: m.CareStickyBar })))
@@ -96,7 +95,6 @@ export default function CarePage() {
 
       {/* Estímulos de conversão */}
       <CareStickyBar />
-      <CareFloatingWhatsApp />
       <CareExitPopup />
     </>
   )
