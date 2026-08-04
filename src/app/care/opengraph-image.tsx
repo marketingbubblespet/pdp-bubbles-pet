@@ -3,7 +3,7 @@
 import { ImageResponse } from 'next/og'
 import { CARE } from '@/lib/care'
 
-export const alt = 'Bubbles Care: revenda para petshops'
+export const alt = 'Bubbles Care: revenda para o seu negócio'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 

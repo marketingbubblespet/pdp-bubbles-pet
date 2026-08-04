@@ -8,7 +8,7 @@ export const CARE = {
   slug: 'care',
   tagline: 'A linha que transforma cada banho em faturamento extra.',
   whatsapp: BRAND.whatsapp,
-  whatsappMsg: 'Olá! Quero saber como revender a linha Bubbles Care no meu petshop.',
+  whatsappMsg: 'Olá! Quero saber como revender a linha Bubbles Care no meu negócio.',
 } as const
 
 // Números da máquina de demanda (TikTok Shop), vindos do briefing, confirmar antes de publicar.
@@ -124,7 +124,7 @@ export const CARE_PRODUCTS = [
 // Bloco de conexão com o lojista (roteiro do Ivan)
 export const CARE_CONNECTION = {
   title: 'Seu cliente já compra o serviço. Agora, ele pode continuar comprando o cuidado.',
-  text: 'O banho e tosa entrega resultado imediato. A linha Bubbles Care ajuda o tutor a manter esse resultado por mais tempo, e cria uma nova oportunidade de venda dentro do pet shop.',
+  text: 'O banho e tosa entrega resultado imediato. A linha Bubbles Care ajuda o tutor a manter esse resultado por mais tempo, e cria uma nova oportunidade de venda dentro do seu negócio.',
   bullets: [
     'Aumenta o valor de cada atendimento',
     'Transforma a recomendação do profissional em venda',
@@ -205,7 +205,7 @@ export const CARE_TESTIMONIALS_PENDING = true
 export const CARE_FAQ = [
   {
     q: 'Qual a margem real de ganho revendendo a Care?',
-    a: 'A margem é pensada para o petshop, com material de divulgação pronto. No cadastro, nossos consultores passam a condição de lançamento com os números fechados para o seu caso.',
+    a: 'A margem é pensada para o seu negócio, com material de divulgação pronto. No cadastro, nossos consultores passam a condição de lançamento com os números fechados para o seu caso.',
   },
   {
     q: 'Quanto eu preciso comprar pra começar?',

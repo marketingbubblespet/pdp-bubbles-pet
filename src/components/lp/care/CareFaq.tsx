@@ -43,7 +43,7 @@ export function CareFaq() {
             href="#cadastro"
             className="inline-block bg-[#3DB85C] text-white font-bold text-sm md:text-base px-6 md:px-8 py-2.5 md:py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 text-center shadow-md"
           >
-            Quero revender no meu petshop →
+            Quero revender no meu negócio →
           </a>
         </div>
       </div>

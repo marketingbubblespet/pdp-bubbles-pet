@@ -14,7 +14,7 @@ export function CareStickyBar() {
       <div className="max-w-[1100px] mx-auto px-4 py-3 flex items-center justify-between gap-3">
         <div className="hidden sm:block">
           <p className="text-sm font-extrabold text-[#0F0C0D] leading-tight">Bubbles Care</p>
-          <p className="text-xs text-[#6B7280]">Revenda pro seu petshop, pré-venda de lançamento</p>
+          <p className="text-xs text-[#6B7280]">Revenda pro seu negócio, pré-venda de lançamento</p>
         </div>
         <a
           href="#cadastro"

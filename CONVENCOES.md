@@ -80,3 +80,25 @@ O comportamento esperado é parecido com o do Lovable: cirúrgico, previsível e
 37. Todo texto visível ao usuário em **pt-BR**.
 38. **Sem travessão "—" em textos visíveis da LP.** Usar vírgula, ":" ou ".".
 39. **Não mudar SEO** (title, description, metadata) sem pedir.
+
+## 10. UX de formulários multi-etapa (mobile)
+40. **Todo formulário dividido em passos precisa controlar a rolagem.** Etapas têm alturas
+    diferentes; quando uma etapa alta dá lugar a uma curta, a página encolhe, o navegador
+    mantém a posição de rolagem e o usuário é jogado na seção seguinte, achando que o
+    formulário sumiu. Em toda LP nova com formulário em etapas, aplicar os três casos:
+    - **Ao trocar de etapa** (avançar e voltar): rolar de volta ao topo da caixa do
+      formulário, mas **só se o topo estiver fora da tela** (se já estiver visível, não
+      mexer, pra não criar solavanco à toa).
+    - **Quando a validação falha**: rolar até o primeiro campo pendente. Sem isso, quem
+      está lá embaixo no botão clica e não vê nada acontecer, porque o erro aparece num
+      campo acima, fora da tela. Grupos de botões (radio) precisam de um `id` próprio no
+      wrapper para servirem de âncora.
+    - **Ao enviar com sucesso**: rolar até a confirmação, que costuma ser bem mais curta
+      que o formulário.
+    Detalhes de implementação: chamar a rolagem **dentro do handler do clique**, não num
+    `useEffect`. O topo da caixa não muda de posição quando o conteúdo interno troca, então
+    a rolagem já sai correta e evita o "flash" de o navegador pintar a seção errada antes
+    de voltar. A âncora precisa envolver formulário **e** tela de sucesso (os dois se
+    alternam no mesmo lugar). Respeitar `prefers-reduced-motion`: quem tem "reduzir
+    movimento" ligado recebe rolagem instantânea em vez de animada.
+    Referência pronta: `src/components/lp/care/CareForm.tsx`.

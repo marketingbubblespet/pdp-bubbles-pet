@@ -2,7 +2,7 @@
 const PHRASES = [
   'A demanda já está acontecendo',
   '2.665 afiliados gerando procura',
-  'Margem pensada pro seu petshop',
+  'Margem pensada pro seu negócio',
   'Pré-venda de lançamento',
   'Produto que gira, não encalha',
 ]

@@ -22,13 +22,13 @@ export function CareFinalCta() {
           A demanda já está aí. Falta só você entrar.
         </h2>
         <p className="text-sm md:text-base text-[#9ca3af] mb-8 max-w-[560px] mx-auto">
-          Milhares de tutores já procurando pela Linha Care. Garanta sua condição de pré-venda e transforme essa demanda em faturamento extra pro seu petshop.
+          Milhares de tutores já procurando pela Linha Care. Garanta sua condição de pré-venda e transforme essa demanda em faturamento extra pro seu negócio.
         </p>
         <a
           href="#cadastro"
           className="inline-block bg-[#3DB85C] text-white font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-lg"
         >
-          Quero revender no meu petshop →
+          Quero revender no meu negócio →
         </a>
       </Reveal>
     </section>

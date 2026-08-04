@@ -36,10 +36,10 @@ export function CareCalculator() {
           Faça a conta
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#0F0C0D] text-center mb-4">
-          Quanto a Care pode render pro seu petshop?
+          Quanto a Care pode render pro seu negócio?
         </h2>
         <p className="text-sm text-[#6B7280] text-center mb-10 max-w-[560px] mx-auto">
-          Considerando a procura que já geramos, arraste para simular quantas unidades por mês o seu petshop pretende comprar.
+          Considerando a procura que já geramos, arraste para simular quantas unidades por mês o seu negócio pretende comprar.
         </p>
 
         <div className="bg-white rounded-2xl p-6 md:p-10 border border-[#E5E7EB] shadow-sm">
@@ -93,7 +93,7 @@ export function CareCalculator() {
             href="#cadastro"
             className="inline-block bg-[#3DB85C] text-white font-bold text-sm md:text-base px-6 md:px-8 py-2.5 md:py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 text-center shadow-md"
           >
-            Quero essa margem no meu petshop →
+            Quero essa margem no meu negócio →
           </a>
         </div>
       </div>
