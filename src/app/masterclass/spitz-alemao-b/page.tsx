@@ -3,6 +3,7 @@
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { MC, MC_INSTRUCTOR } from '@/lib/masterclass-spitz'
+import { GtmScript } from '@/components/ui/GtmScript'
 
 // Above fold — carregamento imediato
 import { MasterHeroB } from '@/components/lp/masterclass-b/MasterHeroB'
@@ -89,6 +90,7 @@ const eventJsonLd = {
 export default function MasterclassSpitzB() {
   return (
     <>
+      <GtmScript id="GTM-5L9TD3PN" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}

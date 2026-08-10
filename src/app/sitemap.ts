@@ -34,5 +34,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      url: `${SITE_URL}/captacao`,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/pet-south`,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
   ]
 }

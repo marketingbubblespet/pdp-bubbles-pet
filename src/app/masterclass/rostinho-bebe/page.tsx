@@ -4,6 +4,7 @@
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { MC, MC_INSTRUCTOR } from '@/lib/masterclass-agosto'
+import { GtmScript } from '@/components/ui/GtmScript'
 
 // Above fold — carregamento imediato
 import { MasterHeroAgosto } from '@/components/lp/masterclass-agosto/MasterHeroAgosto'
@@ -92,6 +93,7 @@ const eventJsonLd = {
 export default function MasterclassRostinhoBebe() {
   return (
     <>
+      <GtmScript id="GTM-5L9TD3PN" />
       {/* Dados estruturados do evento para resultados ricos no Google */}
       <script
         type="application/ld+json"

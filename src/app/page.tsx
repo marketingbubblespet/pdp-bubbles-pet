@@ -33,6 +33,16 @@ const pages = [
     label: 'MasterClass Rostinho Bebê',
     description: 'Aula ao vivo de 24/08 com Tio Dan: a base do banho pro rostinho bebê perfeito',
   },
+  {
+    href: '/captacao',
+    label: 'Captação de Distribuidores',
+    description: 'Página de captação para quem quer se tornar distribuidor Bubbles',
+  },
+  {
+    href: '/pet-south',
+    label: 'Captação Pet South America',
+    description: 'Variante de captação de distribuidores co-branded com a Pet South America',
+  },
 ]
 
 const PASSWORD = 'mariane'

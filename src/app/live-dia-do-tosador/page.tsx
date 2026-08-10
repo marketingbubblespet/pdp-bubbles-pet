@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { LIVE } from '@/lib/live-tosador'
+import { GtmScript } from '@/components/ui/GtmScript'
 
 // Above fold — carregamento imediato
 import { LiveHero } from '@/components/lp/live-tosador/LiveHero'
@@ -53,6 +54,7 @@ const eventJsonLd = {
 export default function LiveDiaDoTosador() {
   return (
     <>
+      <GtmScript id="GTM-5L9TD3PN" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }} />
 
       {/* Pulse dos CTAs + barra de rolagem rosa (escopo desta página) */}

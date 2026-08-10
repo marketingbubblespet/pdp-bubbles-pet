@@ -1,6 +1,7 @@
 // src/app/essential/page.tsx
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
+import { GtmScript } from '@/components/ui/GtmScript'
 
 // Above fold — carregamento imediato
 import { TopBar } from '@/components/lp/essential/TopBar'
@@ -41,6 +42,7 @@ export const metadata: Metadata = {
 export default function LandingPage() {
   return (
     <>
+      <GtmScript id="GTM-5L9TD3PN" />
       <TopBar />
       <main className="pb-20 md:pb-0">
         <Hero />
