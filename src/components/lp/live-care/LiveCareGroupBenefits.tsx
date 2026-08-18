@@ -1,5 +1,6 @@
-import { BellRing, Tag, Users, Camera, ArrowRight, MessageCircle, type LucideIcon } from 'lucide-react'
+import { BellRing, Tag, Users, Camera, ArrowRight, type LucideIcon } from 'lucide-react'
 import { LIVE_CARE_GROUP_BENEFITS } from '@/lib/live-care'
+import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 import { LiveCareCta } from './LiveCareCta'
 
 const ICONS: Record<string, LucideIcon> = { BellRing, Tag, Users }
@@ -22,7 +23,7 @@ export function LiveCareGroupBenefits() {
         <div className="flex items-center justify-center gap-2 md:gap-4 mb-10 text-center">
           <div className="flex flex-col items-center gap-1.5 max-w-[110px]">
             <span className="w-11 h-11 rounded-full bg-[#3DB85C] flex items-center justify-center">
-              <MessageCircle size={20} className="text-white" />
+              <WhatsAppIcon size={20} className="text-white" />
             </span>
             <span className="text-[11px] font-bold text-[#0F0C0D] leading-tight">Você entra no grupo</span>
           </div>

@@ -76,6 +76,16 @@ O comportamento esperado é parecido com o do Lovable: cirúrgico, previsível e
     é suficiente na maioria das vezes; só abrir o preview quando eu pedir explicitamente pra ver
     rodando ou quando for pedido visual (ex: conferir imagem, animação).
 
+## 8.1 Ícones de marca
+41. **Todo elemento que leva o usuário ao WhatsApp usa o logo oficial do WhatsApp**, nunca
+    um ícone genérico de balão de conversa (`MessageCircle` e similares). Vale para botão
+    de CTA, botão flutuante, link de dúvida e qualquer menção visual ao canal. O logo é
+    reconhecido na hora e deixa claro pra onde o clique vai, o que aumenta a confiança e
+    a taxa de clique. Componente pronto: `src/components/ui/WhatsAppIcon.tsx`, que herda a
+    cor do texto (`currentColor`), então funciona em botão verde, branco ou escuro sem
+    precisar de variação. O `lucide-react` v1 removeu ícones de marca, por isso o logo é
+    um SVG próprio e não vem da biblioteca.
+
 ## 9. Idioma e texto
 37. Todo texto visível ao usuário em **pt-BR**.
 38. **Sem travessão "—" em textos visíveis da LP.** Usar vírgula, ":" ou ".".

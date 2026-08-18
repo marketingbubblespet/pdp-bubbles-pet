@@ -1,7 +1,8 @@
 'use client'
 import { useState } from 'react'
-import { ChevronDown, MessageCircle } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { LIVE_CARE, LIVE_CARE_FAQ } from '@/lib/live-care'
+import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 import { trackFaqOpen } from './trackLiveCare'
 
 export function LiveCareFaq() {
@@ -59,7 +60,7 @@ export function LiveCareFaq() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 min-h-[48px] bg-white border-2 border-[#3DB85C] text-[#3DB85C] font-bold rounded-[10px] px-6 py-3 hover:bg-[#f0fdf4] active:scale-95 transition-all duration-200"
           >
-            <MessageCircle size={18} /> Falar com a equipe no WhatsApp
+            <WhatsAppIcon size={18} /> Falar com a equipe no WhatsApp
           </a>
         </div>
       </div>
