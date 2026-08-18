@@ -34,6 +34,11 @@ const pages = [
     description: 'Aula ao vivo de 24/08 com Tio Dan: a base do banho pro rostinho bebê perfeito',
   },
   {
+    href: '/live-care',
+    label: 'Live de Lançamento Linha Care',
+    description: 'Live de 23/08 com Amanda e Ellen: captura para o grupo do WhatsApp',
+  },
+  {
     href: '/captacao',
     label: 'Captação de Distribuidores',
     description: 'Página de captação para quem quer se tornar distribuidor Bubbles',
