@@ -37,6 +37,11 @@ export function LiveCareHosts() {
                   [Aguardando cargo e bio para completar esta seção]
                 </p>
               )}
+              {h.quote && (
+                <p className="text-xs text-[#9ca3af] italic leading-relaxed border-t border-[#E5E7EB] pt-3 mt-1">
+                  &quot;{h.quote}&quot;
+                </p>
+              )}
             </div>
           ))}
         </div>

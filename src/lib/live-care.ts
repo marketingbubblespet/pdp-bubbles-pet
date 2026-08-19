@@ -93,20 +93,22 @@ export const LIVE_CARE_GROUP_BENEFITS = [
   },
 ] as const
 
-// Apresentadoras. [AGUARDANDO] fotos, cargo e bio reais: não inventar credencial de
-// pessoa real. Enquanto photo for null, o componente mostra um placeholder visual.
+// Apresentadoras. [AGUARDANDO] fotos reais: não inventar credencial de pessoa real.
+// Enquanto photo for null, o componente mostra um placeholder visual.
 export const LIVE_CARE_HOSTS = [
   {
     name: 'Amanda Moreth',
-    role: 'Equipe Bubbles',
+    role: 'Analista Comercial',
     photo: null,
-    bio: null,
+    bio: 'Estou na Bubbles há 6 meses, atuando no atendimento comercial e Sucesso do Cliente. No dia a dia, acompanho de perto os groomers, ouvindo suas necessidades e construindo uma relação próxima com quem faz o setor acontecer.',
+    quote: 'Já converso com muitos de vocês todos os dias, mas quero esse encontro ao vivo para uma troca ainda mais sincera, celebrar nossa profissão e contar todas as novidades da linha Care.',
   },
   {
     name: 'Ellen Lourenção',
-    role: 'Equipe Bubbles',
+    role: 'Líder de SAC e P&D',
     photo: null,
-    bio: null,
+    bio: 'Líder de SAC na Bubbles, com atuação próxima aos clientes e profissionais do setor. À frente do Sucesso do Cliente, acompanha de perto suas necessidades, experiências e feedbacks, contribuindo também para a evolução dos produtos junto ao P&D.',
+    quote: 'Estar perto dos nossos clientes é o que realmente nos permite entender suas necessidades. Essa live é uma oportunidade de reconhecer e valorizar quem inspira a Bubbles todos os dias.',
   },
 ] as const
 
