@@ -93,19 +93,20 @@ export const LIVE_CARE_GROUP_BENEFITS = [
   },
 ] as const
 
-// Apresentadoras. [AGUARDANDO] fotos, cargo e bio reais: não inventar credencial de
-// pessoa real. Enquanto photo for null, o componente mostra um placeholder visual.
+// Apresentadoras. Fotos recebidas em 20/08. [AGUARDANDO] ainda o cargo e a mini bio reais
+// de cada uma: não inventar credencial de pessoa real. Enquanto bio for null, o componente
+// mostra um aviso discreto no lugar do texto.
 export const LIVE_CARE_HOSTS = [
   {
     name: 'Amanda Moreth',
     role: 'Equipe Bubbles',
-    photo: null,
+    photo: '/images/live-care/amanda.webp',
     bio: null,
   },
   {
     name: 'Ellen Lourenção',
     role: 'Equipe Bubbles',
-    photo: null,
+    photo: '/images/live-care/ellen.webp',
     bio: null,
   },
 ] as const

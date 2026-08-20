@@ -12,6 +12,22 @@ Este documento tem duas partes independentes, que podem seguir para pessoas dife
 
 ---
 
+## ✅ Status em 20/08/2026
+
+| Ativo | Situação |
+|---|---|
+| Imagem 1 (herói) | **Recebida e no ar.** Arte quadrada com Amanda, Ellen e o logo Care. |
+| Imagem 2 (Amanda) | **Recebida e no ar.** |
+| Imagem 3 (Ellen) | **Recebida e no ar.** |
+| Imagem 4 (prova social) | Pendente, opcional |
+| Imagens 5 a 9 (kits) | Pendentes, só se decidirmos incluir o bloco de kits |
+| **Mini bios e cargos (Parte 2)** | **Pendente. É o que falta para a seção "Quem apresenta" ficar completa.** |
+
+> **Resumo para quem for tocar:** o design já entregou o essencial. O que trava a página
+> agora é a **Parte 2 (textos)**, não imagem.
+
+---
+
 # PARTE 1 · Briefing de imagens (design)
 
 ## Especificação técnica (vale para todas)

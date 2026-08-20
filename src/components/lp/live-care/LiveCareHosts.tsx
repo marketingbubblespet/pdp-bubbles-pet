@@ -16,27 +16,30 @@ export function LiveCareHosts() {
           {LIVE_CARE_HOSTS.map((h) => (
             <div
               key={h.name}
-              className="bg-white rounded-2xl p-6 border border-[#E5E7EB] flex flex-col items-center text-center gap-3"
+              className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="relative w-28 h-28 rounded-full overflow-hidden bg-[#fdf0f3] shrink-0">
+              {/* Retrato em quadrado: as fotos são 4:5 feitas na loja, então o recorte
+                  pelo topo mantém o rosto centralizado e ainda mostra o ambiente. */}
+              <div className="relative aspect-square bg-[#fdf0f3]">
                 <LiveCarePhoto
                   src={h.photo}
                   alt={h.name}
-                  sizes="112px"
+                  sizes="(max-width: 639px) calc(100vw - 32px), 420px"
                   label={`[FOTO: ${h.name}]`}
                 />
               </div>
-              <div>
-                <p className="font-extrabold text-[#0F0C0D] text-lg">{h.name}</p>
-                <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mt-1">{h.role}</p>
+
+              <div className="p-5 flex flex-col gap-2">
+                <p className="font-extrabold text-[#0F0C0D] text-lg leading-tight">{h.name}</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A]">{h.role}</p>
+                {h.bio ? (
+                  <p className="text-sm text-[#6B7280] leading-relaxed mt-1">{h.bio}</p>
+                ) : (
+                  <p className="text-xs text-[#9ca3af] italic leading-relaxed mt-1">
+                    [Aguardando cargo e mini bio]
+                  </p>
+                )}
               </div>
-              {h.bio ? (
-                <p className="text-sm text-[#6B7280] leading-relaxed">{h.bio}</p>
-              ) : (
-                <p className="text-xs text-[#9ca3af] italic leading-relaxed">
-                  [Aguardando cargo e bio para completar esta seção]
-                </p>
-              )}
             </div>
           ))}
         </div>

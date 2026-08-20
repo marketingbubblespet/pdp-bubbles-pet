@@ -108,12 +108,14 @@ export function LiveCareHero() {
 
         {/* Coluna da imagem */}
         <div className="order-first md:order-none">
-          <div className="relative w-full max-w-[520px] mx-auto md:mx-0 md:ml-auto aspect-[4/5] sm:aspect-square rounded-2xl overflow-hidden bg-[#fdf0f3] shadow-sm">
+          {/* Proporção quadrada em todas as telas: a arte é um quadrado fechado, com o logo
+              da Care no topo. Recortar para retrato no mobile cortaria as laterais. */}
+          <div className="relative w-full max-w-[520px] mx-auto md:mx-0 md:ml-auto aspect-square rounded-2xl overflow-hidden bg-[#fdf0f3] shadow-sm">
             <LiveCarePhoto
-              src={null}
-              alt="Live de lançamento da Linha Care"
+              src="/images/live-care/hero.webp"
+              alt={`Live de lançamento da Linha Care com ${LIVE_CARE.hosts}`}
               sizes="(max-width: 767px) calc(100vw - 32px), 520px"
-              label="[FOTO-01: herói da live, Amanda e Ellen ou a Linha Care em ambiente de pet shop]"
+              label="[FOTO-01: herói da live]"
               priority
             />
           </div>
