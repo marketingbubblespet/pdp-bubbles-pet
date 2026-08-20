@@ -32,11 +32,13 @@ export function LiveCareHosts() {
               <div className="p-5 flex flex-col gap-2">
                 <p className="font-extrabold text-[#0F0C0D] text-lg leading-tight">{h.name}</p>
                 <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A]">{h.role}</p>
-                {h.bio ? (
-                  <p className="text-sm text-[#6B7280] leading-relaxed mt-1">{h.bio}</p>
-                ) : (
-                  <p className="text-xs text-[#9ca3af] italic leading-relaxed mt-1">
-                    [Aguardando cargo e mini bio]
+
+                {h.bio && <p className="text-sm text-[#6B7280] leading-relaxed mt-1">{h.bio}</p>}
+
+                {/* Frase de convite na primeira pessoa: dá voz humana à seção */}
+                {h.quote && (
+                  <p className="text-sm text-[#6B7280] italic leading-relaxed border-t border-[#E5E7EB] pt-3 mt-2">
+                    &ldquo;{h.quote}&rdquo;
                   </p>
                 )}
               </div>

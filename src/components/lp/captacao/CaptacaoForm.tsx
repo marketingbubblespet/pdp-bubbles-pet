@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import { loadUtms } from '@/lib/utm'
@@ -37,10 +37,14 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
   const [isSuccess, setIsSuccess] = useState(false)
   const [candidacyId, setCandidacyId] = useState('')
   const [attemptedNext, setAttemptedNext] = useState(false)
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen)
 
-  useEffect(() => {
+  // Gera um novo ID de candidatura sempre que o modal abre, sem depender de useEffect
+  // (evita a renderização em cascata: o ajuste acontece na mesma passagem de render).
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen)
     if (isOpen) setCandidacyId(generateId())
-  }, [isOpen])
+  }
 
   if (!isOpen) return null
 
