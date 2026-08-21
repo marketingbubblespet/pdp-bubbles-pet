@@ -1,406 +1,496 @@
-# Briefing: Live 27/09 + MasterClass 28/09
+# Briefing de setembro de 2026
 
-> **Como usar:** marque com `x` as opções e preencha as linhas. O que não souber ainda,
-> escreva "a definir" em vez de deixar em branco, para eu saber a diferença entre
-> "esqueceu" e "ainda não foi decidido".
->
-> **O que já está respondido:** as seções marcadas com 🟢 eu já preenchi com base no
-> histórico do projeto. Só confirme ou corrija.
+## Sobre este documento
+
+Este é **um único briefing que cobre dois eventos diferentes**, que acontecem em dias
+seguidos:
+
+| Evento | Data | Dia da semana |
+|---|---|---|
+| **Live** | 27 de setembro de 2026 | domingo |
+| **MasterClass** | 28 de setembro de 2026 | segunda-feira |
+
+**As datas já estão fechadas e não estão em discussão.** Cada evento terá a sua própria
+landing page, independente da outra.
+
+O documento está dividido em três blocos:
+
+- **BLOCO 1** · perguntas da Live de 27/09
+- **BLOCO 2** · perguntas da MasterClass de 28/09
+- **BLOCO 3** · perguntas que valem para os dois eventos
+
+Os blocos 1 e 2 são independentes e podem ser preenchidos por pessoas diferentes.
+
+### Como preencher
+- Marque as opções com `x` entre os parênteses: `(x)`
+- Nas linhas com `______`, escreva a resposta
+- Se algo ainda não foi decidido, escreva **"a definir"** em vez de deixar em branco, para
+  eu saber a diferença entre o que passou despercebido e o que ainda não foi resolvido
+- Não precisa responder tudo de uma vez. Assim que os itens do BLOCO 3.5 estiverem
+  respondidos, já dá para começar a construção
 
 ---
-
-# PARTE 0 · O que eu já sei (confirmar)
-
-## 0.1 As datas 🟢
-
-| | Live | MasterClass |
-|---|---|---|
-| **Data** | 27 de setembro de 2026 | 28 de setembro de 2026 |
-| **Dia da semana** | **domingo** | **segunda-feira** |
-| **Faltam (a partir de 20/08)** | 38 dias | 39 dias |
-
-## 0.2 O padrão que vocês já vêm repetindo 🟢
-
-Não é a primeira vez que essa dupla acontece. Nos dois meses anteriores foi exatamente o
-mesmo desenho:
-
-| Mês | Live (domingo) | MasterClass (segunda) |
-|---|---|---|
-| Julho | 26/07 · Dia do Tosador | 27/07 · Spitz Alemão, com Guilherme Mendes |
-| Agosto | 23/08 · Lançamento Linha Care | 24/08 · Rostinho Bebê, com Tio Dan |
-| **Setembro** | **27/09 · ?** | **28/09 · ?** |
-
-Ou seja: **live no último domingo do mês, masterclass na segunda seguinte.** Isso já virou
-uma cadência mensal, o que é ótimo, porque o público começa a esperar.
-
-**Confirma que setembro segue o mesmo desenho?**
-( ) Sim, mesmo formato dos meses anteriores
-( ) Não, muda alguma coisa: ______
-
-## 0.3 A oportunidade que essas duas datas criam ⭐
-
-Esse é o ponto mais importante deste briefing, e vale a leitura mesmo que você pule o resto.
-
-Nos meses anteriores, a live e a masterclass foram tratadas como **dois eventos separados,
-com duas páginas independentes e dois públicos captados do zero.** Só que elas acontecem
-com **menos de 24 horas de diferença.**
-
-Isso abre uma possibilidade que ainda não foi explorada:
-
-> **A live de domingo pode ser o funil da masterclass de segunda.**
-
-Na prática: a live é gratuita, aberta e de topo de funil (Instagram, sem barreira). A
-masterclass é o evento de conversão (exige compra para liberar acesso). Se no fim da live
-de domingo vocês anunciarem a masterclass do dia seguinte, com a condição de compra
-liberada ali ao vivo, o público mais quente que existe (quem acabou de assistir 1 hora de
-conteúdo de vocês) recebe a oferta no melhor momento possível.
-
-**Como você quer tratar os dois eventos?**
-( ) **Funil integrado** (recomendado): a live aquece e vende a masterclass. As páginas se
-    conversam, e a live tem um bloco "amanhã tem mais".
-( ) **Eventos separados:** cada página vive por conta própria, como em julho e agosto.
-( ) Ainda não decidido, quero discutir
-
 ---
 
-# PARTE 1 · Campanha (vale para as duas páginas)
+# BLOCO 1 · LIVE · domingo, 27/09/2026
 
-## 1.1 Objetivo do mês
+## 1.1 Tema e promessa
 
-Qual é o objetivo comercial principal de setembro?
-( ) Vender uma linha específica. Qual: ______
-( ) Escoar estoque de algum produto. Qual: ______
-( ) Captar novos clientes (quem nunca comprou)
-( ) Reativar clientes antigos
-( ) Fortalecer a comunidade e a marca, sem meta direta de venda
-( ) Outro: ______
+- Qual é o tema da live? ______
 
-## 1.2 Tem uma linha ou produto em foco?
+- Qual é o título que você quer na página? ______
 
-Setembro vem logo depois do lançamento da Linha Care (agosto). Faz sentido:
-( ) Continuar empurrando a **Care** (aproveitar o embalo do lançamento)
-( ) Voltar o foco para a **Linha PRO** (profissional, ticket maior)
-( ) Focar em **Essential**
-( ) Focar em **Collora** (coloração)
-( ) Focar em **Xperience** / **Aurabian** / **Sensorial**
-( ) **Kits** (ticket maior, decisão mais simples)
-( ) Nenhuma linha específica, é conteúdo puro
-( ) Outro: ______
+- Em uma frase: o que a pessoa ganha ao assistir? ______
 
-## 1.3 Verba e tráfego
+- Qual é o assunto principal, o miolo da transmissão? ______
 
-- Vai ter tráfego pago? ( ) Sim ( ) Não
-- Verba prevista para as duas páginas: R$ ______
-- Canais: ( ) Meta (Instagram/Facebook) ( ) Google ( ) TikTok ( ) Só orgânico
-- Público: ( ) Frio ( ) Morno (já seguem/compraram) ( ) Os dois
+- A live é de conteúdo técnico, de celebração, ou as duas coisas?
+  ( ) Técnica ( ) Celebração ( ) Ambas
 
-> Isso muda a escrita da página. Público frio precisa entender a proposta em 5 segundos e
-> não conhece nenhuma referência interna da marca. Público morno aceita ir direto ao ponto.
+- Existe alguma data comemorativa, sazonalidade ou lançamento ligado a essa live?
+  ( ) Não
+  ( ) Sim, qual: ______
 
-## 1.4 Meta
+## 1.2 Horário e duração
 
-- Meta de cadastros/entradas no grupo (live): ______
-- Meta de inscritos na masterclass: ______
-- Meta de faturamento atrelado: R$ ______
+> A data (27/09, domingo) já está definida.
 
-## 1.5 Identidade visual
+- Horário de início: ______
+- Fuso: ( ) Horário de Brasília ( ) Outro: ______
+- Duração estimada: ______
 
-| | Live 27/09 | MasterClass 28/09 |
-|---|---|---|
-| Tema claro (padrão `DESIGN-SYSTEM.md`) | ( ) | ( ) |
-| Tema escuro ("Midnight Luxury & Cosmic Rose") | ( ) | ( ) |
+## 1.3 Quem apresenta
 
-> 🟢 **Padrão que vocês vêm usando:** live em tema claro, masterclass em tema escuro. Se
-> for manter, é só confirmar.
+Para **cada** pessoa que vai aparecer na live, preencha o bloco abaixo. Copie o bloco quantas
+vezes forem necessárias.
 
----
+> Esses dados alimentam a seção "Quem apresenta" da página, que é o que responde à pergunta
+> silenciosa de quem chega por anúncio e não conhece a marca: "vale a minha hora de
+> domingo à noite?".
 
-# PARTE 2 · LIVE · domingo, 27/09
+```
+APRESENTADOR(A) 1
+Nome completo:
+Cargo exato (como está no crachá):
+É da equipe interna da Bubbles ou convidado externo?
+Há quanto tempo está na Bubbles (se for interno):
+O que faz no dia a dia:
+Qual a proximidade dessa pessoa com o groomer?
+(eventos, feiras, treinamentos, atendimento, redes sociais)
 
-## 2.1 Tema e título ⭐
+MINI BIO (entre 25 e 40 palavras, escrita em terceira pessoa ou primeira, como preferir):
 
-Você me disse que só sabe as datas, então preparei sugestões. **Escolha uma ou escreva a sua.**
 
-### Contexto de calendário que ajuda a decidir 🟢
+FRASE DE CONVITE (opcional, até 25 palavras, em primeira pessoa, dizendo por que
+ela quer que o groomer esteja na live):
 
-- **A primavera começa em 22 ou 23 de setembro.** A live cai na **primeira semana da
-  primavera**, o que é um gancho sazonal forte e verdadeiro, não inventado.
-- O que a primavera significa na prática para o groomer: **troca de pelo**, aumento de
-  volume de banhos, pets saindo do inverno com pelagem pesada e embaraçada, mais odor,
-  início da temporada de pulgas e carrapatos, e a preparação para o verão.
-- **Dia Mundial dos Animais é 04/10**, uma semana depois. Dá para plantar isso na live.
 
-### Opções de tema
+Tem foto profissional pronta?  ( ) Sim  ( ) Não, precisa produzir
+```
 
-**Opção A · "A primavera chegou e o seu salão vai encher"** (recomendada)
-Como se preparar para o mês mais movimentado do semestre: troca de pelo, agenda cheia,
-produtos que dão conta do volume. Junta o comercial com o útil, e serve para público frio.
-( ) Escolho esta
+```
+APRESENTADOR(A) 2
+Nome completo:
+Cargo exato:
+Interno ou convidado:
+Há quanto tempo está na Bubbles:
+O que faz no dia a dia:
+Proximidade com o groomer:
 
-**Opção B · "Troca de pelo sem desespero"**
-Foco em uma dor específica e muito real dessa época. Bem prático, ótimo para engajar, mas é
-um tema mais estreito.
-( ) Escolho esta
+MINI BIO (25 a 40 palavras):
 
-**Opção C · "Bastidores da Care: o que aconteceu depois do lançamento"**
-Continuidade de agosto, com resultados reais, kits e como o produto está girando no balcão.
-Funciona melhor com público morno do que frio.
-( ) Escolho esta
 
-**Opção D · "Prepare o pet para o verão"**
-Antecipa a alta temporada. Mais amplo que a opção B, e casa com banho, hidratação e perfume.
-( ) Escolho esta
+FRASE DE CONVITE (opcional, até 25 palavras):
 
-**Opção E · minha própria:** ______
 
-### Título da página
-Depois de escolher o tema, o título vem daí. Se já tiver um em mente:
-Título desejado: ______
+Tem foto profissional pronta?  ( ) Sim  ( ) Não, precisa produzir
+```
 
-> 🟢 **O que funciona melhor aqui:** título de **resultado**, não de assunto. Comparando:
-> "Live sobre troca de pelo" (assunto, fraco) contra "A primavera vai lotar sua agenda: como
-> dar conta sem perder qualidade" (resultado, forte). Se você me der só o tema, eu escrevo
-> 3 opções de título para você escolher.
+## 1.4 Onde acontece
 
-## 2.2 Formato e logística
+- Plataforma:
+  ( ) Instagram ( ) YouTube ( ) Instagram e YouTube ( ) Dentro do grupo do WhatsApp
+  ( ) Outra: ______
 
-- Horário: ______ (🟢 as anteriores foram **19h**, horário de Brasília)
-- Duração estimada: ______ (🟢 as anteriores foram **1 hora**)
-- Onde acontece:
-  ( ) Ao vivo no Instagram ( ) YouTube ( ) Nos dois ( ) Dentro do grupo do WhatsApp
-- Quem apresenta (nome e cargo de cada um): ______
-- É gente de dentro da Bubbles ou convidado externo? ______
-- **Vai ficar salva para assistir depois?** ( ) Sim ( ) Não ( ) Não sabemos ainda
+- A live vai ficar salva para assistir depois?
+  ( ) Sim, fica salva ( ) Não, só ao vivo ( ) Ainda não sabemos
 
-> Essa última pergunta ficou sem resposta na live de agosto e é a dúvida mais comum de quem
-> não pode no domingo. Vale definir dessa vez.
+- Se ficar salva, por quanto tempo e onde: ______
 
-## 2.3 Acesso e CTA
+## 1.5 Acesso e CTA
 
-- CTA principal:
-  ( ) Entrar no grupo do WhatsApp ( ) Cadastro com nome e e-mail ( ) Outro: ______
-- Link do grupo: ______
-- É grupo novo ou o VIP que já existe? ( ) Novo ( ) VIP existente
-- O que a pessoa ganha por entrar no grupo, além do aviso: ______
+- Qual é a ação principal que a pessoa deve tomar na página?
+  ( ) Entrar no grupo do WhatsApp
+  ( ) Preencher um cadastro (nome, e-mail, WhatsApp)
+  ( ) Outra: ______
 
-## 2.4 Conteúdo
+- Texto exato do botão principal: ______
 
-- 3 a 5 motivos concretos para assistir (o que o groomer ganha, aprende ou sente):
+- Se for grupo do WhatsApp:
+  - Link do grupo: ______
+  - É grupo novo, criado só para esse evento, ou o VIP que já existe?
+    ( ) Novo ( ) VIP existente
+  - Tem limite de vagas? ( ) Não ( ) Sim, quantas: ______
+  - O que a pessoa recebe ao entrar no grupo, além do aviso da live? ______
+
+- Vai ter régua de lembretes até o dia da live?
+  ( ) Sim, quais: ______
+  ( ) Não
+
+## 1.6 Conteúdo da página
+
+- Liste de 3 a 5 motivos concretos para assistir. Cada um com um título curto e uma
+  explicação de uma ou duas linhas:
+
+```
+1. Título:
+   Explicação:
+
+2. Título:
+   Explicação:
+
+3. Título:
+   Explicação:
+
+4. Título:
+   Explicação:
+
+5. Título:
+   Explicação:
+```
+
+## 1.7 Público
+
+- Nível do profissional:
+  ( ) Iniciante ( ) Experiente ( ) Dono de pet shop ( ) Distribuidor ( ) Todos
+
+- A live serve para quem ainda não é cliente Bubbles?
+  ( ) Sim, é porta de entrada ( ) Não, é só para quem já compra
+
+- O tráfego será de público frio, morno, ou os dois?
+  ( ) Frio ( ) Morno ( ) Os dois
+
+- Tem alguém que essa live claramente **não** atende? Quem: ______
+
+## 1.8 Produtos vinculados
+
+- A página deve mostrar produtos?
+  ( ) Não ( ) Sim
+
+- Se sim, quais (nome ou link da Shopify):
   1. ______
   2. ______
   3. ______
   4. ______
-  5. ______
 
-- Vai ter sorteio, brinde ou cupom ao vivo? ( ) Sim, o quê: ______ ( ) Não
-- Vai ter oferta comercial durante a live? ( ) Sim ( ) Não ( ) Revelada só na hora
-- **Vai anunciar a masterclass do dia seguinte na live?** ( ) Sim ( ) Não
-
-## 2.5 Produtos na página
-
-- A página deve mostrar produtos? ( ) Sim ( ) Não
-- Se sim, quais (nome ou link): ______
-- Os cards devem **linkar para a loja**?
-  ( ) Sim, cada produto leva para a Shopify
+- Os produtos devem ter botão de comprar e link para a loja?
   ( ) Não, é só vitrine (a compra acontece na live)
-  ( ) Híbrido: vitrine, com um único botão para a coleção no fim da página
-- Se for linkar, **qual a URL da coleção**: ______
+  ( ) Sim, cada card leva para a página do produto
+  ( ) Vitrine, com um único botão para a coleção no fim da página
 
-> Na live da Care ficou como vitrine pura, porque eu não tinha a URL da coleção e não posso
-> inventar link de loja.
+- Se for linkar, qual a URL da coleção: ______
+
+- Mostrar preço nos cards? ( ) Sim ( ) Não
+
+## 1.9 Oferta e incentivos
+
+- Vai ter sorteio, brinde ou cupom para quem assistir ao vivo?
+  ( ) Não
+  ( ) Sim, o quê: ______
+
+- Vai ter oferta comercial durante ou logo após a live?
+  ( ) Não
+  ( ) Sim, qual: ______
+  ( ) Sim, mas só será revelada na hora
+
+- Essa oferta pode ser antecipada na página, ou fica em segredo até a transmissão?
+  ( ) Pode antecipar ( ) Segredo até a live
+
+## 1.10 Prova social
+
+- Quantas pessoas já estão no grupo, ou qual número podemos usar como prova social? ______
+- Temos depoimentos ou prints de lives anteriores para reaproveitar?
+  ( ) Sim, onde estão: ______
+  ( ) Não
+
+## 1.11 Identidade visual
+
+- Qual tema visual?
+  ( ) Claro, padrão do `DESIGN-SYSTEM.md`
+  ( ) Escuro, "Midnight Luxury & Cosmic Rose"
+
+- Existe arte, logo ou identidade específica dessa campanha?
+  ( ) Não, seguir o Design System
+  ( ) Sim, onde está: ______
 
 ---
+---
 
-# PARTE 3 · MASTERCLASS · segunda, 28/09
+# BLOCO 2 · MASTERCLASS · segunda, 28/09/2026
 
-## 3.1 Tema e título ⭐
+## 2.1 Tema e promessa
 
-### Histórico da série 🟢
-Julho foi **Spitz Alemão** (raça específica). Agosto foi **Rostinho Bebê** (técnica de
-corte). Setembro pode seguir por raça, por técnica, ou entrar num tema sazonal.
+- Qual é o tema da masterclass? ______
 
-### Opções de tema
+- Qual é o título que você quer na página? ______
 
-**Opção A · "Pelagem dupla e subpelo: resolver a troca de pelo da primavera"** (recomendada)
-Golden, Husky, Pastor, Chow Chow, Border. É a dor número 1 da estação, tem solução técnica
-clara, e conversa direto com produto (shampoo, condicionador, máscara, secagem). Sazonal e
-técnico ao mesmo tempo.
-( ) Escolho esta
+- **Ao final da aula, o groomer vai saber fazer o quê exatamente?**
+  (essa é a frase mais importante da página inteira, é ela que faz a pessoa se inscrever)
+  ______
 
-**Opção B · Próxima raça da série**
-Mantém a lógica do Spitz. Candidatas: Shih Tzu, Poodle, Yorkshire, Maltês, Schnauzer,
-Lhasa Apso.
-( ) Escolho esta. Raça: ______
+- É uma aula sobre uma raça específica, uma técnica, ou um tema mais amplo?
+  ( ) Raça. Qual: ______
+  ( ) Técnica. Qual: ______
+  ( ) Tema amplo. Qual: ______
 
-**Opção C · "Tosa de verão: higiênica e de baixa manutenção"**
-Antecipa a demanda que explode em dezembro. Muito procurada pelo tutor.
-( ) Escolho esta
+## 2.2 Horário e duração
 
-**Opção D · Coloração (Collora)**
-Se quiserem empurrar a Collora, uma masterclass de coloração pet é o caminho mais direto.
-( ) Escolho esta
+> A data (28/09, segunda-feira) já está definida.
 
-**Opção E · minha própria:** ______
+- Horário de início: ______
+- Fuso: ( ) Horário de Brasília ( ) Outro: ______
+- Duração estimada: ______
+- Tem espaço para perguntas ao final? ( ) Sim ( ) Não
 
-### Título e transformação
-- Título desejado: ______
-- **Ao final da aula, o groomer vai saber fazer o quê exatamente?** (essa é a frase mais
-  importante da página inteira, é ela que faz a pessoa se inscrever): ______
+## 2.3 Quem ensina
 
-## 3.2 Instrutor
+```
+INSTRUTOR(A)
+Nome completo:
+Cargo ou credencial principal:
+É da equipe interna da Bubbles ou convidado externo?
 
-- Nome: ______
-- Credencial em uma linha (ex: "Groomer, +10 mil atendimentos, competidor multipremiado"): ______
-- Bio curta (2 a 3 linhas): ______
-- Tem foto profissional? ( ) Sim ( ) Não, precisa produzir
-- É interno da Bubbles ou convidado? ______
+CREDENCIAL EM UMA LINHA
+(números e reconhecimento: anos de experiência, quantidade de atendimentos,
+prêmios, competições. Exemplo de formato: "Groomer, +10 mil atendimentos,
+empresário e competidor multipremiado")
 
-## 3.3 Logística
 
-- Horário: ______ (🟢 as anteriores foram **19h**)
-- Duração: ______ (🟢 as anteriores foram **2 horas**)
-- Plataforma: ( ) Google Meet ( ) Zoom ( ) YouTube ao vivo ( ) Outra: ______
-- Tem replay? ( ) Sim, por quanto tempo: ______ ( ) Não
-- Certificado digital? ( ) Sim ( ) Não
-- Grupo VIP no WhatsApp para os inscritos? ( ) Sim ( ) Não
-- Régua de lembretes: ( ) Mesma dos meses anteriores (1 dia antes, 1h antes, 15min antes)
-  ( ) Diferente: ______
+MINI BIO (25 a 40 palavras):
 
-## 3.4 Acesso: como a pessoa entra ⭐
 
-Este é o bloco que mais muda a estrutura da página.
+FRASE DE CONVITE (opcional, até 25 palavras, em primeira pessoa):
 
-**Modelo de acesso:**
-( ) **Gratuito**, só cadastro
-( ) **Destravado por compra acima de um valor.** Valor: R$ ______
-( ) **Destravado por compra de uma linha específica.** Qual: ______
-( ) **Destravado por compra de produto específico.** Quais: ______
-( ) Pago (ingresso). Valor: R$ ______
-( ) Outro: ______
 
-> 🟢 Referência: julho foi "compras acima de R$ 499". Agosto foi "qualquer item da Linha PRO".
+Palavras-chave para as etiquetas de destaque (3 a 4, ex: Groomer, Especialista
+em Rostinho, Empresário):
 
-**Se for por compra:**
-- Canais que valem: ( ) Site ( ) WhatsApp oficial ( ) Distribuidores autorizados
-- **Prazo final de compra:** ______
 
-> ⚠️ **Regra fixa do projeto (CONVENCOES.md #23):** o prazo de compra **nunca passa da
-> data da própria aula**. Ou seja, no máximo **28/09**. Se o briefing vier com data
-> posterior, eu aviso e aplico 28/09, porque prazo depois da aula deixa alguém assistir sem
-> ter comprado e quebra o modelo.
+Tem foto profissional pronta?  ( ) Sim  ( ) Não, precisa produzir
+Tem vídeo curto de convite?    ( ) Sim  ( ) Não  ( ) Vamos gravar
+```
+
+> Se houver mais de um instrutor, copie o bloco acima.
+
+## 2.4 Onde acontece
+
+- Plataforma:
+  ( ) Google Meet ( ) Zoom ( ) YouTube ao vivo ( ) Instagram ( ) Outra: ______
+
+- Como o inscrito recebe o link de acesso, e quando?
+  ______
+
+- Tem replay?
+  ( ) Sim, por quanto tempo: ______ ( ) Não
+
+- Tem certificado digital? ( ) Sim ( ) Não
+
+- Tem grupo VIP no WhatsApp para os inscritos? ( ) Sim, link: ______ ( ) Não
+
+- Tem material de apoio (PDF, resumo, lista de produtos)? ( ) Sim, o quê: ______ ( ) Não
+
+- Régua de lembretes:
+  ( ) 1 dia antes, 1 hora antes e 15 minutos antes
+  ( ) Outra: ______
+  ( ) Não vai ter
+
+## 2.5 Como a pessoa consegue acesso
+
+> Este é o bloco que mais muda a estrutura da página.
+
+- Modelo de acesso:
+  ( ) Gratuito, só cadastro
+  ( ) Destravado por compra acima de um valor. Valor: R$ ______
+  ( ) Destravado por compra de uma linha específica. Qual: ______
+  ( ) Destravado por compra de produtos específicos. Quais: ______
+  ( ) Pago, com ingresso. Valor: R$ ______
+  ( ) Outro: ______
+
+**Se o acesso for por compra:**
+
+- Em quais canais a compra vale?
+  ( ) Site ( ) WhatsApp oficial de vendas ( ) Distribuidores autorizados ( ) Outro: ______
+
+- Prazo final de compra: ______
+
+  > ⚠️ **Regra fixa do projeto (`CONVENCOES.md` #23):** o prazo de compra nunca pode
+  > passar da data da própria aula. O limite máximo aqui é **28/09**. Se o prazo enviado
+  > for posterior, eu aviso a divergência e aplico 28/09, porque prazo depois da aula
+  > permitiria assistir sem ter comprado.
 
 - Como o acesso é confirmado para quem comprou? ______
 
-## 3.5 Produtos na página
+- Quem comprou antes do anúncio da masterclass também tem direito? ( ) Sim ( ) Não
 
-Se o acesso for por compra, a página precisa de um bloco de produtos "shoppable" (com botão
-de comprar), senão a pessoa se inscreve e não sabe o que comprar.
+## 2.6 Produtos que destravam o acesso
 
-- Quais produtos destravam o acesso (nome ou link da Shopify):
-  1. ______
-  2. ______
-  3. ______
-  4. ______
-- URL da coleção, se houver: ______
-- Mostrar preço nos cards? ( ) Sim ( ) Não
+> Se o acesso for por compra, a página precisa mostrar os produtos com botão de comprar,
+> senão a pessoa se inscreve e não sabe o que comprar.
 
-## 3.6 Conteúdo e público
-
-- 3 a 5 resultados concretos que a pessoa leva da aula:
+- Liste os produtos (nome e link da Shopify):
   1. ______
   2. ______
   3. ______
   4. ______
   5. ______
 
-- **Para quem é** (pode marcar vários):
-  ( ) Groomer iniciante ( ) Groomer experiente ( ) Dono de pet shop
-  ( ) Quem quer aumentar faturamento ( ) Quem quer se diferenciar ( ) Todos
+- Existe uma coleção que reúne todos? URL: ______
 
-- **Para quem NÃO é** (qualifica e aumenta a percepção de relevância):
-  1. ______
-  2. ______
-  3. ______
+- Mostrar preço nos cards? ( ) Sim ( ) Não
 
-- Tem depoimento ou gravação de edição anterior para usar como prova?
-  ( ) Sim, link: ______ ( ) Não
+- Tem kit ou combo que também destrava? ( ) Não ( ) Sim, quais: ______
+
+## 2.7 Conteúdo da aula
+
+- Liste de 3 a 5 resultados concretos que a pessoa leva da aula. Resultado, não tópico.
+  (Exemplo de resultado: "vai saber preparar o pelo no banho para a tesoura deslizar".
+  Exemplo de tópico, que não serve: "técnicas de banho")
+
+```
+1.
+2.
+3.
+4.
+5.
+```
+
+- O que a pessoa recebe ao se inscrever, além da aula?
+  ( ) Certificado ( ) Replay ( ) Grupo VIP ( ) Material em PDF ( ) Outro: ______
+
+## 2.8 Público
+
+- Nível do profissional:
+  ( ) Iniciante ( ) Experiente ( ) Dono de pet shop ( ) Todos
+
+- **Para quem é** (liste de 3 a 5 perfis):
+```
+1.
+2.
+3.
+4.
+5.
+```
+
+- **Para quem NÃO é** (liste de 2 a 4. Isso qualifica o público e aumenta a percepção de
+  relevância de quem se encaixa):
+```
+1.
+2.
+3.
+4.
+```
+
+- Serve para quem ainda não é cliente Bubbles? ( ) Sim ( ) Não
+
+## 2.9 Prova social
+
+- Temos gravação, depoimento ou print de edição anterior?
+  ( ) Sim, link ou onde está: ______
+  ( ) Não, é a primeira
+
+- Quantos inscritos tivemos nas edições anteriores? ______
+
+- Queremos mostrar contador de inscritos na página? ( ) Sim ( ) Não
+
+## 2.10 Identidade visual
+
+- Qual tema visual?
+  ( ) Claro, padrão do `DESIGN-SYSTEM.md`
+  ( ) Escuro, "Midnight Luxury & Cosmic Rose"
+
+- Existe arte ou identidade específica dessa aula?
+  ( ) Não, seguir o padrão
+  ( ) Sim, onde está: ______
 
 ---
-
-# PARTE 4 · Rastreamento e publicação
-
-## 4.1 GTM 🟢
-
-Pela regra que você definiu em agosto:
-
-| Página | Contêiner |
-|---|---|
-| Live 27/09 | `GTM-5L9TD3PN` (lives, masterclass, iscas, ecommerce) |
-| MasterClass 28/09 | `GTM-5L9TD3PN` |
-
-( ) Confirmo ( ) Muda: ______
-
-> Lembrando que GA4, Google Ads e Meta Pixel **não estão mais no código**: eles são
-> configurados dentro do GTM. Se as tags não estiverem montadas lá, não há rastreamento.
-
-## 4.2 URLs
-
-- Slug da live: ______ (sugestão: `/live-primavera` ou `/live-27-09`)
-- Slug da masterclass: ______ (sugestão: `/masterclass/<tema>`)
-
-## 4.3 Captação de leads
-
-- Destino dos leads: ( ) Sellum ( ) Sellum + backup no Netlify Forms ( ) Outro: ______
-- Se Sellum, é o mesmo webhook de alguma página existente ou um novo? ______
-
 ---
 
-# PARTE 5 · Ativos visuais necessários
+# BLOCO 3 · Vale para os dois eventos
 
-Preencher junto com o time de design. Especificações técnicas completas eu envio depois de
-saber o tema.
+## 3.1 Relação entre os dois eventos
+
+Os dois acontecem com menos de 24 horas de diferença.
+
+- A live de domingo deve divulgar a masterclass de segunda?
+  ( ) Sim ( ) Não ( ) A definir
+
+- A página da live deve ter um bloco falando da masterclass, com link para a outra página?
+  ( ) Sim ( ) Não ( ) A definir
+
+- A página da masterclass deve mencionar a live?
+  ( ) Sim ( ) Não ( ) A definir
+
+## 3.2 Objetivo e verba
+
+- Objetivo comercial de setembro: ______
+- Existe uma linha ou produto em foco no mês? ( ) Não ( ) Sim, qual: ______
+- Vai ter tráfego pago? ( ) Sim ( ) Não
+- Verba prevista para as duas páginas: R$ ______
+- Canais: ( ) Meta ( ) Google ( ) TikTok ( ) Só orgânico ( ) Outro: ______
+- Meta de cadastros da live: ______
+- Meta de inscritos da masterclass: ______
+- Meta de faturamento atrelado: R$ ______
+
+## 3.3 Endereço das páginas e rastreamento
+
+- Slug (endereço) da live: ______
+- Slug da masterclass: ______
+
+- Qual contêiner do GTM cada página usa?
+  - Live: ( ) `GTM-5L9TD3PN` ( ) `GTM-N4PHK6DM` ( ) Outro: ______
+  - MasterClass: ( ) `GTM-5L9TD3PN` ( ) `GTM-N4PHK6DM` ( ) Outro: ______
+
+  > Lembrando que GA4, Google Ads e Meta Pixel não estão mais no código: eles são
+  > configurados dentro do GTM. Se as tags não estiverem montadas lá dentro, não existe
+  > rastreamento nenhum na página.
+
+- Precisa de algum evento de conversão específico além do padrão? ______
+
+## 3.4 Captação e destino dos leads
+
+- Para onde vão os leads?
+  ( ) Sellum ( ) Sellum, com backup no Netlify Forms ( ) Outro: ______
+
+- Se for Sellum, é o mesmo webhook de alguma página existente, ou um novo?
+  ( ) Mesmo de: ______
+  ( ) Novo. URL e token: ______
+
+- Quais campos o formulário precisa capturar (se houver formulário)? ______
+
+## 3.5 O que é bloqueante
+
+Se você responder só os itens abaixo, eu já consigo começar a construção. O resto pode ser
+preenchido enquanto as páginas ficam prontas.
+
+- [ ] Tema da live (1.1)
+- [ ] Tema da masterclass (2.1)
+- [ ] Quem apresenta cada uma, com cargo e mini bio (1.3 e 2.3)
+- [ ] Modelo de acesso da masterclass (2.5)
+- [ ] Horário e duração dos dois (1.2 e 2.2)
+- [ ] Link do grupo ou destino do cadastro da live (1.5)
+
+## 3.6 Ativos visuais
+
+Preencher junto com o time de design. As especificações técnicas completas (dimensão,
+enquadramento, formato) eu envio depois que os temas estiverem definidos.
 
 | Ativo | Live 27/09 | MasterClass 28/09 |
 |---|---|---|
-| Imagem de herói (1080×1080 mín.) | ( ) tem ( ) produzir | ( ) tem ( ) produzir |
-| Foto do apresentador / instrutor | ( ) tem ( ) produzir | ( ) tem ( ) produzir |
+| Imagem de herói | ( ) tem ( ) produzir | ( ) tem ( ) produzir |
+| Foto de quem apresenta | ( ) tem ( ) produzir | ( ) tem ( ) produzir |
 | Fotos dos produtos vinculados | ( ) tem ( ) produzir ( ) não se aplica | ( ) tem ( ) produzir ( ) não se aplica |
 | Vídeo curto de convite | ( ) tem ( ) produzir ( ) não vai ter | ( ) tem ( ) produzir ( ) não vai ter |
 | Prova de edição anterior | ( ) tem ( ) não tem | ( ) tem ( ) não tem |
 
-> 🟢 **O que já existe no projeto e pode ser reaproveitado:** as 11 fotos dos produtos Care,
-> as fotos da Linha PRO, Essential, Xperience e Collora, e os retratos de Amanda, Ellen,
-> Tio Dan, Mariane e Anna.
-
----
-
-# PARTE 6 · Prazos, contando de trás para frente
-
-Hoje é **20/08**. Faltam **38 dias** para a live. Sugestão de cronograma:
-
-| Prazo | O que precisa estar pronto | Por quê |
-|---|---|---|
-| **até 27/08** | Este briefing preenchido (ao menos tema, instrutor e modelo de acesso) | Sem tema não dá para escrever uma linha de copy |
-| **até 03/09** | Textos aprovados (títulos, motivos, FAQ, bios) | Copy é o caminho crítico, não o código |
-| **até 08/09** | Ativos visuais entregues | Preciso converter e testar no mobile |
-| **até 12/09** | **Páginas no ar** | Dá 15 dias de campanha, que é a janela boa |
-| **13/09 a 27/09** | Tráfego pago rodando | Aquecimento e captação |
-| **27/09** | Live, e anúncio da masterclass no fim | Público mais quente possível |
-| **28/09** | MasterClass | |
-
-> ⚠️ **O gargalo nunca é o código.** Nas duas páginas anteriores, o que atrasou foi texto e
-> foto, não desenvolvimento. Se o tema for definido até 27/08, sobra folga confortável.
-
----
-
-# PARTE 7 · Perguntas que só você pode responder
-
-Um resumo do que é realmente bloqueante. Se você responder só isso, eu já começo:
-
-1. **Tema da live** (ou escolher uma das 5 opções da parte 2.1)
-2. **Tema da masterclass** (ou escolher uma das 5 opções da parte 3.1)
-3. **Quem apresenta** cada uma
-4. **Modelo de acesso da masterclass** (grátis, por compra, valor mínimo)
-5. **Integrar os dois eventos** num funil só, ou tratar separados (parte 0.3)
-
-O resto dá para ir preenchendo enquanto eu construo.
+- Onde os arquivos serão entregues (link do Drive ou pasta)? ______
+- Data prevista de entrega dos ativos: ______
