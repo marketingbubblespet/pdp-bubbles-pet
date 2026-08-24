@@ -17,7 +17,7 @@ export function CareTicker() {
       `}</style>
       <div className="flex whitespace-nowrap care-ticker-track w-max">
         {loop.map((phrase, i) => (
-          <span key={i} className="mx-6 text-xs md:text-sm font-bold uppercase tracking-widest text-white flex items-center gap-6 shrink-0">
+          <span key={i} className="mx-6 text-xs md:text-sm font-semibold uppercase tracking-widest text-white flex items-center gap-6 shrink-0">
             {phrase}
             <span className="opacity-50">•</span>
           </span>

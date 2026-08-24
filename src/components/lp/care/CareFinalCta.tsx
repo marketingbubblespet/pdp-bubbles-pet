@@ -15,18 +15,18 @@ export function CareFinalCta() {
       <div className="absolute inset-0 bg-[#0d0c0d]/85 z-0" />
 
       <Reveal className="relative z-10 max-w-[760px] mx-auto text-center">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#F4CDD4] mb-3">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#F4CDD4] mb-3">
           Pré-venda de lançamento
         </p>
-        <h2 className="text-2xl md:text-4xl font-extrabold text-white leading-tight mb-4">
+        <h2 className="text-2xl md:text-4xl font-medium text-white leading-tight mb-4">
           A demanda já está aí. Falta só você entrar.
         </h2>
-        <p className="text-sm md:text-base text-[#9ca3af] mb-8 max-w-[560px] mx-auto">
+        <p className="text-sm md:text-base text-[#666666] mb-8 max-w-[560px] mx-auto">
           Milhares de tutores já procurando pela Linha Care. Garanta sua condição de pré-venda e transforme essa demanda em faturamento extra pro seu negócio.
         </p>
         <a
           href="#cadastro"
-          className="inline-block bg-[#3DB85C] text-white font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-lg"
+          className="inline-block bg-[#3DB85C] text-white font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-lg"
         >
           Quero revender no meu negócio →
         </a>

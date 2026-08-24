@@ -9,10 +9,10 @@ export function CareJourney() {
     <section className="bg-[#fdf0f3] py-16 md:py-24 px-4">
       <div className="max-w-[1000px] mx-auto">
         <Reveal>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#0F0C0D] text-center mb-4">
+          <h2 className="text-2xl md:text-3xl font-semibold text-[#0D0C0D] text-center mb-4">
             {CARE_JOURNEY.title}
           </h2>
-          <p className="text-sm md:text-base text-[#6B7280] text-center leading-relaxed max-w-[680px] mx-auto mb-10">
+          <p className="text-sm md:text-base text-[#666666] text-center leading-relaxed max-w-[680px] mx-auto mb-10">
             {CARE_JOURNEY.intro}
           </p>
         </Reveal>
@@ -26,8 +26,8 @@ export function CareJourney() {
                   <div className="w-11 h-11 rounded-xl bg-[#fdf0f3] flex items-center justify-center">
                     <Icon size={22} className="text-[#E8649A]" />
                   </div>
-                  <h3 className="font-extrabold text-[#0F0C0D]">{step.label}</h3>
-                  <p className="text-sm text-[#6B7280] leading-relaxed">{step.text}</p>
+                  <h3 className="font-medium text-[#0D0C0D]">{step.label}</h3>
+                  <p className="text-sm text-[#666666] leading-relaxed">{step.text}</p>
                 </div>
               </Reveal>
             )
@@ -35,7 +35,7 @@ export function CareJourney() {
         </div>
 
         <Reveal delay={300}>
-          <p className="text-sm md:text-base font-semibold text-[#0F0C0D] text-center max-w-[680px] mx-auto">
+          <p className="text-sm md:text-base font-semibold text-[#0D0C0D] text-center max-w-[680px] mx-auto">
             {CARE_JOURNEY.closing}
           </p>
         </Reveal>

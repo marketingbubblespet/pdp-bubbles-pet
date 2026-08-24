@@ -50,7 +50,7 @@ export function FooterBlock() {
 
         {/* Políticas */}
         <div className="flex flex-wrap justify-center gap-x-2 gap-y-2 text-sm font-medium items-center pb-4 border-b border-gray-100">
-          <span className="font-bold text-gray-700 mr-1">Políticas:</span>
+          <span className="font-semibold text-gray-700 mr-1">Políticas:</span>
           {policies.map((p, i) => (
             <span key={p.label} className="flex items-center gap-2">
               {i > 0 && <span className="text-gray-300">|</span>}

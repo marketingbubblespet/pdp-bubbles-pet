@@ -30,10 +30,10 @@ export function LiveCareCountdown({ target, className = '' }: { target: string; 
 
   const bloco = (n: number, label: string) => (
     <div className="flex flex-col items-center bg-white rounded-xl px-3 py-2 md:px-4 md:py-3 min-w-[62px] md:min-w-[72px] border border-[#E5E7EB] shadow-sm">
-      <span className="text-xl md:text-2xl font-extrabold text-[#0F0C0D] tabular-nums leading-none">
+      <span className="text-xl md:text-2xl font-medium text-[#0D0C0D] tabular-nums leading-none">
         {String(n).padStart(2, '0')}
       </span>
-      <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-[#9ca3af]">{label}</span>
+      <span className="mt-1 text-[10px] font-semibold uppercase tracking-widest text-[#666666]">{label}</span>
     </div>
   )
 

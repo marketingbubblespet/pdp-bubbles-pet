@@ -22,10 +22,10 @@ export function CareBrand() {
 
       <div className="relative z-10 max-w-[1100px] mx-auto">
         <Reveal>
-          <p className="text-xs font-bold uppercase tracking-widest text-[#F4CDD4] mb-3 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#F4CDD4] mb-3 text-center">
             Nossa essência
           </p>
-          <h2 className="text-2xl md:text-4xl font-extrabold text-white text-center mb-6">
+          <h2 className="text-2xl md:text-4xl font-medium text-white text-center mb-6">
             Quem é a <span className="text-[#F4CDD4]">Bubbles®</span>?
           </h2>
           <p className="text-sm md:text-base text-white/70 text-center leading-relaxed max-w-[720px] mx-auto mb-2">
@@ -43,10 +43,10 @@ export function CareBrand() {
               <Reveal key={s.label} delay={i * 100}>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-5 border border-white/10 flex flex-col items-center text-center gap-1.5 transition-transform duration-300 hover:-translate-y-1 hover:bg-white/15">
                   {Icon && <Icon size={20} className="text-[#F4CDD4]" />}
-                  <span className="font-extrabold text-white text-lg md:text-xl">
+                  <span className="font-medium text-white text-lg md:text-xl">
                     <CountUp target={s.target} prefix={s.prefix} suffix={s.suffix} decimals={s.decimals} />
                   </span>
-                  <span className="text-[10px] font-bold uppercase tracking-wide text-white">{s.label}</span>
+                  <span className="text-[10px] font-semibold uppercase tracking-wide text-white">{s.label}</span>
                   <span className="text-[10px] text-white/50">{s.sub}</span>
                 </div>
               </Reveal>

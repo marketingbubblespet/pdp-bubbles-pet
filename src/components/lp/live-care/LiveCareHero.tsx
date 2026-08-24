@@ -28,21 +28,21 @@ export function LiveCareHero() {
       <div className="relative max-w-[1100px] mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         {/* Coluna de texto (primeira no mobile) */}
         <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3">
             Live de lançamento · Linha Care
           </p>
 
-          <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.15] text-[#0F0C0D] mb-4">
+          <h1 className="text-3xl md:text-5xl font-medium leading-[1.15] text-[#0D0C0D] mb-4">
             Transforme cada banho em uma nova oportunidade de venda
           </h1>
 
-          <p className="text-base md:text-lg text-[#6B7280] font-medium leading-relaxed mb-5">
+          <p className="text-base md:text-lg text-[#666666] font-medium leading-relaxed mb-5">
             No domingo, 23 de agosto, apresentamos a Linha Care ao vivo: a linha de home care que faz o
             resultado do seu banho e tosa continuar na casa do tutor, e abre uma nova frente de faturamento
             no seu negócio, sem aumentar o número de atendimentos.
           </p>
 
-          <p className="flex items-center gap-1.5 text-sm font-semibold text-[#0F0C0D] mb-6">
+          <p className="flex items-center gap-1.5 text-sm font-semibold text-[#0D0C0D] mb-6">
             <Check size={16} className="text-[#3DB85C] shrink-0" />
             {LIVE_CARE.socialProof} groomers parceiros já confiam na Bubbles
           </p>
@@ -52,7 +52,7 @@ export function LiveCareHero() {
             {meta.map((m) => (
               <span
                 key={m.texto}
-                className="inline-flex items-center gap-1.5 bg-white border border-[#E5E7EB] rounded-full px-3 py-1.5 text-xs md:text-sm font-semibold text-[#0F0C0D]"
+                className="inline-flex items-center gap-1.5 bg-white border border-[#E5E7EB] rounded-full px-3 py-1.5 text-xs md:text-sm font-semibold text-[#0D0C0D]"
               >
                 <m.icon size={14} className="text-[#E8649A] shrink-0" />
                 {m.texto}
@@ -62,7 +62,7 @@ export function LiveCareHero() {
 
           {depois ? (
             <div>
-              <p className="text-sm font-bold text-[#0F0C0D] mb-4">
+              <p className="text-sm font-semibold text-[#0D0C0D] mb-4">
                 Essa live já aconteceu. Entre no grupo para ser avisado da próxima e receber os cupons.
               </p>
               <LiveCareCta origem="hero-pos-live" className="w-full sm:w-auto text-base">
@@ -71,7 +71,7 @@ export function LiveCareHero() {
             </div>
           ) : aoVivo ? (
             <div>
-              <p className="inline-flex items-center gap-2 text-sm font-bold text-[#E8649A] mb-4">
+              <p className="inline-flex items-center gap-2 text-sm font-semibold text-[#E8649A] mb-4">
                 <Radio size={16} className="shrink-0 animate-pulse" />
                 Estamos ao vivo agora no {LIVE_CARE.platform}
               </p>
@@ -81,7 +81,7 @@ export function LiveCareHero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={trackWatchLive}
-                  className="inline-flex items-center justify-center gap-2 min-h-[52px] bg-[#E8649A] text-white font-bold rounded-[10px] px-6 py-3.5 hover:brightness-110 active:scale-95 transition-all duration-200 shadow-md"
+                  className="inline-flex items-center justify-center gap-2 min-h-[52px] bg-[#E8649A] text-white font-semibold rounded-[10px] px-6 py-3.5 hover:brightness-110 active:scale-95 transition-all duration-200 shadow-md"
                 >
                   <Camera size={18} /> Assistir agora
                 </a>
@@ -92,14 +92,14 @@ export function LiveCareHero() {
             </div>
           ) : (
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#9ca3af] mb-2">Faltam</p>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#666666] mb-2">Faltam</p>
               <LiveCareCountdown target={LIVE_CARE.targetDateISO} className="mb-6" />
 
               <LiveCareCta origem="hero" pulse className="w-full sm:w-auto text-base">
                 Entrar no grupo do WhatsApp →
               </LiveCareCta>
 
-              <p className="mt-3 text-xs text-[#6B7280]">
+              <p className="mt-3 text-xs text-[#666666]">
                 Gratuito. É no grupo que avisamos a hora da live e liberamos os cupons.
               </p>
             </div>

@@ -22,7 +22,7 @@ export function StickyCtaBar() {
             <Image src="/images/groomer-badge.png" alt={PRODUCT.shortName} fill className="object-contain" />
           </div>
           <div className="min-w-0">
-            <p className="text-[12px] font-bold text-[#0F0C0D] truncate">{PRODUCT.shortName}</p>
+            <p className="text-[12px] font-semibold text-[#0D0C0D] truncate">{PRODUCT.shortName}</p>
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-[16px] font-semibold text-black leading-none">{PRODUCT.price}</span>
               <span className="text-[10px] text-[#3DB85C] bg-[#f0fdf4] border border-[#bbf7d0] px-2 py-0.5 rounded-full whitespace-nowrap flex items-center gap-1">
@@ -34,7 +34,7 @@ export function StickyCtaBar() {
         </div>
         <CtaLink
           href={PRODUCT.shopifyUrl}
-          className="inline-block bg-[#3DB85C] text-white font-bold text-sm md:text-base px-5 md:px-8 py-2.5 md:py-3 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-150 text-center shadow-lg shrink-0 whitespace-nowrap"
+          className="inline-block bg-[#3DB85C] text-white font-semibold text-sm md:text-base px-5 md:px-8 py-2.5 md:py-3 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-150 text-center shadow-lg shrink-0 whitespace-nowrap"
         >
           <span className="hidden md:inline">Comprar agora →</span>
           <span className="md:hidden">Comprar →</span>

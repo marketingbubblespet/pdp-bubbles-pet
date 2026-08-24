@@ -13,7 +13,7 @@ export function LiveCareFloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Tirar dúvida no WhatsApp"
-      className="fixed bottom-24 right-4 z-40 w-[52px] h-[52px] md:w-14 md:h-14 flex items-center justify-center rounded-full bg-[#0F0C0D] text-white shadow-lg hover:scale-105 active:scale-95 transition-transform duration-200"
+      className="fixed bottom-24 right-4 z-40 w-[52px] h-[52px] md:w-14 md:h-14 flex items-center justify-center rounded-full bg-[#0D0C0D] text-white shadow-lg hover:scale-105 active:scale-95 transition-transform duration-200"
     >
       <WhatsAppIcon size={24} />
     </a>

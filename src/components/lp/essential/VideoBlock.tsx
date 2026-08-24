@@ -4,7 +4,7 @@ import { CtaLink } from '@/components/ui/CtaLink'
 
 export function VideoBlock() {
   return (
-    <section className="px-4 py-16 md:py-24 bg-[#0F0C0D] overflow-hidden">
+    <section className="px-4 py-16 md:py-24 bg-[#0D0C0D] overflow-hidden">
       <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row gap-10 md:gap-16 items-center">
 
         {/* Vídeo vertical — borda 10px + glow rosa */}
@@ -39,13 +39,13 @@ export function VideoBlock() {
 
         {/* Copy */}
         <div className="flex-1 flex flex-col text-white text-center md:text-left">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#F4CDD4] mb-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#F4CDD4] mb-3">
             Resultado em ação
           </p>
-          <h2 className="text-2xl md:text-4xl font-extrabold leading-tight text-white mb-4">
+          <h2 className="text-2xl md:text-4xl font-medium leading-tight text-white mb-4">
             Pelagem limpa, macia e com cheiro que fica.
           </h2>
-          <p className="text-[#9ca3af] leading-relaxed mb-6 text-sm md:text-base">
+          <p className="text-[#666666] leading-relaxed mb-6 text-sm md:text-base">
             O Shampoo Neutro Essential entrega resultado que o tutor percebe antes de sair do petshop. Pelo limpo sem ressecar, fragrância suave e duradoura, sem risco de reação.
           </p>
 
@@ -66,7 +66,7 @@ export function VideoBlock() {
           <div className="mt-auto">
             <CtaLink
               href={PRODUCT.shopifyUrl}
-              className="block md:inline-block w-full md:w-auto text-center bg-[#3DB85C] text-white font-bold text-base px-8 py-4 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-lg"
+              className="block md:inline-block w-full md:w-auto text-center bg-[#3DB85C] text-white font-semibold text-base px-8 py-4 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-lg"
             >
               COMPRE AGORA →
             </CtaLink>

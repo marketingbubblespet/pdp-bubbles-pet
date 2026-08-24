@@ -42,7 +42,7 @@ function CouponBtn({ code }: { code: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-1 ml-1.5 bg-white/40 text-[#0d0c0d] text-[10px] font-bold px-2 py-0.5 rounded cursor-pointer hover:bg-white/60 transition-colors border border-dashed border-[#0d0c0d]/40"
+      className="inline-flex items-center gap-1 ml-1.5 bg-white/40 text-[#0d0c0d] text-[10px] font-semibold px-2 py-0.5 rounded cursor-pointer hover:bg-white/60 transition-colors border border-dashed border-[#0d0c0d]/40"
     >
       <span>{copied ? '✓ COPIADO' : code}</span>
       {!copied && <IconCopy />}

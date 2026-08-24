@@ -48,7 +48,7 @@ export default function Image() {
             display: 'flex',
             fontSize: 58,
             fontWeight: 800,
-            color: '#0F0C0D',
+            color: '#0D0C0D',
             textAlign: 'center',
             lineHeight: 1.15,
             maxWidth: 980,
@@ -69,15 +69,15 @@ export default function Image() {
             padding: '18px 34px',
           }}
         >
-          <span style={{ fontSize: 30, fontWeight: 800, color: '#0F0C0D' }}>
+          <span style={{ fontSize: 30, fontWeight: 800, color: '#0D0C0D' }}>
             {LIVE_CARE.weekday}, {LIVE_CARE.date} às {LIVE_CARE.time}
           </span>
-          <span style={{ fontSize: 26, color: '#6B7280' }}>ao vivo no Instagram</span>
+          <span style={{ fontSize: 26, color: '#666666' }}>ao vivo no Instagram</span>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 48 }}>
           <div style={{ display: 'flex', width: 36, height: 36, borderRadius: 10, background: '#E8649A' }} />
-          <span style={{ fontSize: 28, fontWeight: 700, color: '#0F0C0D' }}>Bubbles Pet</span>
+          <span style={{ fontSize: 28, fontWeight: 700, color: '#0D0C0D' }}>Bubbles Pet</span>
         </div>
       </div>
     ),

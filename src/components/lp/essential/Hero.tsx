@@ -19,19 +19,19 @@ export function Hero() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Copy */}
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3">
               Linha Essential · Shampoo Pet Neutro · 5 Litros
             </p>
-            <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.15] text-[#0F0C0D] mb-4">
+            <h1 className="text-3xl md:text-5xl font-medium leading-[1.15] text-[#0D0C0D] mb-4">
               O shampoo que limpa de verdade e ainda rende 300 banhos.
             </h1>
-            <p className="text-base md:text-lg text-[#6B7280] font-medium leading-relaxed mb-6">
+            <p className="text-base md:text-lg text-[#666666] font-medium leading-relaxed mb-6">
               Desenvolvido para groomers profissionais que não abrem mão de resultado, higiene e economia por banho.
             </p>
 
             <ul className="space-y-2 mb-8">
               {bullets.map((b, i) => (
-                <li key={i} className="flex items-start gap-2 text-[#0F0C0D] text-sm md:text-base">
+                <li key={i} className="flex items-start gap-2 text-[#0D0C0D] text-sm md:text-base">
                   <Check size={16} className="text-[#3DB85C] mt-1 shrink-0" />
                   <span className="font-medium">{b}</span>
                 </li>
@@ -40,12 +40,12 @@ export function Hero() {
 
             <CtaLink
               href={PRODUCT.shopifyUrl}
-              className="inline-block bg-[#3DB85C] text-white font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 text-center shadow-lg mb-3"
+              className="inline-block bg-[#3DB85C] text-white font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 text-center shadow-lg mb-3"
             >
               COMPRE AGORA →
             </CtaLink>
 
-            <p className="text-[10px] md:text-xs text-[#6B7280]">
+            <p className="text-[10px] md:text-xs text-[#666666]">
               Compra Segura · Garantia · ATÉ 6X S/JUROS
             </p>
             <DeliveryBadge />
@@ -75,8 +75,8 @@ export function Hero() {
                 </svg>
               </div>
               <div>
-                <p className="text-[11px] font-bold text-[#0F0C0D] leading-tight">Aprovado por groomers</p>
-                <p className="text-[10px] text-[#6B7280] leading-tight mt-0.5">+5.000 profissionais</p>
+                <p className="text-[11px] font-semibold text-[#0D0C0D] leading-tight">Aprovado por groomers</p>
+                <p className="text-[10px] text-[#666666] leading-tight mt-0.5">+5.000 profissionais</p>
               </div>
             </div>
           </div>

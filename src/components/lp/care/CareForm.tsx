@@ -98,8 +98,8 @@ function encodeFormData(data: Record<string, string>): string {
     .join('&')
 }
 
-const inputClass = 'w-full bg-white border border-[#E5E7EB] rounded-[10px] px-4 py-2.5 text-sm text-[#0F0C0D] focus:outline-none focus:border-[#E8649A]'
-const labelClass = 'block text-xs font-bold text-[#0F0C0D] mb-1.5'
+const inputClass = 'w-full bg-white border border-[#E5E7EB] rounded-[10px] px-4 py-2.5 text-sm text-[#0D0C0D] focus:outline-none focus:border-[#E8649A]'
+const labelClass = 'block text-xs font-semibold text-[#0D0C0D] mb-1.5'
 
 // Formata o telefone conforme o usuário digita: (00) 0000-0000 (fixo) ou (00) 00000-0000 (celular)
 function formatPhone(raw: string): string {
@@ -138,8 +138,8 @@ function RadioPill({
 }: { name: string; value: string; checked: boolean; onChange: () => void; children: React.ReactNode }) {
   return (
     <label
-      className={`flex-1 flex items-center justify-center gap-1.5 text-sm font-bold rounded-[10px] px-4 py-2.5 border cursor-pointer transition-colors ${
-        checked ? 'bg-[#E8649A] border-[#E8649A] text-white' : 'bg-white border-[#E5E7EB] text-[#0F0C0D] hover:border-[#E8649A]'
+      className={`flex-1 flex items-center justify-center gap-1.5 text-sm font-semibold rounded-[10px] px-4 py-2.5 border cursor-pointer transition-colors ${
+        checked ? 'bg-[#E8649A] border-[#E8649A] text-white' : 'bg-white border-[#E5E7EB] text-[#0D0C0D] hover:border-[#E8649A]'
       }`}
     >
       <input type="radio" name={name} value={value} checked={checked} onChange={onChange} className="sr-only" />
@@ -169,12 +169,12 @@ function CategoriaCard({
       </span>
       <span className="flex flex-col">
         {/* O detalhe fica inline, na mesma linha do rótulo, e só quebra se faltar largura. */}
-        <span className="text-sm font-bold text-[#0F0C0D] leading-snug">
+        <span className="text-sm font-semibold text-[#0D0C0D] leading-snug">
           {label}
-          {detalhe && <span className="text-xs font-medium text-[#6B7280]"> {detalhe}</span>}
+          {detalhe && <span className="text-xs font-medium text-[#666666]"> {detalhe}</span>}
         </span>
         {valor && (
-          <span className={`text-xs font-bold mt-1 ${checked ? 'text-[#E8649A]' : 'text-[#6B7280]'}`}>
+          <span className={`text-xs font-semibold mt-1 ${checked ? 'text-[#E8649A]' : 'text-[#666666]'}`}>
             primeiro pedido a partir de {valor}
           </span>
         )}
@@ -392,13 +392,13 @@ export function CareForm() {
   return (
     <section id="cadastro" className="bg-white py-16 md:py-24 px-4 border-t border-[#E5E7EB] scroll-mt-4">
       <div className="max-w-[640px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           Pré-venda de lançamento
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#0F0C0D] text-center mb-3">
+        <h2 className="text-2xl md:text-3xl font-semibold text-[#0D0C0D] text-center mb-3">
           Quero ser parceiro Bubbles Care
         </h2>
-        <p className="text-sm md:text-base text-[#6B7280] text-center mb-10 max-w-[480px] mx-auto">
+        <p className="text-sm md:text-base text-[#666666] text-center mb-10 max-w-[480px] mx-auto">
           Preencha o cadastro e nossos consultores entram em contato com as condições especiais de pré-venda.
         </p>
 
@@ -408,22 +408,22 @@ export function CareForm() {
         {submitted ? (
           <div className="bg-[#f0fdf4] border border-[#bbf7d0] rounded-2xl p-8 text-center flex flex-col items-center gap-3">
             <CheckCircle2 size={40} className="text-[#3DB85C]" />
-            <h3 className="font-extrabold text-[#0F0C0D] text-lg">Cadastro recebido!</h3>
+            <h3 className="font-medium text-[#0D0C0D] text-lg">Cadastro recebido!</h3>
             {redirecting ? (
               <>
-                <p className="text-sm text-[#6B7280]">
+                <p className="text-sm text-[#666666]">
                   Você está sendo redirecionado para o WhatsApp para falar com um consultor.
                 </p>
                 {/* Saída manual, caso o redirecionamento automático não aconteça. */}
                 <a
                   href={whatsappUrl}
-                  className="text-xs font-bold text-[#3DB85C] underline"
+                  className="text-xs font-semibold text-[#3DB85C] underline"
                 >
                   Continuar agora
                 </a>
               </>
             ) : (
-              <p className="text-sm text-[#6B7280]">
+              <p className="text-sm text-[#666666]">
                 Nossos consultores vão falar com você em breve pelo WhatsApp ou e-mail informado.
               </p>
             )}
@@ -433,10 +433,10 @@ export function CareForm() {
             {/* Cabeçalho do passo + barra de progresso */}
             <div className="mb-6">
               <div className="flex items-center justify-between mb-2">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#9ca3af]">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-[#666666]">
                   Passo {step} de {TOTAL_STEPS}
                 </p>
-                <h3 className="text-sm font-extrabold text-[#0F0C0D]">{stepTitles[step - 1]}</h3>
+                <h3 className="text-sm font-medium text-[#0D0C0D]">{stepTitles[step - 1]}</h3>
               </div>
               <div className="h-1.5 w-full bg-[#E5E7EB] rounded-full overflow-hidden">
                 <div
@@ -594,7 +594,7 @@ export function CareForm() {
                     </label>
 
                     <div className="bg-white border border-[#E5E7EB] rounded-[10px] px-4 pt-4 pb-3">
-                      <p className="text-2xl font-extrabold text-[#E8649A] text-center mb-3 tabular-nums">
+                      <p className="text-2xl font-medium text-[#E8649A] text-center mb-3 tabular-nums">
                         {investimentoLabel}
                       </p>
                       <input
@@ -622,8 +622,8 @@ export function CareForm() {
                             >
                               <span className={`w-px h-1.5 ${ativo ? 'bg-[#E8649A]' : 'bg-[#E5E7EB]'}`} />
                               <span
-                                className={`mt-1 text-[10px] font-bold tabular-nums ${
-                                  ativo ? 'text-[#E8649A]' : 'text-[#9ca3af]'
+                                className={`mt-1 text-[10px] font-semibold tabular-nums ${
+                                  ativo ? 'text-[#E8649A]' : 'text-[#666666]'
                                 }`}
                               >
                                 {fmtCompacto(valor)}{i === faixas.length - 1 ? '+' : ''}
@@ -649,7 +649,7 @@ export function CareForm() {
                 <button
                   type="button"
                   onClick={goBack}
-                  className="flex items-center gap-1 bg-white border border-[#E5E7EB] text-[#0F0C0D] font-bold text-sm px-5 py-3 rounded-[10px] hover:bg-[#F7F7F7] active:scale-95 transition-all duration-200"
+                  className="flex items-center gap-1 bg-white border border-[#E5E7EB] text-[#0D0C0D] font-semibold text-sm px-5 py-3 rounded-[10px] hover:bg-[#F7F7F7] active:scale-95 transition-all duration-200"
                 >
                   <ChevronLeft size={16} /> Voltar
                 </button>
@@ -659,7 +659,7 @@ export function CareForm() {
                 <button
                   type="button"
                   onClick={goNext}
-                  className="flex-1 flex items-center justify-center gap-1 bg-[#E8649A] text-white font-bold text-sm md:text-base px-6 py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-md"
+                  className="flex-1 flex items-center justify-center gap-1 bg-[#E8649A] text-white font-semibold text-sm md:text-base px-6 py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-md"
                 >
                   Próxima etapa <ChevronRight size={16} />
                 </button>
@@ -670,14 +670,14 @@ export function CareForm() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={loading}
-                  className="flex-1 bg-[#3DB85C] text-white font-bold text-sm md:text-base px-6 py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-md disabled:opacity-60"
+                  className="flex-1 bg-[#3DB85C] text-white font-semibold text-sm md:text-base px-6 py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-md disabled:opacity-60"
                 >
                   {loading ? 'Enviando...' : 'Enviar cadastro →'}
                 </button>
               )}
             </div>
 
-            <p className="text-[10px] text-[#9ca3af] text-center mt-4">
+            <p className="text-[10px] text-[#666666] text-center mt-4">
               Ao enviar, você concorda em ser contatado pela equipe Bubbles.
             </p>
           </div>

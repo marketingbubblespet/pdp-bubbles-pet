@@ -32,21 +32,21 @@ export function BrandBlock() {
 
       {/* Conteúdo */}
       <div className="relative z-20 max-w-[1100px] mx-auto w-full text-[#F7F7F7]">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#F4CDD4] mb-3 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#F4CDD4] mb-3 text-center">
           Bubbles Pet
         </p>
-        <h2 className="text-3xl md:text-4xl font-extrabold leading-tight text-white mb-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-medium leading-tight text-white mb-6 text-center">
           Mais de 7 anos elevando o padrão do banho e tosa.
         </h2>
-        <p className="text-[#9ca3af] text-center leading-relaxed mb-10 md:mb-12 max-w-2xl mx-auto text-sm md:text-base">
+        <p className="text-[#666666] text-center leading-relaxed mb-10 md:mb-12 max-w-2xl mx-auto text-sm md:text-base">
           A Bubbles nasceu com o propósito de transformar cada banho em uma experiência profissional, segura e memorável, tanto para o groomer quanto para o pet. Somos 100% brasileiros, veganos e cruelty free.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10 md:mb-12">
           {stats.map(({ value, label }) => (
             <div key={label} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 flex flex-col items-center text-center border border-white/10">
-              <span className="font-extrabold text-white text-lg md:text-xl mb-0.5">{value}</span>
-              <span className="text-xs text-[#9ca3af]">{label}</span>
+              <span className="font-medium text-white text-lg md:text-xl mb-0.5">{value}</span>
+              <span className="text-xs text-[#666666]">{label}</span>
             </div>
           ))}
         </div>
@@ -54,7 +54,7 @@ export function BrandBlock() {
         <div className="flex justify-center">
           <CtaLink
             href={PRODUCT.shopifyUrl}
-            className="inline-block bg-[#3DB85C] text-white font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-150 text-center shadow-lg"
+            className="inline-block bg-[#3DB85C] text-white font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-150 text-center shadow-lg"
           >
             COMPRE AGORA →
           </CtaLink>

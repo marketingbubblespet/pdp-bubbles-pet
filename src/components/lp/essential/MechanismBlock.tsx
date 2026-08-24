@@ -21,13 +21,13 @@ export function MechanismBlock() {
   return (
     <section className="py-16 md:py-24 bg-[#F4CDD4]/10">
       <div className="px-4 max-w-[1100px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           Por que funciona
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold leading-tight text-[#0F0C0D] mb-3 text-center">
+        <h2 className="text-2xl md:text-3xl font-semibold leading-tight text-[#0D0C0D] mb-3 text-center">
           Fórmula com ativos que fazem o trabalho pesado.
         </h2>
-        <p className="text-[#6B7280] text-center font-medium leading-relaxed mb-10 md:mb-12 max-w-2xl mx-auto text-sm md:text-base">
+        <p className="text-[#666666] text-center font-medium leading-relaxed mb-10 md:mb-12 max-w-2xl mx-auto text-sm md:text-base">
           O Shampoo Neutro Essential combina dois ativos de alta eficácia que atuam juntos no cuidado da pelagem.
         </p>
 
@@ -35,14 +35,14 @@ export function MechanismBlock() {
           {actives.map(({ icon: Icon, title, subtitle, text }) => (
             <div key={title} className="bg-white rounded-xl shadow-sm p-5 md:p-6">
               <Icon size={26} className="text-[#E8649A] mb-3" />
-              <h3 className="font-bold text-[#0F0C0D] text-base md:text-lg mb-1">{title}</h3>
+              <h3 className="font-semibold text-[#0D0C0D] text-base md:text-lg mb-1">{title}</h3>
               <p className="text-xs font-medium uppercase tracking-wide text-[#E8649A] mb-2">{subtitle}</p>
-              <p className="text-sm text-[#6B7280] leading-relaxed">{text}</p>
+              <p className="text-sm text-[#666666] leading-relaxed">{text}</p>
             </div>
           ))}
         </div>
 
-        <p className="text-center text-[#6B7280] text-xs md:text-sm mb-10 md:mb-12">
+        <p className="text-center text-[#666666] text-xs md:text-sm mb-10 md:mb-12">
           Fórmula 100% vegana, hipoalergênica e cruelty free. Desenvolvida para uso profissional diário.
         </p>
       </div>

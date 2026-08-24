@@ -31,13 +31,13 @@ export function CareDemandMachine() {
 
       <div className="relative z-10 max-w-[1100px] mx-auto">
         <Reveal>
-          <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
             A máquina de demanda
           </p>
-          <h2 className="text-2xl md:text-4xl font-extrabold leading-tight text-[#0F0C0D] mb-4 text-center max-w-[820px] mx-auto">
+          <h2 className="text-2xl md:text-4xl font-medium leading-tight text-[#0D0C0D] mb-4 text-center max-w-[820px] mx-auto">
             Enquanto você vê isso, tem criador gerando conteúdo e desejo para seu negócio.
           </h2>
-          <p className="text-sm md:text-base text-[#6B7280] leading-relaxed mb-10 text-center max-w-[720px] mx-auto">
+          <p className="text-sm md:text-base text-[#666666] leading-relaxed mb-10 text-center max-w-[720px] mx-auto">
             {CARE_DEMAND.afiliados.toLocaleString('pt-BR')} criadores já estão gerando procura pela Bubbles no TikTok Shop. Os tutores vão procurar os produtos. A pergunta é: vão encontrar na sua prateleira?
           </p>
         </Reveal>
@@ -47,17 +47,17 @@ export function CareDemandMachine() {
             <Reveal key={s.label} delay={i * 120}>
               <div className="bg-white rounded-2xl p-6 border border-[#E5E7EB] flex flex-col items-center text-center gap-2 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
                 <s.icon size={28} className="text-[#E8649A]" />
-                <span className="text-3xl md:text-4xl font-extrabold text-[#0F0C0D]">
+                <span className="text-3xl md:text-4xl font-medium text-[#0D0C0D]">
                   <CountUp target={s.target} prefix={s.prefix} />
                 </span>
-                <span className="text-xs md:text-sm text-[#6B7280] leading-snug">{s.label}</span>
+                <span className="text-xs md:text-sm text-[#666666] leading-snug">{s.label}</span>
               </div>
             </Reveal>
           ))}
         </div>
 
         <Reveal delay={200}>
-          <p className="text-sm md:text-base font-semibold text-[#0F0C0D] text-center max-w-[680px] mx-auto">
+          <p className="text-sm md:text-base font-semibold text-[#0D0C0D] text-center max-w-[680px] mx-auto">
             Não é promessa de venda. É venda que já está acontecendo. Cada afiliado é uma pessoa trabalhando, de graça, para levar o tutor até o seu balcão.
           </p>
         </Reveal>

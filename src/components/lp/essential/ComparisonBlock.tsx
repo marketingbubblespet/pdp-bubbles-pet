@@ -15,10 +15,10 @@ export function ComparisonBlock() {
   return (
     <section className="px-4 py-16 md:py-24 bg-[#F7F7F7]">
       <div className="max-w-[1100px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           O padrão Bubbles
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold leading-tight text-[#0F0C0D] mb-10 md:mb-12 text-center">
+        <h2 className="text-2xl md:text-3xl font-semibold leading-tight text-[#0D0C0D] mb-10 md:mb-12 text-center">
           Por que groomers profissionais não trocam a Bubbles por marcas genéricas.
         </h2>
 
@@ -26,13 +26,13 @@ export function ComparisonBlock() {
           {/* Marcas comuns */}
           <div className="bg-[#F5F5F5] rounded-xl overflow-hidden">
             <div className="px-5 py-3 border-b border-[#E5E7EB]">
-              <span className="text-sm font-bold text-[#6B7280] uppercase tracking-wide">Marcas comuns</span>
+              <span className="text-sm font-semibold text-[#666666] uppercase tracking-wide">Marcas comuns</span>
             </div>
             <ul className="divide-y divide-[#E5E7EB]">
               {rows.map((r) => (
                 <li key={r.bad} className="flex items-start gap-3 px-5 py-4">
                   <X size={16} className="text-red-400 mt-0.5 shrink-0" />
-                  <span className="text-sm text-[#6B7280]">{r.bad}</span>
+                  <span className="text-sm text-[#666666]">{r.bad}</span>
                 </li>
               ))}
             </ul>
@@ -41,13 +41,13 @@ export function ComparisonBlock() {
           {/* Bubbles Essential */}
           <div className="bg-[#F4CDD4]/20 border border-[#E8649A]/30 rounded-xl overflow-hidden">
             <div className="px-5 py-3 border-b border-[#E8649A]/20">
-              <span className="text-sm font-bold text-[#E8649A] uppercase tracking-wide">Bubbles Essential</span>
+              <span className="text-sm font-semibold text-[#E8649A] uppercase tracking-wide">Bubbles Essential</span>
             </div>
             <ul className="divide-y divide-[#E8649A]/10">
               {rows.map((r) => (
                 <li key={r.good} className="flex items-start gap-3 px-5 py-4">
                   <Check size={16} className="text-[#3DB85C] mt-0.5 shrink-0" />
-                  <span className="text-sm text-[#0F0C0D] font-medium">{r.good}</span>
+                  <span className="text-sm text-[#0D0C0D] font-medium">{r.good}</span>
                 </li>
               ))}
             </ul>
@@ -57,7 +57,7 @@ export function ComparisonBlock() {
         <div className="flex justify-center">
           <CtaLink
             href={PRODUCT.shopifyUrl}
-            className="inline-block bg-[#3DB85C] text-white font-bold text-lg px-8 py-4 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-150 text-center shadow-lg"
+            className="inline-block bg-[#3DB85C] text-white font-semibold text-lg px-8 py-4 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-150 text-center shadow-lg"
           >
             Quero o Bubbles Essential →
           </CtaLink>

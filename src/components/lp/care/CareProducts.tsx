@@ -45,13 +45,13 @@ export function CareProducts() {
       `}</style>
 
       <div className="max-w-[1100px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           A linha completa
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#0F0C0D] text-center mb-4">
+        <h2 className="text-2xl md:text-3xl font-semibold text-[#0D0C0D] text-center mb-4">
           11 produtos pensados para gerar banho, cuidado, manutenção e renda extra no seu negócio.
         </h2>
-        <p className="text-sm md:text-base text-[#6B7280] text-center mb-10 max-w-[640px] mx-auto">
+        <p className="text-sm md:text-base text-[#666666] text-center mb-10 max-w-[640px] mx-auto">
           Escolha uma categoria e veja o que pode estar na sua prateleira.
         </p>
 
@@ -69,8 +69,8 @@ export function CareProducts() {
                 ref={(el) => { tabRefs.current[cat.id] = el }}
                 onClick={() => setActive(cat.id)}
                 style={active === cat.id ? undefined : { animationDelay: `${i * 0.4}s` }}
-                className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap px-4 py-2 rounded-full text-xs md:text-sm font-bold transition-colors duration-300 ${
-                  active === cat.id ? 'text-white' : 'text-[#0F0C0D] hover:bg-[#fdf0f3] care-tab-invite'
+                className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-colors duration-300 ${
+                  active === cat.id ? 'text-white' : 'text-[#0D0C0D] hover:bg-[#fdf0f3] care-tab-invite'
                 }`}
               >
                 {Icon && <Icon size={15} className={active === cat.id ? 'text-white' : 'text-[#E8649A]'} />}
@@ -97,9 +97,9 @@ export function CareProducts() {
                   className="object-contain transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
-              <h4 className="font-extrabold text-[#0F0C0D] text-sm leading-snug">{p.nome}</h4>
-              <p className="text-[11px] text-[#9ca3af] mb-1">{p.apresentacao}</p>
-              <p className="text-xs text-[#6B7280] leading-snug">{p.descricao}</p>
+              <h4 className="font-medium text-[#0D0C0D] text-sm leading-snug">{p.nome}</h4>
+              <p className="text-[11px] text-[#666666] mb-1">{p.apresentacao}</p>
+              <p className="text-xs text-[#666666] leading-snug">{p.descricao}</p>
             </div>
           ))}
         </div>
@@ -107,7 +107,7 @@ export function CareProducts() {
         <div className="flex justify-center mt-12">
           <a
             href="#cadastro"
-            className="inline-block bg-[#3DB85C] text-white font-bold text-sm md:text-base px-6 md:px-8 py-2.5 md:py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 text-center shadow-md"
+            className="inline-block bg-[#3DB85C] text-white font-semibold text-sm md:text-base px-6 md:px-8 py-2.5 md:py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 text-center shadow-md"
           >
             Quero revender essa linha →
           </a>

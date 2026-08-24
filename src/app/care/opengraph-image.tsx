@@ -49,7 +49,7 @@ export default function Image() {
             display: 'flex',
             fontSize: 60,
             fontWeight: 800,
-            color: '#0F0C0D',
+            color: '#0D0C0D',
             textAlign: 'center',
             lineHeight: 1.15,
             maxWidth: 960,
@@ -62,7 +62,7 @@ export default function Image() {
           style={{
             display: 'flex',
             fontSize: 28,
-            color: '#6B7280',
+            color: '#666666',
             marginTop: 28,
             textAlign: 'center',
             maxWidth: 800,
@@ -88,7 +88,7 @@ export default function Image() {
               background: '#E8649A',
             }}
           />
-          <span style={{ fontSize: 28, fontWeight: 700, color: '#0F0C0D' }}>Bubbles Pet</span>
+          <span style={{ fontSize: 28, fontWeight: 700, color: '#0D0C0D' }}>Bubbles Pet</span>
         </div>
       </div>
     ),

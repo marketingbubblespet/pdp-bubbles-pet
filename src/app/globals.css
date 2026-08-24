@@ -2,16 +2,50 @@
 @source "../**/*.{tsx,ts,jsx,js}";
 
 @theme {
+  /* Cor de marca — confirmado, não muda */
   --color-background: #F7F7F7;
-  --color-foreground: #0F0C0D;
+  --color-foreground: #0D0C0D;
   --color-accent: #F4CDD4;
   --color-accent-strong: #E8649A;
   --color-action: #3DB85C;
-  --color-muted: #6B7280;
+
+  /* Texto: #888888 só serve pra texto >=18px/decorativo (contraste ~3.5:1, reprova
+     WCAG AA em texto pequeno). Qualquer texto de leitura usa --color-secondary (#666666). */
+  --color-muted: #888888;
+  --color-secondary: #666666;
   --color-border: #E5E7EB;
-  --font-family-sans: 'Figtree', sans-serif;
+
+  /* Superfícies rosa, confirmadas em uso real no site */
+  --color-surface-pink-light: #FDF2F4;
+  --color-surface-pink-section: #FCEEF1;
+
+  /* Linhas de produto */
+  --color-line-pro: #0D0C0D;
+  --color-line-essential: #F4CDD4;
+  --color-line-xperience: #C8A96E;
+  --color-line-collora: #B066C6;
+
+  --font-family-sans: 'Poppins', sans-serif;
+  --font-family-decorative: 'Lobster Two', cursive;
+
   --max-width-content: 760px;
   --max-width-wide: 1100px;
+  --max-width-page: 1400px;
+
+  /* Raio de borda: 12px é o padrão (botão, input, card) */
+  --radius-chip: 4px;
+  --radius-default: 12px;
+  --radius-card: 20px;
+  --radius-hero: 40px;
+
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.07);
+
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+
+  /* Altura mínima de alvo de toque em CTA (lei de Fitts / mobile) */
+  --cta-min-height: 44px;
 }
 
 @keyframes announcement-scroll {
@@ -40,7 +74,19 @@ html {
 
 body {
   background-color: #F7F7F7;
-  color: #0F0C0D;
-  font-family: 'Figtree', sans-serif;
+  color: #0D0C0D;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

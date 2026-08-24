@@ -8,10 +8,10 @@ export function CareGroomerProof() {
     <section className="bg-[#F7F7F7] py-16 md:py-24 px-4">
       <div className="max-w-[1100px] mx-auto">
         <Reveal>
-          <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
             Quem já confia
           </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#0F0C0D] text-center mb-10 max-w-[720px] mx-auto">
+          <h2 className="text-2xl md:text-3xl font-semibold text-[#0D0C0D] text-center mb-10 max-w-[720px] mx-auto">
             {BRAND.groomers} groomers já constroem seu padrão com a Bubbles.
           </h2>
         </Reveal>
@@ -25,13 +25,13 @@ export function CareGroomerProof() {
                     <Star key={j} size={14} className="text-[#F4A522] fill-[#F4A522]" />
                   ))}
                 </div>
-                <p className="text-sm text-[#6B7280] italic leading-relaxed line-clamp-[10]">
+                <p className="text-sm text-[#666666] italic leading-relaxed line-clamp-[10]">
                   &ldquo;{t.text}&rdquo;
                 </p>
                 <div className="flex items-center gap-2 mt-1">
                   <UserCircle2 size={28} className="text-[#E5E7EB]" />
-                  <span className="text-xs font-bold text-[#0F0C0D]">{t.name}</span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#3DB85C]">
+                  <span className="text-xs font-semibold text-[#0D0C0D]">{t.name}</span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#3DB85C]">
                     <BadgeCheck size={12} /> Verificado
                   </span>
                 </div>

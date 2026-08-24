@@ -94,12 +94,12 @@ export default function Sitemap() {
 
   if (!unlocked) {
     return (
-      <main style={{ fontFamily: 'Figtree, sans-serif', background: '#F7F7F7', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
+      <main style={{ fontFamily: 'Poppins, sans-serif', background: '#F7F7F7', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
         <form onSubmit={handleSubmit} style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: 10, padding: 32, maxWidth: 340, width: '100%' }}>
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E8649A', marginBottom: 8 }}>
+          <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E8649A', marginBottom: 8 }}>
             Bubbles Pet
           </p>
-          <h1 style={{ fontSize: 20, fontWeight: 800, color: '#0F0C0D', marginBottom: 16 }}>
+          <h1 style={{ fontSize: 20, fontWeight: 500, color: '#0F0C0D', marginBottom: 16 }}>
             Área restrita
           </h1>
           <input
@@ -115,7 +115,7 @@ export default function Sitemap() {
           )}
           <button
             type="submit"
-            style={{ width: '100%', background: '#3DB85C', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 12px', borderRadius: 8, border: 'none', cursor: 'pointer' }}
+            style={{ width: '100%', background: '#3DB85C', color: '#fff', fontWeight: 600, fontSize: 14, padding: '10px 12px', borderRadius: 8, border: 'none', cursor: 'pointer' }}
           >
             Entrar
           </button>
@@ -125,12 +125,12 @@ export default function Sitemap() {
   }
 
   return (
-    <main style={{ fontFamily: 'Figtree, sans-serif', background: '#F7F7F7', minHeight: '100vh', padding: '48px 24px' }}>
+    <main style={{ fontFamily: 'Poppins, sans-serif', background: '#F7F7F7', minHeight: '100vh', padding: '48px 24px' }}>
       <div style={{ maxWidth: 640, margin: '0 auto' }}>
-        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E8649A', marginBottom: 8 }}>
+        <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E8649A', marginBottom: 8 }}>
           Bubbles Pet
         </p>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0F0C0D', marginBottom: 4 }}>
+        <h1 style={{ fontSize: 28, fontWeight: 500, color: '#0F0C0D', marginBottom: 4 }}>
           Mapa de páginas
         </h1>
         <p style={{ fontSize: 14, color: '#6B7280', marginBottom: 40 }}>
@@ -155,7 +155,7 @@ export default function Sitemap() {
                 }}
               >
                 <div>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: '#0F0C0D', margin: 0 }}>{page.label}</p>
+                  <p style={{ fontSize: 15, fontWeight: 600, color: '#0F0C0D', margin: 0 }}>{page.label}</p>
                   <p style={{ fontSize: 13, color: '#6B7280', margin: '2px 0 0' }}>{page.description}</p>
                 </div>
                 <span style={{ color: '#E8649A', fontSize: 18, marginLeft: 16 }}>→</span>

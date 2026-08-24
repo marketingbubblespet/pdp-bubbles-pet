@@ -32,22 +32,22 @@ export function CareCalculator() {
         .care-calc-pop { animation: care-calc-pop 0.4s ease-out; display: inline-block; }
       `}</style>
       <div className="max-w-[760px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           Faça a conta
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#0F0C0D] text-center mb-4">
+        <h2 className="text-2xl md:text-3xl font-semibold text-[#0D0C0D] text-center mb-4">
           Quanto a Care pode render pro seu negócio?
         </h2>
-        <p className="text-sm text-[#6B7280] text-center mb-10 max-w-[560px] mx-auto">
+        <p className="text-sm text-[#666666] text-center mb-10 max-w-[560px] mx-auto">
           Considerando a procura que já geramos, arraste para simular quantas unidades por mês o seu negócio pretende comprar.
         </p>
 
         <div className="bg-white rounded-2xl p-6 md:p-10 border border-[#E5E7EB] shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <label htmlFor="unidades" className="text-sm font-bold text-[#0F0C0D]">
+            <label htmlFor="unidades" className="text-sm font-semibold text-[#0D0C0D]">
               Unidades por mês
             </label>
-            <span key={unidades} className="text-lg font-extrabold text-[#E8649A] care-calc-pop">{unidades}</span>
+            <span key={unidades} className="text-lg font-medium text-[#E8649A] care-calc-pop">{unidades}</span>
           </div>
           <input
             id="unidades"
@@ -62,24 +62,24 @@ export function CareCalculator() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-[#fdf0f3] rounded-xl p-4 md:p-5 text-center">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#6B7280] mb-1">
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#666666] mb-1">
                 Lucro extra por mês
               </p>
-              <p key={`mes-${unidades}`} className="text-2xl md:text-3xl font-extrabold text-[#0F0C0D] care-calc-pop">
+              <p key={`mes-${unidades}`} className="text-2xl md:text-3xl font-medium text-[#0D0C0D] care-calc-pop">
                 R$ {lucroMes.toLocaleString('pt-BR')}
               </p>
             </div>
             <div className="bg-[#fdf0f3] rounded-xl p-4 md:p-5 text-center">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#6B7280] mb-1">
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-[#666666] mb-1">
                 Lucro extra por ano
               </p>
-              <p key={`ano-${unidades}`} className="text-2xl md:text-3xl font-extrabold text-[#0F0C0D] care-calc-pop">
+              <p key={`ano-${unidades}`} className="text-2xl md:text-3xl font-medium text-[#0D0C0D] care-calc-pop">
                 R$ {lucroAno.toLocaleString('pt-BR')}
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-2 mt-6 text-[#9ca3af]">
+          <div className="flex items-start gap-2 mt-6 text-[#666666]">
             <Calculator size={14} className="shrink-0 mt-0.5" />
             <p className="text-[11px] leading-relaxed">
               Projeção ilustrativa baseada na demanda que já geramos. Resultados reais podem variar
@@ -91,7 +91,7 @@ export function CareCalculator() {
         <div className="flex justify-center mt-8">
           <a
             href="#cadastro"
-            className="inline-block bg-[#3DB85C] text-white font-bold text-sm md:text-base px-6 md:px-8 py-2.5 md:py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 text-center shadow-md"
+            className="inline-block bg-[#3DB85C] text-white font-semibold text-sm md:text-base px-6 md:px-8 py-2.5 md:py-3 rounded-[10px] hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 text-center shadow-md"
           >
             Quero essa margem no meu negócio →
           </a>

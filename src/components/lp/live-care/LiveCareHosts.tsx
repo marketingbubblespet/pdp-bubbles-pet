@@ -5,10 +5,10 @@ export function LiveCareHosts() {
   return (
     <section className="bg-[#F7F7F7] py-16 md:py-24 px-4">
       <div className="max-w-[900px] mx-auto">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           Quem apresenta
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#0F0C0D] text-center mb-10">
+        <h2 className="text-2xl md:text-3xl font-semibold text-[#0D0C0D] text-center mb-10">
           Quem vai estar com você no domingo
         </h2>
 
@@ -30,14 +30,14 @@ export function LiveCareHosts() {
               </div>
 
               <div className="p-5 flex flex-col gap-2">
-                <p className="font-extrabold text-[#0F0C0D] text-lg leading-tight">{h.name}</p>
-                <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A]">{h.role}</p>
+                <p className="font-medium text-[#0D0C0D] text-lg leading-tight">{h.name}</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A]">{h.role}</p>
 
-                {h.bio && <p className="text-sm text-[#6B7280] leading-relaxed mt-1">{h.bio}</p>}
+                {h.bio && <p className="text-sm text-[#666666] leading-relaxed mt-1">{h.bio}</p>}
 
                 {/* Frase de convite na primeira pessoa: dá voz humana à seção */}
                 {h.quote && (
-                  <p className="text-sm text-[#6B7280] italic leading-relaxed border-t border-[#E5E7EB] pt-3 mt-2">
+                  <p className="text-sm text-[#666666] italic leading-relaxed border-t border-[#E5E7EB] pt-3 mt-2">
                     &ldquo;{h.quote}&rdquo;
                   </p>
                 )}

@@ -26,7 +26,7 @@ export function CareDemandGallery() {
               <VolumeX size={11} className="text-[#E8649A]" />
             </span>
             <ImageIcon size={20} className="text-[#E8649A]" />
-            <span className="text-[9px] text-[#9ca3af] text-center leading-tight">
+            <span className="text-[9px] text-[#666666] text-center leading-tight">
               Print/vídeo real de afiliado
             </span>
           </div>

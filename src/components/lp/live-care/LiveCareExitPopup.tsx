@@ -65,18 +65,18 @@ export function LiveCareExitPopup() {
           type="button"
           onClick={() => setAberto(false)}
           aria-label="Fechar"
-          className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center text-[#9ca3af] hover:text-[#0F0C0D] transition-colors"
+          className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center text-[#666666] hover:text-[#0D0C0D] transition-colors"
         >
           <X size={20} />
         </button>
 
-        <p className="text-[10px] font-bold uppercase tracking-widest text-[#E8649A] mb-2">Espera!</p>
-        <h3 className="text-xl md:text-2xl font-extrabold text-[#0F0C0D] mb-2 leading-tight">
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#E8649A] mb-2">Espera!</p>
+        <h3 className="text-xl md:text-2xl font-medium text-[#0D0C0D] mb-2 leading-tight">
           {depois
             ? 'Não perca a próxima live'
             : `A live é ${LIVE_CARE.weekday} e o cupom só sai ao vivo`}
         </h3>
-        <p className="text-sm text-[#6B7280] mb-6">
+        <p className="text-sm text-[#666666] mb-6">
           {depois
             ? 'Entre no grupo e seja avisado antes de todo mundo quando a próxima transmissão for marcada.'
             : 'Entre no grupo para receber o aviso na hora e as condições de lançamento da Linha Care.'}

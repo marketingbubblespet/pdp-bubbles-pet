@@ -39,10 +39,10 @@ export function LiveCareStickyBar() {
     >
       <div className="max-w-[1100px] mx-auto px-4 py-3 flex items-center justify-between gap-3">
         <div className="hidden sm:block shrink-0">
-          <p className="text-sm font-extrabold text-[#0F0C0D] tracking-tight leading-tight">
+          <p className="text-sm font-medium text-[#0D0C0D] tracking-tight leading-tight">
             Live da Linha Care
           </p>
-          <p className="text-xs text-[#6B7280]">
+          <p className="text-xs text-[#666666]">
             {phase === 'depois'
               ? 'Entre no grupo e receba a próxima'
               : `${LIVE_CARE.weekday}, ${LIVE_CARE.date} às ${LIVE_CARE.time}, gratuita`}

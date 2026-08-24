@@ -25,7 +25,7 @@ export function LiveCarePhoto({
         className={`absolute inset-0 flex flex-col items-center justify-center gap-2 bg-[#fdf0f3] border-2 border-dashed border-[#F4CDD4] p-4 text-center ${className}`}
       >
         <ImageIcon size={26} className="text-[#E8649A]" aria-hidden />
-        <span className="text-[11px] font-bold uppercase tracking-widest text-[#E8649A] leading-snug">
+        <span className="text-[11px] font-semibold uppercase tracking-widest text-[#E8649A] leading-snug">
           {label}
         </span>
       </div>

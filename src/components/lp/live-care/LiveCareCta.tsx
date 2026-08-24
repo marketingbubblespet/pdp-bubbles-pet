@@ -23,7 +23,7 @@ export function LiveCareCta({
       rel="noopener noreferrer"
       onClick={() => trackJoinGroup(origem)}
       // min-h-[52px] garante área de toque confortável no mobile (alvo mínimo de 44px)
-      className={`inline-flex items-center justify-center gap-2 min-h-[52px] bg-[#3DB85C] text-white font-bold rounded-[10px] px-6 md:px-8 py-3.5 md:py-4 hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-md text-center ${className}`}
+      className={`inline-flex items-center justify-center gap-2 min-h-[52px] bg-[#3DB85C] text-white font-semibold rounded-[10px] px-6 md:px-8 py-3.5 md:py-4 hover:brightness-110 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-md text-center ${className}`}
       style={pulse ? { animation: 'livecare-pulse 2.4s ease-in-out infinite' } : undefined}
     >
       <WhatsAppIcon size={20} />

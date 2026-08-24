@@ -27,10 +27,10 @@ export function CareWhyResell() {
 
       <div className="relative max-w-[1100px] mx-auto">
         <Reveal>
-          <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
             Diferenciais Bubbles Care
           </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#0F0C0D] text-center mb-10 max-w-[780px] mx-auto">
+          <h2 className="text-2xl md:text-3xl font-semibold text-[#0D0C0D] text-center mb-10 max-w-[780px] mx-auto">
             O que torna a Bubbles Care uma oportunidade diferente para o canal
           </h2>
         </Reveal>
@@ -43,9 +43,9 @@ export function CareWhyResell() {
                   <div className="w-11 h-11 rounded-xl bg-[#fdf0f3] flex items-center justify-center">
                     {Icon && <Icon size={22} className="text-[#E8649A]" />}
                   </div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#E8649A]">{item.label}</p>
-                  <h3 className="font-extrabold text-[#0F0C0D]">{item.title}</h3>
-                  <p className="text-sm text-[#6B7280] leading-relaxed">{item.text}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-[#E8649A]">{item.label}</p>
+                  <h3 className="font-medium text-[#0D0C0D]">{item.title}</h3>
+                  <p className="text-sm text-[#666666] leading-relaxed">{item.text}</p>
                 </div>
               </Reveal>
             )

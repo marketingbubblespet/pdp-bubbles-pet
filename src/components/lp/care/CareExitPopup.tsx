@@ -25,14 +25,14 @@ export function CareExitPopup() {
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60" onClick={() => setOpen(false)}>
       <div className="relative bg-white rounded-[10px] max-w-[420px] w-full p-6 md:p-8 text-center shadow-2xl" onClick={(e) => e.stopPropagation()}>
-        <button onClick={() => setOpen(false)} aria-label="Fechar" className="absolute top-1 right-1 w-11 h-11 flex items-center justify-center text-[#9ca3af] hover:text-[#0F0C0D] text-2xl leading-none">×</button>
-        <p className="text-xs font-bold uppercase tracking-widest text-[#E8649A] mb-2">Espera!</p>
-        <h3 className="text-xl md:text-2xl font-extrabold text-[#0F0C0D] mb-2 leading-tight">A demanda já está acontecendo</h3>
-        <p className="text-sm text-[#6B7280] mb-6">Milhares de tutores já procurando pela Linha Care. Garanta sua condição de pré-venda antes de sair.</p>
+        <button onClick={() => setOpen(false)} aria-label="Fechar" className="absolute top-1 right-1 w-11 h-11 flex items-center justify-center text-[#666666] hover:text-[#0D0C0D] text-2xl leading-none">×</button>
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-2">Espera!</p>
+        <h3 className="text-xl md:text-2xl font-medium text-[#0D0C0D] mb-2 leading-tight">A demanda já está acontecendo</h3>
+        <p className="text-sm text-[#666666] mb-6">Milhares de tutores já procurando pela Linha Care. Garanta sua condição de pré-venda antes de sair.</p>
         <a
           href="#cadastro"
           onClick={() => setOpen(false)}
-          className="block w-full text-center bg-[#3DB85C] text-white font-bold rounded-[10px] px-6 py-3.5 hover:brightness-110 active:scale-95 transition-all"
+          className="block w-full text-center bg-[#3DB85C] text-white font-semibold rounded-[10px] px-6 py-3.5 hover:brightness-110 active:scale-95 transition-all"
         >
           Quero ser revendedor da Linha Care →
         </a>
