@@ -27,7 +27,7 @@ export function StickyCtaBar() {
               <span className="text-[16px] font-semibold text-black leading-none">{PRODUCT.price}</span>
               <span className="text-[10px] text-[#3DB85C] bg-[#f0fdf4] border border-[#bbf7d0] px-2 py-0.5 rounded-full whitespace-nowrap flex items-center gap-1">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" className="shrink-0"><circle cx="12" cy="12" r="10" fill="#3DB85C"/><path d="M12 6v2m0 8v2M8 12h8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/></svg>
-                +<strong>R$ 10,94</strong> cashback
+                +<strong className="font-semibold">R$ 10,94</strong> cashback
               </span>
             </div>
           </div>

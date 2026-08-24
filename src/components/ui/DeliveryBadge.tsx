@@ -19,10 +19,10 @@ export function DeliveryBadge() {
         </svg>
       </div>
       <div>
-        <p className="text-[13px] font-bold text-[#0F0C0D]">
+        <p className="text-[13px] font-semibold text-[#0D0C0D]">
           Chegará entre {fmt(addDays(today, 2))} e {fmt(addDays(today, 7))}
         </p>
-        <p className="text-[11px] text-[#6B7280] mt-0.5">Confirme o prazo final na próxima etapa.</p>
+        <p className="text-[11px] text-[#666666] mt-0.5">Confirme o prazo final na próxima etapa.</p>
       </div>
     </div>
   )
