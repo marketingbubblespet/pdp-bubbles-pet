@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Calculator } from 'lucide-react'
-import { trackCareCalculatorUse } from './trackCare'
+import { pushCalculatorUse } from '@/lib/tracking'
 
 // TODO [a confirmar com Ivan]: valores placeholder. A margem real por unidade e a taxa de
 // conversão dependem da resolução do briefing (seção 8.1: os preços recebidos, abaixo de 100
@@ -9,6 +9,9 @@ import { trackCareCalculatorUse } from './trackCare'
 const LUCRO_MEDIO_POR_UNIDADE = 12 // R$ de margem média estimada por unidade (placeholder)
 const MIN_UNIDADES = 10
 const MAX_UNIDADES = 100
+
+// Throttle simples pra não disparar um evento por pixel arrastado no slider.
+let lastCalculatorEvent = 0
 
 export function CareCalculator() {
   const [unidades, setUnidades] = useState(30)
@@ -18,7 +21,10 @@ export function CareCalculator() {
 
   const handleChange = (v: number) => {
     setUnidades(v)
-    trackCareCalculatorUse()
+    const now = Date.now()
+    if (now - lastCalculatorEvent < 1500) return
+    lastCalculatorEvent = now
+    pushCalculatorUse('care_investimento', { unidades: v })
   }
 
   return (

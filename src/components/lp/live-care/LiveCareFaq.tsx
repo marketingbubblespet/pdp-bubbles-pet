@@ -3,7 +3,8 @@ import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { LIVE_CARE, LIVE_CARE_FAQ } from '@/lib/live-care'
 import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
-import { trackFaqOpen } from './trackLiveCare'
+import { WhatsappGate } from '@/components/ui/WhatsappGate'
+import { pushCtaClick } from '@/lib/tracking'
 
 export function LiveCareFaq() {
   const [aberta, setAberta] = useState<number | null>(null)
@@ -11,7 +12,7 @@ export function LiveCareFaq() {
   const alternar = (i: number, pergunta: string) => {
     const abrindo = aberta !== i
     setAberta(abrindo ? i : null)
-    if (abrindo) trackFaqOpen(pergunta)
+    if (abrindo) pushCtaClick(pergunta, 'live-care-faq')
   }
 
   const whatsappDuvida = `${LIVE_CARE.whatsappDoubtUrl}?text=${encodeURIComponent(LIVE_CARE.whatsappDoubtMsg)}`
@@ -54,14 +55,15 @@ export function LiveCareFaq() {
         {/* Remove a última barreira de quem quase entrou mas travou numa dúvida específica */}
         <div className="mt-8 bg-white rounded-2xl border border-[#E5E7EB] p-6 text-center">
           <p className="text-sm font-semibold text-[#0D0C0D] mb-3">Ficou com outra dúvida?</p>
-          <a
+          <WhatsappGate
             href={whatsappDuvida}
-            target="_blank"
-            rel="noopener noreferrer"
+            ctaLocation="live-care-faq-duvida"
+            ctaLabel="Falar com a equipe no WhatsApp"
+            theme="light"
             className="inline-flex items-center justify-center gap-2 min-h-[48px] bg-white border-2 border-[#3DB85C] text-[#3DB85C] font-semibold rounded-[10px] px-6 py-3 hover:bg-[#f0fdf4] active:scale-95 transition-all duration-200"
           >
             <WhatsAppIcon size={18} /> Falar com a equipe no WhatsApp
-          </a>
+          </WhatsappGate>
         </div>
       </div>
     </section>

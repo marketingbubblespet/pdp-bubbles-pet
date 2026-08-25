@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Poppins, Lobster_Two } from 'next/font/google'
 import './globals.css'
 import { UTMCapture } from '@/components/ui/UTMCapture'
+import { PageViewTracker } from '@/components/ui/PageViewTracker'
 import { BRAND } from '@/lib/constants'
 
 const SITE_URL = 'https://ofertas.bubbles.com.br'
@@ -29,6 +30,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Shampoo Pet Neutro Essential 5L — Bubbles Pet',
   description: 'Shampoo profissional para groomers. Diluição 1:5, rende 30L e ~300 banhos.',
+  // Verificação de domínio do Meta Business (Facebook). Precisa estar no <head>
+  // estático (não carregado via JS) para o verificador aceitar.
+  other: {
+    'facebook-domain-verification': 'mdq5czkd2mj4m8uduvlyeaqd1snr0e',
+  },
 }
 
 const organizationJsonLd = {
@@ -56,6 +62,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <UTMCapture />
+        <PageViewTracker />
         {children}
       </body>
     </html>

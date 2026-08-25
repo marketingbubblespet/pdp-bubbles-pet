@@ -3,6 +3,7 @@ import { MasterCtaB } from './MasterCtaB'
 import { MasterCountdownB } from './MasterCountdownB'
 import { HighlightPriceB } from './HighlightPriceB'
 import { EventGate } from '../masterclass/EventGate'
+import { WhatsappGate } from '@/components/ui/WhatsappGate'
 
 export function MasterFinalCtaB() {
   return (
@@ -22,14 +23,15 @@ export function MasterFinalCtaB() {
                 Deixe seu contato no WhatsApp para ser avisado assim que abrirem as inscrições da
                 próxima edição.
               </p>
-              <a
+              <WhatsappGate
                 href={`${MC.whatsapp}?text=${encodeURIComponent(MC.whatsappReminderMsg)}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                ctaLocation="masterclass-spitz-b-cta-final"
+                ctaLabel="Avisar da próxima edição"
+                theme="dark"
                 className="inline-flex items-center justify-center bg-[#F4CDD4] text-[#080808] font-black uppercase tracking-widest rounded-xl px-6 md:px-8 py-3.5 md:py-4 transition-transform duration-150 hover:scale-[1.02] shadow-[0_0_20px_rgba(244,205,212,0.2)] text-xs md:text-sm"
               >
                 Avisar da próxima edição →
-              </a>
+              </WhatsappGate>
             </>
           }
         >

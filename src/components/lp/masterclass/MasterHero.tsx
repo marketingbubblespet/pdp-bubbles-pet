@@ -5,6 +5,7 @@ import { MasterCta } from './MasterCta'
 import { MasterCountdown } from './MasterCountdown'
 import { HighlightPrice } from './HighlightPrice'
 import { EventGate } from './EventGate'
+import { WhatsappGate } from '@/components/ui/WhatsappGate'
 
 const metaItems = [
   { icon: '📅', text: `${MC.date} às ${MC.time}` },
@@ -64,14 +65,15 @@ export function MasterHero() {
                   Essa edição da MasterClass já aconteceu. Deixe seu contato para ser avisado
                   quando abrirem as inscrições da próxima.
                 </p>
-                <a
+                <WhatsappGate
                   href={`${MC.whatsapp}?text=${encodeURIComponent(MC.whatsappReminderMsg)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  ctaLocation="masterclass-spitz-hero"
+                  ctaLabel="Avisar da próxima edição"
+                  theme="dark"
                   className="inline-flex items-center justify-center bg-[#3DB85C] text-white font-bold rounded-[10px] px-6 md:px-8 py-3 md:py-4 hover:brightness-110 active:scale-95 transition-all duration-200 text-base md:text-lg w-full sm:w-auto shadow-lg"
                 >
                   Avisar da próxima edição →
-                </a>
+                </WhatsappGate>
               </div>
             }
           >

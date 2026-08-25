@@ -1,4 +1,5 @@
 // src/components/lp/FooterBlock.tsx
+import { WhatsappGate } from '@/components/ui/WhatsappGate'
 
 const policies = [
   { label: 'Envio e Frete',       href: 'https://www.bubbles.com.br/pages/politica-de-frete' },
@@ -103,15 +104,15 @@ export function FooterBlock() {
             >
               <IconInstagram />
             </a>
-            <a
+            <WhatsappGate
               href="https://wa.me/5514996312932"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp Bubbles"
+              ctaLocation="essential-rodape"
+              ctaLabel="WhatsApp Bubbles (rodapé)"
+              theme="light"
               className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#F4CDD4] hover:text-[#0D0C0D] transition-all"
             >
               <IconWhatsApp />
-            </a>
+            </WhatsappGate>
           </div>
           <p className="text-xs text-gray-400 text-center leading-relaxed">
             © 2025 Bubbles Pet | CNPJ: 31.900.078/0001-96

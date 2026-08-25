@@ -4,7 +4,7 @@ import { Check } from 'lucide-react'
 import { MC, MC_STEPS, MC_PRODUCTS, MC_PURCHASE_CHANNELS } from '@/lib/masterclass-spitz'
 import { CtaLink } from '@/components/ui/CtaLink'
 import { HighlightPriceB } from './HighlightPriceB'
-import { trackLeadClick } from '../masterclass/trackLead'
+import { pushCtaClick } from '@/lib/tracking'
 
 export function MasterAccessB() {
   return (
@@ -70,7 +70,7 @@ export function MasterAccessB() {
               <CtaLink
                 key={p.name}
                 href={p.url || MC.storeUrl}
-                onClick={trackLeadClick}
+                onClick={() => pushCtaClick(p.name, 'produtos_acesso')}
                 className="group bg-[#1A1A1A] rounded-2xl border border-white/5 overflow-hidden flex flex-col hover:border-white/10 transition-colors duration-300"
               >
                 <div className="relative aspect-square bg-[#111111]">
@@ -91,7 +91,7 @@ export function MasterAccessB() {
           <div className="flex justify-center">
             <CtaLink
               href={MC.storeUrl}
-              onClick={trackLeadClick}
+              onClick={() => pushCtaClick('ver_todos_produtos', 'produtos_acesso')}
               className="inline-block text-center bg-[#1A1A1A] border border-white/10 text-white font-bold rounded-xl px-6 py-3.5 hover:border-white/20 transition-colors duration-300"
             >
               Ver todos os produtos na loja →

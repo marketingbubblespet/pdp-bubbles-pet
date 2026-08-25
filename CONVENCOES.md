@@ -112,3 +112,53 @@ O comportamento esperado é parecido com o do Lovable: cirúrgico, previsível e
     alternam no mesmo lugar). Respeitar `prefers-reduced-motion`: quem tem "reduzir
     movimento" ligado recebe rolagem instantânea em vez de animada.
     Referência pronta: `src/components/lp/care/CareForm.tsx`.
+
+## 11. Rastreamento (GTM)
+42. **Todo `page.tsx` novo precisa do `<GtmScript id="..."/>` manual**, do jeito que já é
+    hoje (não existe carregamento automático por rota). Antes de criar a página, decido
+    qual container usar:
+    - **`GTM-N4PHK6DM`** ("Bubbles - LPs", conta que administramos) é o **padrão** para
+      toda LP nova, a menos que você diga o contrário.
+    - **`GTM-5L9TD3PN`** ("Bubbles - Shopify", de outro fornecedor) só é usado nas páginas
+      que já usam hoje: `essential`, `live-care`, `live-dia-do-tosador`,
+      `masterclass/rostinho-bebe`, `masterclass/spitz-alemao`, `masterclass/spitz-alemao-b`.
+      Nunca migro uma página de um container pro outro sem confirmar, e nunca mexo em
+      configuração dentro do `GTM-5L9TD3PN` (não é nosso).
+    - A home (`/`) **não carrega GTM**.
+    Se esquecer de adicionar o `GtmScript` numa página nova, ela nasce sem rastreamento.
+    Por isso confirmo esse item no resumo final sempre que crio uma LP.
+43. **Rastreamento de eventos (dataLayer) passa pelo módulo central** `src/lib/tracking.ts`
+    — nunca chamo `window.dataLayer.push`, `window.gtag` ou `window.fbq` direto num
+    componente. Ver `docs/tracking.md` para a tabela de eventos completa. Boas práticas
+    obrigatórias em toda página nova com formulário:
+    - Gero o `leadId` com `createLeadId('<slug>')` (ou reaproveito um `candidacyId` que
+      já exista), incluo esse mesmo valor no payload do Netlify **e** do Sellum, e uso
+      ele como `event_id` do lead (`lead.<leadId>`) — nunca `crypto.randomUUID()`, porque
+      o servidor precisa conhecer a mesma chave pra deduplicar Meta/Google.
+    - Disparo `pushLead`/`pushLeadFromForm` **só depois** do `Promise.allSettled` resolver
+      e **só se o Netlify aceitou**. Se o Sellum falhar mas o Netlify aceitar, ainda
+      disparo o lead, com `sellum_failed: true` em `extra`.
+    - Nunca chamo `fbq('track','Lead')` nem `gtag('event','generate_lead')` direto: quem
+      dispara o pixel é a tag do próprio GTM, escutando o evento `lead_form_submitted`.
+    - E-mail/telefone/nome vão em **texto puro** pro `dataLayer` (o GTM hasheia na hora
+      de enviar pro Google/Meta) — nunca faço hash no navegador, isso desliga o Enhanced
+      Conversions/Advanced Matching sem erro visível.
+    - Clique que **não é conversão de verdade** (botão que só rola a página, por exemplo)
+      nunca dispara `lead_form_submitted` nem tem `event_id` — vira `cta_click`.
+    - Página **sem** formulário (ex: LP só com saída pro WhatsApp ou pra loja) usa
+      `pushWhatsappClick`/`pushCtaClick` de engajamento, nunca finge um lead.
+44. **Nome de evento tem nível, e o nível decide o que dispara no GTM:**
+    - `lead_form_submitted` é **Nível 1** e só vale pra candidatura de distribuidor/revenda
+      gravada no CRM (`captacao-lead`, `care-lead`, `pet-south-lead`). Ele dispara conversão
+      de Google Ads e Meta, que alimenta lance de campanha real. **Na dúvida, não uso esse
+      nome**: lead subestimado custa análise, lead superestimado custa verba de mídia.
+    - Captura de contato mais leve é **Nível 2**, com nome próprio (`whatsapp_gate_submitted`).
+    - O resto é **Nível 3**, engajamento, sem conversão.
+    - Nunca crio evento com prefixo `gtm.` (é reservado do container).
+    - Evento com nome inédito não quebra nada, mas também **não faz nada** até alguém criar
+      o gatilho no GTM. Sempre aviso quando publico um nome novo.
+45. **Botão que leva ao WhatsApp usa o `WhatsappGate`**, não um `<a>` solto: ele pede nome,
+    WhatsApp, e-mail e perfil (tudo opcional) antes de abrir a conversa, e grava no Netlify
+    Forms junto com origem do clique, UTMs e URL completa. Link de **compra/loja fica livre**,
+    sem gate. Detalhes em `docs/tracking.md`. Campo novo no formulário exige declarar também
+    em `public/__forms.html`, senão o Netlify descarta em silêncio.

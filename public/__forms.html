@@ -49,6 +49,47 @@
       <input name="bot-field" type="text" />
     </form>
 
+    <!--
+      Gate de WhatsApp: formulário curto que aparece antes de abrir o WhatsApp nas LPs.
+      Um único formulário para todas as páginas; o campo `landing_page` separa a origem.
+      ATENÇÃO: campo não declarado aqui é descartado em silêncio pelo Netlify.
+    -->
+    <form name="whatsapp-gate" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="whatsapp-gate" />
+      <!-- Identificação (todos opcionais) -->
+      <input name="nome" type="text" />
+      <input name="email" type="text" />
+      <input name="whatsapp" type="text" />
+      <input name="perfil" type="text" />
+      <!-- Identificação técnica do envio -->
+      <input name="gate_id" type="text" />
+      <input name="enviado_em" type="text" />
+      <!-- Atribuição de campanha -->
+      <input name="full_url" type="text" />
+      <input name="landing_page" type="text" />
+      <input name="referrer" type="text" />
+      <input name="utm_source" type="text" />
+      <input name="utm_medium" type="text" />
+      <input name="utm_campaign" type="text" />
+      <input name="utm_term" type="text" />
+      <input name="utm_content" type="text" />
+      <input name="gclid" type="text" />
+      <input name="fbclid" type="text" />
+      <!-- Contexto do clique -->
+      <input name="cta_location" type="text" />
+      <input name="cta_label" type="text" />
+      <input name="destino_url" type="text" />
+      <!-- Engajamento -->
+      <input name="tempo_na_pagina" type="text" />
+      <input name="scroll_max" type="text" />
+      <input name="visita_recorrente" type="text" />
+      <!-- Dispositivo -->
+      <input name="dispositivo" type="text" />
+      <input name="viewport" type="text" />
+      <input name="user_agent" type="text" />
+      <input name="bot-field" type="text" />
+    </form>
+
     <form name="pet-south-lead" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="pet-south-lead" />
       <input name="nome" type="text" />

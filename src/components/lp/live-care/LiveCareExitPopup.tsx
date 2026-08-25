@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { X } from 'lucide-react'
 import { LIVE_CARE } from '@/lib/live-care'
 import { LiveCareCta } from './LiveCareCta'
-import { trackExitPopup } from './trackLiveCare'
+import { pushExitPopupShown } from '@/lib/tracking'
 import { useLiveCarePhase } from './useLiveCarePhase'
 
 const KEY = 'livecare-exit-last-shown'
@@ -19,7 +19,7 @@ export function LiveCareExitPopup() {
       if (!podeMostrar()) return
       sessionStorage.setItem(KEY, String(Date.now()))
       setAberto(true)
-      trackExitPopup()
+      pushExitPopupShown('live-care')
     }
 
     // Desktop: mouse saindo pelo topo da janela.

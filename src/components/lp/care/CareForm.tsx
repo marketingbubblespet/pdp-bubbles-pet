@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react'
 import { loadUtms } from '@/lib/utm'
 import { CARE } from '@/lib/care'
-import { trackCareLead, trackCareFormSubmit } from './trackCare'
+import { createLeadId, pushLeadFromForm, pushFormStep } from '@/lib/tracking'
+
+const FORM_NAME = 'care-lead'
 
 const SELLUM_WEBHOOK_URL = 'https://api-admin.sellum.app/v1/public/crm/webhooks/campos-do-formulario-linha-care-f47be681d1'
 const SELLUM_TOKEN = 'crm_414922a02b0bf588301ae868350adf823bc4c6ce5c644bdf'
@@ -192,6 +194,7 @@ export function CareForm() {
   const [attemptedNext, setAttemptedNext] = useState(false)
   const [redirecting, setRedirecting] = useState(false)
   const formBoxRef = useRef<HTMLDivElement>(null)
+  const [leadId] = useState(() => createLeadId('care'))
 
   const whatsappUrl = `${CARE.whatsapp}?text=${encodeURIComponent(CARE.whatsappMsg)}`
 
@@ -281,7 +284,9 @@ export function CareForm() {
       return
     }
     setAttemptedNext(false)
-    setStep((s) => Math.min(s + 1, TOTAL_STEPS))
+    const proximo = Math.min(step + 1, TOTAL_STEPS)
+    setStep(proximo)
+    pushFormStep(FORM_NAME, proximo, stepTitles[proximo - 1])
     scrollToFormBox()
   }
   const goBack = () => {
@@ -303,6 +308,7 @@ export function CareForm() {
       email: form.email || undefined,
       phone: form.whatsapp,
       source: 'care',
+      leadId,
       cidade: form.cidade,
       categoria: categoriaSel?.label ?? '',
       categoriaOutro: form.categoriaOutro || undefined,
@@ -318,6 +324,7 @@ export function CareForm() {
     // independente do resultado do envio pra Sellum.
     const netlifyPayload = {
       'form-name': NETLIFY_FORM_NAME,
+      leadId,
       nome: form.nome,
       petshop: form.petshop,
       categoria: categoriaSel?.label ?? '',
@@ -378,8 +385,22 @@ export function CareForm() {
       return
     }
 
-    trackCareFormSubmit()
-    trackCareLead()
+    // O evento de lead só dispara se o Netlify confirmou o recebimento: é o único
+    // destino que recebe todo lead (qualificado ou não), então é a fonte de verdade
+    // de "esse lead existe". Se o Netlify falhou, mesmo com Sellum ok, não disparamos
+    // (ver item E da tarefa de rastreamento).
+    if (netlifyResult.status === 'fulfilled') {
+      pushLeadFromForm({
+        leadId,
+        formName: FORM_NAME,
+        qualified: qualificado,
+        fullName: form.nome,
+        email: form.email,
+        phone: form.whatsapp,
+        extra: sellumResult.status === 'rejected' ? { sellum_failed: true } : undefined,
+      })
+    }
+
     setSubmitted(true)
     if (!qualificado) setRedirecting(true)
     // A confirmação é bem mais curta que o formulário: sem isso a pessoa pode terminar
@@ -409,6 +430,7 @@ export function CareForm() {
           <div className="bg-[#f0fdf4] border border-[#bbf7d0] rounded-2xl p-8 text-center flex flex-col items-center gap-3">
             <CheckCircle2 size={40} className="text-[#3DB85C]" />
             <h3 className="font-medium text-[#0D0C0D] text-lg">Cadastro recebido!</h3>
+            <p className="text-[10px] text-[#666666] font-mono">ID: {leadId}</p>
             {redirecting ? (
               <>
                 <p className="text-sm text-[#666666]">

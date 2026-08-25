@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Check } from 'lucide-react'
 import { MC, MC_STEPS, MC_PRODUCTS, MC_PURCHASE_CHANNELS } from '@/lib/masterclass-agosto'
 import { CtaLink } from '@/components/ui/CtaLink'
-import { trackLeadClickAgosto } from './trackLeadAgosto'
+import { pushCtaClick } from '@/lib/tracking'
 
 export function MasterAccessAgosto() {
   return (
@@ -63,7 +63,7 @@ export function MasterAccessAgosto() {
               <CtaLink
                 key={p.name}
                 href={p.url || MC.storeUrl}
-                onClick={trackLeadClickAgosto}
+                onClick={() => pushCtaClick(p.name, 'produtos_acesso')}
                 className="group bg-[#1A1A1A] rounded-2xl border border-white/5 overflow-hidden flex flex-col hover:border-white/10 transition-colors duration-300"
               >
                 <div className="relative aspect-square bg-[#111111]">
@@ -84,7 +84,7 @@ export function MasterAccessAgosto() {
           <div className="flex justify-center">
             <CtaLink
               href={MC.storeUrl}
-              onClick={trackLeadClickAgosto}
+              onClick={() => pushCtaClick('ver_todos_produtos', 'produtos_acesso')}
               className="inline-block text-center bg-[#1A1A1A] border border-white/10 text-white font-bold rounded-xl px-6 py-3.5 hover:border-white/20 transition-colors duration-300 animate-pulse"
             >
               Ver todos os produtos na loja →

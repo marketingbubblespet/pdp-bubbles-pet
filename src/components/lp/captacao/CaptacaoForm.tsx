@@ -1,10 +1,10 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import { loadUtms } from '@/lib/utm'
 import { CAPTACAO } from '@/lib/captacao'
-import { trackCaptacaoFormSubmit, trackCaptacaoLead } from './trackCaptacao'
+import { createLeadId, pushLeadFromForm, pushFormStep } from '@/lib/tracking'
 import {
   type FormState, EMPTY_FORM, formatPhone, formatDoc, isEmailValid, isPhoneValid, isDocValid, encodeFormData,
 } from './captacaoFormUtils'
@@ -17,10 +17,7 @@ const SELLUM_TOKEN = 'crm_15eb27da51aa452be74dfe4512570c8a7e16acd25f9600a0'
 
 const NETLIFY_FORM_NAME = 'captacao-lead'
 const TOTAL_STEPS = 5
-
-function generateId(): string {
-  return Math.random().toString(36).substring(2, 11).toUpperCase()
-}
+const STEP_NAMES = ['Dados de contato', 'Perfil', 'Localização', 'Negócio', 'Investimento']
 
 function isStepValid(step: number, form: FormState): boolean {
   if (step === 1) return form.name.trim() !== '' && isEmailValid(form.email || 'x@x.com') && isPhoneValid(form.whatsapp)
@@ -41,9 +38,10 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
   // Gera um novo ID de candidatura sempre que o modal abre, sem depender de useEffect
   // (evita a renderização em cascata: o ajuste acontece na mesma passagem de render).
+  // Esse mesmo ID é o leadId usado no dataLayer e nos payloads do Netlify/Sellum.
   if (isOpen !== prevIsOpen) {
     setPrevIsOpen(isOpen)
-    if (isOpen) setCandidacyId(generateId())
+    if (isOpen) setCandidacyId(createLeadId('captacao'))
   }
 
   if (!isOpen) return null
@@ -67,7 +65,9 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
     setAttemptedNext(true)
     if (!isStepValid(step, form)) return
     setAttemptedNext(false)
-    setStep((s) => Math.min(s + 1, TOTAL_STEPS))
+    const proximo = Math.min(step + 1, TOTAL_STEPS)
+    setStep(proximo)
+    pushFormStep(NETLIFY_FORM_NAME, proximo, STEP_NAMES[proximo - 1])
   }
   const handleBack = () => {
     setAttemptedNext(false)
@@ -78,6 +78,7 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
     const fullUrl = window.location.href
     const netlifyPayload = {
       'form-name': NETLIFY_FORM_NAME,
+      leadId: candidacyId,
       nome: form.name,
       email: form.email,
       whatsapp: form.whatsapp,
@@ -150,8 +151,20 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
       if (netlifyResult.status === 'rejected') console.error('Falha ao salvar lead na Netlify:', netlifyResult.reason)
       if (sellumResult.status === 'rejected') console.error('Falha ao enviar lead pra Sellum:', sellumResult.reason)
 
-      trackCaptacaoFormSubmit()
-      trackCaptacaoLead()
+      // Só dispara o lead se o Netlify confirmou: é o destino que recebe todo lead,
+      // qualificado ou não, então é a fonte de verdade de que o lead existe.
+      if (netlifyResult.status === 'fulfilled') {
+        pushLeadFromForm({
+          leadId: candidacyId,
+          formName: NETLIFY_FORM_NAME,
+          qualified: isQualified,
+          fullName: form.name,
+          email: form.email,
+          phone: form.whatsapp,
+          extra: sellumResult.status === 'rejected' ? { sellum_failed: true } : undefined,
+        })
+      }
+
       setIsSuccess(true)
 
       if (!isQualified) {
@@ -184,30 +197,28 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
         )}
 
         <div className="p-8 md:p-12">
-          <AnimatePresence mode="wait">
-            {isSuccess ? (
-              <SuccessScreen key="success" isQualified={isQualified} candidacyId={candidacyId} whatsappLink={whatsappLink} onClose={handleClose} />
-            ) : (
-              <div key={`step-${step}`}>
-                {step === 1 && <Step1Contact form={form} setForm={setForm} attemptedNext={attemptedNext} />}
-                {step === 2 && <Step2Profile form={form} setForm={setForm} />}
-                {step === 3 && <Step3Location form={form} setForm={setForm} attemptedNext={attemptedNext} />}
-                {step === 4 && <Step4Business form={form} setForm={setForm} />}
-                {step === 5 && <Step5Investment form={form} setForm={setForm} whatsappLink={whatsappLink} />}
+          {isSuccess ? (
+            <SuccessScreen key="success" isQualified={isQualified} candidacyId={candidacyId} whatsappLink={whatsappLink} onClose={handleClose} />
+          ) : (
+            <div key={`step-${step}`}>
+              {step === 1 && <Step1Contact form={form} setForm={setForm} attemptedNext={attemptedNext} />}
+              {step === 2 && <Step2Profile form={form} setForm={setForm} />}
+              {step === 3 && <Step3Location form={form} setForm={setForm} attemptedNext={attemptedNext} />}
+              {step === 4 && <Step4Business form={form} setForm={setForm} />}
+              {step === 5 && <Step5Investment form={form} setForm={setForm} whatsappLink={whatsappLink} />}
 
-                <div className="mt-8">
-                  <StepNavButtons
-                    step={step}
-                    totalSteps={TOTAL_STEPS}
-                    isSubmitting={isSubmitting}
-                    onBack={handleBack}
-                    onNext={onNextOrSubmit}
-                    canSubmitLabel={isQualified ? 'Finalizar Candidatura' : 'Quero Condições Exclusivas'}
-                  />
-                </div>
+              <div className="mt-8">
+                <StepNavButtons
+                  step={step}
+                  totalSteps={TOTAL_STEPS}
+                  isSubmitting={isSubmitting}
+                  onBack={handleBack}
+                  onNext={onNextOrSubmit}
+                  canSubmitLabel={isQualified ? 'Finalizar Candidatura' : 'Quero Condições Exclusivas'}
+                />
               </div>
-            )}
-          </AnimatePresence>
+            </div>
+          )}
         </div>
       </motion.div>
     </div>

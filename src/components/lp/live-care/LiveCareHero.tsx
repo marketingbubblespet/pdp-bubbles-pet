@@ -5,7 +5,7 @@ import { LiveCareCta } from './LiveCareCta'
 import { LiveCareCountdown } from './LiveCareCountdown'
 import { LiveCarePhoto } from './LiveCarePhoto'
 import { useLiveCarePhase } from './useLiveCarePhase'
-import { trackWatchLive } from './trackLiveCare'
+import { pushCtaClick } from '@/lib/tracking'
 
 const meta = [
   { icon: Calendar, texto: `${LIVE_CARE.weekday}, ${LIVE_CARE.date}` },
@@ -80,7 +80,7 @@ export function LiveCareHero() {
                   href={LIVE_CARE.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={trackWatchLive}
+                  onClick={() => pushCtaClick('assistir-agora', 'live-care-hero')}
                   className="inline-flex items-center justify-center gap-2 min-h-[52px] bg-[#E8649A] text-white font-semibold rounded-[10px] px-6 py-3.5 hover:brightness-110 active:scale-95 transition-all duration-200 shadow-md"
                 >
                   <Camera size={18} /> Assistir agora

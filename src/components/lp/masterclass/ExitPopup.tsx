@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { MC } from '@/lib/masterclass-spitz'
+import { WhatsappGate } from '@/components/ui/WhatsappGate'
 
 const KEY = 'mc-exit-last-shown'
 const THROTTLE_MS = 5 * 60 * 1000 // não repetir antes de 5 minutos
@@ -73,15 +74,16 @@ export function ExitPopup() {
           seu acesso antes que as vagas acabem.
         </p>
 
-        <a
+        <WhatsappGate
           href={`${MC.whatsapp}?text=${encodeURIComponent(MC.whatsappReminderMsg)}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          ctaLocation="masterclass-spitz-popup-saida"
+          ctaLabel="Falar no WhatsApp"
+          theme="dark"
           onClick={() => setOpen(false)}
           className="block w-full text-center bg-[#25D366] text-white font-bold rounded-[10px] px-6 py-3.5 hover:brightness-110 active:scale-95 transition-all"
         >
           Falar no WhatsApp →
-        </a>
+        </WhatsappGate>
       </div>
     </div>
   )

@@ -1,13 +1,14 @@
 'use client'
-import { trackFloatingClick } from './trackJoin'
+import { pushCtaClick } from '@/lib/tracking'
 
 // Botão flutuante que leva à seção de participação (âncora #participar).
+// Não é conversão (só rola a página), por isso dispara cta_click, nunca lead.
 export function LiveFloatingWhatsApp() {
   return (
     <a
       href="#participar"
       aria-label="Participar da live"
-      onClick={trackFloatingClick}
+      onClick={() => pushCtaClick('participar_flutuante', 'floating_button')}
       className="fixed bottom-24 right-4 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] shadow-lg hover:scale-105 active:scale-95 transition-transform"
     >
       <svg width="30" height="30" viewBox="0 0 24 24" fill="white">

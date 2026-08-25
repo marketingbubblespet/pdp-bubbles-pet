@@ -5,7 +5,9 @@ import { CheckCircle, ChevronRight, X, MessageCircle } from 'lucide-react'
 import { loadUtms } from '@/lib/utm'
 import { PET_SOUTH, PET_SOUTH_BUSINESS_MODELS } from '@/lib/pet-south'
 import { OPEN_FORM_EVENT } from './formBus'
-import { trackPetSouthFormSubmit, trackPetSouthLead } from './trackPetSouth'
+import { createLeadId, pushLeadFromForm, pushFormOpen, pushFormStep } from '@/lib/tracking'
+
+const STEP_NAMES = ['Dados de contato', 'Estrutura', 'Região', 'Modelo', 'Investimento']
 
 const SELLUM_WEBHOOK_URL = 'https://api-admin.sellum.app/v1/public/crm/webhooks/captacao-237b5035c0'
 const SELLUM_TOKEN = 'crm_15eb27da51aa452be74dfe4512570c8a7e16acd25f9600a0'
@@ -115,8 +117,9 @@ export function PetSouthForm() {
 
   useEffect(() => {
     const handleOpen = () => {
-      setCandidacyId(Math.random().toString(36).slice(2, 11).toUpperCase())
+      setCandidacyId(createLeadId('pet-south'))
       setIsOpen(true)
+      pushFormOpen('pet-south-lead')
     }
     window.addEventListener(OPEN_FORM_EVENT, handleOpen)
     return () => window.removeEventListener(OPEN_FORM_EVENT, handleOpen)
@@ -154,7 +157,9 @@ export function PetSouthForm() {
     setAttemptedNext(true)
     if (!stepValid) return
     setAttemptedNext(false)
-    setStep((s) => Math.min(s + 1, TOTAL_STEPS))
+    const proximo = Math.min(step + 1, TOTAL_STEPS)
+    setStep(proximo)
+    pushFormStep('pet-south-lead', proximo, STEP_NAMES[proximo - 1])
   }
   const handlePrev = () => {
     setAttemptedNext(false)
@@ -264,8 +269,20 @@ Quero comprar com condições exclusivas da feira!`
       return
     }
 
-    trackPetSouthFormSubmit()
-    trackPetSouthLead()
+    // Só dispara o lead se o Netlify confirmou: é o destino que recebe todo lead,
+    // qualificado ou não, então é a fonte de verdade de que o lead existe.
+    if (netlifyResult.status === 'fulfilled') {
+      pushLeadFromForm({
+        leadId: candidacyId,
+        formName: 'pet-south-lead',
+        qualified: isQualified,
+        fullName: form.name,
+        email: form.email,
+        phone: form.whatsapp,
+        extra: sellumResult.status === 'rejected' ? { sellum_failed: true } : undefined,
+      })
+    }
+
     setSubmitted(true)
 
     if (!isQualified) {

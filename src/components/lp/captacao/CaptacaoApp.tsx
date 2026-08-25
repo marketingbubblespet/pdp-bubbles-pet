@@ -14,7 +14,7 @@ import { CaptacaoFooter } from './CaptacaoFooter'
 import { CaptacaoForm } from './CaptacaoForm'
 import { CaptacaoStickyBar } from './CaptacaoStickyBar'
 import { CaptacaoExitPopup } from './CaptacaoExitPopup'
-import { trackCaptacaoFormOpen } from './trackCaptacao'
+import { pushFormOpen } from '@/lib/tracking'
 import { useFormModal } from './useFormModal'
 
 export function CaptacaoApp() {
@@ -23,7 +23,7 @@ export function CaptacaoApp() {
 
   const handleOpenForm = useCallback(() => {
     open()
-    trackCaptacaoFormOpen()
+    pushFormOpen('captacao-lead')
   }, [open])
 
   return (

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { MC, MC_STEPS, MC_PRODUCTS, MC_PURCHASE_CHANNELS } from '@/lib/masterclass-spitz'
 import { CtaLink } from '@/components/ui/CtaLink'
 import { HighlightPrice } from './HighlightPrice'
-import { trackLeadClick } from './trackLead'
+import { pushCtaClick } from '@/lib/tracking'
 
 export function MasterAccess() {
   return (
@@ -69,7 +69,7 @@ export function MasterAccess() {
               <CtaLink
                 key={p.name}
                 href={p.url || MC.storeUrl}
-                onClick={trackLeadClick}
+                onClick={() => pushCtaClick(p.name, 'produtos_acesso')}
                 className="group bg-white rounded-[10px] border border-[#E5E7EB] overflow-hidden flex flex-col hover:border-[#E8649A] transition-colors"
               >
                 <div className="relative aspect-square bg-[#F7F7F7]">
@@ -90,7 +90,7 @@ export function MasterAccess() {
           <div className="flex justify-center">
             <CtaLink
               href={MC.storeUrl}
-              onClick={trackLeadClick}
+              onClick={() => pushCtaClick('ver_todos_produtos', 'produtos_acesso')}
               className="inline-block text-center bg-[#0d0c0d] text-white font-bold rounded-[10px] px-6 py-3.5 hover:brightness-125 active:scale-95 transition-all"
             >
               Ver todos os produtos na loja →

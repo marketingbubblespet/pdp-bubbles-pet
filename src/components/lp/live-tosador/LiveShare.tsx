@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Share2, Copy, Check } from 'lucide-react'
-import { trackShareClick } from './trackJoin'
+import { pushShareClick } from '@/lib/tracking'
 
 const SHARE_TEXT = 'Bubbles tá fazendo uma live especial de Dia do Tosador, 26/07 às 19h, com brinde, sorteio e cupom exclusivo. Entra também:'
 
@@ -9,7 +9,7 @@ export function LiveShare() {
   const [copied, setCopied] = useState(false)
 
   const handleShare = () => {
-    trackShareClick()
+    pushShareClick('live_tosador')
     const url = window.location.href
     if (navigator.share) {
       navigator.share({ title: 'Live Dia do Tosador com a Bubbles', text: SHARE_TEXT, url }).catch(() => {})
@@ -19,7 +19,7 @@ export function LiveShare() {
   }
 
   const handleCopy = () => {
-    trackShareClick()
+    pushShareClick('live_tosador')
     const url = window.location.href
     const onCopied = () => {
       setCopied(true)
