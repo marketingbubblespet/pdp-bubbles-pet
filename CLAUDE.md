@@ -2,6 +2,13 @@
 @CONVENCOES.md
 @DESIGN-SYSTEM.md
 
+# Visão geral do projeto
+
+**Leia `README.md` primeiro** (não carrega automaticamente): mapa completo de todas as
+LPs/rotas, o que cada uma faz, tema (claro/escuro), onde ficam os dados/textos de cada
+página, e como funciona o rastreamento (GTM, dataLayer, formulários). É o ponto de
+partida pra entender a estrutura do repositório antes de mexer em qualquer coisa.
+
 # Base de conhecimento da marca
 
 O conhecimento institucional, de produtos e de comunicação da Bubbles está em `docs/brand/`.

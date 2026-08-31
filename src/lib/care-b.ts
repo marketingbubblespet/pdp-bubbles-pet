@@ -46,13 +46,6 @@ export const CARE_B_DEMAND_MACHINE = {
   fechamento: 'Reconhecimento de marca não é promessa, é o que já está acontecendo. Seu trabalho é ter o produto na prateleira quando o tutor chegar procurando.',
 } as const
 
-export const CARE_B_PRODUCTS = {
-  eyebrow: 'A linha completa',
-  h2: '11 produtos de alto giro, do banho à perfumaria',
-  corpo: 'Portfólio fechado pra cobrir toda a rotina de cuidado em casa, sem precisar completar com outra marca.',
-  fechamento: 'Portfólio completo com 11 produtos de alto giro: do banho à perfumaria.',
-} as const
-
 // 4 dos 6 itens de CARE_WHY_RESELL (lib/care.ts): mantém margem, giro/recompra,
 // marketing de apoio, portfólio completo. Corta design/apresentação e qualidade
 // profissional, que são argumento de produto, não de negócio.

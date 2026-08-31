@@ -22,7 +22,7 @@ export function CareBDemandMachine() {
       `}</style>
 
       <Image
-        src="/images/mechanism-pelagem.jpg"
+        src="/images/care-hero-produtos.jpg"
         alt=""
         fill
         sizes="100vw"
@@ -44,10 +44,12 @@ export function CareBDemandMachine() {
           </p>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 gap-4 mb-10 max-w-[560px] mx-auto">
+        {/* items-stretch + h-full nos dois níveis (Reveal e card): garante que os dois
+            blocos fiquem com a mesma altura mesmo com textos de tamanhos diferentes. */}
+        <div className="grid sm:grid-cols-2 gap-4 mb-10 max-w-[560px] mx-auto items-stretch">
           {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 120}>
-              <div className="bg-white rounded-2xl p-6 border border-[#E5E7EB] flex flex-col items-center text-center gap-2 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <Reveal key={s.label} delay={i * 120} className="h-full">
+              <div className="h-full bg-white rounded-2xl p-6 border border-[#E5E7EB] flex flex-col items-center justify-center text-center gap-2 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
                 <s.icon size={28} className="text-[#E8649A]" />
                 <span className="text-3xl md:text-4xl font-medium text-[#0D0C0D]">
                   <CountUp target={s.target} prefix={s.prefix} />

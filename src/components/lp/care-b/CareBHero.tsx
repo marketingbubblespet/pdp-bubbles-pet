@@ -20,16 +20,20 @@ export function CareBHero() {
       <div className="careb-blob-b absolute bottom-0 left-[5%] w-52 h-52 rounded-full bg-[#E8649A] opacity-20 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-[1100px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
+        {/* 3fr/2fr em vez de 1fr/1fr: coluna de texto mais larga, formulário mais
+            estreito, a pedido do usuário. */}
+        <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-10 md:gap-10 items-start">
           <div>
             <Reveal>
               <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3">
                 {CARE_B_HERO.eyebrow}
               </p>
-              <h1 className="text-3xl md:text-5xl font-medium leading-[1.15] text-[#0D0C0D] mb-4">
+              {/* Texto ~20% menor que o padrão do hero (era text-3xl/text-5xl e
+                  text-base/text-lg), a pedido do usuário. */}
+              <h1 className="text-2xl md:text-4xl font-medium leading-[1.15] text-[#0D0C0D] mb-4">
                 {CARE_B_HERO.h1}
               </h1>
-              <p className="text-base md:text-lg text-[#666666] font-medium leading-relaxed mb-6">
+              <p className="text-sm md:text-base text-[#666666] font-medium leading-relaxed mb-6">
                 {CARE_B_HERO.corpo}
               </p>
             </Reveal>
