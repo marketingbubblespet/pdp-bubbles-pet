@@ -29,6 +29,11 @@ const pages = [
     description: 'Pré-lançamento para petshops: cadastro de revenda da linha Care',
   },
   {
+    href: '/care-b',
+    label: 'Bubbles Care (Revenda, versão B)',
+    description: 'Variante de teste A/B: formulário na primeira dobra, foco B2B',
+  },
+  {
     href: '/masterclass/rostinho-bebe',
     label: 'MasterClass Rostinho Bebê',
     description: 'Aula ao vivo de 24/08 com Tio Dan: a base do banho pro rostinho bebê perfeito',

@@ -3,6 +3,10 @@
   <body>
     <form name="care-parceria" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="care-parceria" />
+      <!-- leadId: já era enviado pelo CareForm.tsx mas faltava declarar aqui, o Netlify
+           descartava em silêncio. variante: novo, separa A de B no painel (teste A/B). -->
+      <input name="leadId" type="text" />
+      <input name="variante" type="text" />
       <input name="nome" type="text" />
       <input name="petshop" type="text" />
       <input name="categoria" type="text" />
