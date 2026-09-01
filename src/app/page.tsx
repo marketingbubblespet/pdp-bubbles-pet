@@ -53,6 +53,11 @@ const pages = [
     label: 'Captação Pet South America',
     description: 'Variante de captação de distribuidores co-branded com a Pet South America',
   },
+  {
+    href: '/masterclass/penteados-que-encantam',
+    label: 'MasterClass Penteados que Encantam',
+    description: 'Aula ao vivo de 28/09 com Jéssica Silva: acesso liberado para compras acima de R$ 399',
+  },
 ]
 
 const PASSWORD = 'mariane'
