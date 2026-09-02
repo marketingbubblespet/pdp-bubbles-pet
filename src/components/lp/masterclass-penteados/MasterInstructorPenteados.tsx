@@ -4,13 +4,13 @@ import { MC_INSTRUCTOR } from '@/lib/masterclass-penteados'
 export function MasterInstructorPenteados() {
   return (
     <section className="bg-white py-16 md:py-24 px-4 border-t border-[#E5E7EB]">
-      <div className="max-w-[1000px] mx-auto grid md:grid-cols-[280px_1fr] gap-8 md:gap-12 items-center">
+      <div className="max-w-[1100px] mx-auto grid md:grid-cols-[400px_1fr] gap-8 md:gap-12 items-center">
         <div className="relative aspect-square rounded-3xl overflow-hidden">
           <Image
             src={MC_INSTRUCTOR.photo}
             alt={MC_INSTRUCTOR.name}
             fill
-            sizes="(max-width: 767px) 343px, 280px"
+            sizes="(max-width: 767px) calc(100vw - 32px), 400px"
             className="object-cover object-top"
           />
         </div>

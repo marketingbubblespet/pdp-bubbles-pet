@@ -55,6 +55,48 @@ export const MC = {
   previousEditionAttendees: 80,
 } as const
 
+// Produtos por trás dos penteados (galeria da seção "Os produtos por trás"). Cada card
+// linka direto pro produto na Shopify (abre em nova aba via CtaLink, preservando UTM).
+// `hoverImage` ausente = card usa efeito de zoom no hover em vez de troca de imagem
+// (caso da Máscara Multifuncional, que só tem uma foto disponível).
+export const MC_PRODUCTS = [
+  {
+    nome: 'Kit Duo Glitters Prata e Dourado',
+    linha: 'Collora',
+    url: 'https://www.bubbles.com.br/products/kit-pet-duo-glitters-prata-e-dourado-collora-2-itens',
+    image: '/images/masterclass/produtos-penteados/collora-glitter-main.webp',
+    hoverImage: '/images/masterclass/produtos-penteados/collora-glitter-hover.webp',
+  },
+  {
+    nome: 'Gel Modelador Antifrizz',
+    linha: 'PRO · 15ml',
+    url: 'https://www.bubbles.com.br/products/gel-modelador-pet-antifrizz-pro-15ml',
+    image: '/images/masterclass/produtos-penteados/gel-modelador-main.webp',
+    hoverImage: '/images/masterclass/produtos-penteados/gel-modelador-hover.webp',
+  },
+  {
+    nome: 'Máscara Nutritiva',
+    linha: 'EGO · 500ml',
+    url: 'https://www.bubbles.com.br/products/mascara-pet-nutritiva-ego-500ml',
+    image: '/images/masterclass/produtos-penteados/mascara-nutritiva-main.webp',
+    hoverImage: '/images/masterclass/produtos-penteados/mascara-nutritiva-hover.webp',
+  },
+  {
+    nome: 'Kit Cronograma de Pelagem',
+    linha: 'EGO · 3 itens',
+    url: 'https://www.bubbles.com.br/products/kit-pet-cronograma-de-pelagem-ego-3-itens',
+    image: '/images/masterclass/produtos-penteados/kit-cronograma-main.webp',
+    hoverImage: '/images/masterclass/produtos-penteados/kit-cronograma-hover.webp',
+  },
+  {
+    nome: 'Máscara Multifuncional',
+    linha: 'Essential · 500g',
+    url: 'https://www.bubbles.com.br/products/mascara-pet-multifuncional-essential-500g',
+    image: '/images/masterclass/produtos-penteados/mascara-multifuncional.webp',
+    hoverImage: null,
+  },
+] as const
+
 // Canais onde a compra vale (2.5)
 export const MC_PURCHASE_CHANNELS = ['Site', 'WhatsApp oficial de vendas', 'Distribuidores autorizados'] as const
 
@@ -92,7 +134,7 @@ export const MC_INSTRUCTOR = {
   credential: 'Groomer especialista em penteados pet, com anos de profissão e centenas de atendimentos. Instrutora de cursos por todo o Brasil, une técnica, criatividade e elegância em penteados que encantam tutores e valorizam o serviço.',
   bio: 'Groomer especialista em penteados pet há anos. Ministra cursos pelo Brasil e acredita que técnica, criatividade e elegância transformam um penteado em um serviço que o tutor volta para comprar.',
   tags: ['Groomer', 'Especialista', 'Penteados', 'Técnica'],
-  photo: '/images/masterclass/jessica-instrutora.webp',
+  photo: '/images/masterclass/jessica-hero.webp',
 } as const
 
 // Detalhes e logística (2.2, 2.4)

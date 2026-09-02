@@ -15,17 +15,17 @@ const metaItems = [
 export function MasterHeroPenteados() {
   return (
     <section className="bg-[#F7F7F7] pt-10 pb-14 md:pt-16 md:pb-20 px-4">
-      <div className="max-w-[1100px] mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div className="max-w-[1240px] mx-auto grid md:grid-cols-[1fr_1.25fr] gap-8 md:gap-12 items-center">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3">
-            {MC.program} · MasterClass ao vivo
+            MasterClass {MC.dateFull} às {MC.time} · Aula ao vivo
           </p>
 
           <div className="inline-flex items-center gap-2 bg-white border border-[#E5E7EB] rounded-full px-3.5 py-2 mb-4">
             <Unlock size={16} className="text-[#E8649A] shrink-0" />
             <p className="text-xs md:text-sm font-semibold text-[#0F0C0D]">
-              {MC.accessRule} até {MC.purchaseDeadline}
-              <span className="font-medium text-[#6B7280]"> · site, WhatsApp ou distribuidores oficiais</span>
+              Acesso liberado em compras acima de R$ 399 até {MC.dateFull}
+              <span className="font-medium text-[#6B7280]"> · Site, WhatsApp oficial ou Distribuidores</span>
             </p>
           </div>
 
@@ -89,16 +89,16 @@ export function MasterHeroPenteados() {
           </EventGate>
         </div>
 
-        <div className="max-w-[320px] mx-auto md:max-w-none">
-          <div className="relative aspect-[4/5] md:max-h-[90vh] rounded-3xl overflow-hidden shadow-md">
+        <div className="order-first md:order-none max-w-[420px] mx-auto md:max-w-none">
+          <div className="relative aspect-[4/5] md:aspect-[3/4] md:max-h-[85vh] rounded-3xl overflow-hidden shadow-md">
             <Image
               src={MC_INSTRUCTOR.photo}
               alt={MC_INSTRUCTOR.name}
               fill
               priority
               fetchPriority="high"
-              quality={70}
-              sizes="(max-width: 767px) 320px, 560px"
+              quality={75}
+              sizes="(max-width: 767px) 420px, 700px"
               className="object-cover"
             />
           </div>
