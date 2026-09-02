@@ -134,6 +134,9 @@ export const MC_INSTRUCTOR = {
   credential: 'Groomer especialista em penteados pet, com anos de profissão e centenas de atendimentos. Instrutora de cursos por todo o Brasil, une técnica, criatividade e elegância em penteados que encantam tutores e valorizam o serviço.',
   bio: 'Groomer especialista em penteados pet há anos. Ministra cursos pelo Brasil e acredita que técnica, criatividade e elegância transformam um penteado em um serviço que o tutor volta para comprar.',
   tags: ['Groomer', 'Especialista', 'Penteados', 'Técnica'],
+  // Fotos diferentes por seção: a primeira foto enviada (retrato) vai no hero, a segunda
+  // (com os produtos) fica só em "Quem vai ensinar".
+  heroPhoto: '/images/masterclass/jessica-instrutora.webp',
   photo: '/images/masterclass/jessica-hero.webp',
 } as const
 

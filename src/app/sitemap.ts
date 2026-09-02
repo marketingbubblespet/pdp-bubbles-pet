@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/masterclass/penteados`,
+      url: `${SITE_URL}/masterclass/penteados-que-encantam`,
       changeFrequency: 'weekly',
       priority: 0.8,
     },

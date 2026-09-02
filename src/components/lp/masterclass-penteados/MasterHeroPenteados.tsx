@@ -92,7 +92,7 @@ export function MasterHeroPenteados() {
         <div className="order-first md:order-none max-w-[420px] mx-auto md:max-w-none">
           <div className="relative aspect-[4/5] md:aspect-[3/4] md:max-h-[85vh] rounded-3xl overflow-hidden shadow-md">
             <Image
-              src={MC_INSTRUCTOR.photo}
+              src={MC_INSTRUCTOR.heroPhoto}
               alt={MC_INSTRUCTOR.name}
               fill
               priority
