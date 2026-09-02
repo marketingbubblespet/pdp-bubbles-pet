@@ -7,17 +7,17 @@ export function MasterDetailsPenteados() {
         <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           Detalhes e logística
         </p>
-        <h2 className="text-2xl md:text-3xl font-medium text-[#0D0C0D] text-center mb-10">
+        <h2 className="text-2xl md:text-3xl font-medium text-[#0F0C0D] tracking-tight text-center mb-10">
           Tudo o que você precisa saber
         </h2>
 
-        <div className="bg-white rounded-[20px] border border-[#E5E7EB] divide-y divide-[#E5E7EB] overflow-hidden">
+        <div className="bg-white rounded-2xl border border-[#E5E7EB] divide-y divide-[#E5E7EB] overflow-hidden">
           {MC_DETAILS.map((d) => (
             <div key={d.label} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 px-5 py-4">
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] sm:w-44 shrink-0">
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-[#E8649A] sm:w-44 shrink-0">
                 {d.label}
               </span>
-              <span className="text-sm text-[#666666]">{d.value}</span>
+              <span className="text-sm text-[#0F0C0D]">{d.value}</span>
             </div>
           ))}
         </div>

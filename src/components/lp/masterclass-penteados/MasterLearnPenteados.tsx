@@ -1,11 +1,14 @@
-import { Droplets, Sparkles, Wand2, Scissors, Star, GraduationCap, MessageCircle, HelpCircle, type LucideIcon } from 'lucide-react'
+import { Scissors, Star, GraduationCap, MessageCircle, Link2, type LucideIcon } from 'lucide-react'
 import { MC, MC_LEARN, MC_DELIVERABLES } from '@/lib/masterclass-penteados'
 
 const LEARN_ICONS: Record<string, LucideIcon> = {
-  Droplets, Sparkles, Wand2, Scissors, Star,
+  '✂️': Scissors,
+  '⭐': Star,
 }
 const DELIVERABLE_ICONS: Record<string, LucideIcon> = {
-  GraduationCap, MessageCircle, HelpCircle,
+  '🎓': GraduationCap,
+  '💬': MessageCircle,
+  '🔗': Link2,
 }
 
 export function MasterLearnPenteados() {
@@ -15,7 +18,7 @@ export function MasterLearnPenteados() {
         <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3 text-center">
           O que você vai aprender
         </p>
-        <h2 className="text-2xl md:text-3xl font-medium text-[#0D0C0D] text-center max-w-[760px] mx-auto mb-4">
+        <h2 className="text-2xl md:text-3xl font-medium text-[#0F0C0D] tracking-tight text-center max-w-[760px] mx-auto mb-4">
           {MC.transformation}
         </h2>
 
@@ -25,10 +28,10 @@ export function MasterLearnPenteados() {
             return (
               <div
                 key={item.text}
-                className="bg-[#FDF2F4] rounded-[20px] p-8 border border-[#F4CDD4] flex flex-col gap-3"
+                className="bg-[#F7F7F7] rounded-2xl p-8 border border-[#E5E7EB] hover:border-[#F4CDD4] transition-colors duration-300 flex flex-col gap-3"
               >
                 {Icon && <Icon size={28} className="text-[#E8649A]" />}
-                <p className="text-sm md:text-base font-medium text-[#0D0C0D] leading-snug">
+                <p className="text-sm md:text-base font-medium text-[#0F0C0D] leading-snug">
                   {item.text}
                 </p>
               </div>
@@ -36,9 +39,8 @@ export function MasterLearnPenteados() {
           })}
         </div>
 
-        {/* O que você recebe */}
         <div className="mt-16 md:mt-20 max-w-[760px] mx-auto">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-6 text-center">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#E8649A] mb-6 text-center">
             O que você recebe ao participar
           </p>
           <div className="grid sm:grid-cols-3 gap-3">
@@ -47,10 +49,10 @@ export function MasterLearnPenteados() {
               return (
                 <div
                   key={d.text}
-                  className="flex items-start gap-3 bg-[#F7F7F7] rounded-[12px] p-4 border border-[#E5E7EB]"
+                  className="flex items-start gap-3 bg-[#F7F7F7] rounded-xl p-4 border border-[#E5E7EB]"
                 >
                   {Icon && <Icon size={22} className="text-[#E8649A] shrink-0" />}
-                  <p className="text-sm text-[#666666] leading-relaxed">{d.text}</p>
+                  <p className="text-sm text-[#6B7280] leading-relaxed">{d.text}</p>
                 </div>
               )
             })}

@@ -1,39 +1,38 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { X } from 'lucide-react'
 import { MC } from '@/lib/masterclass-penteados'
-import { WhatsappGate } from '@/components/ui/WhatsappGate'
+import { MasterCtaPenteados } from './MasterCtaPenteados'
+import { trackExitPopup } from './trackPenteados'
 
-const KEY = 'mcp-exit-last-shown'
-const THROTTLE_MS = 5 * 60 * 1000 // não repetir antes de 5 minutos
+const KEY = 'mc-penteados-exit-last-shown'
+const THROTTLE_MS = 5 * 60 * 1000
 
 export function ExitPopupPenteados() {
-  const [open, setOpen] = useState(false)
+  const [aberto, setAberto] = useState(false)
 
   useEffect(() => {
-    const canShow = () => {
-      const last = Number(sessionStorage.getItem(KEY) || 0)
-      return Date.now() - last >= THROTTLE_MS
-    }
-    const show = () => {
-      if (!canShow()) return
+    const podeMostrar = () => Date.now() - Number(sessionStorage.getItem(KEY) || 0) >= THROTTLE_MS
+    const mostrar = () => {
+      if (!podeMostrar()) return
       sessionStorage.setItem(KEY, String(Date.now()))
-      setOpen(true)
+      setAberto(true)
+      trackExitPopup()
     }
 
-    // Desktop: intenção de sair pelo topo da tela.
     const onMouseOut = (e: MouseEvent) => {
-      if (e.clientY <= 0) show()
+      if (e.clientY <= 0) mostrar()
     }
-    // Mobile: scroll para cima rápido e brusco, gesto típico de quem vai fechar a página.
-    let lastY = window.scrollY
-    let lastT = Date.now()
+
+    let ultimoY = window.scrollY
+    let ultimoT = Date.now()
     const onScroll = () => {
       const y = window.scrollY
       const t = Date.now()
-      const dt = t - lastT
-      if (dt > 0 && dt < 300 && lastY - y > 250) show()
-      lastY = y
-      lastT = t
+      const dt = t - ultimoT
+      if (dt > 0 && dt < 300 && ultimoY - y > 250) mostrar()
+      ultimoY = y
+      ultimoT = t
     }
 
     document.addEventListener('mouseout', onMouseOut)
@@ -44,46 +43,37 @@ export function ExitPopupPenteados() {
     }
   }, [])
 
-  if (!open) return null
+  if (!aberto) return null
 
   return (
     <div
       className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60"
-      onClick={() => setOpen(false)}
+      onClick={() => setAberto(false)}
     >
       <div
-        className="relative bg-white border border-[#E5E7EB] rounded-[20px] max-w-[420px] w-full p-6 md:p-8 text-center"
+        className="relative bg-white rounded-2xl max-w-[420px] w-full p-6 md:p-8 text-center shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          onClick={() => setOpen(false)}
+          type="button"
+          onClick={() => setAberto(false)}
           aria-label="Fechar"
-          className="absolute top-1 right-1 w-11 h-11 flex items-center justify-center text-[#666666] hover:text-[#0D0C0D] text-2xl leading-none"
+          className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center text-[#9ca3af] hover:text-[#0F0C0D] transition-colors"
         >
-          ×
+          <X size={20} />
         </button>
 
-        <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-2">
-          Espera!
-        </p>
-        <h3 className="text-xl md:text-2xl font-medium text-[#0D0C0D] mb-2 leading-tight">
-          Não perca a MasterClass de Penteados
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-[#E8649A] mb-2">Espera!</p>
+        <h3 className="text-xl md:text-2xl font-medium text-[#0F0C0D] mb-2 leading-tight">
+          A MasterClass é {MC.weekday} e o acesso é só até {MC.purchaseDeadline}
         </h3>
-        <p className="text-sm text-[#666666] mb-6">
-          Aula ao vivo em {MC.date} às {MC.time}. Fale com a gente no WhatsApp e garanta seu
-          acesso antes que as vagas acabem.
+        <p className="text-sm text-[#6B7280] mb-6">
+          Garanta seu acesso comprando a partir de R$399 em qualquer produto Bubbles.
         </p>
 
-        <WhatsappGate
-          href={`${MC.whatsapp}?text=${encodeURIComponent(MC.whatsappReminderMsg)}`}
-          ctaLocation="masterclass-penteados-popup-saida"
-          ctaLabel="Falar no WhatsApp"
-          theme="light"
-          onClick={() => setOpen(false)}
-          className="block w-full text-center bg-[#3DB85C] text-white font-semibold rounded-[12px] px-6 py-3.5 min-h-[44px] hover:brightness-110 active:scale-95 transition-all"
-        >
-          Falar no WhatsApp →
-        </WhatsappGate>
+        <MasterCtaPenteados origem="popup-saida" className="w-full">
+          Quero garantir meu acesso
+        </MasterCtaPenteados>
       </div>
     </div>
   )

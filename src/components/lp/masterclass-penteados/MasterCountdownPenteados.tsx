@@ -1,10 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-type T = { d: number; h: number; m: number; s: number }
+type Restante = { d: number; h: number; m: number; s: number }
 
 export function MasterCountdownPenteados({ target, className = '' }: { target: string; className?: string }) {
-  const [t, setT] = useState<T | null>(null)
+  const [t, setT] = useState<Restante | null>(null)
 
   useEffect(() => {
     const tick = () => {
@@ -25,24 +25,24 @@ export function MasterCountdownPenteados({ target, className = '' }: { target: s
     return () => clearInterval(id)
   }, [target])
 
-  // Evita mismatch de hidratação: só renderiza depois de montar no cliente.
+  // Evita mismatch de hidratação: no servidor não existe "agora".
   if (!t) return null
 
-  const box = (n: number, l: string) => (
-    <div className="flex flex-col items-center bg-white border border-[#E5E7EB] rounded-xl px-3 py-2 md:px-4 md:py-3 min-w-[56px] md:min-w-[68px]">
-      <span className="font-mono text-xl md:text-2xl font-semibold text-[#B25A72] tabular-nums">
+  const bloco = (n: number, label: string) => (
+    <div className="flex flex-col items-center bg-white rounded-xl px-3 py-2 md:px-4 md:py-3 min-w-[62px] md:min-w-[72px] border border-[#E5E7EB] shadow-sm">
+      <span className="text-xl md:text-2xl font-semibold text-[#0F0C0D] tabular-nums leading-none">
         {String(n).padStart(2, '0')}
       </span>
-      <span className="text-[10px] font-semibold uppercase tracking-widest text-[#666666]">{l}</span>
+      <span className="mt-1 text-[10px] font-semibold uppercase tracking-widest text-[#9ca3af]">{label}</span>
     </div>
   )
 
   return (
-    <div className={`flex items-center gap-2 md:gap-3 ${className}`}>
-      {box(t.d, 'dias')}
-      {box(t.h, 'horas')}
-      {box(t.m, 'min')}
-      {box(t.s, 'seg')}
+    <div className={`flex items-center gap-2 md:gap-3 ${className}`} aria-label="Tempo restante para a MasterClass">
+      {bloco(t.d, 'dias')}
+      {bloco(t.h, 'horas')}
+      {bloco(t.m, 'min')}
+      {bloco(t.s, 'seg')}
     </div>
   )
 }

@@ -1,32 +1,18 @@
-'use client'
-import { useEffect, useState } from 'react'
 import { MC } from '@/lib/masterclass-penteados'
-import { WhatsappGate } from '@/components/ui/WhatsappGate'
 import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 
-const waLink = `${MC.whatsapp}?text=${encodeURIComponent(MC.whatsappMsg)}`
-
 export function FloatingWhatsAppPenteados() {
-  // Sobe o botão no mobile quando a sticky bar aparece, evitando aglomerar os dois no canto.
-  const [stickyVisible, setStickyVisible] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setStickyVisible(window.scrollY > 600)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const url = `${MC.whatsapp}?text=${encodeURIComponent('Olá! Tenho uma dúvida sobre a MasterClass de Penteados.')}`
 
   return (
-    <WhatsappGate
-      href={waLink}
-      ctaLocation="masterclass-penteados-flutuante"
-      ctaLabel="Falar no WhatsApp (botão flutuante)"
-      theme="light"
-      className={`fixed right-4 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#3DB85C] shadow-lg hover:scale-105 active:scale-95 transition-all ${
-        stickyVisible ? 'bottom-40 sm:bottom-24' : 'bottom-24'
-      }`}
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Tirar dúvida no WhatsApp"
+      className="fixed bottom-24 right-4 z-40 w-[52px] h-[52px] md:w-14 md:h-14 flex items-center justify-center rounded-full bg-[#3DB85C] text-white shadow-lg hover:scale-105 active:scale-95 transition-transform duration-200"
     >
-      <WhatsAppIcon size={30} className="text-white" />
-    </WhatsappGate>
+      <WhatsAppIcon size={24} />
+    </a>
   )
 }
