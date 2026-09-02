@@ -152,11 +152,11 @@ const HTML = `<!doctype html>
   .topo-conteudo { max-width: 1100px; margin: 0 auto; }
   .eyebrow {
     font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
-    color: #FFFFFF; opacity: 0.85; margin: 0 0 10px;
+    color: #FFFFFF; margin: 0 0 10px;
   }
   header.topo h1 { font-size: 1.6rem; max-width: 720px; margin-bottom: 12px; color: #FFFFFF; }
-  header.topo .subtitulo { max-width: 640px; color: #FFFFFF; opacity: 0.85; font-size: 0.95rem; margin: 0 0 14px; }
-  header.topo .meta { font-size: 0.78rem; color: #FFFFFF; opacity: 0.7; }
+  header.topo .subtitulo { max-width: 640px; color: #FFFFFF; font-size: 0.95rem; margin: 0 0 14px; }
+  header.topo .meta { font-size: 0.78rem; color: #14100F; }
 
   main { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
   section.bloco { padding: 40px 0; border-bottom: 1px solid var(--cinza-claro); }
