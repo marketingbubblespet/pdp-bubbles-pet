@@ -14,24 +14,28 @@ const HTML = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Mídia Paga Bubbles · Agosto 2026</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
+    /* Paleta oficial da marca (DESIGN-SYSTEM.md), igual à página de captura da Linha Care */
     --rosa-bubbles: #F4CDD4;
     --branco: #F7F7F7;
     --preto: #0F0C0D;
-    --rosa-profundo: #B25A72;
-    --rosa-medio: #E4A9B8;
-    --cinza-rosa: #6B5D60;
-    --cinza-claro: #EFE7E9;
+    --rosa-profundo: #E8649A;
+    --rosa-medio: #F4CDD4;
+    --cinza-rosa: #6B7280;
+    --cinza-claro: #E5E7EB;
     --surface: #FFFFFF;
     --bom-fg: #2F7A4C; --bom-bg: #E2EFE7;
     --atencao-fg: #9A6410; --atencao-bg: #F5EAD6;
     --prejuizo-fg: #A83A38; --prejuizo-bg: #F6E0DF;
     --link: var(--rosa-profundo);
-    --focus: #7A3550;
+    --focus: #E8649A;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -39,7 +43,7 @@ const HTML = `<!doctype html>
       --surface: #1E1819;
       --preto: #F2E9EB;
       --rosa-bubbles: #3A2A2E;
-      --rosa-profundo: #E9A5B6;
+      --rosa-profundo: #F4A6C4;
       --rosa-medio: #4A363B;
       --cinza-rosa: #C9B9BC;
       --cinza-claro: #241D1E;
@@ -47,7 +51,7 @@ const HTML = `<!doctype html>
       --atencao-fg: #E3B564; --atencao-bg: #3A2E18;
       --prejuizo-fg: #E38A87; --prejuizo-bg: #3A2320;
       --link: var(--rosa-profundo);
-      --focus: #E9A5B6;
+      --focus: #F4A6C4;
     }
   }
   :root[data-theme="dark"] {
@@ -55,7 +59,7 @@ const HTML = `<!doctype html>
     --surface: #1E1819;
     --preto: #F2E9EB;
     --rosa-bubbles: #3A2A2E;
-    --rosa-profundo: #E9A5B6;
+    --rosa-profundo: #F4A6C4;
     --rosa-medio: #4A363B;
     --cinza-rosa: #C9B9BC;
     --cinza-claro: #241D1E;
@@ -63,7 +67,7 @@ const HTML = `<!doctype html>
     --atencao-fg: #E3B564; --atencao-bg: #3A2E18;
     --prejuizo-fg: #E38A87; --prejuizo-bg: #3A2320;
     --link: var(--rosa-profundo);
-    --focus: #E9A5B6;
+    --focus: #F4A6C4;
   }
 
   * { box-sizing: border-box; }
@@ -135,23 +139,24 @@ const HTML = `<!doctype html>
   #relatorio.visivel { display: block; }
 
   header.topo {
-    background: var(--rosa-bubbles);
-    padding: 32px 20px;
+    background: var(--rosa-profundo);
+    padding: 40px 20px 32px;
   }
   .marca {
     display: flex; align-items: center; gap: 10px;
-    max-width: 1100px; margin: 0 auto 20px;
+    max-width: 1100px; margin: 0 auto 28px;
   }
-  .marca img { width: 40px; height: auto; }
-  .marca span { font-size: 1.1rem; }
+  /* Logo branco: o arquivo original é preto (#0d0c0d), invertido via filtro pra
+     ficar branco em cima do fundo rosa profundo do cabeçalho. */
+  .marca img { width: 180px; height: auto; filter: brightness(0) invert(1); }
   .topo-conteudo { max-width: 1100px; margin: 0 auto; }
   .eyebrow {
     font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
-    color: var(--rosa-profundo); margin: 0 0 10px;
+    color: #FFFFFF; margin: 0 0 10px;
   }
-  header.topo h1 { font-size: 1.6rem; max-width: 720px; margin-bottom: 12px; }
-  header.topo .subtitulo { max-width: 640px; color: var(--cinza-rosa); font-size: 0.95rem; margin: 0 0 14px; }
-  header.topo .meta { font-size: 0.78rem; color: var(--cinza-rosa); }
+  header.topo h1 { font-size: 1.6rem; max-width: 720px; margin-bottom: 12px; color: #FFFFFF; }
+  header.topo .subtitulo { max-width: 640px; color: #FFFFFF; font-size: 0.95rem; margin: 0 0 14px; }
+  header.topo .meta { font-size: 0.78rem; color: #14100F; }
 
   main { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
   section.bloco { padding: 40px 0; border-bottom: 1px solid var(--cinza-claro); }
@@ -249,7 +254,6 @@ const HTML = `<!doctype html>
 <header class="topo">
   <div class="marca">
     <img src="/images/bubbles-logo.svg" alt="Bubbles">
-    <span class="brand-name">Bubbles</span>
   </div>
   <div class="topo-conteudo">
     <p class="eyebrow">RELATÓRIO DE FECHAMENTO · MÍDIA PAGA</p>
@@ -261,13 +265,27 @@ const HTML = `<!doctype html>
 
 <main>
 
+<section class="bloco" id="contexto">
+  <h2>1. Contexto</h2>
+  <p class="intro">Este relatório cobre três frentes de tráfego pago, cada uma com objetivo, público e responsável diferentes.</p>
+
+  <h3 style="font-size:1rem; margin-bottom:6px;">Tráfego Ecommerce (Groomers)</h3>
+  <p style="max-width:68ch; margin:0 0 16px;">Venda direta de produtos profissionais para groomers e donos de pet shop, rodando em Google Ads e Meta Ads. Estratégia de Diego Santana (estrategista referência em ecommerce no Brasil), execução por mim, Gabriel, e por Caio, gestor de tráfego da consultoria.</p>
+
+  <h3 style="font-size:1rem; margin-bottom:6px;">Tráfego Distribuidor</h3>
+  <p style="max-width:68ch; margin:0 0 16px;">Captação de novos distribuidores Bubbles pelo Brasil. Estratégia e execução do tráfego 100% comigo, Gabriel.</p>
+
+  <h3 style="font-size:1rem; margin-bottom:6px;">Tráfego Linha Care</h3>
+  <p style="max-width:68ch; margin:0;">Frente nova de agosto: venda direta ao tutor do pet, não mais só ao profissional. Estudos, personas e estratégia estão sendo elaborados por Diego Santana, com início das vendas diretas ao tutor previsto para os próximos dias.</p>
+</section>
+
 <section class="bloco" id="resumo">
-  <h2>1. Resumo executivo</h2>
+  <h2>2. Resumo executivo</h2>
   <div class="kpis">
     <div class="kpi"><span class="valor">R$ 46.042,90</span><span class="rotulo">Investimento total</span></div>
     <div class="kpi"><span class="valor">ROAS 5,92</span><span class="rotulo">Ecommerce Groomers (agregado)</span></div>
     <div class="kpi"><span class="valor">209 leads</span><span class="rotulo">Distribuidores, R$ 43,87 por lead</span></div>
-    <div class="kpi"><span class="valor">≈ R$ 218.205</span><span class="rotulo">Receita gerada, Ecommerce</span></div>
+    <div class="kpi"><span class="valor">≈ R$ 218.205</span><span class="rotulo">Receita gerada, Ecommerce · Fonte: Google Ads e Meta Ads</span></div>
   </div>
 
   <div class="tabela-wrap">
@@ -286,10 +304,13 @@ const HTML = `<!doctype html>
   </div>
 
   <ul class="bullets">
-    <li>Ecommerce saudável no agregado (ROAS 5,92), mas puxado por branding/remarketing: a Pesquisa de conquista está no prejuízo.</li>
     <li>Captação de distribuidor tem uma campanha eficiente carregando quase tudo (86% dos leads) e duas outras frentes com perfis bem diferentes.</li>
     <li>O gargalo da Linha Care é a página de captura, não o criativo.</li>
   </ul>
+
+  <div class="caixa-destaque">
+    <p><strong>Observação:</strong> em agosto, a captação de distribuidor rodou em 3 frentes: a Tradicional, a Linha Care e o evento Pet South. Hoje o maior desafio na parte de distribuidores é estruturar a captura de distribuidores para a Linha Care, estamos na etapa de reformulação da estratégia. Já na frente Tradicional, o desafio é produzir novos criativos.</p>
+  </div>
 </section>
 
 <section class="bloco" id="ecommerce">
@@ -299,21 +320,35 @@ const HTML = `<!doctype html>
   <div class="tabela-wrap">
     <table>
       <thead>
-        <tr><th>Campanha</th><th>Tipo</th><th>Gasto</th><th>Conv.</th><th>Receita</th><th>ROAS</th><th>Status</th></tr>
+        <tr><th>Canal</th><th>Gasto</th><th>Conv.</th><th>Receita</th><th>ROAS</th></tr>
       </thead>
       <tbody>
-        <tr><td class="mono">Bubbles - Branding - [Increase]</td><td>Pesquisa</td><td>R$ 3.032,44</td><td>109,82</td><td>R$ 65.225,06</td><td>21,51</td><td><span class="pill bom">Forte</span></td></tr>
-        <tr><td class="mono">FUNDO_PMAX_COBERTURA_TOP_ESTADOS - 15.07.26</td><td>PMax</td><td>R$ 3.040,85</td><td>42,13</td><td>R$ 13.660,70</td><td>4,49</td><td><span class="pill bom">Saudável, limitada por orçamento</span></td></tr>
-        <tr><td class="mono">FUNDO_PMAX_HEROIS_TOP_ESTADOS - 15.07.26</td><td>PMax</td><td>R$ 3.024,92</td><td>27,87</td><td>R$ 12.303,11</td><td>4,07</td><td><span class="pill bom">Saudável, limitada por orçamento</span></td></tr>
-        <tr><td class="mono">PMAX_TP_TOP_ESTADOS - 14.04.26</td><td>PMax</td><td>R$ 1.876,84</td><td>17,49</td><td>R$ 5.526,38</td><td>2,94</td><td><span class="pill atencao">OK, limitada por orçamento</span></td></tr>
-        <tr><td class="mono">MEIO_SEARCH_DOR_TOP_ESTADOS - 17.07.26 · Lote 3</td><td>Pesquisa</td><td>R$ 1.824,17</td><td>7,00</td><td>R$ 3.295,80</td><td>1,81</td><td><span class="pill atencao">Fraco</span></td></tr>
-        <tr><td class="mono">MEIO_SEARCH_DOR_TOP_ESTADOS - 15.07.26 - Lote 2</td><td>Pesquisa</td><td>R$ 1.823,75</td><td>2,00</td><td>R$ 1.223,80</td><td>0,67</td><td><span class="pill prejuizo">Prejuízo</span></td></tr>
-        <tr><td class="mono">FUNDO_SEARCH_PRODUTO_TOP_ESTADOS - 16.07.26</td><td>Pesquisa</td><td>R$ 1.828,28</td><td>2,50</td><td>R$ 1.014,73</td><td>0,56</td><td><span class="pill prejuizo">Prejuízo</span></td></tr>
-        <tr><td class="mono">MEIO_SEARCH_DOR_TOP_ESTADOS - 15.07.26</td><td>Pesquisa</td><td>R$ 1.823,47</td><td>3,00</td><td>R$ 709,48</td><td>0,39</td><td><span class="pill prejuizo">Prejuízo</span></td></tr>
-        <tr class="total"><td>TOTAL</td><td></td><td>R$ 18.274,71</td><td>211,81</td><td>R$ 102.959,06</td><td>5,63</td><td></td></tr>
+        <tr class="total"><td>TOTAL Google Ads</td><td>R$ 18.274,71</td><td>211,81</td><td>R$ 102.959,06</td><td>5,63</td></tr>
       </tbody>
     </table>
   </div>
+
+  <details class="secundario">
+    <summary>Ver campanhas em detalhe</summary>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Campanha</th><th>Tipo</th><th>Gasto</th><th>Conv.</th><th>Receita</th><th>ROAS</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">Bubbles - Branding - [Increase]</td><td>Pesquisa</td><td>R$ 3.032,44</td><td>109,82</td><td>R$ 65.225,06</td><td>21,51</td><td><span class="pill bom">Forte</span></td></tr>
+          <tr><td class="mono">FUNDO_PMAX_COBERTURA_TOP_ESTADOS - 15.07.26</td><td>PMax</td><td>R$ 3.040,85</td><td>42,13</td><td>R$ 13.660,70</td><td>4,49</td><td><span class="pill bom">Saudável, limitada por orçamento</span></td></tr>
+          <tr><td class="mono">FUNDO_PMAX_HEROIS_TOP_ESTADOS - 15.07.26</td><td>PMax</td><td>R$ 3.024,92</td><td>27,87</td><td>R$ 12.303,11</td><td>4,07</td><td><span class="pill bom">Saudável, limitada por orçamento</span></td></tr>
+          <tr><td class="mono">PMAX_TP_TOP_ESTADOS - 14.04.26</td><td>PMax</td><td>R$ 1.876,84</td><td>17,49</td><td>R$ 5.526,38</td><td>2,94</td><td><span class="pill atencao">OK, limitada por orçamento</span></td></tr>
+          <tr><td class="mono">MEIO_SEARCH_DOR_TOP_ESTADOS - 17.07.26 · Lote 3</td><td>Pesquisa</td><td>R$ 1.824,17</td><td>7,00</td><td>R$ 3.295,80</td><td>1,81</td><td><span class="pill atencao">Fraco</span></td></tr>
+          <tr><td class="mono">MEIO_SEARCH_DOR_TOP_ESTADOS - 15.07.26 - Lote 2</td><td>Pesquisa</td><td>R$ 1.823,75</td><td>2,00</td><td>R$ 1.223,80</td><td>0,67</td><td><span class="pill prejuizo">Prejuízo</span></td></tr>
+          <tr><td class="mono">FUNDO_SEARCH_PRODUTO_TOP_ESTADOS - 16.07.26</td><td>Pesquisa</td><td>R$ 1.828,28</td><td>2,50</td><td>R$ 1.014,73</td><td>0,56</td><td><span class="pill prejuizo">Prejuízo</span></td></tr>
+          <tr><td class="mono">MEIO_SEARCH_DOR_TOP_ESTADOS - 15.07.26</td><td>Pesquisa</td><td>R$ 1.823,47</td><td>3,00</td><td>R$ 709,48</td><td>0,39</td><td><span class="pill prejuizo">Prejuízo</span></td></tr>
+          <tr class="total"><td>TOTAL</td><td></td><td>R$ 18.274,71</td><td>211,81</td><td>R$ 102.959,06</td><td>5,63</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
 
   <ul class="bullets">
     <li>R$ 7.299,67 (40% do orçamento do Google) rodou em campanhas com ROAS abaixo de 1,81. As três MEIO_SEARCH_DOR mais a FUNDO_SEARCH_PRODUTO juntas geraram 14,5 conversões e R$ 6.243 de receita: não se pagam.</li>
@@ -322,7 +357,19 @@ const HTML = `<!doctype html>
     <li>FUNDO_PMAX_HEROIS_TOP_ESTADOS - 15.07.26 mostra "Os produtos foram excluídos": problema de feed a resolver.</li>
   </ul>
 
-  <h3 style="font-size:1rem; margin-bottom:10px;">2.2 Meta Ads · top 4 por volume</h3>
+  <h3 style="font-size:1rem; margin-bottom:10px;">2.2 Meta Ads · geral</h3>
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr><th>Canal</th><th>Gasto</th><th>Compras</th><th>Receita</th><th>ROAS</th></tr>
+      </thead>
+      <tbody>
+        <tr class="total"><td>TOTAL Meta Ads</td><td>R$ 18.598,71</td><td>191</td><td>≈ R$ 115.246</td><td>≈ 6,2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:1rem; margin-bottom:10px;">2.3 Meta Ads · top 4 por volume</h3>
   <div class="tabela-wrap">
     <table>
       <thead>
@@ -330,33 +377,55 @@ const HTML = `<!doctype html>
       </thead>
       <tbody>
         <tr><td>1</td><td class="ad-name mono">ad16|img|continuo|frete_gratis_sul| criativo 01 - Junho – Cópia</td><td>26</td><td>16,01</td><td>R$ 1.408,16</td><td>R$ 22.548</td><td><a href="https://www.dropbox.com/scl/fo/e2jio8yx36gldml4yokic/AOyb30MJOQSTjxaOTFvXyLc?rlkey=zz1joekwtm8ervzf677azeuu9&dl=0">ver criativo</a></td></tr>
-        <tr><td>2</td><td class="ad-name mono">ad29|vid|continuo|desembaraço inteligente| Internos Amanda AXOLY</td><td>17</td><td>7,52</td><td>R$ 1.542,97</td><td>R$ 11.603</td><td>sem link</td></tr>
-        <tr><td>3</td><td class="ad-name mono">ad71|vid|continuo|Qual a diferença da Bubbles...| Vídeo 4</td><td>15</td><td>4,80</td><td>R$ 930,72</td><td>R$ 4.467</td><td>sem link</td></tr>
-        <tr><td>4</td><td class="ad-name mono">ad06|vid|continuo|fondue_de_chocolate| oliver pet AXOLY</td><td>12</td><td>2,24</td><td>R$ 1.992,39</td><td>R$ 4.465</td><td>sem link</td></tr>
+        <tr><td>2</td><td class="ad-name mono">ad29|vid|continuo|desembaraço inteligente| Internos Amanda AXOLY</td><td>17</td><td>7,52</td><td>R$ 1.542,97</td><td>R$ 11.603</td><td><a href="https://www.facebook.com/100063565944892/posts/1633266585468857/">ver criativo</a></td></tr>
+        <tr><td>3</td><td class="ad-name mono">ad71|vid|continuo|Qual a diferença da Bubbles...| Vídeo 4</td><td>15</td><td>4,80</td><td>R$ 930,72</td><td>R$ 4.467</td><td><a href="https://www.facebook.com/100063565944892/posts/1633266585468857/">ver criativo</a></td></tr>
+        <tr><td>4</td><td class="ad-name mono">ad06|vid|continuo|fondue_de_chocolate| oliver pet AXOLY</td><td>12</td><td>2,24</td><td>R$ 1.992,39</td><td>R$ 4.465</td><td><a href="https://www.facebook.com/100063565944892/posts/1620610350067814/">ver criativo</a></td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3 style="font-size:1rem; margin-bottom:10px;">2.3 Meta Ads · top 4 por ROAS (piso de 5 compras)</h3>
+  <h3 style="font-size:1rem; margin-bottom:10px;">2.4 Meta Ads · top 4 por ROAS (piso de 5 compras)</h3>
   <div class="tabela-wrap">
     <table>
       <thead>
         <tr><th>#</th><th class="ad-name">Anúncio</th><th>ROAS</th><th>Compras</th><th>Gasto</th><th>Receita</th><th>Link</th></tr>
       </thead>
       <tbody>
-        <tr><td>1</td><td class="ad-name mono">ad26|vid|continuo|medo do pelo pesado| Internos Amanda AXOLY</td><td>25,38</td><td>9</td><td>R$ 216,56</td><td>R$ 5.497</td><td>sem link</td></tr>
+        <tr><td>1</td><td class="ad-name mono">ad26|vid|continuo|medo do pelo pesado| Internos Amanda AXOLY</td><td>25,38</td><td>9</td><td>R$ 216,56</td><td>R$ 5.497</td><td><a href="https://www.facebook.com/100063565944892/posts/1633198762142306/">ver criativo</a></td></tr>
         <tr><td>2</td><td class="ad-name mono">ad16|img|continuo|frete_gratis_sul| criativo 01 - Junho – Cópia</td><td>16,01</td><td>26</td><td>R$ 1.408,16</td><td>R$ 22.548</td><td><a href="https://www.dropbox.com/scl/fo/e2jio8yx36gldml4yokic/AOyb30MJOQSTjxaOTFvXyLc?rlkey=zz1joekwtm8ervzf677azeuu9&dl=0">ver criativo</a></td></tr>
-        <tr><td>3</td><td class="ad-name mono">ad48|vid|continuo|Meu truque para a diluição perfeita| Oliver pet</td><td>10,19</td><td>11</td><td>R$ 682,66</td><td>R$ 6.953</td><td>sem link</td></tr>
-        <tr><td>4</td><td class="ad-name mono">ad68|vid|continuo|Os produtos são hipoalergênicos? | Vídeo 1</td><td>9,52</td><td>5</td><td>R$ 290,35</td><td>R$ 2.764</td><td>sem link</td></tr>
+        <tr><td>3</td><td class="ad-name mono">ad48|vid|continuo|Meu truque para a diluição perfeita| Oliver pet</td><td>10,19</td><td>11</td><td>R$ 682,66</td><td>R$ 6.953</td><td><a href="https://www.facebook.com/100063565944892/posts/1646702817458567/">ver criativo</a></td></tr>
+        <tr><td>4</td><td class="ad-name mono">ad68|vid|continuo|Os produtos são hipoalergênicos? | Vídeo 1</td><td>9,52</td><td>5</td><td>R$ 290,35</td><td>R$ 2.764</td><td><a href="https://www.facebook.com/100063565944892/posts/1665077328954449/">ver criativo</a></td></tr>
       </tbody>
     </table>
   </div>
 
+  <h3 style="font-size:1rem; margin-bottom:10px;">2.5 Meta Ads · top 4 por CTR</h3>
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th class="ad-name">Anúncio</th><th>CTR</th><th>Cliques no link</th><th>Impressões</th><th>Link</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td class="ad-name mono">ad30|vid|continuo|shampoo neutralizador| Joyce AXOLY</td><td>1,90%</td><td>402</td><td>21.159</td><td><a href="https://www.facebook.com/100063565944892/posts/1640697408059108/">ver criativo</a></td></tr>
+        <tr><td>2</td><td class="ad-name mono">ad29|vid|continuo|desembaraço inteligente| Internos Amanda AXOLY</td><td>1,25%</td><td>1.456</td><td>116.740</td><td><a href="https://www.facebook.com/100063565944892/posts/1633266585468857/">ver criativo</a></td></tr>
+        <tr><td>3</td><td class="ad-name mono">ad06|vid|continuo|fondue_de_chocolate| oliver pet AXOLY</td><td>1,11%</td><td>1.000</td><td>90.392</td><td><a href="https://www.facebook.com/100063565944892/posts/1620610350067814/">ver criativo</a></td></tr>
+        <tr><td>4</td><td class="ad-name mono">ad48|vid|continuo|Meu truque para a diluição perfeita| Oliver pet</td><td>1,01%</td><td>368</td><td>36.441</td><td><a href="https://www.facebook.com/100063565944892/posts/1646702817458567/">ver criativo</a></td></tr>
+      </tbody>
+    </table>
+  </div>
   <div class="caixa-metodo">
-    <p style="margin:0;">Nota de método: a exportação do Meta não traz coluna de CTA. O ranqueamento foi feito por ROAS com piso de 5 compras, para não premiar volume irrelevante. O ângulo de venda está no próprio nome do anúncio.</p>
+    <p style="margin:0;">Nota de método: dados da exportação BUBBLES-OFICIAL · Anúncios · 01–31 ago 2026, coluna "CTR (taxa de cliques no link)". Ranqueamento com piso de 5.000 impressões, mesmo critério de robustez usado no ranking por ROAS, para não premiar anúncio de baixo volume com resultado instável.</p>
   </div>
 
-  <h3 style="font-size:1rem; margin-bottom:10px;">2.4 Leitura de criativo</h3>
+  <div class="caixa-destaque">
+    <p style="margin:0;">Observação: para conferir todos os criativos da conta, a planilha completa está em <a href="https://docs.google.com/spreadsheets/d/1A3t-to4GvzghwXmrri31GWhl_22_SVq1cIEAvlo2CH4/edit?usp=sharing">docs.google.com/spreadsheets/d/1A3t-to4GvzghwXmrri31GWhl_22_SVq1cIEAvlo2CH4</a>.</p>
+  </div>
+
+  <div class="caixa-metodo">
+    <p style="margin:0;">Nota de método: a exportação do Meta não traz coluna de CTA. O ranqueamento por volume e por ROAS foi feito com piso de 5 compras neste último, para não premiar volume irrelevante. O ângulo de venda está no próprio nome do anúncio.</p>
+  </div>
+
+  <h3 style="font-size:1rem; margin-bottom:10px;">2.6 Leitura de criativo</h3>
   <ul class="bullets">
     <li><span class="mono">ad16|img|continuo|frete_gratis_sul| criativo 01 - Junho – Cópia</span> é o melhor anúncio da conta, presente nos dois rankings. Risco: frequência 12,1, audiência saturada, precisa de criativo novo ou audiência maior. Link: <a href="https://www.dropbox.com/scl/fo/e2jio8yx36gldml4yokic/AOyb30MJOQSTjxaOTFvXyLc?rlkey=zz1joekwtm8ervzf677azeuu9&dl=0">ver criativo</a></li>
     <li>Três ângulos vencedores: oferta de frete grátis; dor/rotina do groomer (medo do pelo pesado, desembaraço inteligente, diluição perfeita); quebra de objeção (hipoalergênico, qual a diferença da Bubbles).</li>
@@ -485,14 +554,13 @@ const HTML = `<!doctype html>
   <h2>5. Recomendações para setembro</h2>
   <h3 style="font-size:1rem; margin-bottom:10px;">Prioridade alta</h3>
   <ol class="bullets">
+    <li>Resolver o problema de exclusão de produtos em <span class="mono">FUNDO_PMAX_HEROIS_TOP_ESTADOS - 15.07.26</span>.</li>
     <li>Nova página de captura da Linha Care: maior impacto financeiro imediato (R$ 3.300 gastos em agosto com 0,75% de conversão pós-clique).</li>
-    <li>Revisar/pausar MEIO_SEARCH_DOR e FUNDO_SEARCH_PRODUTO: R$ 7,3 mil de prejuízo mensal, revisar palavras-chave, negativas e copy antes de renovar orçamento.</li>
     <li>Trocar ou ampliar a audiência de <span class="mono">ad16|img|continuo|frete_gratis_sul| criativo 01 - Junho – Cópia</span>: frequência 12,1 insustentável, é o maior gerador de receita.</li>
   </ol>
   <h3 style="font-size:1rem; margin-bottom:10px;">Prioridade média</h3>
   <ol class="bullets">
     <li>Aumentar orçamento das campanhas PMax limitadas por orçamento com ROAS acima de 4: FUNDO_PMAX_COBERTURA_TOP_ESTADOS - 15.07.26 e FUNDO_PMAX_HEROIS_TOP_ESTADOS - 15.07.26.</li>
-    <li>Resolver o problema de exclusão de produtos em FUNDO_PMAX_HEROIS_TOP_ESTADOS - 15.07.26.</li>
     <li>Produzir novos criativos nos três ângulos vencedores, em formato de vídeo com criador.</li>
     <li>Escalar [GX] [Conv] [Leads] [Novos Distribuidores] V2 enquanto a frequência permitir.</li>
   </ol>

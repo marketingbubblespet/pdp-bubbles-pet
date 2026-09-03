@@ -9,6 +9,7 @@ import { GtmScript } from '@/components/ui/GtmScript'
 // Above fold — carregamento imediato
 import { MasterHeroPenteados } from '@/components/lp/masterclass-penteados/MasterHeroPenteados'
 import { MasterLearnPenteados } from '@/components/lp/masterclass-penteados/MasterLearnPenteados'
+import { MasterProductsPenteados } from '@/components/lp/masterclass-penteados/MasterProductsPenteados'
 import { MasterAudiencePenteados } from '@/components/lp/masterclass-penteados/MasterAudiencePenteados'
 
 // Below fold — code split
@@ -126,6 +127,7 @@ export default function MasterclassPenteados() {
         <main className="pb-24 md:pb-20">
           <MasterHeroPenteados />
           <MasterLearnPenteados />
+          <MasterProductsPenteados />
           <MasterAudiencePenteados />
           <MasterInstructorPenteados />
           <MasterDetailsPenteados />

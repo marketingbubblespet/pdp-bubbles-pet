@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         destination: '/masterclass/spitz-alemao',
         permanent: false,
       },
+      {
+        source: '/masterclass/penteados',
+        destination: '/masterclass/penteados-que-encantam',
+        permanent: false,
+      },
     ]
   },
   images: {
