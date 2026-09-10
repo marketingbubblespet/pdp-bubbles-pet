@@ -58,6 +58,11 @@ const pages = [
     label: 'MasterClass Penteados que Encantam',
     description: 'Aula ao vivo de 28/09 com Jéssica Silva: acesso liberado para compras acima de R$ 399',
   },
+  {
+    href: '/nomenclatura',
+    label: 'Gerador de Nomenclatura de Anúncios (interno)',
+    description: 'Ferramenta da social media para padronizar o nome dos criativos de Meta Ads. Oculta, sem indexação.',
+  },
 ]
 
 const PASSWORD = 'mariane'
