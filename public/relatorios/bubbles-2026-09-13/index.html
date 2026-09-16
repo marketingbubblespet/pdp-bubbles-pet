@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Relatório de mídia paga · Bubbles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;1,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bubbles-magenta:#FF0080;
+  --bubbles-magenta-fundo:#CC0066;
+  --bubbles-rosa:#F4CDD4;
+  --bubbles-preto:#0F0C0D;
+  --bubbles-cinza-claro:#F7F7F7;
+  --bubbles-branco:#FFFFFF;
+  --cinza-medio:#666666;
+  --borda:#E5E7EB;
+
+  --ok:#1B7F4B;
+  --manter:#2563EB;
+  --atencao:#B45309;
+  --reduzir:var(--bubbles-magenta-fundo);
+  --perigo:#B91C1C;
+  --neutro:#6B7280;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bubbles-cinza-claro);color:var(--bubbles-preto);
+  font-family:'Work Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0 0 .6em;font-weight:500;font-family:'Libre Baskerville',Georgia,serif}
+h3,h4{font-family:inherit;font-weight:600}
+p{margin:0 0 1rem}
+a{color:var(--bubbles-preto)}
+strong{font-weight:600}
+:focus-visible{outline:2px solid var(--bubbles-magenta);outline-offset:2px;border-radius:4px}
+.valor-ausente{color:var(--neutro);cursor:help;border-bottom:1px dotted var(--neutro)}
+
+/* Gate de senha */
+#gate{position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;
+  background:var(--bubbles-preto);padding:1.5rem;transition:opacity .4s ease,visibility .4s ease}
+#gate.is-open{opacity:0;visibility:hidden;pointer-events:none}
+.gate__box{width:100%;max-width:360px;text-align:center}
+.gate__title{color:#fff;font-size:1.25rem;margin-bottom:.4rem}
+.gate__sub{font-size:.875rem;color:rgba(255,255,255,.72);margin-bottom:2rem}
+.gate__field{display:flex;gap:.5rem}
+#gate-input{flex:1;min-width:0;font-size:1rem;padding:.75rem 1rem;border:1.5px solid rgba(255,255,255,.25);
+  border-radius:10px;background:#fff}
+.gate__btn{font-weight:600;font-size:.9375rem;color:var(--bubbles-preto);background:#fff;border:0;
+  border-radius:999px;padding:.75rem 1.5rem;cursor:pointer}
+.gate__btn:hover{background:var(--bubbles-rosa)}
+.gate__hint{margin-top:1rem;font-size:.8125rem;color:rgba(255,255,255,.5)}
+.gate__error{min-height:1.4rem;margin-top:.5rem;font-size:.8125rem;color:rgba(255,255,255,.7)}
+
+/* Aviso desktop */
+#aviso-desktop{background:var(--bubbles-rosa);color:var(--bubbles-preto);padding:.75rem 1.25rem;
+  font-size:.875rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+#aviso-desktop button{border:0;background:transparent;font-size:1.1rem;cursor:pointer}
+#aviso-desktop[hidden]{display:none}
+
+#shell{opacity:0;transition:opacity .5s ease}
+#shell.is-revealed{opacity:1}
+
+/* Progresso */
+#progresso{position:sticky;bottom:0;z-index:80;background:#fff;border-top:1px solid var(--borda);
+  padding:.75rem 1.25rem;display:flex;align-items:center;gap:1rem;font-size:.8125rem}
+#progresso .barra{flex:1;height:6px;background:var(--borda);border-radius:99px;overflow:hidden}
+#progresso .barra__fill{height:100%;background:var(--bubbles-magenta);width:0%;transition:width .2s ease}
+#progresso button{white-space:nowrap;border:0;border-radius:999px;padding:.6rem 1.2rem;font-weight:600;
+  background:var(--bubbles-preto);color:#fff;cursor:pointer}
+
+/* Cabeçalho / capa */
+.cover{background:var(--bubbles-preto);color:#fff;padding:3rem 1.25rem}
+.cover__inner{max-width:1280px;margin:0 auto}
+.cover__eyebrow{display:inline-block;font-size:.6875rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.1em;background:rgba(255,255,255,.14);border-radius:999px;padding:.3rem .875rem;margin-bottom:1.2rem}
+.cover__title{font-size:clamp(1.75rem,4vw,2.5rem);color:#fff;margin:0 0 .5rem}
+.cover__sub{color:rgba(255,255,255,.75);font-size:.9375rem;max-width:44ch}
+.cover__meta{display:flex;flex-wrap:wrap;gap:2rem;padding-top:1.5rem;margin-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,.18)}
+.cover__meta div{min-width:150px}
+.cover__meta dt{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;
+  color:rgba(255,255,255,.55);margin-bottom:.35rem}
+.cover__meta dd{margin:0;font-size:.9375rem;color:#fff}
+
+/* Layout */
+.layout{max-width:1280px;margin:0 auto;padding:2rem 1.25rem 4rem}
+@media(min-width:990px){.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:3rem;align-items:start}}
+
+/* Sumário */
+.toc{font-size:.875rem}
+@media(min-width:990px){.toc{position:sticky;top:1.5rem;max-height:calc(100vh - 3rem);overflow-y:auto}}
+.toc__label{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--cinza-medio);margin-bottom:1rem}
+.toc__list{list-style:none;margin:0;padding:0}
+.toc__list a{display:flex;align-items:baseline;gap:.5rem;padding:.5rem 0 .5rem .9rem;
+  color:var(--cinza-medio);border-left:4px solid transparent;text-decoration:none;line-height:1.35}
+.toc__item--nivel2 a{padding-left:1.8rem;font-size:.8125rem}
+.toc__item--nivel2 .toc__texto{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.toc__list a:hover{color:var(--bubbles-preto)}
+.toc__list a.is-active{color:var(--bubbles-preto);border-left-color:var(--bubbles-magenta);font-weight:500}
+.toc__num{color:rgba(15,12,13,.35);font-variant-numeric:tabular-nums}
+.toc__estado{margin-left:auto;font-size:.7rem}
+.toc__toggle{position:fixed;left:1rem;bottom:5rem;z-index:90;display:none;align-items:center;gap:.5rem;
+  min-height:44px;padding:.7rem 1.15rem;font-size:.8125rem;font-weight:600;color:#fff;
+  background:var(--bubbles-preto);border:0;border-radius:999px;cursor:pointer}
+.toc__backdrop{position:fixed;inset:0;z-index:95;background:rgba(15,12,13,.4);opacity:0;visibility:hidden;
+  transition:opacity .25s ease,visibility .25s ease}
+.toc__backdrop.is-open{opacity:1;visibility:visible}
+@media(max-width:989px){
+  .toc{position:fixed;top:0;left:0;bottom:0;width:min(310px,86vw);z-index:96;background:#fff;
+    padding:2rem 1.5rem;overflow-y:auto;transform:translateX(-101%);transition:transform .35s ease}
+  .toc.is-open{transform:translateX(0)}
+  .toc__toggle{display:inline-flex}
+}
+
+/* Seções e nós */
+.secao{margin-bottom:3rem;scroll-margin-top:1.5rem}
+.secao h2{scroll-margin-top:1.5rem}
+.secao-sub{color:var(--cinza-medio);font-size:.875rem;margin-top:-.5rem}
+.canal-ausente{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:1.25rem}
+.canal-investimento{font-size:.9375rem;color:var(--cinza-medio);display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.pacing{background:var(--bubbles-rosa);border-radius:999px;padding:.2rem .7rem;font-size:.8125rem}
+.pacing--estoura{background:var(--perigo);color:#fff}
+
+.campanhas{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
+.no{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:1.25rem;overflow-wrap:break-word}
+.no--campanha{padding:1.5rem}
+.no__cabecalho h3{font-size:1.125rem;margin-bottom:.4rem}
+.no__badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0}
+.no__resumo{font-size:.875rem;color:var(--cinza-medio)}
+.no--conjunto,.no--anuncio{padding:0}
+.no--conjunto summary,.no--anuncio summary{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;
+  padding:.9rem 1.1rem;cursor:pointer;list-style:none;font-size:.9375rem}
+.no--conjunto summary::-webkit-details-marker,.no--anuncio summary::-webkit-details-marker{display:none}
+.no--conjunto summary::before,.no--anuncio summary::before{content:'▸';color:var(--cinza-medio)}
+details[open]>summary::before{content:'▾'}
+.no__nome{font-weight:500;flex:1;min-width:200px}
+.no__roas{font-size:.8125rem;color:var(--cinza-medio)}
+.no__verba-resumo{font-size:.8125rem;color:var(--bubbles-magenta-fundo);font-weight:600}
+.no__corpo{padding:0 1.1rem 1.1rem}
+.no--campanha>.no__corpo{padding:0}
+.filhos{display:flex;flex-direction:column;gap:.6rem;margin-top:1rem}
+.filhos .no{border-radius:12px}
+
+.tag{display:inline-block;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;
+  background:var(--bubbles-cinza-claro);color:var(--cinza-medio);border-radius:6px;padding:.15rem .5rem}
+.tag--novo{background:var(--manter);color:#fff}
+.acao-tag{font-size:.8125rem;font-weight:600;color:var(--bubbles-preto)}
+.badge{display:inline-block;font-size:.75rem;font-weight:600;border-radius:999px;padding:.15rem .6rem}
+.badge--ok{background:#DCFCE7;color:var(--ok)}
+.badge--atencao{background:#FEF3C7;color:var(--atencao)}
+.badge--neutro{background:#F3F4F6;color:var(--neutro)}
+.nota-sem-leitura,.nota{font-size:.8125rem;color:var(--cinza-medio);background:var(--bubbles-cinza-claro);
+  border-radius:10px;padding:.6rem .9rem;margin:.6rem 0}
+.tooltip{cursor:help;border-bottom:1px dotted currentColor}
+
+.verba-destaque{background:var(--bubbles-rosa);border-radius:12px;padding:.8rem 1rem;margin:.8rem 0}
+.verba-valores{font-size:1.05rem;font-weight:600;margin:0}
+.verba-anterior{font-size:.8125rem;color:var(--cinza-medio);margin:.2rem 0 0}
+.aviso-verba{font-size:.8125rem;color:var(--reduzir);margin:.2rem 0 0}
+.variacao{font-size:.8125rem;font-weight:600}
+.var-pos{color:var(--ok)}
+.var-neg{color:var(--perigo)}
+
+.table-wrap{overflow-x:auto;margin:.8rem 0}
+table.metricas{width:100%;border-collapse:collapse;font-size:.875rem}
+table.metricas thead th{text-align:right;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;
+  color:var(--cinza-medio);padding:.3rem .6rem}
+table.metricas thead th:first-child{text-align:left}
+table.metricas th{text-align:left;font-weight:500;color:var(--cinza-medio);padding:.45rem .6rem;
+  border-bottom:1px solid var(--borda);white-space:nowrap}
+table.metricas td{padding:.45rem .6rem;border-bottom:1px solid var(--borda);text-align:right}
+table.metricas td.col-anterior{color:var(--cinza-medio)}
+table.metricas tbody tr:nth-child(even){background:var(--bubbles-cinza-claro)}
+table.metricas tr.destaque th,table.metricas tr.destaque td{font-weight:700;color:var(--bubbles-preto)}
+.meta-dist{color:var(--cinza-medio);font-size:.8125rem}
+.ver-mais-indicadores{display:block;margin:.4rem 0 0;border:0;background:transparent;color:var(--bubbles-magenta-fundo);
+  font-size:.8125rem;font-weight:600;cursor:pointer;padding:.4rem 0}
+@media(max-width:600px){
+  table.metricas,table.metricas thead,table.metricas tbody,table.metricas th,table.metricas td,table.metricas tr{display:block}
+  table.metricas thead{display:none}
+  table.metricas tr{padding:.4rem 0;border-bottom:1px solid var(--borda);display:flex;justify-content:space-between;flex-wrap:wrap}
+  table.metricas th{border:0;padding-bottom:.1rem}
+  table.metricas td{border:0;padding-top:0;text-align:right}
+}
+
+.sustentacao{background:#FFF7ED;border-radius:12px;padding:.8rem 1rem;margin:.6rem 0}
+.sustentacao .aviso{font-size:.8125rem;color:var(--reduzir);margin:.4rem 0 0}
+
+details.motivos,details.perguntas,details.sinais-suprimidos,details.historico{margin:.6rem 0}
+details summary{cursor:pointer;font-size:.8125rem;font-weight:600;color:var(--cinza-medio)}
+.expectativa{background:var(--bubbles-cinza-claro);border-radius:10px;padding:.7rem .9rem;font-size:.9rem}
+
+/* Decisão */
+/* Bolinha pulsante ao lado do veredito enquanto o item não tem decisão (JS remove/oculta
+   ao decidir) */
+.pulso{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--bubbles-magenta);
+  animation:pulso-anim 1.6s ease-in-out infinite}
+@keyframes pulso-anim{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+@media(prefers-reduced-motion:reduce){.pulso{animation:none}}
+
+.decisao{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--borda)}
+.decisao__resumo{background:var(--bubbles-cinza-claro);border-radius:10px;padding:.7rem .9rem;
+  font-size:.875rem;display:flex;flex-direction:column;gap:.3rem;margin-bottom:.8rem}
+.decisao__resumo-linha strong{color:var(--bubbles-preto)}
+.decisao__estados{display:flex;flex-wrap:wrap;gap:.5rem}
+.btn-estado{min-height:44px;border:1.5px solid var(--borda);background:#fff;border-radius:10px;
+  padding:.5rem 1rem;font-size:.8125rem;font-weight:600;cursor:pointer;color:var(--bubbles-preto)}
+.btn-estado[aria-checked="true"][data-estado="aplicar"]{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn-estado[aria-checked="true"][data-estado="parcial"]{background:var(--atencao);border-color:var(--atencao);color:#fff}
+.btn-estado[aria-checked="true"][data-estado="nao_aplicar"]{background:var(--perigo);border-color:var(--perigo);color:#fff}
+.btn-estado[aria-checked="true"][data-estado="adiar"]{background:var(--manter);border-color:var(--manter);color:#fff}
+.btn-estado[aria-checked="true"][data-estado="manter"]{background:var(--neutro);border-color:var(--neutro);color:#fff}
+.decisao__campo{margin-top:.6rem}
+.decisao__campo label{display:block;font-size:.8125rem;color:var(--cinza-medio);margin-bottom:.3rem}
+.decisao__campo textarea{width:100%;border:1.5px solid var(--borda);border-radius:10px;padding:.6rem;
+  font-family:inherit;font-size:.9rem}
+.decisao--pendente-obrigatoria .decisao__campo textarea{border-color:var(--perigo)}
+
+/* Pódios */
+.podio-categoria{margin-bottom:1.5rem}
+.podio-explica{font-size:.875rem;color:var(--cinza-medio)}
+.podio-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.8rem}
+.podio-card{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:.9rem}
+.podio-pos{font-weight:700;color:var(--bubbles-magenta-fundo);margin:0}
+.podio-nome{font-weight:500;font-size:.875rem;margin:.2rem 0}
+.podio-formato{font-size:.75rem;color:var(--cinza-medio);text-transform:uppercase}
+.podio-metricas{list-style:none;padding:0;margin:.5rem 0 0;font-size:.8125rem;color:var(--cinza-medio)}
+.multi-podio{background:var(--bubbles-rosa);border-radius:12px;padding:1rem;margin:1rem 0}
+
+.secao--diagnostico details{background:#fff;border:1px solid var(--borda);border-radius:12px;
+  padding:1rem;margin-bottom:.8rem}
+.conciliacao li.ok{color:var(--ok)}
+
+/* Selo de completude */
+.selo-completude{border-radius:16px;padding:1rem 1.25rem;color:#fff;margin-bottom:1.5rem}
+.selo-completude--ok{background:var(--ok)}
+.selo-completude--atencao{background:var(--atencao)}
+.selo-completude--reduzir{background:var(--reduzir)}
+.selo-completude--perigo{background:var(--perigo)}
+.selo-completude__texto{margin:0}
+.selo-completude__resumo{margin:.3rem 0 0;font-size:.875rem;opacity:.9}
+.selo-completude details{margin-top:.6rem;font-size:.8125rem}
+.selo-completude summary{color:#fff;opacity:.9}
+
+.periodo-investimento{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:1.25rem;margin-bottom:2rem}
+.periodo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:.8rem}
+.periodo-grid .rotulo{font-size:.75rem;color:var(--cinza-medio);text-transform:uppercase;letter-spacing:.05em;margin:0}
+.periodo-grid .valor{font-size:1rem;font-weight:600;margin:.2rem 0}
+.periodo-grid .sub{font-size:.8125rem;color:var(--cinza-medio);margin:0}
+.investimento-total{font-weight:600}
+
+.glossario{display:grid;grid-template-columns:max-content 1fr;gap:.4rem 1rem;margin-top:.8rem}
+.glossario dt{font-weight:600}
+.glossario dd{margin:0;color:var(--cinza-medio)}
+.ressalvas{display:flex;flex-direction:column;gap:.8rem}
+.ressalva{background:#FEF3C7;border-radius:12px;padding:1rem}
+.ressalva__titulo{font-weight:600;margin:0 0 .3rem}
+.auditoria{display:flex;flex-direction:column;gap:.8rem}
+.auditoria__item{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:1rem}
+.auditoria-ok{color:var(--ok);font-weight:600}
+.proveniencia table{width:100%;border-collapse:collapse;font-size:.8125rem;margin-top:.6rem}
+.proveniencia th{text-align:left;color:var(--cinza-medio);padding:.3rem .5rem;white-space:nowrap}
+.proveniencia td{padding:.3rem .5rem}
+
+.exportar{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:1.5rem}
+.exportar__botoes{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+.exportar__botoes button{min-height:44px;border-radius:999px;padding:.7rem 1.4rem;font-weight:600;
+  font-size:.875rem;cursor:pointer;border:1.5px solid var(--bubbles-preto)}
+#btn-copiar{background:#fff;color:var(--bubbles-preto)}
+#btn-whatsapp{background:#25D366;color:#fff;border-color:#25D366}
+#preview-copiar{white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:.75rem;
+  background:var(--bubbles-cinza-claro);border-radius:10px;padding:1rem;margin-top:1rem;max-height:400px;overflow:auto}
+
+@media print{
+  #gate,#progresso,.toc,.toc__toggle,#aviso-desktop,.decisao,.exportar__botoes{display:none!important}
+  details{display:block!important}
+  .layout{display:block;max-width:100%}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate__box">
+    <p class="gate__title">Relatório de mídia paga</p>
+    <p class="gate__sub">Bubbles · digite a senha para continuar</p>
+    <div class="gate__field">
+      <input id="gate-input" type="password" placeholder="Senha" autofocus>
+      <button id="gate-btn" class="gate__btn" type="button">Entrar</button>
+    </div>
+    <p class="gate__hint">Dica: nome da gerente.</p>
+    <p id="gate-erro" class="gate__error"></p>
+  </div>
+</div>
+
+<div id="shell">
+  <div id="aviso-desktop">
+    <span>🖥️ Este relatório foi feito para desktop. No celular tudo funciona, mas tabelas largas e o sistema de decisões leem melhor em tela grande.</span>
+    <button type="button" aria-label="Fechar aviso">✕</button>
+  </div>
+
+  <header class="cover">
+    <div class="cover__inner">
+      <span class="cover__eyebrow">Relatório de mídia paga</span>
+      <h1 class="cover__title">Bubbles</h1>
+      <p class="cover__sub">Revisão semanal de campanhas em Meta Ads e Google Ads.</p>
+      <dl class="cover__meta">
+        <div><dt>Período analisado</dt><dd>07/09/2026 a 13/09/2026</dd></div>
+        <div><dt>Canais sob gestão</dt><dd>Meta Ads · Google Ads</dd></div>
+        <div><dt>Data do documento</dt><dd>15/09/2026 · revisor Caio</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" id="sumario" aria-label="Sumário">
+    <p class="toc__label">Sumário</p>
+    <ul class="toc__list"><li class="toc__item toc__item--nivel1">
+      <a href="#resumo-semana" data-toc-alvo="resumo-semana">
+        <span class="toc__num">01</span>
+        <span class="toc__texto">Resumo da semana</span>
+        <span class="toc__estado" data-toc-estado="resumo-semana"></span>
+      </a>
+    </li><li class="toc__item toc__item--nivel1">
+      <a href="#canal-meta" data-toc-alvo="canal-meta">
+        <span class="toc__num">02</span>
+        <span class="toc__texto">Meta Ads</span>
+        <span class="toc__estado" data-toc-estado="canal-meta"></span>
+      </a>
+    </li><li class="toc__item toc__item--nivel2">
+      <a href="#gx-compra" data-toc-alvo="gx-compra">
+        
+        <span class="toc__texto">GX_COMPRA_ADV_ABO_INTERNO-BUBBLES_TODOS_OS_PRODUTOS_E_LINHAS</span>
+        
+      </a>
+    </li><li class="toc__item toc__item--nivel2">
+      <a href="#rocket-remarketing" data-toc-alvo="rocket-remarketing">
+        
+        <span class="toc__texto">ROCKET_COMPRA_REMARKETING-09.07.2026_2</span>
+        
+      </a>
+    </li><li class="toc__item toc__item--nivel1">
+      <a href="#canal-google" data-toc-alvo="canal-google">
+        <span class="toc__num">03</span>
+        <span class="toc__texto">Google Ads</span>
+        <span class="toc__estado" data-toc-estado="canal-google"></span>
+      </a>
+    </li><li class="toc__item toc__item--nivel1">
+      <a href="#podios" data-toc-alvo="podios">
+        <span class="toc__num">04</span>
+        <span class="toc__texto">Pódios de criativo</span>
+        <span class="toc__estado" data-toc-estado="podios"></span>
+      </a>
+    </li><li class="toc__item toc__item--nivel1">
+      <a href="#glossario" data-toc-alvo="glossario">
+        <span class="toc__num">05</span>
+        <span class="toc__texto">Glossário</span>
+        <span class="toc__estado" data-toc-estado="glossario"></span>
+      </a>
+    </li><li class="toc__item toc__item--nivel1">
+      <a href="#ressalvas" data-toc-alvo="ressalvas">
+        <span class="toc__num">06</span>
+        <span class="toc__texto">Ressalvas de dado</span>
+        <span class="toc__estado" data-toc-estado="ressalvas"></span>
+      </a>
+    </li><li class="toc__item toc__item--nivel1">
+      <a href="#auditoria" data-toc-alvo="auditoria">
+        <span class="toc__num">07</span>
+        <span class="toc__texto">Revisão do relatório</span>
+        <span class="toc__estado" data-toc-estado="auditoria"></span>
+      </a>
+    </li><li class="toc__item toc__item--nivel1">
+      <a href="#exportar" data-toc-alvo="exportar">
+        <span class="toc__num">08</span>
+        <span class="toc__texto">Exportar decisões</span>
+        <span class="toc__estado" data-toc-estado="exportar"></span>
+      </a>
+    </li></ul>
+  </nav>
+  <button type="button" class="toc__toggle" id="toc-toggle" aria-expanded="false" aria-controls="sumario">☰ Sumário</button>
+  <div class="toc__backdrop" id="toc-backdrop"></div>
+
+    <main>
+      <section class="secao" id="resumo-semana">
+        <h2>01 · Resumo da semana</h2>
+        <div class="selo-completude selo-completude--atencao" data-selo="quase">
+    <p class="selo-completude__texto"><strong>Análise completa, com nota</strong></p>
+    <p class="selo-completude__resumo">Uma etapa fica sem avaliação · o resto do diagnóstico está inteiro.</p>
+    <details class="colunas-faltando"><summary>O que falta (1)</summary>
+      <ul><li><strong>Frequência</strong> (importante) · impede: §3.5 · saturação de público. Onde conseguir: Gerenciador → Colunas → Personalizar</li></ul>
+    </details>
+  </div>
+        <div class="periodo-investimento">
+    <div class="periodo-grid">
+      <div><p class="rotulo">Janela analisada</p><p class="valor">07/09/2026 → 13/09/2026</p><p class="sub">7 dias</p></div>
+      <div><p class="rotulo">Comparada com</p><p class="valor">31/08/2026 → 06/09/2026</p><p class="sub">7 dias</p></div>
+    </div>
+    <p class="investimento-total">Investimento total: R$ 31.457,23</p>
+    <p class="nota">Hoje não entra: o dia corrente está incompleto e sempre subestima.</p>
+    <p class="nota">A decisão olha 7 dias; o volume que sustenta um veredito de conversão vem dos 30.</p>
+  </div>
+        <div class="controles-globais" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem">
+          <button type="button" data-acao-expandir="expandir" class="btn-estado">Expandir tudo</button>
+          <button type="button" data-acao-expandir="recolher" class="btn-estado">Recolher tudo</button>
+          <button type="button" id="filtro-pendentes" class="btn-estado" aria-pressed="false">Só os pendentes</button>
+        </div>
+      </section>
+
+      <section class="secao" id="canal-meta">
+    <h2>02 · Meta Ads</h2>
+    <p class="canal-investimento">
+      Investimento na janela: R$ 3.517,18 <span class="variacao var-pos">▲ 18,0%</span>
+      <span class="pacing ">Projeção do mês: R$ 15.420,00 de R$ 20.000,00</span>
+    </p>
+    <div class="campanhas"><article class="no no--campanha" id="gx-compra">
+    <header class="no__cabecalho">
+      <h3 class="no__nome">GX_COMPRA_ADV_ABO_INTERNO-BUBBLES_TODOS_OS_PRODUTOS_E_LINHAS</h3>
+      <p class="no__badges"><span class="tag">prospeccao</span> <span class="tag">groomer</span> <span class="tag">consistente</span> <span class="badge badge--ok">✅ veredito firme</span> <span class="acao-tag">→ Manter</span> </p>
+      <p class="no__resumo">
+        R$ 1.638,56 ·
+        12 vendas ·
+        ROAS LC 2,43 ·
+        2 conjunto(s)
+      </p>
+    </header>
+    <div class="no__corpo">
+      
+      
+      <div class="table-wrap">
+    <table class="metricas" id="metricas-4"><tbody><tr class=" " >
+      <th scope="row">Investimento</th>
+      
+      <td>R$ 1.638,56 <span class="variacao var-pos">▲ 66,8%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">Vendas</th>
+      
+      <td>12 <span class="variacao var-pos">▲ 50,0%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">Ticket médio <span class="tooltip" tabindex="0" data-tip="Receita ÷ número de vendas.">ⓘ</span></th>
+      
+      <td>R$ 331,92 </td>
+    </tr><tr class=" " >
+      <th scope="row">CPS <span class="tooltip" tabindex="0" data-tip="Custo por sessão · investimento ÷ sessões no site.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class=" " >
+      <th scope="row">CPM <span class="tooltip" tabindex="0" data-tip="Custo por mil impressões. Sobe com leilão competitivo ou público saturado.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class="destaque " >
+      <th scope="row">ROAS LC <span class="tooltip" tabindex="0" data-tip="Último clique · credita ao último canal acessado antes da compra. É a régua de decisão da casa, saudável a partir de 2,0x.">ⓘ</span></th>
+      
+      <td>2,43<span class="meta-dist"> · meta 2,00</span> <span class="variacao var-pos">▲ 12,4%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS FC <span class="tooltip" tabindex="0" data-tip="Primeiro clique · credita ao primeiro canal da jornada. Mostra quem traz gente nova, não serve para decidir escala.">ⓘ</span></th>
+      
+      <td>1,10 </td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS ASSIST <span class="tooltip" tabindex="0" data-tip="Assistida · credita a venda inteira a todos os canais que participaram da jornada. Multiplica, por isso nunca é comparada com a meta — só como razão ASSIST ÷ LC.">ⓘ</span></th>
+      
+      <td>4,17 </td>
+    </tr><tr class=" " >
+      <th scope="row">CTR <span class="tooltip" tabindex="0" data-tip="Cliques ÷ impressões. Mede se o criativo atrai clique.">ⓘ</span></th>
+      
+      <td>1,29%<span class="meta-dist"> · meta 1,00%</span> <span class="variacao var-neg">▼ 3,1%</span></td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-4" hidden>
+      <th scope="row">Impressões</th>
+      
+      <td>87.074 <span class="variacao var-pos">▲ 12,0%</span></td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-4" hidden>
+      <th scope="row">Sessões</th>
+      
+      <td>412 <span class="variacao var-pos">▲ 8,0%</span></td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-4" hidden>
+      <th scope="row">ConnectRate <span class="tooltip" tabindex="0" data-tip="Sessões ÷ cliques. Abaixo de ~80% indica página lenta ou link errado. Acima de 100% costuma ser visita de retorno, não erro.">ⓘ</span></th>
+      
+      <td>87,0% </td>
+    </tr></tbody></table>
+    <button type="button" class="ver-mais-indicadores" data-tabela="metricas-4" aria-expanded="false">Ver mais indicadores ▾</button>
+  </div>
+      <details class="motivos"><summary>Por que esta ação (1)</summary>
+    <ul><li>É a única campanha que vendeu nas duas semanas seguidas.</li></ul>
+  </details>
+      <details class="sinais-suprimidos"><summary>O que NÃO é problema aqui (1)</summary>
+    <ul><li><strong>Frequência acima do limite</strong> · remarketing tolera repetição maior</li></ul>
+  </details>
+      <details class="perguntas"><summary>Perguntas em aberto (1)</summary>
+    <ul><li>Sobrou criativo no conjunto para absorver mais verba?</li></ul>
+  </details>
+      <p class="expectativa"><strong>O que esperamos:</strong> R$ 6/dia a mais deveria trazer ~1 venda adicional por semana.</p>
+      <details class="historico"><summary>Histórico</summary><p>14/09 · sugerido escalar · aplicado</p></details>
+      
+      <div class="filhos"><details class="no no--conjunto" id="gx-cj08">
+    <summary>
+      <span class="no__nome">CJ_08_INTERNO-BUBBLES_AD_TOP_ESTADOS_PRO_PERFUMES-06.07.2026</span>
+      <span class="acao-tag">↑ Escalar 20%</span>
+      <span class="no__verba-resumo">R$ 28,00 → R$ 34,28</span>
+      <span class="no__roas">ROAS LC 13,60</span>
+      <span class="badge badge--ok">✅ veredito firme</span>
+      <span class="pulso" data-pulso-de="gx-cj08" aria-hidden="true"></span>
+    </summary>
+    <div class="no__corpo">
+      <p class="no__badges"><span class="tag">prospeccao</span> <span class="tag">groomer</span> <span class="tag">consistente</span> <span class="badge badge--ok">✅ veredito firme</span></p>
+      
+      
+      <div class="verba-destaque">
+    <p class="verba-valores">R$ 28,00 → <strong>R$ 34,28</strong> <span class="variacao var-pos">▲ 20,0%</span></p>
+    <p class="verba-anterior">na semana passada: R$ 28,80</p>
+    
+  </div>
+      <div class="table-wrap">
+    <table class="metricas" id="metricas-2"><tbody><tr class=" " >
+      <th scope="row">Investimento</th>
+      
+      <td>R$ 197,43 <span class="variacao var-neg">▼ 2,0%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">Vendas</th>
+      
+      <td>3 <span class="variacao var-pos">▲ 50,0%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">Ticket médio <span class="tooltip" tabindex="0" data-tip="Receita ÷ número de vendas.">ⓘ</span></th>
+      
+      <td>R$ 895,02 <span class="variacao var-pos">▲ 100,4%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">CPS <span class="tooltip" tabindex="0" data-tip="Custo por sessão · investimento ÷ sessões no site.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class=" " >
+      <th scope="row">CPM <span class="tooltip" tabindex="0" data-tip="Custo por mil impressões. Sobe com leilão competitivo ou público saturado.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class="destaque " >
+      <th scope="row">ROAS LC <span class="tooltip" tabindex="0" data-tip="Último clique · credita ao último canal acessado antes da compra. É a régua de decisão da casa, saudável a partir de 2,0x.">ⓘ</span></th>
+      
+      <td>13,60<span class="meta-dist"> · meta 2,00</span> <span class="variacao var-pos">▲ 207,0%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS FC <span class="tooltip" tabindex="0" data-tip="Primeiro clique · credita ao primeiro canal da jornada. Mostra quem traz gente nova, não serve para decidir escala.">ⓘ</span></th>
+      
+      <td>0,00 </td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS ASSIST <span class="tooltip" tabindex="0" data-tip="Assistida · credita a venda inteira a todos os canais que participaram da jornada. Multiplica, por isso nunca é comparada com a meta — só como razão ASSIST ÷ LC.">ⓘ</span></th>
+      
+      <td>13,60 <span class="variacao var-pos">▲ 141,0%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">CTR <span class="tooltip" tabindex="0" data-tip="Cliques ÷ impressões. Mede se o criativo atrai clique.">ⓘ</span></th>
+      
+      <td>0,67%<span class="meta-dist"> · meta 1,00%</span> <span class="variacao var-neg">▼ 26,0%</span></td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-2" hidden>
+      <th scope="row">Impressões</th>
+      
+      <td>12.594 <span class="variacao var-pos">▲ 20,0%</span></td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-2" hidden>
+      <th scope="row">Sessões</th>
+      
+      <td>66 <span class="variacao var-neg">▼ 19,0%</span></td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-2" hidden>
+      <th scope="row">ConnectRate <span class="tooltip" tabindex="0" data-tip="Sessões ÷ cliques. Abaixo de ~80% indica página lenta ou link errado. Acima de 100% costuma ser visita de retorno, não erro.">ⓘ</span></th>
+      
+      <td>78,6% <span class="variacao var-neg">▼ 9,0%</span></td>
+    </tr></tbody></table>
+    <button type="button" class="ver-mais-indicadores" data-tabela="metricas-2" aria-expanded="false">Ver mais indicadores ▾</button>
+  </div>
+      <details class="motivos"><summary>Por que esta ação (2)</summary>
+    <ul><li>É o único conjunto que vendeu nas duas semanas seguidas.</li><li>O investimento ficou praticamente igual e as vendas subiram de 2 para 3.</li></ul>
+  </details>
+      
+      <details class="perguntas"><summary>Perguntas em aberto (1)</summary>
+    <ul><li>Sobrou criativo suficiente no conjunto para absorver mais verba?</li></ul>
+  </details>
+      <p class="expectativa"><strong>O que esperamos:</strong> R$ 6/dia a mais deveria trazer cerca de 1 venda adicional por semana.</p>
+      
+      <div class="decisao" data-item="gx-cj08">
+    <p class="decisao__resumo">
+      <span class="decisao__resumo-linha"><strong>Motivo:</strong> É o único conjunto que vendeu nas duas semanas seguidas.</span>
+      <span class="decisao__resumo-linha"><strong>Ação sugerida:</strong> ↑ Escalar 20%</span>
+    </p>
+    <div class="decisao__estados" role="radiogroup" aria-label="Como prosseguir">
+      
+        <button type="button" class="btn-estado" data-estado="aplicar" data-item="gx-cj08" role="radio" aria-checked="false">
+          Aplicar completamente
+        </button>
+        <button type="button" class="btn-estado" data-estado="parcial" data-item="gx-cj08" role="radio" aria-checked="false">
+          Aplicar parcialmente
+        </button>
+        <button type="button" class="btn-estado" data-estado="nao_aplicar" data-item="gx-cj08" role="radio" aria-checked="false">
+          Não vou aplicar
+        </button>
+        <button type="button" class="btn-estado" data-estado="adiar" data-item="gx-cj08" role="radio" aria-checked="false">
+          Adiar
+        </button>
+        <button type="button" class="btn-estado" data-estado="manter" data-item="gx-cj08" role="radio" aria-checked="false">
+          Manter como está
+        </button>
+    </div>
+    <div class="decisao__campo" data-campo-de="gx-cj08" hidden>
+      <label for="campo-gx-cj08"></label>
+      <textarea id="campo-gx-cj08" rows="2"></textarea>
+    </div>
+  </div>
+      <div class="filhos"><details class="no no--anuncio" id="gx-cj08-ad12">
+    <summary>
+      <span class="no__nome">ad12|img|pontual|CRIATIVO 02 - MINI PERFUMES</span>
+      
+      <span class="acao-tag">↑ Escalar 20%</span>
+      <span class="no__roas">ROAS LC 15,14</span>
+      <span class="badge badge--ok">✅ veredito firme</span>
+      <span class="pulso" data-pulso-de="gx-cj08-ad12" aria-hidden="true"></span>
+    </summary>
+    <div class="no__corpo">
+      <p class="no__badges"><span class="tag">prospeccao</span> <span class="tag">groomer</span> <span class="tag">comecou</span> <span class="badge badge--ok">✅ veredito firme</span></p>
+      
+      <div class="verba-destaque">
+    <p class="verba-valores">R$ 25,33 → <strong>R$ 30,25</strong> <span class="variacao var-pos">▲ 20,0%</span></p>
+    <p class="verba-anterior">na semana passada: R$ 10,06</p>
+    
+  </div>
+      <div class="table-wrap">
+    <table class="metricas" id="metricas-1"><tbody><tr class=" " >
+      <th scope="row">Investimento</th>
+      
+      <td>R$ 177,30 <span class="variacao var-pos">▲ 152,0%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">Vendas</th>
+      
+      <td>3 </td>
+    </tr><tr class=" " >
+      <th scope="row">Ticket médio <span class="tooltip" tabindex="0" data-tip="Receita ÷ número de vendas.">ⓘ</span></th>
+      
+      <td>R$ 895,02 </td>
+    </tr><tr class=" " >
+      <th scope="row">CPS <span class="tooltip" tabindex="0" data-tip="Custo por sessão · investimento ÷ sessões no site.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class=" " >
+      <th scope="row">CPM <span class="tooltip" tabindex="0" data-tip="Custo por mil impressões. Sobe com leilão competitivo ou público saturado.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class="destaque " >
+      <th scope="row">ROAS LC <span class="tooltip" tabindex="0" data-tip="Último clique · credita ao último canal acessado antes da compra. É a régua de decisão da casa, saudável a partir de 2,0x.">ⓘ</span></th>
+      
+      <td>15,14<span class="meta-dist"> · meta 2,00</span> </td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS FC <span class="tooltip" tabindex="0" data-tip="Primeiro clique · credita ao primeiro canal da jornada. Mostra quem traz gente nova, não serve para decidir escala.">ⓘ</span></th>
+      
+      <td>0,00 </td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS ASSIST <span class="tooltip" tabindex="0" data-tip="Assistida · credita a venda inteira a todos os canais que participaram da jornada. Multiplica, por isso nunca é comparada com a meta — só como razão ASSIST ÷ LC.">ⓘ</span></th>
+      
+      <td>15,14 </td>
+    </tr><tr class=" " >
+      <th scope="row">CTR <span class="tooltip" tabindex="0" data-tip="Cliques ÷ impressões. Mede se o criativo atrai clique.">ⓘ</span></th>
+      
+      <td>0,66%<span class="meta-dist"> · meta 1,00%</span> </td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-1" hidden>
+      <th scope="row">Impressões</th>
+      
+      <td>9.200 </td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-1" hidden>
+      <th scope="row">Sessões</th>
+      
+      <td>44 </td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-1" hidden>
+      <th scope="row">ConnectRate <span class="tooltip" tabindex="0" data-tip="Sessões ÷ cliques. Abaixo de ~80% indica página lenta ou link errado. Acima de 100% costuma ser visita de retorno, não erro.">ⓘ</span></th>
+      
+      <td>75,9% </td>
+    </tr></tbody></table>
+    <button type="button" class="ver-mais-indicadores" data-tabela="metricas-1" aria-expanded="false">Ver mais indicadores ▾</button>
+  </div>
+      <details class="motivos"><summary>Por que esta ação (1)</summary>
+    <ul><li>É o anúncio que está sustentando sozinho o resultado do conjunto.</li></ul>
+  </details>
+      
+      
+      
+      
+      <div class="decisao" data-item="gx-cj08-ad12">
+    <p class="decisao__resumo">
+      <span class="decisao__resumo-linha"><strong>Motivo:</strong> É o anúncio que está sustentando sozinho o resultado do conjunto.</span>
+      <span class="decisao__resumo-linha"><strong>Ação sugerida:</strong> ↑ Escalar 20%</span>
+    </p>
+    <div class="decisao__estados" role="radiogroup" aria-label="Como prosseguir">
+      
+        <button type="button" class="btn-estado" data-estado="aplicar" data-item="gx-cj08-ad12" role="radio" aria-checked="false">
+          Aplicar completamente
+        </button>
+        <button type="button" class="btn-estado" data-estado="parcial" data-item="gx-cj08-ad12" role="radio" aria-checked="false">
+          Aplicar parcialmente
+        </button>
+        <button type="button" class="btn-estado" data-estado="nao_aplicar" data-item="gx-cj08-ad12" role="radio" aria-checked="false">
+          Não vou aplicar
+        </button>
+        <button type="button" class="btn-estado" data-estado="adiar" data-item="gx-cj08-ad12" role="radio" aria-checked="false">
+          Adiar
+        </button>
+        <button type="button" class="btn-estado" data-estado="manter" data-item="gx-cj08-ad12" role="radio" aria-checked="false">
+          Manter como está
+        </button>
+    </div>
+    <div class="decisao__campo" data-campo-de="gx-cj08-ad12" hidden>
+      <label for="campo-gx-cj08-ad12"></label>
+      <textarea id="campo-gx-cj08-ad12" rows="2"></textarea>
+    </div>
+  </div>
+    </div>
+  </details></div>
+    </div>
+  </details><details class="no no--conjunto" id="gx-cj09">
+    <summary>
+      <span class="no__nome">CJ_09_INTERNO-BUBBLES_AD_TOP_ESTADOS_PRO-V2</span>
+      <span class="acao-tag">→ Manter e testar concentração</span>
+      <span class="no__verba-resumo">R$ 30,00 → R$ 30,00</span>
+      <span class="no__roas">ROAS LC 2,61</span>
+      <span class="badge badge--atencao">🟡 direcional</span>
+      <span class="pulso" data-pulso-de="gx-cj09" aria-hidden="true"></span>
+    </summary>
+    <div class="no__corpo">
+      <p class="no__badges"><span class="tag">prospeccao</span> <span class="tag">groomer</span> <span class="tag">comecou</span> <span class="badge badge--atencao">🟡 direcional</span></p>
+      
+      
+      <div class="verba-destaque">
+    <p class="verba-valores">R$ 30,00 → <strong>R$ 30,00</strong> <span class="variacao var-pos">▲ 0,0%</span></p>
+    <p class="verba-anterior">na semana passada: R$ 16,30</p>
+    
+  </div>
+      <div class="table-wrap">
+    <table class="metricas" id="metricas-3"><tbody><tr class=" " >
+      <th scope="row">Investimento</th>
+      
+      <td>R$ 204,43 <span class="variacao var-pos">▲ 84,0%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">Vendas</th>
+      
+      <td>2 </td>
+    </tr><tr class=" " >
+      <th scope="row">Ticket médio <span class="tooltip" tabindex="0" data-tip="Receita ÷ número de vendas.">ⓘ</span></th>
+      
+      <td>R$ 266,73 </td>
+    </tr><tr class=" " >
+      <th scope="row">CPS <span class="tooltip" tabindex="0" data-tip="Custo por sessão · investimento ÷ sessões no site.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class=" " >
+      <th scope="row">CPM <span class="tooltip" tabindex="0" data-tip="Custo por mil impressões. Sobe com leilão competitivo ou público saturado.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class="destaque " >
+      <th scope="row">ROAS LC <span class="tooltip" tabindex="0" data-tip="Último clique · credita ao último canal acessado antes da compra. É a régua de decisão da casa, saudável a partir de 2,0x.">ⓘ</span></th>
+      
+      <td>2,61<span class="meta-dist"> · meta 2,00</span> </td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS FC <span class="tooltip" tabindex="0" data-tip="Primeiro clique · credita ao primeiro canal da jornada. Mostra quem traz gente nova, não serve para decidir escala.">ⓘ</span></th>
+      
+      <td>2,18 </td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS ASSIST <span class="tooltip" tabindex="0" data-tip="Assistida · credita a venda inteira a todos os canais que participaram da jornada. Multiplica, por isso nunca é comparada com a meta — só como razão ASSIST ÷ LC.">ⓘ</span></th>
+      
+      <td>2,61 </td>
+    </tr><tr class=" " >
+      <th scope="row">CTR <span class="tooltip" tabindex="0" data-tip="Cliques ÷ impressões. Mede se o criativo atrai clique.">ⓘ</span></th>
+      
+      <td>1,02%<span class="meta-dist"> · meta 1,00%</span> <span class="variacao var-neg">▼ 18,0%</span></td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-3" hidden>
+      <th scope="row">Impressões</th>
+      
+      <td>11.523 <span class="variacao var-pos">▲ 110,0%</span></td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-3" hidden>
+      <th scope="row">Sessões</th>
+      
+      <td>118 <span class="variacao var-pos">▲ 84,0%</span></td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-3" hidden>
+      <th scope="row">ConnectRate <span class="tooltip" tabindex="0" data-tip="Sessões ÷ cliques. Abaixo de ~80% indica página lenta ou link errado. Acima de 100% costuma ser visita de retorno, não erro.">ⓘ</span></th>
+      
+      <td>100,0% <span class="variacao var-pos">▲ 6,0%</span></td>
+    </tr></tbody></table>
+    <button type="button" class="ver-mais-indicadores" data-tabela="metricas-3" aria-expanded="false">Ver mais indicadores ▾</button>
+  </div>
+      <details class="motivos"><summary>Por que esta ação (2)</summary>
+    <ul><li>ROAS LC acima do piso de saúde de 2,0, mas a semana anterior fechou em zero venda.</li><li>ConnectRate de 100% é o melhor da campanha.</li></ul>
+  </details>
+      
+      <details class="perguntas"><summary>Perguntas em aberto (1)</summary>
+    <ul><li>Prefere esperar mais uma semana ou já concentrar verba nele?</li></ul>
+  </details>
+      <p class="expectativa"><strong>O que esperamos:</strong> Se repetir venda na próxima semana, vira consistente e dá para concentrar verba com segurança.</p>
+      
+      <div class="decisao" data-item="gx-cj09">
+    <p class="decisao__resumo">
+      <span class="decisao__resumo-linha"><strong>Motivo:</strong> ROAS LC acima do piso de saúde de 2,0, mas a semana anterior fechou em zero venda.</span>
+      <span class="decisao__resumo-linha"><strong>Ação sugerida:</strong> → Manter e testar concentração</span>
+    </p>
+    <div class="decisao__estados" role="radiogroup" aria-label="Como prosseguir">
+      
+        <button type="button" class="btn-estado" data-estado="aplicar" data-item="gx-cj09" role="radio" aria-checked="false">
+          Aplicar completamente
+        </button>
+        <button type="button" class="btn-estado" data-estado="parcial" data-item="gx-cj09" role="radio" aria-checked="false">
+          Aplicar parcialmente
+        </button>
+        <button type="button" class="btn-estado" data-estado="nao_aplicar" data-item="gx-cj09" role="radio" aria-checked="false">
+          Não vou aplicar
+        </button>
+        <button type="button" class="btn-estado" data-estado="adiar" data-item="gx-cj09" role="radio" aria-checked="false">
+          Adiar
+        </button>
+        <button type="button" class="btn-estado" data-estado="manter" data-item="gx-cj09" role="radio" aria-checked="false">
+          Manter como está
+        </button>
+    </div>
+    <div class="decisao__campo" data-campo-de="gx-cj09" hidden>
+      <label for="campo-gx-cj09"></label>
+      <textarea id="campo-gx-cj09" rows="2"></textarea>
+    </div>
+  </div>
+      
+    </div>
+  </details></div>
+    </div>
+  </article><article class="no no--campanha" id="rocket-remarketing">
+    <header class="no__cabecalho">
+      <h3 class="no__nome">ROCKET_COMPRA_REMARKETING-09.07.2026_2</h3>
+      <p class="no__badges"><span class="tag">remarketing</span> <span class="tag">parou</span> <span class="badge badge--atencao">🟡 direcional</span> <span class="acao-tag">↓ Reduzir para R$ 70</span> <span class="pulso" data-pulso-de="rocket-remarketing" aria-hidden="true"></span></p>
+      <p class="no__resumo">
+        R$ 945,00 ·
+        0 vendas ·
+        ROAS LC 0,36 ·
+        0 conjunto(s)
+      </p>
+    </header>
+    <div class="no__corpo">
+      
+      <div class="verba-destaque">
+    <p class="verba-valores">R$ 135,00 → <strong>R$ 70,00</strong> <span class="variacao var-neg">▼ 48,1%</span></p>
+    <p class="verba-anterior">na semana passada: R$ 135,00</p>
+    <p class="aviso-verba">⚠️ acima do passo seguro de 20% a cada 48h</p>
+  </div>
+      <div class="table-wrap">
+    <table class="metricas" id="metricas-5"><tbody><tr class=" " >
+      <th scope="row">Investimento</th>
+      
+      <td>R$ 945,00 <span class="variacao var-pos">▲ 5,0%</span></td>
+    </tr><tr class=" " >
+      <th scope="row">Vendas</th>
+      
+      <td>0 </td>
+    </tr><tr class=" " >
+      <th scope="row">Ticket médio <span class="tooltip" tabindex="0" data-tip="Receita ÷ número de vendas.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class=" " >
+      <th scope="row">CPS <span class="tooltip" tabindex="0" data-tip="Custo por sessão · investimento ÷ sessões no site.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class=" " >
+      <th scope="row">CPM <span class="tooltip" tabindex="0" data-tip="Custo por mil impressões. Sobe com leilão competitivo ou público saturado.">ⓘ</span></th>
+      
+      <td><span class="valor-ausente" title="não informado">—</span> </td>
+    </tr><tr class="destaque " >
+      <th scope="row">ROAS LC <span class="tooltip" tabindex="0" data-tip="Último clique · credita ao último canal acessado antes da compra. É a régua de decisão da casa, saudável a partir de 2,0x.">ⓘ</span></th>
+      
+      <td>0,36<span class="meta-dist"> · meta 3,60</span> </td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS FC <span class="tooltip" tabindex="0" data-tip="Primeiro clique · credita ao primeiro canal da jornada. Mostra quem traz gente nova, não serve para decidir escala.">ⓘ</span></th>
+      
+      <td>0,50 </td>
+    </tr><tr class=" " >
+      <th scope="row">ROAS ASSIST <span class="tooltip" tabindex="0" data-tip="Assistida · credita a venda inteira a todos os canais que participaram da jornada. Multiplica, por isso nunca é comparada com a meta — só como razão ASSIST ÷ LC.">ⓘ</span></th>
+      
+      <td>2,19 </td>
+    </tr><tr class=" " >
+      <th scope="row">CTR <span class="tooltip" tabindex="0" data-tip="Cliques ÷ impressões. Mede se o criativo atrai clique.">ⓘ</span></th>
+      
+      <td>0,41%<span class="meta-dist"> · meta 1,00%</span> </td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-5" hidden>
+      <th scope="row">Impressões</th>
+      
+      <td>40.200 </td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-5" hidden>
+      <th scope="row">Sessões</th>
+      
+      <td>165 </td>
+    </tr><tr class=" linha-extra" data-extra-de="metricas-5" hidden>
+      <th scope="row">ConnectRate <span class="tooltip" tabindex="0" data-tip="Sessões ÷ cliques. Abaixo de ~80% indica página lenta ou link errado. Acima de 100% costuma ser visita de retorno, não erro.">ⓘ</span></th>
+      
+      <td>71,0% </td>
+    </tr></tbody></table>
+    <button type="button" class="ver-mais-indicadores" data-tabela="metricas-5" aria-expanded="false">Ver mais indicadores ▾</button>
+  </div>
+      <details class="motivos"><summary>Por que esta ação (2)</summary>
+    <ul><li>A meta de remarketing da casa é 3,6 e ele entrega 0,36.</li><li>Parou de vender na comparação entre semanas.</li></ul>
+  </details>
+      
+      <details class="perguntas"><summary>Perguntas em aberto (1)</summary>
+    <ul><li>O público de remarketing está com janela de quantos dias?</li></ul>
+  </details>
+      <p class="expectativa"><strong>O que esperamos:</strong> Reduzir libera cerca de R$ 455/semana.</p>
+      
+      <div class="decisao" data-item="rocket-remarketing">
+    <p class="decisao__resumo">
+      <span class="decisao__resumo-linha"><strong>Motivo:</strong> A meta de remarketing da casa é 3,6 e ele entrega 0,36.</span>
+      <span class="decisao__resumo-linha"><strong>Ação sugerida:</strong> ↓ Reduzir para R$ 70</span>
+    </p>
+    <div class="decisao__estados" role="radiogroup" aria-label="Como prosseguir">
+      
+        <button type="button" class="btn-estado" data-estado="aplicar" data-item="rocket-remarketing" role="radio" aria-checked="false">
+          Aplicar completamente
+        </button>
+        <button type="button" class="btn-estado" data-estado="parcial" data-item="rocket-remarketing" role="radio" aria-checked="false">
+          Aplicar parcialmente
+        </button>
+        <button type="button" class="btn-estado" data-estado="nao_aplicar" data-item="rocket-remarketing" role="radio" aria-checked="false">
+          Não vou aplicar
+        </button>
+        <button type="button" class="btn-estado" data-estado="adiar" data-item="rocket-remarketing" role="radio" aria-checked="false">
+          Adiar
+        </button>
+        <button type="button" class="btn-estado" data-estado="manter" data-item="rocket-remarketing" role="radio" aria-checked="false">
+          Manter como está
+        </button>
+    </div>
+    <div class="decisao__campo" data-campo-de="rocket-remarketing" hidden>
+      <label for="campo-rocket-remarketing"></label>
+      <textarea id="campo-rocket-remarketing" rows="2"></textarea>
+    </div>
+  </div>
+      
+    </div>
+  </article></div>
+  </section><section class="secao" id="canal-google">
+      <h2>03 · Google Ads</h2>
+      <p class="canal-ausente"><em>Não entrou nesta análise.</em> Não houve extração do Google Ads nesta semana. As campanhas seguem rodando, apenas não foram avaliadas aqui.</p>
+    </section>
+      <section class="secao" id="podios">
+    <h2 data-titulo-sumario>Pódios de criativo</h2>
+    
+    <div class="podio-categoria">
+      <h3>🎣 Melhor gancho</h3>
+      <p class="podio-explica">Quem segura o scroll. Só vídeo.</p>
+      <div class="podio-cards">
+        
+          <div class="podio-card">
+            <p class="podio-pos">1º</p>
+            <p class="podio-nome">ad22|vid|continuo|VÍDEO 04 - LINHA CARE (WERYKA)</p>
+            <p class="podio-formato">vídeo</p>
+            <ul class="podio-metricas">
+              <li>Investimento: R$ 774,66</li>
+              <li>Impressões: 25.393</li>
+              <li>Thumbstop: 26,2%</li>
+              <li>CTR: 2,13%</li>
+              <li>ROAS LC: 2,77</li>
+              <li>ROAS FC: 1,18</li>
+              <li>ROAS ASSIST: 4,17</li>
+            </ul>
+          </div>
+      </div>
+    </div>
+    
+    <details class="podios-fora"><summary>Fora dos pódios (1)</summary>
+        <p class="nota">Ficar de fora quase sempre é falta de entrega, não falta de resultado.</p>
+        <ul><li><strong>ad39|img|continuo|O problema do odor que sempre volta| Criativo</strong> · 2 dias no ar · abaixo de 3</li></ul>
+      </details>
+  </section>
+      <section class="secao secao--diagnostico"><details class="hierarquia" >
+        <summary>Hierarquia da reconstrução</summary>
+        <p>Cobertura: 100% · 101 dias únicos</p>
+        <p>Cobertura completa nesta semana.</p>
+      </details><details class="nomes-repetidos" open><summary>Nomes repetidos entre estruturas (1)</summary>
+        <p class="nota">O sistema não vê a miniatura do criativo e por isso não pode decidir sozinho se é o mesmo arquivo.</p>
+        <table><thead><tr><th>Nome</th><th>Onde aparece</th><th>Investido</th></tr></thead><tbody>
+          <tr><td>ad24|vid|continuo|CONDICONADOR HIDRATANTE PRO| Weryka AXOLY</td><td>CJ_05_...V1<br>CJ_05_...V2</td><td>R$ 1.539,47</td></tr>
+        </tbody></table>
+      </details></section>
+      <section class="secao" id="glossario">
+    <h2>05 · Glossário</h2>
+    <details><summary>Ver termos (43)</summary>
+      <dl class="glossario">
+        <dt id="termo-roas-lc-ultimo-clique">ROAS LC (último clique)</dt><dd>Credita 100% ao último canal acessado antes da compra, seja pago, orgânico ou direto. É a régua de decisão da casa, saudável a partir de 2,0x.</dd><dt id="termo-roas-fc-primeiro-clique">ROAS FC (primeiro clique)</dt><dd>Credita 100% da venda ao primeiro canal da jornada. Mostra quem traz gente nova. Regra da casa: é leitura de topo de funil, não serve para escalar.</dd><dt id="termo-roas-assist-assistida">ROAS ASSIST (assistida)</dt><dd>Credita 100% a todos os canais que participaram da jornada. Multiplica crédito, a soma passa de 100%, então nunca é comparada com a meta, só como razão ASSIST ÷ LC.</dd><dt id="termo-roas-lc-pago">ROAS LC pago</dt><dd>Credita ao último canal pago, descartando orgânico e direto. Quando fica bem acima do LC, a venda fechou fora da mídia paga.</dd><dt id="termo-roas-markov">ROAS Markov</dt><dd>Simula remover o canal e mede quanto a conversão cai. Mede incrementalidade, não reparte a mesma receita, não é comparável com a meta de ROAS.</dd><dt id="termo-roas-diluido">ROAS diluído</dt><dd>O ROAS se reparte entre os itens do nível de baixo. Um anúncio com ROAS 0 dentro de um grupo com ROAS 5 não é necessariamente um anúncio ruim, julgar sem olhar o grupo gera pausa indevida.</dd><dt id="termo-mer">MER</dt><dd>Receita total da loja ÷ investimento total em mídia. Não depende de atribuição, é o número que decide verba total, enquanto o ROAS decide criativo.</dd><dt id="termo-ctr">CTR</dt><dd>Cliques ÷ impressões. Mede se o criativo atrai clique.</dd><dt id="termo-cpm">CPM</dt><dd>Custo por mil impressões. Sobe com leilão competitivo ou público saturado.</dd><dt id="termo-cps">CPS</dt><dd>Custo por sessão, investimento ÷ sessões no site.</dd><dt id="termo-ticket-medio">Ticket médio</dt><dd>Receita ÷ número de vendas.</dd><dt id="termo-connectrate">ConnectRate</dt><dd>Sessões ÷ cliques. Abaixo de ~80% indica página lenta, link errado ou abandono no carregamento. Acima de 100% costuma ser visita de retorno do mesmo usuário, não erro.</dd><dt id="termo-frequencia">Frequência</dt><dd>Quantas vezes a mesma pessoa viu o anúncio. Limite de referência da casa: 3 em prospecção, 5 em remarketing.</dd><dt id="termo-thumbstop">Thumbstop</dt><dd>Quem viu 3 segundos ÷ quem recebeu a impressão. Mede atenção, a primeira barreira do criativo, sem thumbstop não há CTR nem ROAS. Só existe em vídeo.</dd><dt id="termo-piso-de-significancia">Piso de significância</dt><dd>Volume mínimo para a métrica valer, referência da casa: 1.000 impressões para CTR e 50 cliques para conversão. Abaixo disso o número é acaso.</dd><dt id="termo-janela-de-analise">Janela de análise</dt><dd>Hoje nunca entra (dia incompleto). Padrão: os últimos dias com dado, sempre comparados com o mesmo tamanho de janela imediatamente anterior.</dd><dt id="termo-evidencia-acumulada">Evidência acumulada</dt><dd>Volume somado numa janela maior (normalmente 30 dias) do que a de decisão (normalmente 7), usado para sustentar veredito de conversão quando a janela curta tem poucos cliques.</dd><dt id="termo-salvo-pela-venda">Salvo pela venda</dt><dd>O item bate a meta com um pedido grande e fica abaixo dela sem ele. O ROAS que se repete é o &quot;sem essa venda&quot;, não é motivo para escalar em cima de um pedido só.</dd><dt id="termo-podio-de-criativo">Pódio de criativo</dt><dd>Ranking de criativo para o time de criação, numa janela de 30 dias. Pódios separados por pergunta (gancho, chamada, fechador, abridor, influenciador) porque um score único somaria modelos de escalas diferentes.</dd><dt id="termo-completo-papel-na-jornada">completo (papel na jornada)</dt><dd>Abre e fecha, primeiro clique e último clique acima da meta. O mais seguro para receber verba.</dd><dt id="termo-fechador-papel-na-jornada">fechador (papel na jornada)</dt><dd>Último clique acima da meta, fecha venda sozinho.</dd><dt id="termo-gerador-papel-na-jornada">gerador (papel na jornada)</dt><dd>Último clique abaixo da meta, mas primeiro clique acima. Abre jornada que fecha em outro canal, nunca pausar pelo último clique, e também não escalar por ele.</dd><dt id="termo-assistente-papel-na-jornada">assistente (papel na jornada)</dt><dd>Não abre nem fecha, mas participa de muitas jornadas (assistida acima de 2x o último clique). Regra da casa: assistida sozinha não sustenta investimento.</dd><dt id="termo-colhedor-papel-na-jornada">colhedor (papel na jornada)</dt><dd>Fecha bem mas quase não abre jornada, esperado em busca de marca e remarketing muito qualificado.</dd><dt id="termo-fraco-papel-na-jornada">fraco (papel na jornada)</dt><dd>Abaixo da meta nos três modelos de atribuição, candidato a pausa, respeitados piso de volume e janela mínima.</dd><dt id="termo-consistente-situacao">consistente (situação)</dt><dd>Vendeu nas duas semanas seguidas, único estado que dá segurança para escalar.</dd><dt id="termo-comecou-situacao">começou (situação)</dt><dd>Vendeu só nesta semana, não na anterior. Ainda não é histórico o bastante para decidir com segurança.</dd><dt id="termo-parou-situacao">parou (situação)</dt><dd>Vendia na semana anterior e não vendeu nesta, investigar antes de agir.</dd><dt id="termo-seco-situacao">seco (situação)</dt><dd>Gastou acima do piso nas duas semanas e não vendeu em nenhuma.</dd><dt id="termo-sem-volume-situacao">sem_volume (situação)</dt><dd>Não vendeu, mas o investimento foi baixo demais para concluir qualquer coisa, não é sinal de bom nem de ruim.</dd><dt id="termo-escalar-decisao">escalar (decisão)</dt><dd>Subir verba, como regra, 20% a cada 48h, nunca dobrar de uma vez.</dd><dt id="termo-reduzir-decisao">reduzir (decisão)</dt><dd>Diminuir a verba sem tirar do ar.</dd><dt id="termo-manter-decisao">manter (decisão)</dt><dd>Deixar como está e observar mais uma janela, sem gargalo identificado, ou sem base para mexer.</dd><dt id="termo-ajustar-decisao">ajustar (decisão)</dt><dd>Gargalo identificado na estrutura (não só na verba), um ajuste por vez, para não misturar causas.</dd><dt id="termo-pausar-decisao">pausar (decisão)</dt><dd>Desligar. Exige causa raiz registrada e um mínimo de dias/histórico de evidência (varia por conta, ver auditoria do relatório).</dd><dt id="termo-chupim-bom">chupim_bom</dt><dd>Domina a verba do conjunto e performa. Pausá-lo custa o melhor anúncio, mas é a única forma de dar chance aos outros acumularem dado.</dd><dt id="termo-chupim-ruim">chupim_ruim</dt><dd>Domina a verba do conjunto e está abaixo da meta, consome entrega e não entrega resultado.</dd><dt id="termo-sufocado">sufocado</dt><dd>Recebeu menos de ~10% da verba do conjunto havendo um item dominante. Não pode ser julgado como fraco, nunca teve chance de provar nada.</dd><dt id="termo-sustentacao-roas-lc-zero">Sustentação (ROAS LC zero)</dt><dd>Quando o último clique é zero, a pergunta é se primeiro clique e assistida sustentam a presença do item na jornada. Sustentação autoriza manter, nunca escalar.</dd><dt id="termo-perda-por-orcamento-google">Perda por orçamento (Google)</dt><dd>A campanha deixou de aparecer no leilão por falta de verba, pede mais orçamento.</dd><dt id="termo-perda-por-classificacao-google">Perda por classificação (Google)</dt><dd>Deixou de aparecer por lance baixo, qualidade fraca do anúncio ou experiência de página ruim, não adianta subir verba.</dd><dt id="termo-roas-lc">ROAS LC</dt><dd>Último clique · a régua de decisão da casa, saudável a partir de 2,0x.</dd><dt id="termo-roas-assist">ROAS ASSIST</dt><dd>Assistida · credita a todos os canais da jornada, nunca comparado com a meta.</dd>
+      </dl>
+    </details>
+  </section>
+      <section class="secao" id="ressalvas">
+    <h2>06 · Ressalvas de dado</h2>
+    <div class="ressalvas">
+      <div class="ressalva"><p class="ressalva__titulo">ConnectRate acima de 1,0</p><p>A Nemu conta visitas de retorno do mesmo usuário · não é erro.</p></div>
+    </div>
+  </section>
+      <section class="secao" id="auditoria">
+    <h2>07 · Revisão do relatório</h2>
+    <p class="secao-sub">Temos o direito de afirmar isto?</p>
+    <div class="auditoria"><div class="auditoria__item"><p><strong>🟡 Poder estatístico desta janela</strong></p><p>65 vendas somando os canais, contra as ~100 de referência de mercado.</p></div></div>
+  </section>
+      <details class="proveniencia"><summary>Proveniência · como reproduzir este relatório</summary>
+    <table><tbody>
+      <tr><th>Gerado em</th><td>2026-09-15 14:32</td></tr>
+      <tr><th>Fonte de verdade</th><td>nemu</td></tr>
+      <tr><th>Metas</th><td>roas_geral: 2 · roas_remarketing: 2.5 · cps_max: 3</td></tr>
+      <tr><th>Arquivos</th><td>meta-ads-daily-[2026-09-07_2026-09-13].csv</td></tr>
+    </tbody></table>
+  </details>
+
+      <section class="secao exportar" id="exportar">
+        <h2>08 · Exportar decisões</h2>
+        <p class="secao-sub">Fecha o ciclo: o que você decidir aqui volta para a próxima análise.</p>
+        <div class="exportar__botoes">
+          <button type="button" id="btn-copiar">📋 Copiar tudo</button>
+          <button type="button" id="btn-whatsapp">💬 Enviar no WhatsApp</button>
+        </div>
+        <pre id="preview-copiar" hidden></pre>
+      </section>
+    </main>
+  </div>
+
+  <div id="progresso">
+    <span class="texto">0 de 0 decisões</span>
+    <div class="barra"><div class="barra__fill"></div></div>
+  </div>
+</div>
+
+<script>
+
+const ESTADOS = {
+  aplicar:     { rotulo: "Aplicar completamente", cor: "verde",   exige: null },
+  parcial:     { rotulo: "Aplicar parcialmente",  cor: "ambar",   exige: "observacao", dica: "O que você vai fazer e o que fica de fora?" },
+  nao_aplicar: { rotulo: "Não vou aplicar",       cor: "vermelho",exige: "motivo",     dica: "Por quê? Isto impede a próxima análise de repetir." },
+  adiar:       { rotulo: "Adiar",                 cor: "azul",    exige: "quando",     dica: "Para quando, ou esperando o quê?" },
+  manter:      { rotulo: "Manter como está",      cor: "cinza",   exige: null },
+};
+
+const SLUG = "2026-09-13-bubbles-semana-37";
+const SENHA = "mariane";
+const WHATSAPP = "5514981287761";
+const ITENS = [{"id":"gx-cj08","nivel":"conjunto","canal":"Meta Ads","campanha":"GX_COMPRA_ADV_ABO_INTERNO-BUBBLES_TODOS_OS_PRODUTOS_E_LINHAS","nome":"CJ_08_INTERNO-BUBBLES_AD_TOP_ESTADOS_PRO_PERFUMES-06.07.2026","acao":"↑ Escalar 20%","verba":{"atual":28,"sugerida":34.28,"anterior":28.8,"variacao_pct":20},"motivos":["É o único conjunto que vendeu nas duas semanas seguidas.","O investimento ficou praticamente igual e as vendas subiram de 2 para 3."]},{"id":"gx-cj08-ad12","nivel":"anuncio","canal":"Meta Ads","campanha":"GX_COMPRA_ADV_ABO_INTERNO-BUBBLES_TODOS_OS_PRODUTOS_E_LINHAS","nome":"ad12|img|pontual|CRIATIVO 02 - MINI PERFUMES","acao":"↑ Escalar 20%","verba":{"atual":25.33,"sugerida":30.25,"anterior":10.06,"variacao_pct":20},"motivos":["É o anúncio que está sustentando sozinho o resultado do conjunto."]},{"id":"gx-cj09","nivel":"conjunto","canal":"Meta Ads","campanha":"GX_COMPRA_ADV_ABO_INTERNO-BUBBLES_TODOS_OS_PRODUTOS_E_LINHAS","nome":"CJ_09_INTERNO-BUBBLES_AD_TOP_ESTADOS_PRO-V2","acao":"→ Manter e testar concentração","verba":{"atual":30,"sugerida":30,"anterior":16.3,"variacao_pct":0},"motivos":["ROAS LC acima do piso de saúde de 2,0, mas a semana anterior fechou em zero venda.","ConnectRate de 100% é o melhor da campanha."]},{"id":"rocket-remarketing","nivel":"campanha","canal":"Meta Ads","campanha":"ROCKET_COMPRA_REMARKETING-09.07.2026_2","nome":"ROCKET_COMPRA_REMARKETING-09.07.2026_2","acao":"↓ Reduzir para R$ 70","verba":{"atual":135,"sugerida":70,"anterior":135,"variacao_pct":-48.1},"motivos":["A meta de remarketing da casa é 3,6 e ele entrega 0,36.","Parou de vender na comparação entre semanas."]}];
+const URL_RELATORIO = "";
+const CHAVE_STORAGE = 'plano:' + SLUG;
+const CHAVE_GATE = 'plano-acesso:' + SLUG;
+const CHAVE_AVISO = 'plano-aviso-desktop:' + SLUG;
+
+/* AVISO DE SEGURANÇA: esta proteção é de conveniência, não de segurança real.
+   A senha está visível no código-fonte desta página. Serve para evitar acesso
+   casual ao documento, não protege contra alguém determinado a ler. */
+(function gate(){
+  const gate = document.getElementById('gate');
+  const shell = document.getElementById('shell');
+  const input = document.getElementById('gate-input');
+  const btn = document.getElementById('gate-btn');
+  const erro = document.getElementById('gate-erro');
+
+  function abrir(){
+    gate.classList.add('is-open');
+    shell.classList.add('is-revealed');
+  }
+
+  try {
+    if (localStorage.getItem(CHAVE_GATE) === '1') { abrir(); }
+  } catch(e) {}
+
+  function tentar(){
+    if (input.value === SENHA) {
+      try { localStorage.setItem(CHAVE_GATE, '1'); } catch(e) {}
+      abrir();
+    } else {
+      erro.textContent = 'Senha incorreta.';
+      erro.classList.add('is-visible');
+    }
+  }
+  btn.addEventListener('click', tentar);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tentar(); });
+})();
+
+/* Aviso de desktop (PARTE 2.3) */
+(function avisoDesktop(){
+  const aviso = document.getElementById('aviso-desktop');
+  if (!aviso) return;
+  try {
+    if (localStorage.getItem(CHAVE_AVISO) === '1') { aviso.hidden = true; return; }
+  } catch(e) {}
+  const fechar = () => {
+    aviso.hidden = true;
+    try { localStorage.setItem(CHAVE_AVISO, '1'); } catch(e) {}
+  };
+  aviso.querySelector('button')?.addEventListener('click', fechar);
+  if (window.innerWidth >= 1100) setTimeout(fechar, 6000);
+})();
+
+/* Estado de decisão */
+function lerEstado(){
+  try {
+    const raw = localStorage.getItem(CHAVE_STORAGE);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) { return {}; }
+}
+function gravarEstado(estado){
+  try { localStorage.setItem(CHAVE_STORAGE, JSON.stringify(estado)); } catch(e) {}
+}
+let ESTADO = lerEstado();
+
+function itemCompleto(id){
+  const s = ESTADO[id];
+  if (!s || !s.estado) return false;
+  const config = ESTADOS[s.estado];
+  if (config && config.exige) return !!(s[config.exige] && s[config.exige].trim().length > 0);
+  return true;
+}
+
+function atualizarBotoes(id){
+  const s = ESTADO[id] || {};
+  document.querySelectorAll('.btn-estado[data-item="'+id+'"]').forEach((b) => {
+    const ativo = b.dataset.estado === s.estado;
+    b.setAttribute('aria-checked', ativo ? 'true' : 'false');
+  });
+  const pulso = document.querySelector('[data-pulso-de="'+id+'"]');
+  if (pulso) pulso.style.display = s.estado ? 'none' : '';
+  const campoWrap = document.querySelector('.decisao__campo[data-campo-de="'+id+'"]');
+  if (!campoWrap) return;
+  const config = s.estado ? ESTADOS[s.estado] : null;
+  if (config && config.exige) {
+    campoWrap.hidden = false;
+    campoWrap.querySelector('label').textContent = config.dica || '';
+    const ta = campoWrap.querySelector('textarea');
+    ta.value = s[config.exige] || '';
+  } else {
+    campoWrap.hidden = true;
+  }
+}
+
+function atualizarSumario(){
+  const porSecaoOuCampanha = {};
+  for (const it of ITENS) {
+    porSecaoOuCampanha[it.id] = itemCompleto(it.id);
+  }
+  document.querySelectorAll('[data-toc-estado]').forEach((el) => {
+    const id = el.dataset.tocEstado;
+    // campanha: olha o próprio item; seção de canal: olha todos os itens daquele canal
+    const secaoCanal = document.getElementById(id);
+    let estadoTexto = '';
+    if (secaoCanal && secaoCanal.classList.contains('secao')) {
+      const idsDoCanal = ITENS.filter((it) => it.id.startsWith(id.replace('canal-','')) || true).map((it)=>it.id);
+      // fallback simples: se a seção é de canal, usamos apenas os ids de campanhas dentro dela
+    }
+    if (ITENS.find((it) => it.id === id)) {
+      estadoTexto = itemCompleto(id) ? '●' : (ESTADO[id] && ESTADO[id].estado ? '◐' : '○');
+    }
+    el.textContent = estadoTexto;
+  });
+}
+
+function atualizarProgresso(){
+  const total = ITENS.length;
+  const decididos = ITENS.filter((it) => itemCompleto(it.id)).length;
+  const pendenteMotivo = ITENS.filter((it) => ESTADO[it.id] && ESTADO[it.id].estado && !itemCompleto(it.id)).length;
+  const fill = document.querySelector('#progresso .barra__fill');
+  const texto = document.querySelector('#progresso .texto');
+  if (fill) fill.style.width = (total ? (decididos/total*100) : 0) + '%';
+  if (texto) texto.textContent = decididos + ' de ' + total + ' decisões' + (pendenteMotivo ? '  ·  ' + pendenteMotivo + ' aguardando motivo' : '');
+}
+
+function definirEstado(id, estado){
+  ESTADO[id] = ESTADO[id] || {};
+  ESTADO[id].estado = estado;
+  gravarEstado(ESTADO);
+  atualizarBotoes(id);
+  atualizarSumario();
+  atualizarProgresso();
+}
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.btn-estado');
+  if (btn) { definirEstado(btn.dataset.item, btn.dataset.estado); return; }
+});
+
+document.addEventListener('input', (e) => {
+  const ta = e.target.closest('.decisao__campo textarea');
+  if (!ta) return;
+  const wrap = ta.closest('.decisao__campo');
+  const id = wrap.dataset.campoDe;
+  const s = ESTADO[id] || {};
+  const config = s.estado ? ESTADOS[s.estado] : null;
+  if (config && config.exige) {
+    s[config.exige] = ta.value;
+    ESTADO[id] = s;
+    gravarEstado(ESTADO);
+    atualizarProgresso();
+  }
+});
+
+// Estado inicial de cada controle
+document.querySelectorAll('.decisao').forEach((d) => atualizarBotoes(d.dataset.item));
+atualizarSumario();
+atualizarProgresso();
+
+/* Scrollspy do sumário */
+(function scrollspy(){
+  const secoesENos = Array.from(document.querySelectorAll('.secao, .no--campanha'));
+  if (!secoesENos.length) return;
+  const links = document.querySelectorAll('.toc__list a');
+  const observer = new IntersectionObserver((entradas) => {
+    const visivel = entradas.find((en) => en.isIntersecting);
+    if (!visivel) return;
+    links.forEach((l) => l.classList.toggle('is-active', l.dataset.tocAlvo === visivel.target.id));
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  secoesENos.forEach((el) => observer.observe(el));
+})();
+
+/* Sumário: drawer mobile */
+(function tocDrawer(){
+  const toc = document.getElementById('sumario');
+  const toggle = document.getElementById('toc-toggle');
+  const backdrop = document.getElementById('toc-backdrop');
+  if (!toc || !toggle) return;
+  function abrir(v){
+    toc.classList.toggle('is-open', v);
+    backdrop.classList.toggle('is-open', v);
+    toggle.setAttribute('aria-expanded', v ? 'true' : 'false');
+  }
+  toggle.addEventListener('click', () => abrir(!toc.classList.contains('is-open')));
+  backdrop.addEventListener('click', () => abrir(false));
+  toc.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => abrir(false)));
+})();
+
+/* "Ver mais indicadores" — compacta a tabela até CTR, expande o resto sob demanda */
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.ver-mais-indicadores');
+  if (!btn) return;
+  const aberto = btn.getAttribute('aria-expanded') === 'true';
+  document.querySelectorAll('[data-extra-de="'+btn.dataset.tabela+'"]').forEach((tr) => { tr.hidden = aberto; });
+  btn.setAttribute('aria-expanded', aberto ? 'false' : 'true');
+  btn.textContent = aberto ? 'Ver mais indicadores ▾' : 'Ver menos indicadores ▴';
+});
+
+/* Expandir/recolher tudo + só pendentes */
+document.querySelectorAll('[data-acao-expandir]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const aberto = btn.dataset.acaoExpandir === 'expandir';
+    document.querySelectorAll('details.no--conjunto, details.no--anuncio').forEach((d) => { d.open = aberto; });
+  });
+});
+document.getElementById('filtro-pendentes')?.addEventListener('click', function(){
+  const ativo = this.getAttribute('aria-pressed') === 'true';
+  this.setAttribute('aria-pressed', ativo ? 'false' : 'true');
+  document.querySelectorAll('.no--conjunto, .no--anuncio, .no--campanha').forEach((no) => {
+    const id = no.id;
+    const completo = ITENS.find((it) => it.id === id) ? itemCompleto(id) : false;
+    no.style.display = (!ativo && completo) ? 'none' : '';
+  });
+});
+
+/* Exportação (PARTE 5) */
+function nomeEstado(estado){ return ESTADOS[estado] ? ESTADOS[estado].rotulo : estado; }
+function emojiEstado(estado){
+  return { aplicar:'✅', parcial:'🟡', nao_aplicar:'❌', adiar:'⏰', manter:'⚪' }[estado] || '⏳';
+}
+
+// "Copiar tudo" (PARTE 5.3) · sem limite de tamanho, todo item nos três níveis, inclusive
+// os mantidos — quem recebe executa sem abrir a página.
+function montarTextoCompleto(){
+  const linhas = [];
+  linhas.push('DECISÕES · ' + "Bubbles" + ' · ' + "07/09/2026" + ' a ' + "13/09/2026" + ' (' + "7 dias" + ')');
+  linhas.push('Revisado por ' + "Caio" + ' em ' + new Date().toLocaleDateString('pt-BR'));
+  linhas.push('');
+  const porCanal = {};
+  for (const it of ITENS) { (porCanal[it.canal] = porCanal[it.canal] || []).push(it); }
+  for (const canal in porCanal) {
+    linhas.push('═══ ' + canal.toUpperCase() + ' ═══');
+    const porCampanha = {};
+    for (const it of porCanal[canal]) { (porCampanha[it.campanha] = porCampanha[it.campanha] || []).push(it); }
+    for (const campanha in porCampanha) {
+      const itens = porCampanha[campanha];
+      linhas.push('');
+      linhas.push('━━ CAMPANHA: ' + campanha);
+      for (const it of itens) {
+        const s = ESTADO[it.id] || {};
+        const prefixo = it.nivel === 'campanha' ? '    ' : it.nivel === 'conjunto' ? '    ▸ CONJUNTO: ' : '        · ANÚNCIO: ';
+        linhas.push('');
+        if (it.nivel !== 'campanha') linhas.push(prefixo + it.nome);
+        linhas.push('      Sugerido: ' + (it.acao || '—'));
+        linhas.push('      Decisão:  ' + emojiEstado(s.estado) + ' ' + (s.estado ? nomeEstado(s.estado).toUpperCase() : 'SEM DECISÃO'));
+        const config = s.estado ? ESTADOS[s.estado] : null;
+        if (config && config.exige && s[config.exige]) {
+          linhas.push('      ' + config.dica.split('?')[0] + ': ' + s[config.exige]);
+        }
+      }
+    }
+    linhas.push('');
+  }
+  linhas.push('═══ RESUMO ═══');
+  const contagem = {};
+  for (const it of ITENS) { const e = (ESTADO[it.id] || {}).estado || 'sem_decisao'; contagem[e] = (contagem[e]||0)+1; }
+  for (const chave in ESTADOS) {
+    linhas.push(emojiEstado(chave) + ' ' + ESTADOS[chave].rotulo.padEnd(24,'.') + ' ' + (contagem[chave] || 0));
+  }
+  linhas.push('⏳ ' + 'Sem decisão'.padEnd(24,'.') + ' ' + (contagem['sem_decisao'] || 0));
+  return linhas.join('\n');
+}
+
+// Mensagem do WhatsApp (PARTE 5.2) · enxuta, com *negrito* e _itálico_ reais, agrupada por
+// canal → campanha. Itens mantidos viram uma linha de contagem; o detalhe fica no "Copiar
+// tudo". Emojis marcam o estado de cada item, para dar para ler rápido no celular.
+function montarMensagemWhatsapp(){
+  const linhas = [];
+  linhas.push('Oi! Revisei o relatório de ' + "Bubbles" + ' de ' + "07/09/2026" + ' a ' + "13/09/2026" + ' e as ações serão:');
+  linhas.push('');
+
+  const porCanal = {};
+  for (const it of ITENS) { (porCanal[it.canal] = porCanal[it.canal] || []).push(it); }
+  let mantidosTotal = 0;
+  let semDecisaoTotal = 0;
+
+  for (const canal in porCanal) {
+    const itensCanal = porCanal[canal];
+    const comAcao = itensCanal.filter((it) => {
+      const e = (ESTADO[it.id] || {}).estado;
+      return e && e !== 'manter';
+    });
+    mantidosTotal += itensCanal.filter((it) => (ESTADO[it.id] || {}).estado === 'manter').length;
+    semDecisaoTotal += itensCanal.filter((it) => !(ESTADO[it.id] || {}).estado).length;
+
+    linhas.push('*' + canal.toUpperCase() + '*');
+    if (comAcao.length === 0) {
+      linhas.push('_Nada com ação nova neste canal por enquanto._');
+      linhas.push('');
+      continue;
+    }
+    const porCampanha = {};
+    for (const it of comAcao) { (porCampanha[it.campanha] = porCampanha[it.campanha] || []).push(it); }
+    for (const campanha in porCampanha) {
+      linhas.push('');
+      linhas.push('*' + campanha + '*');
+      for (const it of porCampanha[campanha]) {
+        const s = ESTADO[it.id] || {};
+        linhas.push('• ' + emojiEstado(s.estado) + ' ' + (it.nivel !== 'campanha' ? it.nome : it.acao));
+        if (it.nivel !== 'campanha') linhas.push('  ' + (it.acao || ''));
+        const config = s.estado ? ESTADOS[s.estado] : null;
+        if (config && config.exige && s[config.exige]) {
+          linhas.push('  _' + s[config.exige] + '_');
+        }
+      }
+    }
+    linhas.push('');
+  }
+
+  if (mantidosTotal > 0) linhas.push('⚪ *MANTER COMO ESTÁ (' + mantidosTotal + ')* — os demais itens continuam como estão. Detalhe no texto copiado.');
+  if (semDecisaoTotal > 0) linhas.push('⏳ *' + semDecisaoTotal + ' item(ns) ainda sem decisão* neste envio.');
+  if (URL_RELATORIO) { linhas.push(''); linhas.push('🔗 ' + URL_RELATORIO); }
+
+  let texto = linhas.join('\n').replace(/\n{3,}/g, '\n\n');
+  const limite = 1500;
+  if (texto.length > limite) {
+    texto = texto.slice(0, limite).trim() + '\n\n_Lista completa no relatório e no texto copiado._';
+  }
+  return texto;
+}
+
+const previewEl = document.getElementById('preview-copiar');
+if (previewEl) { previewEl.hidden = false; previewEl.textContent = 'Clique em "Copiar tudo" para gerar o texto completo das decisões.'; }
+
+document.getElementById('btn-copiar')?.addEventListener('click', async () => {
+  const texto = montarTextoCompleto();
+  if (previewEl) { previewEl.textContent = texto; }
+  try {
+    await navigator.clipboard.writeText(texto);
+    const btn = document.getElementById('btn-copiar');
+    const original = btn.textContent;
+    btn.textContent = '✅ Copiado!';
+    setTimeout(() => { btn.textContent = original; }, 2000);
+  } catch(e) {}
+});
+
+document.getElementById('btn-whatsapp')?.addEventListener('click', () => {
+  const msg = montarMensagemWhatsapp();
+  window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+});
+</script>
+</body>
+</html>

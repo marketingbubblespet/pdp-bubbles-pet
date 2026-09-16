@@ -65,6 +65,33 @@ const pages = [
   },
 ]
 
+// Relatórios de mídia paga: dois tipos diferentes, por isso ficam numa seção à parte da
+// lista de LPs acima. `tipo: 'rota'` é uma página Next.js de verdade (clicável, /planos).
+// `tipo: 'gerado'` é um arquivo HTML estático do scripts/gerar-relatorio.mjs, copiado pra
+// public/relatorios/ pra ficar servido pelo próprio Next.js — funciona igual em
+// localhost:3000 e, depois do deploy, no domínio de produção (o gerador continua
+// escrevendo em output/ também; a cópia em public/ é o que fica navegável pelo site).
+const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; description: string }> = [
+  {
+    tipo: 'rota',
+    href: '/planos',
+    label: 'Planos de ação (Next.js, descontinuado)',
+    description: 'Protótipo em Next.js do revisor de mídia paga. Substituído pelo gerador estático abaixo — deixado no ar sem novos investimentos.',
+  },
+  {
+    tipo: 'gerado',
+    href: '/relatorios/bubbles-2026-09-13/index.html',
+    label: 'Relatório · Bubbles · semana 07 a 13/09',
+    description: 'Gerado por scripts/gerar-relatorio.mjs a partir de projetos/relatorio-bubbles/entrada.md (senha própria).',
+  },
+  {
+    tipo: 'gerado',
+    href: '/relatorios/bubbles-2026-09-13-v2/index.html',
+    label: 'Relatório · Bubbles · semana 07 a 13/09 (v2, comparação de ajustes)',
+    description: 'Segunda versão gerada com os ajustes de glossário/cor/tabela, numa pasta separada para comparar com a de cima.',
+  },
+]
+
 const PASSWORD = 'mariane'
 const SESSION_KEY = 'sitemap_unlocked'
 
@@ -175,6 +202,35 @@ export default function Sitemap() {
                 </div>
                 <span style={{ color: '#E8649A', fontSize: 18, marginLeft: 16 }}>→</span>
               </Link>
+            </li>
+          ))}
+        </ul>
+
+        <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E8649A', margin: '48px 0 8px' }}>
+          Relatórios de mídia paga
+        </p>
+        <p style={{ fontSize: 13, color: '#6B7280', marginBottom: 16 }}>
+          Revisão semanal de campanhas. Os &quot;gerados&quot; são HTML estático servido pelo próprio site, com senha própria.
+        </p>
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {relatorios.map((r) => (
+            <li key={r.href}>
+              <a
+                href={r.href}
+                target={r.tipo === 'gerado' ? '_blank' : undefined}
+                rel={r.tipo === 'gerado' ? 'noopener noreferrer' : undefined}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  background: '#fff', border: r.tipo === 'gerado' ? '1px dashed #E5E7EB' : '1px solid #E5E7EB',
+                  borderRadius: 10, padding: '16px 20px', textDecoration: 'none',
+                }}
+              >
+                <div>
+                  <p style={{ fontSize: 15, fontWeight: 600, color: '#0F0C0D', margin: 0 }}>{r.label}</p>
+                  <p style={{ fontSize: 13, color: '#6B7280', margin: '2px 0 0' }}>{r.description}</p>
+                </div>
+                <span style={{ color: '#E8649A', fontSize: 18, marginLeft: 16 }}>→</span>
+              </a>
             </li>
           ))}
         </ul>
