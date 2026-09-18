@@ -90,6 +90,18 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Relatório · Bubbles · semana 07 a 13/09 (v2, comparação de ajustes)',
     description: 'Segunda versão gerada com os ajustes de glossário/cor/tabela, numa pasta separada para comparar com a de cima.',
   },
+  {
+    tipo: 'gerado',
+    href: '/relatorios/bubbles-2026-09-16/index.html',
+    label: 'Relatório · Bubbles · semana 10 a 16/09 (unificado Meta + Google)',
+    description: 'Gerado a partir do .md real do projeto bubbles-gerador-de-ads (2026-09_unificado_semanal-7d.md), Meta e Google no mesmo relatório.',
+  },
+  {
+    tipo: 'rota',
+    href: '/planos/2026-09-16-bubbles-unificado',
+    label: 'Relatório (Next.js) · Bubbles · Meta + Google Ads · semana 10 a 16/09',
+    description: 'Mesmo .md de 16/09, Meta e Google juntos na mesma página, renderizado no sistema em Next.js (/planos) — senha própria.',
+  },
 ]
 
 const PASSWORD = 'mariane'

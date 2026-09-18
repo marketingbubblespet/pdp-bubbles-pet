@@ -39,11 +39,53 @@ function normalizarDatas(valor) {
   return valor
 }
 
-const raw = fs.readFileSync(entradaPath, 'utf8')
-const { data } = matter(raw)
-const relatorio = normalizarDatas(data)
+// O `id` de cada ação precisa ser único no relatório inteiro: ele vira o `id` do HTML
+// (âncora do sumário, alvo do scrollspy) e a chave do estado de decisão no localStorage.
+// Export sem quebra por campanha/conjunto (comum quando a plataforma não entrega esse
+// nível) já apareceu produzindo o MESMO id para toda campanha, todo conjunto e todo
+// anúncio de um canal inteiro — nesse caso, decidir um item decidiria todos os outros
+// que compartilham o id, silenciosamente. Deduplicamos aqui, na ordem em que os itens
+// aparecem no documento, para o gerador nunca depender de o `.md` de origem garantir
+// unicidade.
+function desduplicarIds(relatorio) {
+  const vistos = new Map()
+  function tornarUnico(item) {
+    if (!item || typeof item.id !== 'string') return
+    const contagem = vistos.get(item.id) ?? 0
+    vistos.set(item.id, contagem + 1)
+    if (contagem > 0) item.id = `${item.id}--dup${contagem}`
+  }
+  for (const canal of relatorio.canais ?? []) {
+    for (const campanha of canal.campanhas ?? []) {
+      tornarUnico(campanha)
+      for (const conjunto of campanha.conjuntos ?? []) {
+        tornarUnico(conjunto)
+        for (const anuncio of conjunto.anuncios ?? []) {
+          tornarUnico(anuncio)
+        }
+      }
+    }
+  }
+  return relatorio
+}
 
-const SENHA = senhaArg || 'mariane'
+// Blindagem de sintaxe YAML (não altera nenhum conteúdo, só a forma como é escrito):
+// um valor de `texto:` que começa com "- " (comum quando o texto original é uma lista
+// markdown de um item só, tipo "- **`ctr`** · 5 linha(s)...") é lido pelo YAML como o
+// início de uma nova sequência, não como string — e quebra o parser. Colocamos aspas
+// em volta do valor pra virar uma string de verdade, preservando o texto exatamente.
+function blindarYamlTextoComLista(raw) {
+  return raw.replace(/^(\s*texto: )(- .*)$/gm, (linhaInteira, prefixo, valor) => {
+    const escapado = valor.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+    return `${prefixo}"${escapado}"`
+  })
+}
+
+const raw = blindarYamlTextoComLista(fs.readFileSync(entradaPath, 'utf8'))
+const { data } = matter(raw)
+const relatorio = desduplicarIds(normalizarDatas(data))
+
+const SENHA = senhaArg || relatorio.senha || 'mariane'
 
 // ---------------------------------------------------------------------------
 // 2 · Utilitários de formatação (regra 0.1: null vira "—", nunca 0)
@@ -80,10 +122,12 @@ function fmtDateBR(iso) {
   return `${d}/${m}/${y}`
 }
 
-function fmtVariacao(pct) {
+// `sentido`: 'up' (subir é bom), 'down' (subir é ruim, ex: CPM/CPS) ou 'neutro' (sem cor).
+function fmtVariacao(pct, sentido = 'up') {
   if (pct === null || pct === undefined) return ''
   const seta = pct >= 0 ? '▲' : '▼'
-  const cls = pct >= 0 ? 'var-pos' : 'var-neg'
+  const positivo = sentido === 'down' ? pct < 0 : pct > 0
+  const cls = sentido === 'neutro' ? 'var-neutro' : positivo ? 'var-pos' : pct === 0 ? 'var-neutro' : 'var-neg'
   return `<span class="variacao ${cls}">${seta} ${fmtNum(Math.abs(pct), 1)}%</span>`
 }
 
@@ -124,23 +168,41 @@ const ESTADOS = {
 // isso a coluna fica ausente até o schema trazer o valor bruto.
 // ---------------------------------------------------------------------------
 
+// Terceiro elemento é o "sentido": 'up' = subir é bom (verde na alta, vermelho na queda),
+// 'down' = subir é ruim (CPM/CPS: vermelho na alta, verde na queda — pedido do Caio:
+// "CPM subir é indicador ruim" / "quando um CPS cai, isso é positivo"), 'neutro' = não é
+// indicador de performance por si só (investimento e ticket médio dependem de contexto
+// que o gerador não tem — não dá pra pintar "bom"/"ruim" sem inventar julgamento).
 const ORDEM_METRICAS = [
-  ['investimento', 'Investimento', fmtMoney],
-  ['vendas', 'Vendas', (v) => fmtNum(v, 0)],
-  ['ticket_medio', 'Ticket médio', fmtMoney],
-  ['cps', 'CPS', fmtMoney],
-  ['cpm', 'CPM', fmtMoney],
-  ['roas_lc', 'ROAS LC', (v) => fmtNum(v, 2)],
-  ['roas_fc', 'ROAS FC', (v) => fmtNum(v, 2)],
-  ['roas_assist', 'ROAS ASSIST', (v) => fmtNum(v, 2)],
-  ['ctr', 'CTR', (v) => fmtNum(v, 2) + '%'],
-  ['impressoes', 'Impressões', (v) => fmtNum(v, 0)],
-  ['sessoes', 'Sessões', (v) => fmtNum(v, 0)],
-  ['connect_rate', 'ConnectRate', (v) => fmtNum(v * 100, 1) + '%'],
+  ['investimento', 'Investimento', fmtMoney, 'neutro'],
+  ['vendas', 'Vendas', (v) => fmtNum(v, 0), 'up'],
+  ['ticket_medio', 'Ticket médio', fmtMoney, 'neutro'],
+  ['cps', 'CPS', fmtMoney, 'down'],
+  ['cpm', 'CPM', fmtMoney, 'down'],
+  ['roas_lc', 'ROAS LC', (v) => fmtNum(v, 2), 'up'],
+  ['roas_fc', 'ROAS FC', (v) => fmtNum(v, 2), 'up'],
+  ['roas_assist', 'ROAS ASSIST', (v) => fmtNum(v, 2), 'up'],
+  ['ctr', 'CTR', (v) => fmtNum(v, 2) + '%', 'up'],
+  ['impressoes', 'Impressões', (v) => fmtNum(v, 0), 'neutro'],
+  ['sessoes', 'Sessões', (v) => fmtNum(v, 0), 'neutro'],
+  ['connect_rate', 'ConnectRate', (v) => fmtNum(v * 100, 1) + '%', 'up'],
 ]
 // Linhas visíveis por padrão; o resto fica atrás do "ver mais indicadores" (compactação
 // pedida pelo Caio). CTR é a última linha sempre visível — o toggle mora ali do lado.
 const METRICA_CORTE = 'ctr'
+
+// ConnectRate calculado (sessões ÷ cliques), em vez do valor bruto da Nemu, que vem
+// passando de 100% — pedido explícito do Caio ("faça o cálculo baseado em sessões e
+// cliques"). É a ÚNICA métrica que o gerador recalcula: os dois insumos (sessões e
+// cliques) já são valores exatos e confiáveis do próprio frontmatter, então não é
+// "inventar" um número — é uma divisão direta de dois dados que já existem. Continua
+// desligado (usa o valor da Nemu) quando não há `evidencia.cliques` para dividir.
+function connectRateCalculado(metricas, evidencia) {
+  const sessoes = metricas?.sessoes?.valor
+  const cliques = evidencia?.cliques
+  if (sessoes == null || cliques == null || cliques <= 0) return null
+  return sessoes / cliques
+}
 
 // Glossário embutido no gerador: definições de casa que não dependem do relatório da
 // semana (ao contrário de `glossario` do frontmatter, que traz nuance específica daquele
@@ -148,7 +210,7 @@ const METRICA_CORTE = 'ctr'
 const GLOSSARIO_PADRAO = {
   'ROAS LC': 'Último clique · credita ao último canal acessado antes da compra. É a régua de decisão da casa, saudável a partir de 2,0x.',
   'ROAS FC': 'Primeiro clique · credita ao primeiro canal da jornada. Mostra quem traz gente nova, não serve para decidir escala.',
-  'ROAS ASSIST': 'Assistida · credita a venda inteira a todos os canais que participaram da jornada. Multiplica, por isso nunca é comparada com a meta — só como razão ASSIST ÷ LC.',
+  'ROAS ASSIST': 'Assistida · credita a venda inteira a todos os canais que participaram da jornada. Multiplica, por isso nunca é comparada com a meta, só como razão ASSIST ÷ LC.',
   CTR: 'Cliques ÷ impressões. Mede se o criativo atrai clique.',
   CPM: 'Custo por mil impressões. Sobe com leilão competitivo ou público saturado.',
   CPS: 'Custo por sessão · investimento ÷ sessões no site.',
@@ -164,27 +226,36 @@ function iconeAjuda(rotulo) {
 
 let _contadorTabelaMetricas = 0
 
-function metricasTable(metricas) {
+// `evidencia` é opcional: só é usada para recalcular o ConnectRate (sessões ÷ cliques).
+function metricasTable(metricas, evidencia) {
   if (!metricas) return ''
   _contadorTabelaMetricas += 1
   const idTabela = `metricas-${_contadorTabelaMetricas}`
+  const connectCalc = connectRateCalculado(metricas, evidencia)
   let depoisDoCorte = false
-  const linhas = ORDEM_METRICAS.map(([chave, rotulo, formatador]) => {
+  const linhas = ORDEM_METRICAS.map(([chave, rotulo, formatador, sentido]) => {
     const m = metricas[chave] ?? { valor: null, anterior: null, var_pct: null, meta: null }
+    const usaConnectCalculado = chave === 'connect_rate' && connectCalc != null
+    const valorExibido = usaConnectCalculado ? connectCalc : m.valor
     const destaque = chave === 'roas_lc' ? ' destaque' : ''
     const linhaOculta = depoisDoCorte
     if (chave === METRICA_CORTE) depoisDoCorte = true
     const meta = m.meta != null ? `<span class="meta-dist"> · meta ${esc(formatador(m.meta))}</span>` : ''
+    const avisoCalculado = usaConnectCalculado
+      ? ` <span class="tooltip" tabindex="0" data-tip="Calculado como sessões ÷ cliques neste relatório, não o valor bruto da Nemu — o dado da Nemu vinha passando de 100% aqui.">ⓘ calc.</span>`
+      : ''
+    // "Semana analisada" primeiro (a que importa pra decisão), "semana anterior" depois,
+    // mais claro/secundário — pedido do Caio.
     const anteriorCol = m.anterior != null ? `<td class="col-anterior">${orDash(m.anterior, formatador)}</td>` : ''
     return `<tr class="${destaque.trim()} ${linhaOculta ? 'linha-extra' : ''}" ${linhaOculta ? `data-extra-de="${idTabela}" hidden` : ''}>
-      <th scope="row">${esc(rotulo)}${iconeAjuda(rotulo)}</th>
+      <th scope="row">${esc(rotulo)}${iconeAjuda(rotulo)}${avisoCalculado}</th>
+      <td>${orDash(valorExibido, formatador)}${meta} ${fmtVariacao(m.var_pct, sentido)}</td>
       ${anteriorCol}
-      <td>${orDash(m.valor, formatador)}${meta} ${fmtVariacao(m.var_pct)}</td>
     </tr>`
   }).join('')
   const temColunaAnterior = ORDEM_METRICAS.some(([chave]) => metricas[chave]?.anterior != null)
   const cabecalho = temColunaAnterior
-    ? `<thead><tr><th scope="col"></th><th scope="col">Semana anterior</th><th scope="col">Semana analisada</th></tr></thead>`
+    ? `<thead><tr><th scope="col"></th><th scope="col">Semana analisada</th><th scope="col">Semana anterior</th></tr></thead>`
     : ''
   return `<div class="table-wrap">
     <table class="metricas" id="${idTabela}">${cabecalho}<tbody>${linhas}</tbody></table>
@@ -315,45 +386,113 @@ function badgeAcao(item) {
   return `<span class="acao-tag">${esc(item.acao ?? '')}</span>`
 }
 
+// Definições usadas nos ícones de ajuda dos badges de `situacao` (pedido do Caio: "esse
+// 'seco' está muito aleatório, precisa ter o I que explica"). Reaproveitadas também como
+// categoria "Situação" no glossário completo.
+const SITUACAO_DEFINICOES = {
+  consistente: 'Vendeu nas duas semanas seguidas, único estado que dá segurança para escalar.',
+  comecou: 'Vendeu só nesta semana, não na anterior. Ainda não é histórico o bastante para decidir com segurança.',
+  parou: 'Vendia na semana anterior e não vendeu nesta, investigar antes de agir.',
+  seco: 'Gastou acima do piso nas duas semanas e não vendeu em nenhuma.',
+  sem_volume: 'Não vendeu, mas o investimento foi baixo demais para concluir qualquer coisa, não é sinal de bom nem de ruim.',
+}
+
 function badgesContexto(item) {
   const partes = []
   if (item.tipo) partes.push(`<span class="tag">${esc(item.tipo)}</span>`)
   if (item.publico) partes.push(`<span class="tag">${esc(item.publico)}</span>`)
-  if (item.situacao) partes.push(`<span class="tag">${esc(item.situacao)}</span>`)
+  if (item.situacao) {
+    const def = SITUACAO_DEFINICOES[item.situacao]
+    partes.push(`<span class="tag">${esc(item.situacao)}${def ? ` <span class="tooltip" tabindex="0" data-tip="${esc(def)}">ⓘ</span>` : ''}</span>`)
+  }
   partes.push(seloLeitura(item.evidencia))
   return partes.join(' ')
 }
 
-function renderAnuncio(anuncio) {
-  const id = anuncio.id
-  return `<details class="no no--anuncio" id="${esc(id)}">
-    <summary>
-      <span class="no__nome">${esc(anuncio.nome)}</span>
-      ${anuncio.novo ? '<span class="tag tag--novo">novo</span>' : ''}
-      ${badgeAcao(anuncio)}
-      <span class="no__roas">ROAS LC ${orDash(anuncio.metricas?.roas_lc?.valor, (v) => fmtNum(v, 2))}</span>
-      ${seloLeitura(anuncio.evidencia)}
-      ${pulsoIndicador(id)}
-    </summary>
-    <div class="no__corpo">
-      <p class="no__badges">${badgesContexto(anuncio)}</p>
-      ${notaSemLeitura(anuncio.evidencia)}
-      ${blocoVerba(anuncio.verba)}
-      ${metricasTable(anuncio.metricas)}
-      ${blocoTexto(anuncio.motivos, 'Por que esta ação', 'motivos')}
-      ${blocoSinaisSuprimidos(anuncio.sinais_suprimidos)}
-      ${blocoTexto(anuncio.perguntas, 'Perguntas em aberto', 'perguntas')}
-      ${anuncio.expectativa ? `<p class="expectativa"><strong>O que esperamos:</strong> ${esc(anuncio.expectativa)}</p>` : ''}
-      ${anuncio.historico ? `<details class="historico"><summary>Histórico</summary><p>${esc(anuncio.historico)}</p></details>` : ''}
-      ${controlesDecisao(anuncio)}
-    </div>
+// "Causa raiz" existe no schema mas não era exibida em lugar nenhum — é a resposta mais
+// direta que o gerador tem pra "por que essa ação foi sugerida", então mostrar ela junto
+// do resumo de decisão ajuda mais do que só repetir o rótulo genérico ("⚙ Ajustar" sozinho
+// não diz nada — pedido do Caio).
+function causaRaizBloco(item) {
+  if (!item.causa_raiz) return ''
+  return `<p class="causa-raiz"><strong>Causa raiz:</strong> ${esc(item.causa_raiz)}</p>`
+}
+
+// Heurística de "sem dados neste período": nada de investimento nem de entrega. Não
+// afirmamos que foi "pausado" porque o schema não traz essa informação (nem data) — só
+// juntamos num grupo à parte pra não misturar com o que tem dado de verdade pra decidir.
+// Ver PEDIDO-OUTRO-PROJETO.md, pedido de campo `pausado`/`pausado_em` explícito.
+function estaSemDados(item) {
+  const m = item.metricas
+  const investimento = m?.investimento?.valor ?? 0
+  const impressoes = m?.impressoes?.valor ?? 0
+  return investimento === 0 && impressoes === 0
+}
+
+function blocoSemDados(itens, nivelLabel) {
+  if (!itens || itens.length === 0) return ''
+  return `<details class="sem-dados">
+    <summary>${nivelLabel} sem dados neste período (${itens.length})</summary>
+    <p class="nota">Sem investimento nem entrega na janela analisada. Pode ser pausa, pode ser conjunto/anúncio novo que ainda não rodou — o relatório não distingue os dois casos.</p>
+    <ul>${itens.map((i) => `<li>${esc(i.nome)}</li>`).join('')}</ul>
   </details>`
 }
 
+// Itens "consolidado da conta" (export sem quebra por campanha/conjunto) ganham um resumo
+// visual diferente — blocos coloridos em vez da árvore normal, porque não há filhos reais
+// pra abrir. Pedido do Caio. Detecção por enquanto é pelo nome (contém "consolidado da
+// conta"); o ideal é um campo explícito `consolidado: true` no schema — ver pedido.
+function ehConsolidado(item) {
+  return /consolidado da conta/i.test(item.nome ?? '')
+}
+
+function blocosConsolidado(item) {
+  const m = item.metricas ?? {}
+  const itens = [
+    ['Investimento', orDash(m.investimento?.valor, fmtMoney)],
+    ['Vendas', orDash(m.vendas?.valor, (v) => fmtNum(v, 0))],
+    ['Ticket médio', orDash(m.ticket_medio?.valor, fmtMoney)],
+    ['ROAS LC', orDash(m.roas_lc?.valor, (v) => fmtNum(v, 2))],
+    ['ROAS FC', orDash(m.roas_fc?.valor, (v) => fmtNum(v, 2))],
+    ['ROAS ASSIST', orDash(m.roas_assist?.valor, (v) => fmtNum(v, 2))],
+  ]
+  return `<div class="stat-blocos">
+    ${itens.map(([rotulo, valor]) => `<div class="stat-bloco"><p class="stat-bloco__rotulo">${esc(rotulo)}</p><p class="stat-bloco__valor">${valor}</p></div>`).join('')}
+  </div>`
+}
+
+// Anúncio não decide mais nada sozinho (pedido do Caio: "a análise deve ser feita pelo
+// conjunto, na parte de anúncio traga somente a tabela"). Uma linha por anúncio, sem
+// accordion, sem motivos, sem controles de decisão.
+function tabelaAnuncios(anuncios) {
+  if (!anuncios || anuncios.length === 0) return ''
+  const linhas = anuncios.map((a) => `
+    <tr id="${esc(a.id)}">
+      <td>${esc(a.nome)}${a.novo ? ' <span class="tag tag--novo">novo</span>' : ''}</td>
+      <td>${badgeAcao(a)}</td>
+      <td>${a.situacao ? esc(a.situacao) : '—'}</td>
+      <td>${orDash(a.metricas?.investimento?.valor, fmtMoney)}</td>
+      <td>${orDash(a.metricas?.vendas?.valor, (v) => fmtNum(v, 0))}</td>
+      <td>${orDash(a.metricas?.roas_lc?.valor, (v) => fmtNum(v, 2))}</td>
+      <td>${orDash(a.metricas?.ctr?.valor, (v) => fmtNum(v, 2) + '%')}</td>
+    </tr>`).join('')
+  return `<div class="table-wrap"><table class="tabela-anuncios">
+    <thead><tr><th>Anúncio</th><th>Sugestão</th><th>Situação</th><th>Investimento</th><th>Vendas</th><th>ROAS LC</th><th>CTR</th></tr></thead>
+    <tbody>${linhas}</tbody>
+  </table></div>`
+}
+
+// "Consolidado" muda só o RESUMO visual (blocos coloridos em vez da tabela padrão de
+// métricas) — nunca esconde os anúncios reais que existam dentro do conjunto. Um nome de
+// campanha/conjunto "consolidado" não significa que os filhos também são consolidados.
 function renderConjunto(conjunto) {
   const id = conjunto.id
-  const anuncios = (conjunto.anuncios ?? []).map(renderAnuncio).join('')
-  return `<details class="no no--conjunto" id="${esc(id)}">
+  const consolidado = ehConsolidado(conjunto)
+  const todosAnuncios = conjunto.anuncios ?? []
+  const anunciosAtivos = todosAnuncios.filter((a) => !estaSemDados(a))
+  const anunciosSemDados = todosAnuncios.filter(estaSemDados)
+
+  return `<details class="no no--conjunto ${consolidado ? 'no--consolidado' : ''}" id="${esc(id)}">
     <summary>
       <span class="no__nome">${esc(conjunto.nome)}</span>
       ${badgeAcao(conjunto)}
@@ -366,48 +505,60 @@ function renderConjunto(conjunto) {
       <p class="no__badges">${badgesContexto(conjunto)}</p>
       ${notaSemLeitura(conjunto.evidencia)}
       ${blocoSustentacao(conjunto.sustentacao)}
-      ${blocoVerba(conjunto.verba)}
-      ${metricasTable(conjunto.metricas)}
+      ${consolidado ? blocosConsolidado(conjunto) : `${blocoVerba(conjunto.verba)}${metricasTable(conjunto.metricas, conjunto.evidencia)}`}
+      ${causaRaizBloco(conjunto)}
       ${blocoTexto(conjunto.motivos, 'Por que esta ação', 'motivos')}
       ${blocoSinaisSuprimidos(conjunto.sinais_suprimidos)}
       ${blocoTexto(conjunto.perguntas, 'Perguntas em aberto', 'perguntas')}
       ${conjunto.expectativa ? `<p class="expectativa"><strong>O que esperamos:</strong> ${esc(conjunto.expectativa)}</p>` : ''}
       ${conjunto.historico ? `<details class="historico"><summary>Histórico</summary><p>${esc(conjunto.historico)}</p></details>` : ''}
       ${controlesDecisao(conjunto)}
-      ${anuncios ? `<div class="filhos">${anuncios}</div>` : ''}
+      ${anunciosAtivos.length > 0 ? `<div class="anuncios-do-conjunto"><p class="anuncios-do-conjunto__titulo">Anúncios deste conjunto</p>${tabelaAnuncios(anunciosAtivos)}</div>` : ''}
+      ${blocoSemDados(anunciosSemDados, 'Anúncios')}
     </div>
   </details>`
 }
 
-// A campanha é só contexto/resumo — os botões de decisão moram nos conjuntos (e nos
-// anúncios). Exceção: campanha sem nenhum conjunto cadastrado (estrutura achatada) não
-// teria onde decidir, então ela mesma vira o item decidível nesse caso raro.
+// A campanha é só contexto/resumo — os botões de decisão moram nos conjuntos. Exceção:
+// campanha sem nenhum conjunto cadastrado (estrutura achatada) não teria onde decidir,
+// então ela mesma vira o item decidível nesse caso raro.
+// Idem: "consolidado" só troca o resumo visual da campanha (blocos coloridos em vez da
+// tabela padrão) — os conjuntos reais dela, se existirem, continuam sendo renderizados
+// normalmente logo abaixo. Só quando não há NENHUM conjunto (`semConjuntos`) é que a
+// campanha vira o próprio item decidível.
 function renderCampanha(campanha) {
   const id = campanha.id
   const semConjuntos = (campanha.conjuntos ?? []).length === 0
-  const conjuntos = (campanha.conjuntos ?? []).map(renderConjunto).join('')
-  return `<article class="no no--campanha" id="${esc(id)}">
+  const consolidado = ehConsolidado(campanha)
+
+  const todosConjuntos = campanha.conjuntos ?? []
+  const conjuntosAtivos = todosConjuntos.filter((c) => !estaSemDados(c))
+  const conjuntosSemDados = todosConjuntos.filter(estaSemDados)
+  const conjuntosHtml = conjuntosAtivos.map(renderConjunto).join('')
+
+  return `<article class="no no--campanha ${consolidado ? 'no--consolidado' : ''}" id="${esc(id)}">
     <header class="no__cabecalho">
       <h3 class="no__nome">${esc(campanha.nome)}</h3>
       <p class="no__badges">${badgesContexto(campanha)} ${badgeAcao(campanha)} ${semConjuntos ? pulsoIndicador(id) : ''}</p>
-      <p class="no__resumo">
+      ${!consolidado ? `<p class="no__resumo">
         ${orDash(campanha.metricas?.investimento?.valor, fmtMoney)} ·
         ${orDash(campanha.metricas?.vendas?.valor, (v) => fmtNum(v, 0) + ' vendas')} ·
         ROAS LC ${orDash(campanha.metricas?.roas_lc?.valor, (v) => fmtNum(v, 2))} ·
-        ${(campanha.conjuntos ?? []).length} conjunto(s)
-      </p>
+        ${todosConjuntos.length} conjunto(s)
+      </p>` : ''}
     </header>
     <div class="no__corpo">
       ${notaSemLeitura(campanha.evidencia)}
-      ${blocoVerba(campanha.verba)}
-      ${metricasTable(campanha.metricas)}
+      ${consolidado ? blocosConsolidado(campanha) : `${blocoVerba(campanha.verba)}${metricasTable(campanha.metricas, campanha.evidencia)}`}
+      ${causaRaizBloco(campanha)}
       ${blocoTexto(campanha.motivos, 'Por que esta ação', 'motivos')}
       ${blocoSinaisSuprimidos(campanha.sinais_suprimidos)}
       ${blocoTexto(campanha.perguntas, 'Perguntas em aberto', 'perguntas')}
       ${campanha.expectativa ? `<p class="expectativa"><strong>O que esperamos:</strong> ${esc(campanha.expectativa)}</p>` : ''}
       ${campanha.historico ? `<details class="historico"><summary>Histórico</summary><p>${esc(campanha.historico)}</p></details>` : ''}
       ${semConjuntos ? controlesDecisao(campanha) : ''}
-      ${conjuntos ? `<div class="filhos">${conjuntos}</div>` : ''}
+      ${conjuntosHtml ? `<div class="filhos">${conjuntosHtml}</div>` : ''}
+      ${blocoSemDados(conjuntosSemDados, 'Conjuntos')}
     </div>
   </article>`
 }
@@ -489,6 +640,7 @@ function renderPodios(podios) {
   const categorias = podios.lista.map((cat) => `
     <div class="podio-categoria">
       <h3>${esc(cat.titulo)}</h3>
+      ${cat.metrica_destaque ? `<p class="podio-criterio">Critério: <strong>${esc(cat.metrica_destaque)}</strong></p>` : ''}
       <p class="podio-explica">${esc(cat.explica ?? '')}</p>
       <div class="podio-cards">
         ${(cat.colocados ?? []).map((c) => `
@@ -536,19 +688,23 @@ function renderPodios(podios) {
 
 function renderDiagnostico(relatorio) {
   const { hierarquia, conciliacao, nomes_repetidos } = relatorio
-  const blocoHierarquia = hierarquia
+  // `hierarquia` pode vir como objeto vazio ({}) quando não há reconstrução pra medir —
+  // sem `cobertura` não tem o que mostrar, e mostrar "NaN%" seria pior que nada (regra 0.1).
+  const blocoHierarquia = hierarquia && hierarquia.cobertura != null
     ? `<details class="hierarquia" ${hierarquia.cobertura < 1 ? 'open' : ''}>
         <summary>Hierarquia da reconstrução</summary>
-        <p>Cobertura: ${fmtNum(hierarquia.cobertura * 100, 0)}% · ${fmtNum(hierarquia.dias_unicos, 0)} dias únicos</p>
-        <p>${esc(hierarquia.nota ?? '')}</p>
+        <p>Cobertura: ${fmtNum(hierarquia.cobertura * 100, 0)}% · ${orDash(hierarquia.dias_unicos, (v) => fmtNum(v, 0))} dias únicos</p>
+        ${hierarquia.nota ? `<p>${esc(hierarquia.nota)}</p>` : ''}
       </details>`
     : ''
 
+  // Campos reais do schema: `a`, `b`, `fecha`, `causa` — só isso, sem diferenca/confianca/
+  // solucao (esses nomes eram só um exemplo do prompt original, não vieram no dado real).
   const blocoConciliacao = (conciliacao ?? []).length > 0
     ? `<details class="conciliacao"><summary>Conciliação entre níveis (${conciliacao.length})</summary>
         <ul>${conciliacao.map((c) => c.fecha
-          ? `<li class="ok">${esc(c.rotulo_a)} × ${esc(c.rotulo_b)}: fecha.</li>`
-          : `<li><strong>${esc(c.rotulo_a)} × ${esc(c.rotulo_b)}</strong>: diferença de ${fmtMoney(c.diferenca)} (${fmtNum(c.diferenca_pct, 1)}%). Causa (${esc(c.confianca)}): ${esc(c.causa)}. ${esc(c.solucao ?? '')}</li>`
+          ? `<li class="ok">${esc(c.a)} × ${esc(c.b)}: fecha${c.causa ? ` (${esc(c.causa)})` : ''}.</li>`
+          : `<li><strong>${esc(c.a)} × ${esc(c.b)}</strong>: não fecha. ${esc(c.causa ?? '')}</li>`
         ).join('')}</ul>
       </details>`
     : ''
@@ -626,7 +782,10 @@ const GLOSSARIO_CATEGORIAS = {
     { termo: 'Sustentação (ROAS LC zero)', definicao: 'Quando o último clique é zero, a pergunta é se primeiro clique e assistida sustentam a presença do item na jornada. Sustentação autoriza manter, nunca escalar.' },
     { termo: 'Perda por orçamento (Google)', definicao: 'A campanha deixou de aparecer no leilão por falta de verba, pede mais orçamento.' },
     { termo: 'Perda por classificação (Google)', definicao: 'Deixou de aparecer por lance baixo, qualidade fraca do anúncio ou experiência de página ruim, não adianta subir verba.' },
+    { termo: 'CPM subindo', definicao: 'Sinal ruim: leilão mais caro ou público saturado. Ao contrário do ROAS/CTR, aqui subir é o indicador de alerta.' },
+    { termo: 'CPS caindo', definicao: 'Sinal bom: menos investimento por sessão gerada. Ao contrário da maioria das métricas, aqui a queda é o indicador positivo.' },
   ],
+  Situação: Object.entries(SITUACAO_DEFINICOES).map(([termo, definicao]) => ({ termo, definicao })),
 }
 
 // O glossário do frontmatter entra na categoria "Termos desta semana" — é conhecimento
@@ -665,6 +824,18 @@ function renderAuditoria(auditoria, indice) {
     ${!auditoria || auditoria.length === 0
       ? `<p class="auditoria-ok">🟢 As auditorias passaram sem ressalva.</p>`
       : `<div class="auditoria">${auditoria.map((a) => `<div class="auditoria__item"><p><strong>${SEVERIDADE[a.severidade] ?? ''} ${esc(a.titulo)}</strong></p><p>${esc(a.texto)}</p></div>`).join('')}</div>`}
+  </section>`
+}
+
+// Considerações metodológicas soltas (tipo "chupim/concentração desconsiderado a pedido
+// do gestor") não podem ficar dentro do NOME da campanha — o Caio pediu um lugar próprio
+// pra isso. O schema ainda não tem um campo pra essas notas (ver pedido pro outro
+// projeto), então esta seção só aparece quando `relatorio.consideracoes` existir.
+function renderConsideracoes(consideracoes, indice) {
+  if (!consideracoes || consideracoes.length === 0) return ''
+  return `<section class="secao" id="consideracoes">
+    <h2>${String(indice).padStart(2, '0')} · Considerações desta análise</h2>
+    <ul class="consideracoes">${consideracoes.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
   </section>`
 }
 
@@ -744,11 +915,10 @@ function coletarItensParaExport(relatorio) {
       if ((campanha.conjuntos ?? []).length === 0) {
         itens.push({ id: campanha.id, nivel: 'campanha', canal: canal.nome, campanha: campanha.nome, nome: campanha.nome, acao: campanha.acao, verba: campanha.verba, motivos: campanha.motivos })
       }
+      // Anúncio não decide mais sozinho (pedido do Caio) — a decisão é sempre no conjunto,
+      // por isso não entra em ITENS.
       for (const conjunto of campanha.conjuntos ?? []) {
         itens.push({ id: conjunto.id, nivel: 'conjunto', canal: canal.nome, campanha: campanha.nome, nome: conjunto.nome, acao: conjunto.acao, verba: conjunto.verba, motivos: conjunto.motivos })
-        for (const anuncio of conjunto.anuncios ?? []) {
-          itens.push({ id: anuncio.id, nivel: 'anuncio', canal: canal.nome, campanha: campanha.nome, nome: anuncio.nome, acao: anuncio.acao, verba: anuncio.verba, motivos: anuncio.motivos })
-        }
       }
     }
   }
@@ -917,6 +1087,7 @@ details[open]>summary::before{content:'▾'}
 .variacao{font-size:.8125rem;font-weight:600}
 .var-pos{color:var(--ok)}
 .var-neg{color:var(--perigo)}
+.var-neutro{color:var(--cinza-medio)}
 
 .table-wrap{overflow-x:auto;margin:.8rem 0}
 table.metricas{width:100%;border-collapse:collapse;font-size:.875rem}
@@ -946,6 +1117,30 @@ table.metricas tr.destaque th,table.metricas tr.destaque td{font-weight:700;colo
 details.motivos,details.perguntas,details.sinais-suprimidos,details.historico{margin:.6rem 0}
 details summary{cursor:pointer;font-size:.8125rem;font-weight:600;color:var(--cinza-medio)}
 .expectativa{background:var(--bubbles-cinza-claro);border-radius:10px;padding:.7rem .9rem;font-size:.9rem}
+.causa-raiz{background:#FDF2F4;border-radius:10px;padding:.7rem .9rem;font-size:.9rem;margin:.6rem 0}
+
+/* Blocos coloridos para itens "consolidado da conta" (sem árvore real pra abrir) */
+.no--consolidado{padding:1.5rem}
+.stat-blocos{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.7rem;margin:1rem 0}
+.stat-bloco{background:var(--bubbles-preto);color:#fff;border-radius:12px;padding:.9rem 1rem}
+.stat-bloco__rotulo{font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:rgba(255,255,255,.6);margin:0 0 .3rem}
+.stat-bloco__valor{font-size:1.15rem;font-weight:600;margin:0;color:#fff}
+
+/* Grupo "sem dados neste período" */
+.sem-dados{background:var(--bubbles-cinza-claro);border-radius:12px;padding:.9rem 1.1rem;margin-top:.8rem}
+.sem-dados summary{font-size:.8125rem;font-weight:600;color:var(--cinza-medio)}
+.sem-dados ul{margin:.6rem 0 0;padding-left:1.2rem;font-size:.8125rem;color:var(--cinza-medio)}
+
+/* Tabela de anúncios dentro do conjunto (a decisão é sempre no conjunto) */
+.anuncios-do-conjunto{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--borda)}
+.anuncios-do-conjunto__titulo{font-size:.8125rem;font-weight:600;color:var(--cinza-medio);margin:0 0 .5rem}
+table.tabela-anuncios{width:100%;border-collapse:collapse;font-size:.8125rem}
+table.tabela-anuncios th{text-align:left;font-weight:600;color:var(--cinza-medio);padding:.4rem .5rem;border-bottom:1px solid var(--borda);white-space:nowrap}
+table.tabela-anuncios td{padding:.4rem .5rem;border-bottom:1px solid var(--borda)}
+
+.podio-criterio{font-size:.8125rem;color:var(--bubbles-magenta-fundo);font-weight:600;margin:.2rem 0}
+
+.consideracoes{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:1rem 1.2rem 1rem 2rem;font-size:.9rem;color:var(--cinza-medio)}
 
 /* Decisão */
 /* Bolinha pulsante ao lado do veredito enquanto o item não tem decisão (JS remove/oculta
@@ -1424,6 +1619,8 @@ function montarHTML(relatorio, senha) {
   if (ressalvasHtml) indice++
   const auditoriaHtml = renderAuditoria(relatorio.auditoria, indice)
   indice++
+  const consideracoesHtml = renderConsideracoes(relatorio.consideracoes, indice)
+  if (consideracoesHtml) indice++
   const provenienciaHtml = renderProveniencia(relatorio.proveniencia)
   const indiceExportar = indice
 
@@ -1494,6 +1691,7 @@ function montarHTML(relatorio, senha) {
       ${glossarioHtml}
       ${ressalvasHtml}
       ${auditoriaHtml}
+      ${consideracoesHtml}
       ${provenienciaHtml}
 
       <section class="secao exportar" id="exportar">

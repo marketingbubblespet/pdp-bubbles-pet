@@ -142,7 +142,7 @@ export function AcaoCard({
               </div>
             </div>
 
-            {acao.evidencia.leitura === 'sem leitura' && (
+            {acao.evidencia.leitura === 'sem leitura' && acao.evidencia.cliques != null && acao.evidencia.vendas_esperadas != null && (
               <p className="text-sm text-gray-600 bg-gray-50 rounded-[12px] px-4 py-3">
                 Este item teve {acao.evidencia.cliques} cliques ≈ {acao.evidencia.vendas_esperadas.toLocaleString('pt-BR', { maximumFractionDigits: 2 })} venda esperada.
                 Zero vendas aqui é o resultado esperado mesmo para um bom anúncio.
