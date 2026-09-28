@@ -57,6 +57,7 @@ export const VENDEDORES = ['Ivan', 'Paulo', 'Claudio', 'Guilherme', 'Thainá'] a
 export interface Fechamento {
   distribuidor: string
   cidadeUF?: string // ex: 'Goiânia/GO'
+  campanhaOrigem?: string // ex: 'Distribuidor Tradicional' (crédito do marketing)
   dataPrimeiraCompra: string | null // 'DD/MM/AAAA'
   valorPrimeiraCompra: number | null // R$
 }
@@ -85,6 +86,9 @@ export interface Criativo {
   // Conjuntos de anúncios onde este anúncio rodou. Cópias ("— Cópia") do mesmo anúncio
   // são unificadas na página, somando os números e juntando os conjuntos.
   conjuntos?: string[]
+  // Quem do comercial gravou/participou do criativo. Se vazio, a página detecta sozinha
+  // o nome de um vendedor (VENDEDORES) escrito no nome do anúncio.
+  participacao?: string[]
 }
 
 export type StatusPlano = 'implementado' | 'andamento' | 'nao-implementado'

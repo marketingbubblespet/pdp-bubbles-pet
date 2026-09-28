@@ -95,6 +95,13 @@ export function etapasFunil(rel: RelatorioDistribuidor | null, rede?: Rede): Eta
   ]
 }
 
+// Soma do valor do 1º pedido de todos os fechamentos. Sem nenhum valor informado: null.
+export function valorPrimeirosPedidos(rel: RelatorioDistribuidor | null): number | null {
+  const valores = (rel?.comercial ?? []).flatMap((v) => v.fechamentos ?? [])
+    .map((f) => f.valorPrimeiraCompra).filter((x): x is number => x != null)
+  return valores.length ? valores.reduce((s, x) => s + x, 0) : null
+}
+
 // Soma do resultado comercial de todos os vendedores. Sem dado do comercial: null.
 export function totaisComercial(rel: RelatorioDistribuidor | null) {
   if (!rel?.comercial) return null

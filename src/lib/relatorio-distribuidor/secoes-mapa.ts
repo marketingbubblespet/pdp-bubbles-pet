@@ -1,6 +1,6 @@
 // src/lib/relatorio-distribuidor/secoes-mapa.ts
 // Mapa de impressões por estado (com visão por região) e ranking de criativos.
-import type { Criativo, RelatorioDistribuidor, UF } from './tipos'
+import { VENDEDORES, type Criativo, type RelatorioDistribuidor, type UF } from './tipos'
 import { NOME_REDE, REDES, impressoesPorUF, indicadores, niveisPorQuantil, porRegiao, type MapaImpressoes } from './calculos'
 import { esc, fmtBRL, fmtInt, fmtPct, nomeMes, rotuloMes, seta } from './format'
 import { NOME_UF, REGIAO_UF, TODAS_UFS, type Regiao } from './mapa-brasil'
@@ -135,6 +135,15 @@ function unificarCopias(lista: Criativo[]): CriativoUnificado[] {
   return [...grupos.values()]
 }
 
+const semAcento = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+
+// Crédito ao comercial: nomes informados, ou vendedores citados no nome do anúncio.
+function participantes(c: Criativo): string[] {
+  if (c.participacao?.length) return c.participacao
+  const nome = semAcento(c.nome)
+  return VENDEDORES.filter((v) => new RegExp(`(^|[^a-z])${semAcento(v)}([^a-z]|$)`).test(nome))
+}
+
 function listaConjuntos(cs: string[]): string {
   return cs.length <= 1 ? cs.join('') : `${cs.slice(0, -1).join(', ')} e ${cs[cs.length - 1]}`
 }
@@ -165,7 +174,7 @@ export function secaoCriativos(rel: RelatorioDistribuidor): string {
       ? `<a class="link-criativo" href="${esc(c.link)}" target="_blank" rel="noopener noreferrer">Ver criativo ↗</a>`
       : '<span class="link-aguardando">Link aguardando</span>'
     return `<div class="criativo"><span class="pos">${i + 1}º</span>
-      <div><h3>${esc(c.nome)}</h3><div class="meta">${c.formato} · ${NOME_REDE[c.rede]}</div>
+      <div><h3>${esc(c.nome)}</h3><div class="meta">${c.formato} · ${NOME_REDE[c.rede]}${participantes(c).length ? ` · <span class="credito">com participação de ${esc(listaConjuntos(participantes(c)))} (comercial)</span>` : ''}</div>
         <div class="nums"><span>${fmtInt(c.leads)} leads</span>${ind.cpl == null ? '' : `<span>CPL ${fmtBRL(ind.cpl)}</span>`}
           ${ind.ctr == null ? '' : `<span>CTR ${fmtPct(ind.ctr)}</span>`}<span>Investimento ${fmtBRL(c.investimento)}</span></div>
         ${c.conjuntos?.length ? `<p class="obs-pequena">Anúncio utilizado nos conjuntos ${esc(listaConjuntos(c.conjuntos))}${c.copias ? ` (soma do original e ${c.copias === 1 ? '1 cópia' : `${c.copias} cópias`})` : ''}.</p>` : ''}

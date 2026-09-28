@@ -31,7 +31,7 @@ ranking ficam restritos a ela (campo `notaMapa`).
 
 ### Dados do time comercial (vendedores: Ivan, Paulo, Claudio, Guilherme, Thainá)
 Por vendedor: **leads qualificados**, **reuniões**, **novos distribuidores (fechamentos)**.
-Para cada fechamento: **nome do distribuidor, cidade/UF, data da primeira compra e valor do
+Para cada fechamento: **nome do distribuidor, cidade/UF, campanha/origem do lead, data da primeira compra e valor do
 primeiro pedido**.
 Sem isso, a seção "Novos distribuidores" mostra "Aguardando os dados do time comercial", e o
 funil fica "sem dado" nas 3 últimas etapas. Isso não bloqueia o relatório, mas deve ser avisado.
@@ -43,7 +43,15 @@ usuário já informou o link**: nesta conversa, nos arquivos de dados dos meses 
 (`src/lib/relatorio-distribuidor/*.ts`, mesmo nome de anúncio) e na memória. Link achado
 entra direto, com o aviso "reaproveitei o link de <onde>". Só pedir o que realmente falta.
 Registro até agora: ad35 artes internas = `https://www.facebook.com/100063565944892/posts/1647497520712430/`;
-`imagem|captacao|novos_distribuidores_linha_ego_v2-1572640434864806` = sem link informado.
+`imagem|captacao|novos_distribuidores_linha_ego_v2-1572640434864806` = sem link informado
+(o usuário vai enviar os links junto com as próximas campanhas; em agosto fica "Link aguardando").
+
+### Pendências para o relatório de setembro/2026
+- Perguntar o **motivo** de "Entrada no Google Ads" não ter sido concluída (em agosto ficou sem motivo, por decisão do usuário) e reescrever para o comercial.
+- Pedir os links dos criativos das novas campanhas.
+
+### Regra de conduta
+Propostas que o usuário **não respondeu** não são aplicadas. Só aplicar o que ele aprovou explicitamente.
 
 ### Plano anterior: perguntar o motivo do que não foi feito
 Para **cada item do plano anterior que não foi implementado ou está em andamento**, perguntar
@@ -87,7 +95,7 @@ motivo. Mostrar a versão reescrita ao usuário antes de gravar no campo `nota` 
 ## 4. Regras do relatório (já implementadas no código; não quebrar)
 
 - **Nunca inventar número.** Campo sem dado = `null`, e a página mostra o aviso ("sem dado", "Não há dados de <rede> referentes a <mês>").
-- **Primeira seção = consolidado Meta + Google**, com filtro Consolidado / Meta Ads / Google Ads. O funil B2B tem o mesmo filtro; as etapas comerciais só existem no consolidado.
+- **Primeira seção = consolidado Meta + Google**, com filtro Consolidado / Meta Ads / Google Ads. Logo abaixo, a faixa **"Resultado em distribuidores"** (todas as redes): leads qualificados, reuniões, novos distribuidores, valor dos 1º pedidos, custo por novo distribuidor e retorno do 1º pedido (valor ÷ investimento). Linha única e compacta. **Sem dados do comercial, a faixa fica oculta.** O funil B2B tem o mesmo filtro; as etapas comerciais só existem no consolidado.
 - **Comparativo obrigatório:** sempre ligar `anterior`. Sem mês anterior, aparece um aviso único, sem setas vazias.
 - Cor da seta: verde = melhorou, vermelha = piorou (CPL, CPC e CPM caindo é bom). **Investimento: subiu = verde, caiu = vermelho** (decisão do usuário, 28/09/2026).
 - **Teto de investimento: R$ 10.000/mês** (Meta + Google, campo `tetoMensal`). Se o consolidado passar, aparece um aviso no topo automaticamente; citar isso também na entrega.
@@ -97,7 +105,24 @@ motivo. Mostrar a versão reescrita ao usuário antes de gravar no campo `nota` 
 - Topo e rodapé: mês sempre em **negrito** ("**Agosto de 2026**") e o público ("Equipe de Marketing e Comercial", campo `publico`). **Nunca** citar diretoria nem data de apresentação.
 - Texto em pt-BR; sem peso 700; tokens do `DESIGN-SYSTEM.md`. Relatório com `noindex` e sem GTM.
 
-## 5. Mapa dos arquivos
+## 5. Relacionamento Marketing × Comercial (decisões do usuário, 28/09/2026)
+
+O relatório é apresentado aos dois times juntos. Ele deve valorizar o trabalho de ambos e
+nunca soar como cobrança.
+- **Seção "Novos distribuidores" fica OCULTA** enquanto o comercial não enviar os dados. Não listar nomes como pendência. O que pedir fica em `PEDIDO_COMERCIAL` (`secoes-texto.ts`) e no checklist da seção 1.
+- No funil, etapas comerciais sem número continuam como **"sem dado"** (decisão do usuário).
+- **Vendedores em ordem alfabética**, nunca em ranking. **Setas só no total do time**, nunca por pessoa.
+- Quem ficou zerado: observação sutil **"Sem leads de tráfego atribuídos no mês: X, Y."**
+- **Fechamentos em tabela compacta** (média de 9 a 10 por mês; cards ficariam extensos), com "Fechado por" (crédito do comercial) e "Campanha de origem" (crédito do marketing). Pedir a campanha de origem de cada fechamento.
+- **Plano anterior "Não implementado":** selo sutil, mas vermelho (sem ❌). O motivo segue a regra da seção 1 (perguntar e reescrever).
+- **Plano do próximo mês:** lista única, sem separar por responsável.
+- **Crédito nos criativos:** "com participação de <nome> (comercial)". Vem do campo `participacao` ou é detectado sozinho pelo nome do vendedor no nome do anúncio (as nomenclaturas vão passar a informar quem gravou).
+- Linguagem: tom construtivo, "nós/juntos", sem culpar pessoas ou áreas.
+
+### Tarefas futuras
+- **Relatório de outubro/2026:** incluir as **fotos dos comerciais** (estão no Drive do usuário). Pedir as fotos ao gerar o relatório de outubro e usá-las na seção do time comercial.
+
+## 6. Mapa dos arquivos
 
 | Arquivo | Papel |
 |---|---|

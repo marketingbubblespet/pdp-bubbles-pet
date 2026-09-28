@@ -2,7 +2,7 @@
 // Seções com números: consolidado, por rede, funil B2B e funis por campanha.
 import type { Campanha, Rede, RelatorioDistribuidor } from './tipos'
 import {
-  NOME_REDE, REDES, campanhaAnterior, etapasFunil, indicadores, redesComDado, totaisConsolidado, totaisRede,
+  NOME_REDE, REDES, campanhaAnterior, etapasFunil, indicadores, redesComDado, totaisComercial, totaisConsolidado, totaisRede, valorPrimeirosPedidos,
   type EtapaFunil, type Totais,
 } from './calculos'
 import { esc, fmtBRL, fmtInt, fmtPct, mesAnteriorDe, nomeMes, razao, rotuloMes, seta, type Sentido } from './format'
@@ -22,7 +22,7 @@ function kpi(
 ): string {
   const badge = seta(atual, anterior, sentido)
   const ant = badge && anterior != null ? `<span class="ant">${mesAnt}: ${fmt(anterior)}</span>` : ''
-  return `<div class="kpi"><span class="valor">${atual == null ? '·' : fmt(atual)}</span>`
+  return `<div class="kpi"><span class="valor">${atual == null ? '<span class="tag-sem">sem dado</span>' : fmt(atual)}</span>`
     + `<div class="linha">${badge}${ant}</div><span class="rotulo">${rotulo}</span></div>`
 }
 
@@ -45,6 +45,42 @@ function painelKpis(t: Totais | null, ta: Totais | null, mesAnt: string): string
     kpi('Clique → lead', i.conv, ia.conv, pct, 'maior', mesAnt),
   ]
   return `<div class="kpis">${principais.join('')}</div><div class="kpis secundarios">${secundarios.join('')}</div>`
+}
+
+// Faixa "Resultado em distribuidores": o que a mídia virou no comercial (todas as redes).
+// Sem dados do comercial, os cartões mostram "sem dado", igual ao funil.
+function blocoDistribuidores(rel: RelatorioDistribuidor, mesAnt: string): string {
+  // Oculta enquanto o comercial não enviar os dados do mês (decisão do usuário).
+  if (!rel.comercial) return ''
+  const dados = (r: RelatorioDistribuidor | null) => {
+    const c = totaisComercial(r)
+    const inv = totaisConsolidado(r)?.investimento ?? null
+    const valor = valorPrimeirosPedidos(r)
+    return {
+      qual: c?.leadsQualificados ?? null,
+      reun: c?.reunioes ?? null,
+      novos: c?.novosDistribuidores ?? null,
+      valor,
+      custoNovo: razao(inv, c?.novosDistribuidores),
+      retorno: razao(valor, inv),
+    }
+  }
+  const a = dados(rel)
+  const b = rel.anterior ? dados(rel.anterior) : null
+  const vezes = (n: number) => `${fmtPct(n).replace('%', '')}x`
+  const cards = [
+    kpi('Leads qualificados', a.qual, b?.qual, fmtInt, 'maior', mesAnt),
+    kpi('Reuniões', a.reun, b?.reun, fmtInt, 'maior', mesAnt),
+    kpi('Novos distribuidores', a.novos, b?.novos, fmtInt, 'maior', mesAnt),
+    kpi('Valor dos 1º pedidos', a.valor, b?.valor, fmtBRL, 'maior', mesAnt),
+    kpi('Custo por novo distribuidor', a.custoNovo, b?.custoNovo, fmtBRL, 'menor', mesAnt),
+    kpi('Retorno do 1º pedido', a.retorno, b?.retorno, vezes, 'maior', mesAnt),
+  ]
+  return `<div class="bloco-distribuidores">
+    <h3 class="sub-bloco">Resultado em distribuidores <small>· todas as redes, dados do time comercial</small></h3>
+    <div class="kpis distribuidores">${cards.join('')}</div>
+    <p class="obs-pequena">Retorno do 1º pedido = valor dos primeiros pedidos ÷ investimento em mídia do mês.</p>
+  </div>`
 }
 
 // --- 1. Consolidado (com filtro por rede) ---
@@ -91,6 +127,7 @@ export function secaoConsolidado(rel: RelatorioDistribuidor): string {
     ${acimaDoTeto}
     <div class="alternar filtro-rede" role="group" aria-label="Filtrar por rede" style="margin-bottom:16px">${botoes}</div>
     ${corpo}
+    ${blocoDistribuidores(rel, mesAnt)}
     ${semComparativo}
   </section>`
 }

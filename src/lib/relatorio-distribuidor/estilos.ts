@@ -122,6 +122,19 @@ export const CSS = `
   .kpis.secundarios .kpi { background: var(--card); border-color: var(--borda); border-left: 3px solid var(--rosa); border-radius: 12px; padding: 10px 12px; }
   .kpis.secundarios .valor { font-size: 1.1rem; }
   .tabela tr.total td { font-weight: 600; background: var(--fundo); }
+  /* Faixa "Resultado em distribuidores" dentro do consolidado. */
+  .bloco-distribuidores { margin-top: 22px; }
+  .sub-bloco { font-size: 0.95rem; margin: 0 0 10px; }
+  .sub-bloco small { font-size: 0.75rem; font-weight: 400; color: var(--texto); }
+  /* Uma linha só com os 6 cartões no computador; 3 por linha no tablet e 2 no celular. */
+  .kpis.distribuidores { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+  .kpis.distribuidores .kpi { border-left: 3px solid var(--rosa-accent); border-radius: 12px; padding: 8px 10px; gap: 2px; }
+  .kpis.distribuidores .valor { font-size: 1rem; }
+  .kpis.distribuidores .rotulo { font-size: 0.6rem; letter-spacing: 0.03em; }
+  .kpis.distribuidores .linha { flex-wrap: wrap; white-space: normal; }
+  @media (max-width: 900px) { .kpis.distribuidores { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .kpis.distribuidores { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .kpi .valor .tag-sem { font-size: 0.72rem; vertical-align: middle; }
   .lista-pedido { margin: 6px 0 0; padding-left: 1.1em; }
   .lista-pedido li { margin-bottom: 2px; }
   .obs-pequena { font-size: 0.72rem; color: var(--texto); margin: 8px 0 0; }
@@ -236,6 +249,7 @@ export const CSS = `
   .criativo .nums { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; font-size: 0.75rem; }
   .criativo .nums span { background: var(--rosa-fundo); border-radius: 8px; padding: 2px 8px; }
   .link-criativo { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--rosa-accent); font-size: 0.8rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .criativo .credito { color: var(--rosa-accent); font-weight: 500; }
   .previa-fb { margin-top: 8px; font-size: 0.8rem; }
   .previa-fb summary { cursor: pointer; color: var(--rosa-accent); font-weight: 600; min-height: 32px; display: inline-flex; align-items: center; }
   .previa-fb iframe { display: block; max-width: 100%; border: 1px solid var(--borda); border-radius: 12px; background: var(--card); margin-top: 6px; }
@@ -270,7 +284,9 @@ export const CSS = `
   .st { flex-shrink: 0; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; border-radius: 999px; padding: 3px 10px; margin-top: 2px; white-space: nowrap; }
   .st.implementado { color: var(--bom-fg); background: var(--bom-bg); border: 1px solid var(--bom-borda); }
   .st.andamento { color: var(--atencao-fg); background: var(--atencao-bg); border: 1px solid var(--atencao-borda); }
-  .st.nao-implementado { color: var(--ruim-fg); background: var(--ruim-bg); border: 1px solid var(--ruim-borda); }
+  /* Sutil, mas vermelho: sem fundo, texto e bolinha em vermelho. */
+  .st.nao-implementado { color: var(--ruim-fg); background: transparent; border: 1px solid var(--ruim-borda); }
+  .st.nao-implementado::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--ruim-fg); margin-right: 6px; vertical-align: middle; }
 
   /* Listas de links */
   .links-lista { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }

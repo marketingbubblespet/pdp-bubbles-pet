@@ -19,7 +19,7 @@ export const PEDIDO_COMERCIAL = [
   'Por vendedor: quantidade de leads qualificados vindos do tráfego pago',
   'Por vendedor: quantidade de reuniões realizadas com esses leads',
   'Por vendedor: quantidade de fechamentos (novos distribuidores)',
-  'Para cada fechamento: nome do distribuidor, cidade/UF, data da primeira compra e valor do primeiro pedido',
+  'Para cada fechamento: nome do distribuidor, cidade/UF, campanha/origem do lead, data da primeira compra e valor do primeiro pedido',
 ]
 
 // Soma do 1º pedido de um vendedor. `pendente` = faltou valor de algum fechamento.
@@ -36,28 +36,32 @@ function celulaPedido(p: { total: number; pendente: boolean }, novos: number): s
   return `${fmtBRL(p.total)}${p.pendente ? ' <span class="tag-sem">parcial</span>' : ''}`
 }
 
+// Tabela compacta (1 linha por fechamento; média de 9 a 10 por mês), com o crédito dos
+// dois times: quem fechou (comercial) e de qual campanha o lead veio (marketing).
 function tabelaFechamentos(vendedores: ResultadoVendedor[]): string {
   const linhas = vendedores.flatMap((v) => (v.fechamentos ?? []).map((f) => `<tr><td>${esc(f.distribuidor)}</td>`
-    + `<td>${esc(f.cidadeUF ?? '·')}</td><td>${esc(v.nome)}</td><td>${f.dataPrimeiraCompra ? esc(f.dataPrimeiraCompra) : '<span class="tag-sem">pendente</span>'}</td>`
+    + `<td>${esc(f.cidadeUF ?? '·')}</td><td>${esc(v.nome)}</td><td>${esc(f.campanhaOrigem ?? '·')}</td>`
+    + `<td>${f.dataPrimeiraCompra ? esc(f.dataPrimeiraCompra) : '<span class="tag-sem">pendente</span>'}</td>`
     + `<td class="num">${f.valorPrimeiraCompra == null ? '<span class="tag-sem">pendente</span>' : fmtBRL(f.valorPrimeiraCompra)}</td></tr>`))
   if (linhas.length === 0) return ''
   return `<div class="tabela-wrap" style="margin-top:14px"><table class="tabela"><caption>Novos distribuidores do mês</caption>
-    <thead><tr><th scope="col">Distribuidor</th><th scope="col">Cidade/UF</th><th scope="col">Vendedor</th><th scope="col">1ª compra</th><th scope="col" class="num">Valor do 1º pedido</th></tr></thead>
+    <thead><tr><th scope="col">Distribuidor</th><th scope="col">Cidade/UF</th><th scope="col">Fechado por</th><th scope="col">Campanha de origem</th><th scope="col">1ª compra</th><th scope="col" class="num">Valor do 1º pedido</th></tr></thead>
     <tbody>${linhas.join('')}</tbody></table></div>`
 }
 
+// Sem dados do comercial no mês, a seção fica oculta (não expõe nomes como pendência).
+// O que pedir ao comercial fica registrado em PEDIDO_COMERCIAL e na skill do relatório.
 export function secaoComercial(rel: RelatorioDistribuidor): string {
   const topo = cabecalho('Time comercial', 'Novos distribuidores', 'Leads qualificados, reuniões, novos distribuidores e valor do primeiro pedido, por vendedor.')
-  if (!rel.comercial) {
-    return `<section class="bloco" id="comercial">${topo}${aviso(`<strong>Aguardando os dados do time comercial referentes a ${rotuloMes(rel.mes)}</strong> `
-      + `(${VENDEDORES.join(', ')}):<ul class="lista-pedido">${PEDIDO_COMERCIAL.map((p) => `<li>${p}</li>`).join('')}</ul>`)}</section>`
-  }
+  if (!rel.comercial) return ''
   const porNome = new Map(rel.comercial.map((v) => [v.nome, v]))
   const todos = [...VENDEDORES.map((n) => porNome.get(n) ?? { nome: n, leadsQualificados: 0, reunioes: 0, novosDistribuidores: 0 }),
     ...rel.comercial.filter((v) => !(VENDEDORES as readonly string[]).includes(v.nome))]
   const vazio = (v: ResultadoVendedor) => v.leadsQualificados + v.reunioes + v.novosDistribuidores === 0
-  const comDado = todos.filter((v) => !vazio(v))
-  const semDado = todos.filter(vazio).map((v) => v.nome)
+  // Ordem alfabética, nunca ranking. Setas só no total do time, nunca por pessoa.
+  const alfa = (a: ResultadoVendedor, b: ResultadoVendedor) => a.nome.localeCompare(b.nome, 'pt-BR')
+  const comDado = todos.filter((v) => !vazio(v)).sort(alfa)
+  const semDado = todos.filter(vazio).sort(alfa).map((v) => v.nome)
   const t = totaisComercial(rel)!
   const ta = totaisComercial(rel.anterior)
   const linhas = comDado.map((v) => `<tr><td>${esc(v.nome)}</td><td class="num">${fmtInt(v.leadsQualificados)}</td>`
@@ -70,7 +74,7 @@ export function secaoComercial(rel: RelatorioDistribuidor): string {
     + `<td class="num">${fmtInt(t.reunioes)} ${seta(t.reunioes, ta?.reunioes, 'maior')}</td>`
     + `<td class="num">${fmtInt(t.novosDistribuidores)} ${seta(t.novosDistribuidores, ta?.novosDistribuidores, 'maior')}</td>`
     + `<td class="num">${celulaPedido(pedidoTotal, t.novosDistribuidores)}</td></tr>`
-  const obs = semDado.length > 0 ? `<p class="obs-pequena">Sem dados no mês: ${semDado.map(esc).join(', ')}.</p>` : ''
+  const obs = semDado.length > 0 ? `<p class="obs-pequena">Sem leads de tráfego atribuídos no mês: ${semDado.map(esc).join(', ')}.</p>` : ''
   return `<section class="bloco" id="comercial">${topo}
     <div class="tabela-wrap"><table class="tabela"><thead><tr><th scope="col">Vendedor</th><th scope="col" class="num">Leads qualificados</th>
       <th scope="col" class="num">Reuniões</th><th scope="col" class="num">Novos distribuidores</th><th scope="col" class="num">Valor do 1º pedido</th></tr></thead>
@@ -101,7 +105,7 @@ export function secaoDesafios(rel: RelatorioDistribuidor): string {
 const ROTULO_STATUS: Record<StatusPlano, string> = {
   implementado: '✅ Implementado',
   andamento: '⏳ Em andamento',
-  'nao-implementado': '❌ Não implementado',
+  'nao-implementado': 'Não implementado',
 }
 
 const ROTULO_PLACAR: Record<StatusPlano, string> = {
