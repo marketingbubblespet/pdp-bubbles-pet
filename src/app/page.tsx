@@ -90,6 +90,12 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Relatório · Bubbles · semana 07 a 13/09 (v2, comparação de ajustes)',
     description: 'Segunda versão gerada com os ajustes de glossário/cor/tabela, numa pasta separada para comparar com a de cima.',
   },
+  {
+    tipo: 'rota',
+    href: '/distribuidor-agosto-2026-2',
+    label: 'Relatório · Captação de Distribuidores · agosto 2026 (v2, em avaliação)',
+    description: 'Nova estrutura mensal (consolidado Meta + Google, funil B2B, mapa por estado, ranking de criativos). Gerada por src/lib/relatorio-distribuidor/.',
+  },
 ]
 
 const PASSWORD = 'mariane'
