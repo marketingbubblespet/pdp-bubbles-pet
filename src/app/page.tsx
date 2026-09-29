@@ -102,6 +102,12 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Relatório (Next.js) · Bubbles · Meta + Google Ads · semana 10 a 16/09',
     description: 'Mesmo .md de 16/09, Meta e Google juntos na mesma página, renderizado no sistema em Next.js (/planos) — senha própria.',
   },
+  {
+    tipo: 'rota',
+    href: '/distribuidor-agosto-2026-2',
+    label: 'Relatório · Captação de Distribuidores · agosto 2026 (v2, em avaliação)',
+    description: 'Nova estrutura mensal (consolidado Meta + Google, funil B2B, mapa por estado, ranking de criativos). Gerada por src/lib/relatorio-distribuidor/.',
+  },
 ]
 
 const PASSWORD = 'mariane'
