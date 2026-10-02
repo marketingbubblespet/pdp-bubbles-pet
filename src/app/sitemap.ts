@@ -40,6 +40,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${SITE_URL}/masterclass/coloracao-pet`,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${SITE_URL}/live-care`,
       changeFrequency: 'daily',
       priority: 0.9,
