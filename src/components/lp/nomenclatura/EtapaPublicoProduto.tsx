@@ -9,14 +9,14 @@ import {
 import { BotaoExemplo, Chips, GradeOpcoes, Secao, ajuda, campoTexto, type EtapaProps } from './ui'
 
 // Etapa 2: para quem é o anúncio e sobre qual produto.
-export function EtapaPublicoProduto({ estado, set, exemplo }: EtapaProps) {
+export function EtapaPublicoProduto({ estado, set, exemplo, faltando }: EtapaProps) {
   const sugestoes = SUGESTOES_PRODUTO[estado.linha] ?? []
   const produtoSlug = slug(estado.produto)
 
   return (
     <div>
       <BotaoExemplo onClick={exemplo} />
-      <Secao titulo="Público *">
+      <Secao titulo="Público *" campo="publico" faltando={faltando}>
         <p className={ajuda}>Para quem esse criativo fala. Branding cobre o institucional.</p>
         <GradeOpcoes
           opcoes={OPCOES_PUBLICO}
@@ -35,7 +35,10 @@ export function EtapaPublicoProduto({ estado, set, exemplo }: EtapaProps) {
       </Secao>
 
       <Secao titulo="Linha do produto">
-        <p className={ajuda}>Se o criativo fala de mais de uma linha ou de nenhuma, pode pular.</p>
+        <p className={ajuda}>
+          Se o criativo fala de várias linhas ou de nenhuma (ex: anúncio de WhatsApp), pode pular. Não precisa
+          escrever &ldquo;todas&rdquo;: campo vazio some do nome.
+        </p>
         <GradeOpcoes
           opcoes={OPCOES_LINHA}
           valor={estado.linha}

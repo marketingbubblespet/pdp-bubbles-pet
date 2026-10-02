@@ -75,9 +75,13 @@ export type SetCampo = <K extends keyof EstadoNomenclatura>(
   valor: EstadoNomenclatura[K],
 ) => void
 
+// Campos obrigatórios em branco a destacar (só depois de tentar avançar).
+export type Faltando = { campos: Set<string>; tentativa: number }
+
 export type EtapaProps = {
   estado: EstadoNomenclatura
   set: SetCampo
+  faltando?: Faltando
   // Quando presente (só no localhost), a etapa mostra um botão que preenche os
   // campos DESTA etapa com um exemplo, sem sair dela.
   exemplo?: () => void
@@ -102,10 +106,40 @@ export const ajuda = 'text-[13px] text-[#666666] mb-3'
 export const campoTexto =
   'w-full bg-white border border-[#E5E7EB] rounded-[12px] px-4 py-3 text-base text-[#0D0C0D] placeholder:text-[#888888] focus:outline-none focus:border-[#E8649A]'
 
-export function Secao({ titulo, children }: { titulo: string; children: ReactNode }) {
+// `campo` liga a seção a uma pendência (id usado para rolar até ela). Quando o campo é
+// obrigatório e ficou em branco numa tentativa de avançar, a seção ganha borda rosa,
+// fundo, aviso e um tremor curto (reiniciado a cada tentativa pela `key`).
+export function Secao({
+  titulo,
+  campo,
+  faltando,
+  children,
+}: {
+  titulo: string
+  campo?: string
+  faltando?: Faltando
+  children: ReactNode
+}) {
+  const erro = Boolean(campo && faltando?.campos.has(campo))
   return (
-    <div className="mb-7">
+    <div
+      id={campo ? `campo-${campo}` : undefined}
+      key={erro ? `erro-${faltando?.tentativa}` : 'ok'}
+      className={`mb-7 scroll-mt-24 transition-colors ${
+        erro
+          ? 'nom-shake rounded-[12px] border-2 border-[#E8649A] bg-[#FDF2F4] p-4 -mx-4 shadow-[0_0_0_4px_rgba(232,100,154,0.18)]'
+          : ''
+      }`}
+    >
       <p className={rotulo}>{titulo}</p>
+      {erro && (
+        <p role="alert" className="flex items-center gap-1.5 text-[13px] font-semibold text-[#E8649A] mb-2">
+          <span aria-hidden className="inline-flex w-5 h-5 items-center justify-center rounded-full bg-[#E8649A] text-white text-[12px]">
+            !
+          </span>
+          Falta preencher este campo
+        </p>
+      )}
       {children}
     </div>
   )

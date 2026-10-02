@@ -2,10 +2,12 @@
 import { useState } from 'react'
 import {
   camposEmBranco,
+  dataLimite,
   segmentosNome,
   type EstadoNomenclatura,
 } from '@/lib/nomenclatura'
 import { NomeSegmentado } from './ui'
+import { ComplementarInfo } from './ComplementarInfo'
 
 // Etapa 5: nome pronto, cópia e aviso suave do que ficou em branco (não bloqueia).
 export function EtapaResultado({
@@ -50,6 +52,12 @@ export function EtapaResultado({
       >
         {copiado ? 'Copiado!' : 'Copiar nome'}
       </button>
+
+      <ComplementarInfo
+        nome={segmentos.map((s) => s.texto).join('|')}
+        midia={estado.midia === 'outro' ? estado.midiaOutro : estado.midia}
+        dataFinalBR={estado.ciclo === 'pont' ? (dataLimite(estado)?.toLocaleDateString('pt-BR') ?? '') : ''}
+      />
 
       {faltando.length > 0 && !mantido && (
         <div className="mt-4 rounded-[12px] border border-[#F4A522] bg-[#FFF8EC] p-4">
