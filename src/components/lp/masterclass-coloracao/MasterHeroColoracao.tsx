@@ -17,11 +17,13 @@ const metaItems = [
 export function MasterHeroColoracao() {
   return (
     <section className="bg-[#F7F7F7] pt-10 pb-14 md:pt-16 md:pb-20 px-4">
-      <div className="max-w-[1240px] mx-auto grid md:grid-cols-[1fr_1.1fr] gap-8 md:gap-12 items-center">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-3">
-            MasterClass {MC.dateFull} às {MC.time} · Aula ao vivo
-          </p>
+      {/* Celular: faixa da data, foto, conteúdo. Desktop: data + conteúdo à esquerda, foto à direita. */}
+      <div className="max-w-[1240px] mx-auto grid md:grid-cols-[1fr_1.1fr] md:grid-rows-[auto_1fr] gap-x-12 gap-y-5 md:gap-y-3">
+        <p className="md:col-start-1 md:row-start-1 md:self-end text-xs font-semibold uppercase tracking-widest text-[#E8649A]">
+          MasterClass {MC.dateFull} às {MC.time} · Aula ao vivo
+        </p>
+
+        <div className="md:col-start-1 md:row-start-2 md:self-start order-3 md:order-none">
 
           <div className="inline-flex items-start gap-2 bg-white border border-[#E5E7EB] rounded-2xl px-3.5 py-2 mb-4">
             <Unlock size={16} className="text-[#E8649A] shrink-0 mt-0.5" />
@@ -87,7 +89,7 @@ export function MasterHeroColoracao() {
           </EventGate>
         </div>
 
-        <div className="order-first md:order-none max-w-[420px] mx-auto md:max-w-none w-full">
+        <div className="order-2 md:order-none md:col-start-2 md:row-start-1 md:row-span-2 md:self-center max-w-[420px] mx-auto md:max-w-none w-full">
           <div className="relative aspect-square rounded-[40px] overflow-hidden shadow-md">
             <Image
               src={MC_HERO_IMAGE.src}
