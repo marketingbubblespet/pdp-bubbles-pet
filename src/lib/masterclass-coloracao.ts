@@ -101,8 +101,8 @@ export const MC_GALLERY = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({
 }))
 
 export const MC_HERO_IMAGE = {
-  src: '/images/masterclass/coloracao/hero.webp',
-  alt: 'Shih Tzu com coloração arco-íris feita com Collora',
+  src: '/images/masterclass/coloracao/lari-capa.webp',
+  alt: 'Lari Stephanie com um cão colorido de verde e amarelo e a linha Collora',
 }
 
 // Itens da linha (fotos do briefing + informações de docs/brand/produtos.md).

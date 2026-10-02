@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     siteName: 'Bubbles Pet',
     locale: 'pt_BR',
     type: 'website',
-    images: [{ url: OG_IMAGE, width: 1200, height: 1200, alt: MC_HERO_IMAGE.alt }],
+    images: [{ url: OG_IMAGE, width: 1080, height: 1350, alt: MC_HERO_IMAGE.alt }],
   },
   twitter: { card: 'summary_large_image', title, description, images: [OG_IMAGE] },
 }

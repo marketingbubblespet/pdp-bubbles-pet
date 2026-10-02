@@ -89,7 +89,7 @@ export function MasterHeroColoracao() {
 
         {/* Fica depois do texto no HTML: no celular aparece abaixo da regra de acesso; no desktop, na coluna da direita. */}
         <div className="max-w-[420px] mx-auto md:max-w-none w-full">
-          <div className="relative aspect-square rounded-[40px] overflow-hidden shadow-md">
+          <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden shadow-md">
             <Image
               src={MC_HERO_IMAGE.src}
               alt={MC_HERO_IMAGE.alt}
