@@ -113,6 +113,12 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Relatório · Captação de Distribuidores · agosto 2026 (v2, em avaliação)',
     description: 'Nova estrutura mensal (consolidado Meta + Google, funil B2B, mapa por estado, ranking de criativos). Gerada por src/lib/relatorio-distribuidor/.',
   },
+  {
+    tipo: 'rota',
+    href: '/distribuidor-setembro-2026',
+    label: 'Relatório · Captação de Distribuidores · setembro 2026',
+    description: 'Mesmo modelo mensal, com comparativo contra agosto. Dados do comercial ainda pendentes.',
+  },
 ]
 
 const PASSWORD = 'mariane'
