@@ -5,6 +5,7 @@ import {
   ESTADO_VAZIO,
   EXEMPLO_TESTE,
   montarNome,
+  paginaDestino,
   obrigatoriosFaltando,
   payloadRegistro,
   segmentosNome,
@@ -75,6 +76,8 @@ export function NomenclaturaTool() {
 
   const previa = useMemo(() => segmentosNome(estado), [estado])
   const previaTexto = previa.map((s) => s.texto).join('|')
+  const destinoPrevia = paginaDestino(estado)
+  const [copiadoLink, setCopiadoLink] = useState(false)
 
   const rolarParaCaixa = () => {
     const el = caixaRef.current
@@ -157,7 +160,7 @@ export function NomenclaturaTool() {
   }
 
   const novoMesmaCampanha = () => {
-    setEstado((s) => ({ ...s, numero: '', produto: '', descricao: '', talentoNome: '' }))
+    setEstado((s) => ({ ...s, numero: '', produto: '', destaque: '', descricao: '', talentoNome: '' }))
     setNomeGerado('')
     setEtapa(1)
     rolarParaCaixa()
@@ -223,6 +226,29 @@ export function NomenclaturaTool() {
               {copiado ? 'copiado' : 'copiar'}
             </button>
           </div>
+          {destinoPrevia && (
+            <div className="flex items-center gap-3 mt-1">
+              <p className="font-mono text-[11px] text-[#666666] truncate flex-1" title={destinoPrevia}>
+                <span className="text-[#E8649A]">destino </span>
+                {destinoPrevia.replace('https://www.', '')}
+              </p>
+              <button
+                type="button"
+                onClick={() =>
+                  navigator.clipboard?.writeText(destinoPrevia).then(
+                    () => {
+                      setCopiadoLink(true)
+                      window.setTimeout(() => setCopiadoLink(false), 2000)
+                    },
+                    () => {},
+                  )
+                }
+                className="shrink-0 text-[11px] text-[#666666] hover:text-[#E8649A] underline underline-offset-2"
+              >
+                {copiadoLink ? 'copiado' : 'copiar link'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

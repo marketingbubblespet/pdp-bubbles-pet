@@ -4,6 +4,8 @@
 // funções puras que montam o nome. Nenhum componente monta a string por conta própria,
 // tudo passa por montarNome(). Se o padrão mudar em 2027, muda só neste arquivo.
 
+import { COLECAO_INTEIRA, COLECOES, produtoPorSlug, type CodigoLinhaColecao } from './produtos-linhas'
+
 // ── Formato final ────────────────────────────────────────────────────────────
 // ad07|img|pont|grm|pro|sha|clareador|axoly-performance|influ-weryka|kit-pistache|wpp|ate-28-out-26
 //  1    2    3    4    5   6      7            8               9            10      11      12
@@ -73,7 +75,12 @@ export const OPCOES_LINHA: Opcao[] = [
 ]
 
 // Categorias seguem o menu do site. "inst" cobre criativo de marca sem produto.
+// "Linha Pro" e "Linha Essential" levam para a coleção da linha no site: a escolha do
+// produto vira obrigatória (busca no catálogo) e gera a página de destino com ?destaque=.
+export const CATEGORIAS_LINHA: Record<string, CodigoLinhaColecao> = { lpro: 'pro', less: 'ess' }
 export const OPCOES_CATEGORIA: OpcaoSimples[] = [
+  { codigo: 'lpro', rotulo: 'Linha Pro' },
+  { codigo: 'less', rotulo: 'Linha Essential' },
   { codigo: 'sha', rotulo: 'Shampoos' },
   { codigo: 'cond', rotulo: 'Condicionadores' },
   { codigo: 'masc', rotulo: 'Máscaras' },
@@ -148,6 +155,9 @@ export type EstadoNomenclatura = {
   linhaOutro: string
   categoria: string
   produto: string
+  // Slug Shopify do produto escolhido na busca (categoria Linha Pro/Essential).
+  // COLECAO_INTEIRA = anúncio da coleção toda, sem destaque. '' = ainda não escolhido.
+  destaque: string
   metodologia: string
   pilar: string
   metodologiaOutro: string
@@ -172,6 +182,7 @@ export const ESTADO_VAZIO: EstadoNomenclatura = {
   linhaOutro: '',
   categoria: '',
   produto: '',
+  destaque: '',
   metodologia: '',
   pilar: '',
   metodologiaOutro: '',
@@ -204,7 +215,7 @@ export const EXEMPLO_TESTE: EstadoNomenclatura = {
 // exemplo" de cada etapa, que só mexe nos campos daquela etapa.
 export const CAMPOS_POR_ETAPA: Record<number, (keyof EstadoNomenclatura)[]> = {
   1: ['numero', 'midia', 'midiaOutro', 'ciclo', 'dataDia', 'dataMes', 'dataAno', 'destino', 'lpNome'],
-  2: ['publico', 'publicoOutro', 'linha', 'linhaOutro', 'categoria', 'produto'],
+  2: ['publico', 'publicoOutro', 'linha', 'linhaOutro', 'categoria', 'produto', 'destaque'],
   3: ['metodologia', 'pilar', 'metodologiaOutro', 'talentoTipo', 'talentoNome'],
   4: ['descricao'],
 }
@@ -330,7 +341,7 @@ export function segmentosNome(e: EstadoNomenclatura, agora: Date = new Date()): 
       dica: `Linha: ${e.linha === 'outro' ? e.linhaOutro : rotuloDe(OPCOES_LINHA, linha)}`,
     })
   }
-  if (util(e.categoria)) {
+  if (util(e.categoria) && !CATEGORIAS_LINHA[e.categoria]) {
     segs.push({ texto: e.categoria, dica: `Categoria: ${rotuloDe(OPCOES_CATEGORIA, e.categoria)}` })
   }
 
@@ -381,6 +392,21 @@ export function segmentosNome(e: EstadoNomenclatura, agora: Date = new Date()): 
   return segs
 }
 
+// Coleção da linha quando a categoria é "Linha Pro/Essential"; senão null.
+export function colecaoDaCategoria(e: EstadoNomenclatura): CodigoLinhaColecao | null {
+  return CATEGORIAS_LINHA[e.categoria] ?? null
+}
+
+// Página de destino do anúncio de linha: coleção + ?destaque=<slug>. Vazio fora desse caso
+// ou enquanto o produto não foi escolhido.
+export function paginaDestino(e: EstadoNomenclatura): string {
+  const col = colecaoDaCategoria(e)
+  if (!col || !e.destaque) return ''
+  const base = COLECOES[col].url
+  if (e.destaque === COLECAO_INTEIRA || !produtoPorSlug(e.destaque)) return base
+  return `${base}?destaque=${e.destaque}`
+}
+
 // Monta o nome final. `agora` é injetável para ficar testável e para o histórico
 // gravar sempre a data em que o nome foi gerado.
 export function montarNome(e: EstadoNomenclatura, agora: Date = new Date()): string {
@@ -404,6 +430,9 @@ export function obrigatoriosFaltando(e: EstadoNomenclatura): Pendencia[] {
   if (e.destino === 'lp' && slug(e.lpNome) === '') p.push({ campo: 'destino', rotulo: 'Nome da landing page', etapa: 1 })
   if (e.publico === '' || (e.publico === 'outro' && slug(e.publicoOutro) === '')) {
     p.push({ campo: 'publico', rotulo: 'Público', etapa: 2 })
+  }
+  if (colecaoDaCategoria(e) && !e.destaque) {
+    p.push({ campo: 'produto', rotulo: 'Produto da linha (ou coleção inteira)', etapa: 2 })
   }
   return p
 }
@@ -442,6 +471,7 @@ export function payloadRegistro(
     destino: blocoDestino(e),
     dataFinal: blocoDataLimite(e),
     mesAno: blocoData(e, agora),
+    paginaDestino: paginaDestino(e),
     geradoEm: agora.toISOString(),
   }
 }

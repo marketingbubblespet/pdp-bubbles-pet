@@ -21,13 +21,15 @@ export function ComplementarInfo({
   nome,
   midia,
   dataFinalBR,
+  destinoInicial = '',
 }: {
+  destinoInicial?: string
   nome: string
   midia: string
   dataFinalBR: string
 }) {
   const [aberto, setAberto] = useState(false)
-  const [c, setC] = useState<Complemento>(COMPLEMENTO_VAZIO)
+  const [c, setC] = useState<Complemento>({ ...COMPLEMENTO_VAZIO, destino: destinoInicial })
   const [copiado, setCopiado] = useState('')
 
   const copiar = (id: string, texto: string) => {
