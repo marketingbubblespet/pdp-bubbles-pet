@@ -1,7 +1,8 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle, ChevronRight, X, MessageCircle } from 'lucide-react'
+import { CheckCircle, ChevronRight, X } from 'lucide-react'
+import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 import { loadUtms } from '@/lib/utm'
 import { PET_SOUTH, PET_SOUTH_BUSINESS_MODELS } from '@/lib/pet-south'
 import { OPEN_FORM_EVENT } from './formBus'
@@ -363,7 +364,7 @@ Quero comprar com condições exclusivas da feira!`
                       rel="noopener noreferrer"
                       className="w-full sm:w-auto px-8 bg-[#F4CDD4] text-[#080808] py-4 rounded-xl font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform flex items-center justify-center gap-2"
                     >
-                      <MessageCircle size={16} /> Abrir WhatsApp Comercial
+                      <WhatsAppIcon size={16} /> Abrir WhatsApp Comercial
                     </a>
                   )}
                   <button type="button" onClick={handleClose} className="w-full sm:w-auto px-8 py-4 rounded-xl font-black uppercase tracking-widest text-xs bg-[#F4CDD4] text-[#080808]">

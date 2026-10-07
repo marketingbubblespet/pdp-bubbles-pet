@@ -1,13 +1,14 @@
-import { Scissors, Star, GraduationCap, MessageCircle, Link2, type LucideIcon } from 'lucide-react'
+import { Scissors, Star, GraduationCap, Link2, type LucideIcon } from 'lucide-react'
+import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 import { MC, MC_LEARN, MC_DELIVERABLES } from '@/lib/masterclass-penteados'
 
-const LEARN_ICONS: Record<string, LucideIcon> = {
+const LEARN_ICONS: Record<string, LucideIcon | typeof WhatsAppIcon> = {
   '✂️': Scissors,
   '⭐': Star,
 }
-const DELIVERABLE_ICONS: Record<string, LucideIcon> = {
+const DELIVERABLE_ICONS: Record<string, LucideIcon | typeof WhatsAppIcon> = {
   '🎓': GraduationCap,
-  '💬': MessageCircle,
+  '💬': WhatsAppIcon,
   '🔗': Link2,
 }
 

@@ -59,7 +59,10 @@ export function CaptacaoRoiCalculator() {
                 step="5000"
                 value={investment}
                 onChange={(e) => setInvestment(Number(e.target.value))}
-                className="w-full h-1 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#F4CDD4]"
+                aria-label="Valor do investimento"
+                // Área de toque de 44px (a linha visível continua fina) e bolinha de 24px,
+                // para arrastar com o dedo. -my-5 mantém o layout no mesmo lugar.
+                className="w-full h-11 -my-5 bg-transparent appearance-none cursor-pointer touch-pan-y [&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-white/10 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:-mt-2.5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#F4CDD4] [&::-webkit-slider-thumb]:shadow-[0_0_12px_rgba(244,205,212,0.5)] [&::-moz-range-track]:h-1 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-white/10 [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:h-6 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#F4CDD4]"
               />
               <div className="flex justify-between text-[7px] md:text-[8px] text-white/40 mt-2 md:mt-3 font-bold uppercase tracking-widest">
                 <span className="text-[#F4CDD4]">Mínimo R$ 10k</span>

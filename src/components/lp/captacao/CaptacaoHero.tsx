@@ -1,9 +1,9 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import Image, { getImageProps } from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
-import { CAPTACAO_HERO_LINES } from '@/lib/captacao'
+import { CAPTACAO_HERO_LINES, CAPTACAO_PARCEIROS_FOTOS } from '@/lib/captacao'
 
 function HeroCarousel() {
   const [index, setIndex] = useState(0)
@@ -31,25 +31,35 @@ function HeroCarousel() {
 
   const line = lines[index]
 
+  // Foto certa para cada tela (celular 400px, computador 1200px), como na referência.
+  // A primeira foto é a da primeira dobra (LCP): carrega com prioridade alta.
+  // (Next 16: "priority" foi descontinuado; com <picture> o recomendado é fetchPriority.)
+  const comum = { alt: line.name, fill: true, fetchPriority: index === 0 ? ('high' as const) : undefined }
+  const { props: desktop } = getImageProps({ ...comum, src: line.imgDesktop, sizes: '526px' })
+  const { props: { srcSet: srcMobile, ...mobile } } = getImageProps({ ...comum, src: line.imgMobile, sizes: '320px' })
+
   return (
     <div ref={wrapperRef} className="relative w-full h-full group">
-      <AnimatePresence mode="wait">
+      {/* initial={false}: a primeira foto já vem visível no HTML, sem esperar o JavaScript
+          carregar para fazer a animação de entrada. É o que destrava o LCP no celular. */}
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={index}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
+          // Só esmaece (sem zoom): com zoom, cada slide novo aparece maior que o anterior e
+          // o Google conta como um novo "maior conteúdo" (LCP), empurrando a nota para ~20s.
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
           className="absolute inset-0"
         >
-          <Image
-            src={line.imgDesktop}
-            alt={line.name}
-            fill
-            sizes="(max-width: 767px) 100vw, 526px"
-            className="object-cover rounded-[40px]"
-            priority={index === 0}
-          />
+          <picture>
+            <source media="(max-width: 767px)" srcSet={srcMobile} sizes="320px" />
+            <source media="(min-width: 768px)" srcSet={desktop.srcSet} sizes="526px" />
+            {/* O <picture> escolhe só uma das fontes, então "eager" não baixa as duas. */}
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+            <img {...mobile} loading={index === 0 ? 'eager' : 'lazy'} className="object-cover rounded-[40px]" />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F0C0D] via-transparent to-transparent opacity-60 rounded-[40px]" />
           <div className="absolute bottom-10 left-10 right-10 z-20">
             <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }}>
@@ -79,18 +89,20 @@ function HeroCarousel() {
         ))}
       </div>
 
-      <div className="absolute top-1/2 -translate-y-1/2 left-4 right-4 flex justify-between z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute top-1/2 -translate-y-1/2 left-4 right-4 flex justify-between z-30 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
         <button
           type="button"
+          aria-label="Linha anterior"
           onClick={() => setIndex((prev) => (prev - 1 + lines.length) % lines.length)}
-          className="w-10 h-10 rounded-full bg-[#0F0C0D]/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-[#F4CDD4] hover:text-[#0F0C0D] transition-colors shadow-lg"
+          className="w-11 h-11 rounded-full bg-[#0F0C0D]/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-[#F4CDD4] hover:text-[#0F0C0D] transition-colors shadow-lg"
         >
           <ChevronLeft size={24} />
         </button>
         <button
           type="button"
+          aria-label="Próxima linha"
           onClick={() => setIndex((prev) => (prev + 1) % lines.length)}
-          className="w-10 h-10 rounded-full bg-[#0F0C0D]/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-[#F4CDD4] hover:text-[#0F0C0D] transition-colors shadow-lg"
+          className="w-11 h-11 rounded-full bg-[#0F0C0D]/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-[#F4CDD4] hover:text-[#0F0C0D] transition-colors shadow-lg"
         >
           <ChevronRight size={24} />
         </button>
@@ -115,7 +127,8 @@ export function CaptacaoHero({
 
       <div className="flex-grow flex items-center px-6 md:px-10 relative z-10">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center w-full">
-          <motion.div initial={{ x: -50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8 }}>
+          {/* initial={false}: visível já no HTML (sem esperar o JS animar), acelera a primeira dobra. */}
+          <motion.div initial={false} animate={{ x: 0, opacity: 1 }}>
             <div className="mb-4 pt-6 md:pt-8">
               <Image src="/images/bubbles-logo.svg" alt="Bubbles" width={150} height={40} className="h-8 md:h-10 w-auto brightness-0 invert" priority />
             </div>
@@ -145,8 +158,15 @@ export function CaptacaoHero({
               </motion.button>
               <div className="flex items-center gap-4 px-6 py-4 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm flex-1">
                 <div className="flex -space-x-3">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-[#0F0C0D] bg-[#F4CDD4]/30" />
+                  {CAPTACAO_PARCEIROS_FOTOS.map((src) => (
+                    <Image
+                      key={src}
+                      src={src}
+                      alt="Parceiro Bubbles"
+                      width={32}
+                      height={32}
+                      className="w-8 h-8 rounded-full border-2 border-[#0F0C0D] object-cover"
+                    />
                   ))}
                 </div>
                 <div className="text-xs">
@@ -158,7 +178,7 @@ export function CaptacaoHero({
           </motion.div>
 
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
+            initial={false}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="relative h-[400px] md:h-[480px]"

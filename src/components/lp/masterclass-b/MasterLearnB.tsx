@@ -1,15 +1,16 @@
-import { Scissors, Ban, Star, GraduationCap, MessageCircle, Link2, PlayCircle, type LucideIcon } from 'lucide-react'
+import { Scissors, Ban, Star, GraduationCap, Link2, PlayCircle, type LucideIcon } from 'lucide-react'
+import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 import { MC, MC_LEARN, MC_DELIVERABLES } from '@/lib/masterclass-spitz'
 
 // MC_LEARN/MC_DELIVERABLES guardam emoji (usado pela versão A); aqui trocamos por ícone Lucide.
-const LEARN_ICONS: Record<string, LucideIcon> = {
+const LEARN_ICONS: Record<string, LucideIcon | typeof WhatsAppIcon> = {
   '✂️': Scissors,
   '🚫': Ban,
   '⭐': Star,
 }
-const DELIVERABLE_ICONS: Record<string, LucideIcon> = {
+const DELIVERABLE_ICONS: Record<string, LucideIcon | typeof WhatsAppIcon> = {
   '🎓': GraduationCap,
-  '💬': MessageCircle,
+  '💬': WhatsAppIcon,
   '🔗': Link2,
   '▶️': PlayCircle,
 }

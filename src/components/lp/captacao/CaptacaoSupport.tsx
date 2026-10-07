@@ -20,7 +20,8 @@ export function CaptacaoSupport() {
             <span className="text-white font-bold">relacionamento comercial</span>. O seu sell-in é consequência
             direta do nosso suporte no seu sell-out. Com produtos de{' '}
             <span className="text-white font-bold">fácil aceitação inicial</span> e altíssima taxa de recompra, a
-            reposição de estoque se torna um processo natural e acelerado.
+            reposição de estoque se torna um processo natural e acelerado. Cuidamos da precisão industrial e da
+            agilidade logística para você nunca perder uma venda.
           </p>
 
           <div className="space-y-8">
@@ -44,7 +45,8 @@ export function CaptacaoSupport() {
         <div className="relative">
           <div className="absolute inset-0 bg-[#F4CDD4]/10 blur-[80px] rounded-full -z-10" />
           <div className="bg-[#1A1A1A] border border-white/10 p-4 rounded-[40px] shadow-2xl relative overflow-hidden">
-            <div className="relative w-full aspect-[3/2] rounded-[32px] overflow-hidden">
+            {/* Proporção natural da foto (vertical, 4:5), sem cortar, igual à referência. */}
+            <div className="relative w-full aspect-[4/5] rounded-[32px] overflow-hidden">
               <Image
                 src="/images/distribuidores/bubbles-estoque-expedicao-desktop.webp"
                 alt="Logística Bubbles"

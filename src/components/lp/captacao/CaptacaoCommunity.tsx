@@ -1,10 +1,22 @@
 'use client'
 import { useState, createElement } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Share2, HelpCircle, Award, GraduationCap, TrendingUp, type LucideIcon } from 'lucide-react'
+import { HelpCircle, Award, GraduationCap, TrendingUp } from 'lucide-react'
 import { CAPTACAO_COMMUNITY_ITEMS } from '@/lib/captacao'
 
-const ICONS: Record<string, LucideIcon> = { Instagram: Share2, HelpCircle, Award, GraduationCap, TrendingUp }
+// O lucide-react v1 removeu ícones de marca: o do Instagram é desenhado aqui, no mesmo
+// traço (stroke) dos ícones do lucide, herdando a cor do texto.
+function InstagramIcon({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  )
+}
+
+const ICONS: Record<string, React.ComponentType<{ size?: number }>> = { Instagram: InstagramIcon, HelpCircle, Award, GraduationCap, TrendingUp }
 
 export function CaptacaoCommunity() {
   const [active, setActive] = useState(0)
@@ -20,7 +32,7 @@ export function CaptacaoCommunity() {
           Pet.
         </h2>
         <p className="text-white/60 text-lg max-w-3xl mx-auto leading-relaxed">
-          Ser um distribuidor Bubbles é pertencer a um{' '}
+          Ser um distribuidor Bubbles® é pertencer a um{' '}
           <span className="bg-[#F4CDD4] text-[#0F0C0D] px-1 py-1 font-bold">ecossistema</span> de elite que dita as
           tendências do setor. Não entregamos apenas galões; entregamos{' '}
           <span className="text-white font-bold">posicionamento e autoridade</span>.
@@ -34,7 +46,7 @@ export function CaptacaoCommunity() {
               key={it.title}
               type="button"
               onClick={() => setActive(i)}
-              className={`px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 border ${
+              className={`px-6 py-3 min-h-11 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 border ${
                 active === i
                   ? 'bg-[#F4CDD4] text-[#0F0C0D] border-[#F4CDD4] shadow-[0_0_20px_rgba(244,205,212,0.3)]'
                   : 'bg-white/5 text-white/40 border-white/10 hover:border-white/30'

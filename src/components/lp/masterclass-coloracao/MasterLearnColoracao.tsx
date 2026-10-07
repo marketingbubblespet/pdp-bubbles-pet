@@ -1,9 +1,10 @@
-import { Palette, GraduationCap, MessageCircle, PlayCircle, type LucideIcon } from 'lucide-react'
+import { Palette, GraduationCap, PlayCircle, type LucideIcon } from 'lucide-react'
+import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 import { MC, MC_LEARN, MC_DELIVERABLES } from '@/lib/masterclass-coloracao'
 
-const DELIVERABLE_ICONS: Record<string, LucideIcon> = {
+const DELIVERABLE_ICONS: Record<string, LucideIcon | typeof WhatsAppIcon> = {
   certificado: GraduationCap,
-  grupo: MessageCircle,
+  grupo: WhatsAppIcon,
   replay: PlayCircle,
 }
 

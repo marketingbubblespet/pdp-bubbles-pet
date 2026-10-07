@@ -8,12 +8,12 @@ export function CaptacaoFooter() {
           <Image src="/images/bubbles-logo.svg" alt="Bubbles" width={150} height={40} className="h-8 md:h-10 w-auto brightness-0 invert" />
 
           <div className="text-center md:text-right">
-            <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-2">Bubbles Cosméticos Pet</p>
+            <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-2">Bubbles® Cosméticos Pet</p>
             <p className="text-white/20 text-[9px] font-bold uppercase tracking-widest">CNPJ: 26.353.134/0001-40</p>
           </div>
 
           <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest">
-            © 2026 Bubbles. Todos os direitos reservados.
+            © 2026 Bubbles®. Todos os direitos reservados.
           </p>
         </div>
 

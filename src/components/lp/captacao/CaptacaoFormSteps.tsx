@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
-import { ChevronRight, CheckCircle, MessageCircle } from 'lucide-react'
+import { ChevronRight, CheckCircle } from 'lucide-react'
+import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 import { CAPTACAO_BUSINESS_MODELS } from '@/lib/captacao'
 import {
   type FormState,
@@ -126,9 +127,9 @@ export function Step3Location({
 
 export function Step4Business({ form, setForm }: { form: FormState; setForm: (f: FormState) => void }) {
   return (
-    <motion.div {...fadeStep} className="space-y-6">
-      <h4 className="text-xl font-black text-white mb-8 tracking-tight">Modelo de Negócio</h4>
-      <div className="space-y-6">
+    <motion.div {...fadeStep} className="space-y-5">
+      <h4 className="text-xl font-black text-white mb-4 tracking-tight">Modelo de Negócio</h4>
+      <div className="space-y-4">
         <div>
           <span className={labelClass}>Como você atua hoje?</span>
           <div className="grid grid-cols-1 gap-2">
@@ -136,7 +137,7 @@ export function Step4Business({ form, setForm }: { form: FormState; setForm: (f:
               <button
                 key={opt.id} type="button"
                 onClick={() => setForm({ ...form, businessModel: opt.label })}
-                className={`py-4 px-6 rounded-xl border text-left font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-between ${
+                className={`py-3.5 px-6 rounded-xl border text-left font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-between ${
                   form.businessModel === opt.label ? 'bg-[#F4CDD4] text-[#0F0C0D] border-[#F4CDD4]' : 'bg-white/5 text-white border-white/10 hover:border-white/30'
                 }`}
               >
@@ -228,7 +229,7 @@ export function SuccessScreen({
   return (
     <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="space-y-6 text-center py-4">
       <div className="w-16 h-16 bg-[#F4CDD4]/10 text-[#F4CDD4] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(244,205,212,0.2)] animate-pulse">
-        {isQualified ? <CheckCircle size={36} className="text-[#F4CDD4]" /> : <MessageCircle size={36} className="text-[#F4CDD4]" />}
+        {isQualified ? <CheckCircle size={36} className="text-[#F4CDD4]" /> : <WhatsAppIcon size={36} className="text-[#F4CDD4]" />}
       </div>
       <h4 className="text-2xl font-black text-white tracking-tight">{isQualified ? 'Candidatura Enviada!' : 'Condições Exclusivas!'}</h4>
       <p className="text-white/70 text-sm max-w-md mx-auto leading-relaxed">
@@ -254,7 +255,7 @@ export function SuccessScreen({
       <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
         {!isQualified && (
           <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 bg-[#F4CDD4] text-[#0F0C0D] py-4 rounded-xl font-black uppercase tracking-widest text-xs hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(244,205,212,0.2)] flex items-center justify-center gap-2">
-            <MessageCircle size={16} /> Abrir WhatsApp
+            <WhatsAppIcon size={16} /> Abrir WhatsApp
           </a>
         )}
         <button

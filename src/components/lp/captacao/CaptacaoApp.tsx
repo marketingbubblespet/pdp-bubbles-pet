@@ -11,10 +11,14 @@ import { CaptacaoSupport } from './CaptacaoSupport'
 import { CaptacaoTestimonials } from './CaptacaoTestimonials'
 import { CaptacaoFinalCta } from './CaptacaoFinalCta'
 import { CaptacaoFooter } from './CaptacaoFooter'
-import { CaptacaoForm } from './CaptacaoForm'
-import { CaptacaoStickyBar } from './CaptacaoStickyBar'
-import { CaptacaoExitPopup } from './CaptacaoExitPopup'
+import dynamic from 'next/dynamic'
 import { pushFormOpen } from '@/lib/tracking'
+
+// Code-split (mesmo padrão da LP /care): formulário, popup de saída e barra fixa não
+// aparecem na primeira dobra, então vão em pacotes separados e não atrasam o carregamento.
+const CaptacaoForm = dynamic(() => import('./CaptacaoForm').then((m) => ({ default: m.CaptacaoForm })))
+const CaptacaoStickyBar = dynamic(() => import('./CaptacaoStickyBar').then((m) => ({ default: m.CaptacaoStickyBar })))
+const CaptacaoExitPopup = dynamic(() => import('./CaptacaoExitPopup').then((m) => ({ default: m.CaptacaoExitPopup })))
 import { useFormModal } from './useFormModal'
 
 export function CaptacaoApp() {

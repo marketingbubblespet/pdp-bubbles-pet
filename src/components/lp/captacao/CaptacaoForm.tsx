@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import { loadUtms } from '@/lib/utm'
@@ -29,6 +29,10 @@ function isStepValid(step: number, form: FormState): boolean {
 
 export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [step, setStep] = useState(1)
+  // O corpo do modal rola sozinho: a cada troca de etapa (ou sucesso) ele volta ao topo,
+  // para quem estava no fim de uma etapa longa não cair no meio da próxima.
+  const corpoRef = useRef<HTMLDivElement>(null)
+  const voltarAoTopo = () => corpoRef.current?.scrollTo({ top: 0 })
   const [form, setForm] = useState<FormState>(EMPTY_FORM)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -67,11 +71,13 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
     setAttemptedNext(false)
     const proximo = Math.min(step + 1, TOTAL_STEPS)
     setStep(proximo)
+    voltarAoTopo()
     pushFormStep(NETLIFY_FORM_NAME, proximo, STEP_NAMES[proximo - 1])
   }
   const handleBack = () => {
     setAttemptedNext(false)
     setStep((s) => Math.max(s - 1, 1))
+    voltarAoTopo()
   }
 
   const submitToDestinations = async (utms: Record<string, string | undefined>) => {
@@ -166,6 +172,7 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
       }
 
       setIsSuccess(true)
+      voltarAoTopo()
 
       if (!isQualified) {
         setTimeout(() => window.open(whatsappLink, '_blank'), 300)
@@ -179,8 +186,10 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
-      <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="bg-[#1A1A1A] border border-white/10 rounded-[32px] w-full max-w-2xl overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto">
-        <div className="p-8 border-b border-white/5 flex justify-between items-center bg-[#121212] sticky top-0 z-10">
+      <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="bg-[#1A1A1A] border border-white/10 rounded-[32px] w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+        {/* Cabeçalho e barra de progresso fixos; só o corpo rola em telas baixas
+            (notebooks 1366×768 ou com escala 125%/150%), sem cortar os botões. */}
+        <div className="p-6 md:p-8 border-b border-white/5 flex justify-between items-center bg-[#121212] shrink-0">
           <div>
             <h3 className="text-xl font-black text-white tracking-tight">{isSuccess ? 'Candidatura Recebida' : 'Candidatura de Distribuidor'}</h3>
             {!isSuccess && <p className="text-white/40 text-[10px] uppercase tracking-widest mt-1 font-bold">Passo {step} de {TOTAL_STEPS}</p>}
@@ -191,12 +200,12 @@ export function CaptacaoForm({ isOpen, onClose }: { isOpen: boolean; onClose: ()
         </div>
 
         {!isSuccess && (
-          <div className="h-1 bg-white/5 w-full">
+          <div className="h-1 bg-white/5 w-full shrink-0">
             <motion.div className="h-full bg-[#F4CDD4] shadow-[0_0_10px_rgba(244,205,212,0.5)]" initial={{ width: '0%' }} animate={{ width: `${(step / TOTAL_STEPS) * 100}%` }} />
           </div>
         )}
 
-        <div className="p-8 md:p-12">
+        <div id="form-distribuidor" ref={corpoRef} className="p-6 md:p-10 overflow-y-auto">
           {isSuccess ? (
             <SuccessScreen key="success" isQualified={isQualified} candidacyId={candidacyId} whatsappLink={whatsappLink} onClose={handleClose} />
           ) : (

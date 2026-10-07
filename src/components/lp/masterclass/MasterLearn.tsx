@@ -1,4 +1,5 @@
 import { MC, MC_LEARN, MC_DELIVERABLES } from '@/lib/masterclass-spitz'
+import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 
 export function MasterLearn() {
   return (
@@ -37,7 +38,8 @@ export function MasterLearn() {
                 key={d.text}
                 className="flex items-start gap-3 bg-white rounded-[10px] p-4 border border-[#E5E7EB]"
               >
-                <span className="text-2xl shrink-0">{d.icon}</span>
+                {/* Item de WhatsApp usa o logo oficial (regra 41), não o emoji de balão. */}
+                {d.icon === '💬' ? <WhatsAppIcon size={24} className="text-[#E8649A] mt-0.5" /> : <span className="text-2xl shrink-0">{d.icon}</span>}
                 <p className="text-sm font-medium text-[#0F0C0D] leading-snug">{d.text}</p>
               </div>
             ))}

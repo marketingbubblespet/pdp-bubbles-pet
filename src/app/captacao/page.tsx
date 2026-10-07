@@ -1,5 +1,6 @@
 // src/app/captacao/page.tsx
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { CAPTACAO } from '@/lib/captacao'
 import { GtmScript } from '@/components/ui/GtmScript'
 import { CaptacaoApp } from '@/components/lp/captacao/CaptacaoApp'
@@ -7,8 +8,9 @@ import { CaptacaoApp } from '@/components/lp/captacao/CaptacaoApp'
 const SITE_URL = 'https://ofertas.bubbles.com.br'
 const PAGE_URL = `${SITE_URL}/${CAPTACAO.slug}`
 
-const title = 'Seja um distribuidor Bubbles | Captação de parceiros'
-const description = 'Domine a sua região com a marca que define o padrão do cosmético pet. Margens competitivas, suporte de marketing 360º e logística ágil para distribuidores autorizados Bubbles.'
+// Título e descrição idênticos aos de captacao.bubbles.com.br (pedido do usuário, out/2026).
+const title = 'Bubbles Pet Cosmetics | Cosméticos Profissionais para Banho e Tosa'
+const description = 'Descubra a linha completa de cosméticos profissionais para pets da Bubbles. Alta rentabilidade, qualidade premium e resultados incríveis para o seu banho e tosa. Seja um parceiro!'
 
 export const metadata: Metadata = {
   title,
@@ -26,6 +28,12 @@ export default function CaptacaoPage() {
     <>
       {/* GTM escopado só nesta página (não entra no layout global) */}
       <GtmScript id="GTM-N4PHK6DM" />
+
+      {/* Microsoft Clarity (gravação de sessões e mapas de calor), mesmo projeto usado em
+          captacao.bubbles.com.br. Escopado só nesta página. */}
+      <Script id="clarity-captacao" strategy="afterInteractive">
+        {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wbnansxpk1");`}
+      </Script>
 
       {/* Barra de rolagem no accent da marca (escopo desta página, tema escuro) */}
       <style>{`
