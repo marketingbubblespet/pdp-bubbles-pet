@@ -4,12 +4,16 @@
 // funções puras que montam o nome. Nenhum componente monta a string por conta própria,
 // tudo passa por montarNome(). Se o padrão mudar em 2027, muda só neste arquivo.
 
+import { COLECAO_INTEIRA, COLECOES, produtoPorSlug, type CodigoLinhaColecao } from './produtos-linhas'
+
 // ── Formato final ────────────────────────────────────────────────────────────
-// ad07|img|pont|grm|pro|sha|clareador|axoly-performance|influ-weryka|kit-gelato-de-pistache|set-26
-//  1    2    3    4    5   6      7            8               9                10             11
+// ad07|img|pont|grm|pro|sha|clareador|axoly-performance|influ-weryka|kit-pistache|wpp|ate-28-out-26
+//  1    2    3    4    5   6      7            8               9            10      11      12
 // 1 numero  2 midia  3 ciclo  4 publico  5 linha  6 categoria  7 produto
-// 8 metodologia  9 talento (quem aparece)  10 do que se trata  11 mes-ano (só pontual)
-// Blocos vazios (4 a 9) simplesmente somem do nome, para encurtar.
+// 8 metodologia  9 talento (quem aparece)  10 do que se trata  11 destino (some se for o site)
+// 12 data: pontual = "ate-dia-mes-ano" escolhido; contínuo = mês-ano em que foi gerado.
+// Blocos vazios (4 a 11) somem do nome, e valores genéricos ("todas", "todos") também,
+// pra não repetir "todas|todos|todos" em anúncio que não é de produto.
 
 export type OpcaoSimples = { codigo: string; rotulo: string }
 export type Opcao = OpcaoSimples & { ex: string }
@@ -27,10 +31,31 @@ export const OPCOES_CICLO: Opcao[] = [
   {
     codigo: 'pont',
     rotulo: 'Pontual',
-    ex: 'cita mês, data ou promoção específica. O nome termina com o mês, ex: set-26',
+    ex: 'tem data para acabar. O nome termina com a data final, ex: ate-28-out-26',
   },
-  { codigo: 'cont', rotulo: 'Contínuo', ex: 'sem prazo, pode rodar o ano todo' },
+  { codigo: 'cont', rotulo: 'Contínuo', ex: 'sem prazo. O nome termina com o mês atual, ex: set-26' },
 ]
+
+// Para onde o clique leva. Site é o padrão e não entra no nome.
+export const OPCOES_DESTINO: Opcao[] = [
+  { codigo: 'site', rotulo: 'Site / loja', ex: 'padrão, não aparece no nome' },
+  { codigo: 'wpp', rotulo: 'WhatsApp', ex: 'conversa com o atendimento' },
+  { codigo: 'insta', rotulo: 'Perfil do Instagram', ex: 'visitas ao perfil' },
+  { codigo: 'lp', rotulo: 'Landing page', ex: 'LP de captação. Pede o nome da LP' },
+]
+
+const BLOCO_DESTINO: Record<string, string> = {
+  wpp: 'wpp',
+  insta: 'insta-visitas-ao-perfil',
+}
+
+// Atalhos de nome de LP (o campo aceita texto livre).
+export const SUGESTOES_LP = ['masterclass-coloracao', 'captacao-distribuidor', 'care', 'live-care', 'essential']
+
+// Valores que não dizem nada no nome: quando aparecem em linha, categoria ou produto,
+// o bloco some.
+const GENERICOS = new Set(['todas', 'todos', 'todo', 'toda', 'geral', 'nenhum', 'nenhuma'])
+const util = (s: string) => (GENERICOS.has(s) ? '' : s)
 
 export const OPCOES_PUBLICO: Opcao[] = [
   { codigo: 'grm', rotulo: 'Groomer', ex: 'profissional de banho e tosa' },
@@ -50,7 +75,12 @@ export const OPCOES_LINHA: Opcao[] = [
 ]
 
 // Categorias seguem o menu do site. "inst" cobre criativo de marca sem produto.
+// "Linha Pro" e "Linha Essential" levam para a coleção da linha no site: a escolha do
+// produto vira obrigatória (busca no catálogo) e gera a página de destino com ?destaque=.
+export const CATEGORIAS_LINHA: Record<string, CodigoLinhaColecao> = { lpro: 'pro', less: 'ess' }
 export const OPCOES_CATEGORIA: OpcaoSimples[] = [
+  { codigo: 'lpro', rotulo: 'Linha Pro' },
+  { codigo: 'less', rotulo: 'Linha Essential' },
   { codigo: 'sha', rotulo: 'Shampoos' },
   { codigo: 'cond', rotulo: 'Condicionadores' },
   { codigo: 'masc', rotulo: 'Máscaras' },
@@ -79,7 +109,7 @@ export const OPCOES_TALENTO: Opcao[] = [
 
 // Atalhos de nome para colaboradores que costumam gravar. A pessoa também pode digitar
 // um nome novo.
-export const COLABORADORES = ['claudio', 'paulo', 'gabriel', 'ivan', 'ana', 'anna']
+export const COLABORADORES = ['amanda', 'anna', 'ana', 'mariane', 'claudio', 'paulo', 'ivan', 'guilherme', 'gabriel']
 
 // Sugestões de produto específico por linha (só atalho, o campo aceita texto livre).
 export const SUGESTOES_PRODUTO: Record<string, string[]> = {
@@ -101,7 +131,11 @@ export const SUGESTOES_PRODUTO: Record<string, string[]> = {
   outro: [],
 }
 
-const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+export const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+export const MESES_NOME = [
+  'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+  'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro',
+]
 
 // ── Estado do formulário ─────────────────────────────────────────────────────
 export type EstadoNomenclatura = {
@@ -109,12 +143,21 @@ export type EstadoNomenclatura = {
   midia: string
   midiaOutro: string
   ciclo: string
+  // Data final do pontual, em partes (dia "1".."31", mês "1".."12", ano "2026").
+  dataDia: string
+  dataMes: string
+  dataAno: string
+  destino: string
+  lpNome: string
   publico: string
   publicoOutro: string
   linha: string
   linhaOutro: string
   categoria: string
   produto: string
+  // Slug Shopify do produto escolhido na busca (categoria Linha Pro/Essential).
+  // COLECAO_INTEIRA = anúncio da coleção toda, sem destaque. '' = ainda não escolhido.
+  destaque: string
   metodologia: string
   pilar: string
   metodologiaOutro: string
@@ -128,12 +171,18 @@ export const ESTADO_VAZIO: EstadoNomenclatura = {
   midia: '',
   midiaOutro: '',
   ciclo: '',
+  dataDia: '',
+  dataMes: '',
+  dataAno: '',
+  destino: 'site',
+  lpNome: '',
   publico: '',
   publicoOutro: '',
   linha: '',
   linhaOutro: '',
   categoria: '',
   produto: '',
+  destaque: '',
   metodologia: '',
   pilar: '',
   metodologiaOutro: '',
@@ -148,6 +197,9 @@ export const EXEMPLO_TESTE: EstadoNomenclatura = {
   numero: '7',
   midia: 'img',
   ciclo: 'pont',
+  dataDia: '28',
+  dataMes: '10',
+  dataAno: String(new Date().getFullYear()),
   publico: 'grm',
   linha: 'pro',
   categoria: 'sha',
@@ -162,8 +214,8 @@ export const EXEMPLO_TESTE: EstadoNomenclatura = {
 // Quais campos do estado pertencem a cada etapa (1 a 4). Usado pelo "preencher
 // exemplo" de cada etapa, que só mexe nos campos daquela etapa.
 export const CAMPOS_POR_ETAPA: Record<number, (keyof EstadoNomenclatura)[]> = {
-  1: ['numero', 'midia', 'midiaOutro', 'ciclo'],
-  2: ['publico', 'publicoOutro', 'linha', 'linhaOutro', 'categoria', 'produto'],
+  1: ['numero', 'midia', 'midiaOutro', 'ciclo', 'dataDia', 'dataMes', 'dataAno', 'destino', 'lpNome'],
+  2: ['publico', 'publicoOutro', 'linha', 'linhaOutro', 'categoria', 'produto', 'destaque'],
   3: ['metodologia', 'pilar', 'metodologiaOutro', 'talentoTipo', 'talentoNome'],
   4: ['descricao'],
 }
@@ -190,6 +242,38 @@ export function formatarNumero(bruto: string): string {
 
 export function mesAno(agora: Date = new Date()): string {
   return `${MESES[agora.getMonth()]}-${String(agora.getFullYear()).slice(-2)}`
+}
+
+// Data final do pontual válida (dia existe naquele mês)? Devolve a Date ou null.
+export function dataLimite(e: EstadoNomenclatura): Date | null {
+  const d = Number(e.dataDia)
+  const m = Number(e.dataMes)
+  const a = Number(e.dataAno)
+  if (!d || !m || !a) return null
+  const dt = new Date(a, m - 1, d)
+  return dt.getMonth() === m - 1 ? dt : null
+}
+
+// "ate-05-set-26"
+export function blocoDataLimite(e: EstadoNomenclatura): string {
+  const dt = dataLimite(e)
+  if (!dt) return ''
+  return `ate-${String(dt.getDate()).padStart(2, '0')}-${MESES[dt.getMonth()]}-${String(dt.getFullYear()).slice(-2)}`
+}
+
+function blocoDestino(e: EstadoNomenclatura): string {
+  if (e.destino === 'lp') {
+    const nome = slug(e.lpNome)
+    return nome ? `lp-${nome}` : ''
+  }
+  return BLOCO_DESTINO[e.destino] ?? ''
+}
+
+// Último bloco do nome: data final (pontual) ou mês em que foi gerado (contínuo).
+function blocoData(e: EstadoNomenclatura, agora: Date): string {
+  if (e.ciclo === 'pont') return blocoDataLimite(e)
+  if (e.ciclo === 'cont') return mesAno(agora)
+  return ''
 }
 
 // Resolve um bloco de opção: se for "outro", usa o texto livre; senão, o próprio código.
@@ -250,18 +334,18 @@ export function segmentosNome(e: EstadoNomenclatura, agora: Date = new Date()): 
     })
   }
 
-  const linha = valorOpcao(e.linha, e.linhaOutro)
+  const linha = util(valorOpcao(e.linha, e.linhaOutro))
   if (linha) {
     segs.push({
       texto: linha,
       dica: `Linha: ${e.linha === 'outro' ? e.linhaOutro : rotuloDe(OPCOES_LINHA, linha)}`,
     })
   }
-  if (e.categoria) {
+  if (util(e.categoria) && !CATEGORIAS_LINHA[e.categoria]) {
     segs.push({ texto: e.categoria, dica: `Categoria: ${rotuloDe(OPCOES_CATEGORIA, e.categoria)}` })
   }
 
-  const prod = slug(e.produto)
+  const prod = util(slug(e.produto))
   if (prod) segs.push({ texto: prod, dica: `Produto: ${semTraco(prod)}` })
 
   const met = blocoMetodologia(e)
@@ -287,11 +371,40 @@ export function segmentosNome(e: EstadoNomenclatura, agora: Date = new Date()): 
   const desc = slug(e.descricao)
   if (desc) segs.push({ texto: desc, dica: `Do que se trata: ${semTraco(desc)}` })
 
-  if (e.ciclo === 'pont') {
-    segs.push({ texto: mesAno(agora), dica: `Mês em que o nome foi gerado: ${mesAno(agora)}` })
+  const dest = blocoDestino(e)
+  if (dest) {
+    const rot = rotuloDe(OPCOES_DESTINO, e.destino)
+    segs.push({ texto: dest, dica: `Destino: ${e.destino === 'lp' ? `landing page ${semTraco(slug(e.lpNome))}` : rot}` })
+  }
+
+  const data = blocoData(e, agora)
+  if (data) {
+    const dt = dataLimite(e)
+    segs.push({
+      texto: data,
+      dica:
+        e.ciclo === 'pont' && dt
+          ? `Roda até ${dt.getDate()} de ${MESES_NOME[dt.getMonth()]} de ${dt.getFullYear()}`
+          : `Mês em que o nome foi gerado: ${data}`,
+    })
   }
 
   return segs
+}
+
+// Coleção da linha quando a categoria é "Linha Pro/Essential"; senão null.
+export function colecaoDaCategoria(e: EstadoNomenclatura): CodigoLinhaColecao | null {
+  return CATEGORIAS_LINHA[e.categoria] ?? null
+}
+
+// Página de destino do anúncio de linha: coleção + ?destaque=<slug>. Vazio fora desse caso
+// ou enquanto o produto não foi escolhido.
+export function paginaDestino(e: EstadoNomenclatura): string {
+  const col = colecaoDaCategoria(e)
+  if (!col || !e.destaque) return ''
+  const base = COLECOES[col].url
+  if (e.destaque === COLECAO_INTEIRA || !produtoPorSlug(e.destaque)) return base
+  return `${base}?destaque=${e.destaque}`
 }
 
 // Monta o nome final. `agora` é injetável para ficar testável e para o histórico
@@ -303,18 +416,23 @@ export function montarNome(e: EstadoNomenclatura, agora: Date = new Date()): str
     .join('|')
 }
 
-export type Pendencia = { rotulo: string; etapa: number }
+export type Pendencia = { campo: string; rotulo: string; etapa: number }
 
 // Campos OBRIGATÓRIOS: sem eles o nome não é gerado. Devolve o que falta e em qual etapa.
 export function obrigatoriosFaltando(e: EstadoNomenclatura): Pendencia[] {
   const p: Pendencia[] = []
-  if (formatarNumero(e.numero) === '') p.push({ rotulo: 'Número do anúncio', etapa: 1 })
+  if (formatarNumero(e.numero) === '') p.push({ campo: 'numero', rotulo: 'Número do anúncio', etapa: 1 })
   if (e.midia === '' || (e.midia === 'outro' && slug(e.midiaOutro) === '')) {
-    p.push({ rotulo: 'Tipo de mídia', etapa: 1 })
+    p.push({ campo: 'midia', rotulo: 'Tipo de mídia', etapa: 1 })
   }
-  if (e.ciclo === '') p.push({ rotulo: 'Pontual ou contínuo', etapa: 1 })
+  if (e.ciclo === '') p.push({ campo: 'ciclo', rotulo: 'Pontual ou contínuo', etapa: 1 })
+  if (e.ciclo === 'pont' && !dataLimite(e)) p.push({ campo: 'data', rotulo: 'Data final do anúncio pontual', etapa: 1 })
+  if (e.destino === 'lp' && slug(e.lpNome) === '') p.push({ campo: 'destino', rotulo: 'Nome da landing page', etapa: 1 })
   if (e.publico === '' || (e.publico === 'outro' && slug(e.publicoOutro) === '')) {
-    p.push({ rotulo: 'Público', etapa: 2 })
+    p.push({ campo: 'publico', rotulo: 'Público', etapa: 2 })
+  }
+  if (colecaoDaCategoria(e) && !e.destaque) {
+    p.push({ campo: 'produto', rotulo: 'Produto da linha (ou coleção inteira)', etapa: 2 })
   }
   return p
 }
@@ -350,7 +468,10 @@ export function payloadRegistro(
     talentoTipo: e.talentoTipo,
     talentoNome: slug(e.talentoNome),
     descricao: slug(e.descricao),
-    mesAno: e.ciclo === 'pont' ? mesAno(agora) : '',
+    destino: blocoDestino(e),
+    dataFinal: blocoDataLimite(e),
+    mesAno: blocoData(e, agora),
+    paginaDestino: paginaDestino(e),
     geradoEm: agora.toISOString(),
   }
 }

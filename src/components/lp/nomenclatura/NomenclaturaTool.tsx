@@ -5,6 +5,7 @@ import {
   ESTADO_VAZIO,
   EXEMPLO_TESTE,
   montarNome,
+  paginaDestino,
   obrigatoriosFaltando,
   payloadRegistro,
   segmentosNome,
@@ -27,6 +28,7 @@ import { EtapaDescricao } from './EtapaDescricao'
 import { EtapaResultado } from './EtapaResultado'
 import { Historico } from './Historico'
 import { Legenda } from './Legenda'
+import { CriacaoAnuncio } from './CriacaoAnuncio'
 
 const NETLIFY_FORM_NAME = 'nomenclatura-anuncio'
 
@@ -56,6 +58,7 @@ export function NomenclaturaTool() {
   const [nomeGerado, setNomeGerado] = useState('')
   const [geradoEm, setGeradoEm] = useState('')
   const [tentouGerar, setTentouGerar] = useState(false)
+  const [tentativa, setTentativa] = useState(0)
   const [copiado, setCopiado] = useState(false)
   const [historico, setHistorico] = useState<ItemHistorico[]>(() => lerHistorico())
   const [ehLocalhost] = useState(() =>
@@ -73,6 +76,8 @@ export function NomenclaturaTool() {
 
   const previa = useMemo(() => segmentosNome(estado), [estado])
   const previaTexto = previa.map((s) => s.texto).join('|')
+  const destinoPrevia = paginaDestino(estado)
+  const [copiadoLink, setCopiadoLink] = useState(false)
 
   const rolarParaCaixa = () => {
     const el = caixaRef.current
@@ -88,6 +93,23 @@ export function NomenclaturaTool() {
   }
 
   const pendencias = obrigatoriosFaltando(estado)
+  const faltando = tentouGerar
+    ? { campos: new Set(pendencias.map((p) => p.campo)), tentativa }
+    : undefined
+
+  // Destaca e rola até o primeiro campo em branco. O timeout espera a etapa certa
+  // renderizar quando a pendência é de outra etapa.
+  const apontarPendencia = (primeira: { campo: string; etapa: number }) => {
+    setTentouGerar(true)
+    setTentativa((t) => t + 1)
+    setEtapa(primeira.etapa)
+    window.setTimeout(() => {
+      const el = document.getElementById(`campo-${primeira.campo}`)
+      if (!el) return
+      const reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      el.scrollIntoView({ behavior: reduz ? 'auto' : 'smooth', block: 'center' })
+    }, 60)
+  }
 
   // Navega para a etapa n, mas não deixa PULAR para frente sem preencher os
   // obrigatórios das etapas anteriores. Voltar é sempre livre.
@@ -95,8 +117,7 @@ export function NomenclaturaTool() {
     if (n > etapa) {
       const bloqueio = pendencias.filter((p) => p.etapa < n)
       if (bloqueio.length > 0) {
-        setTentouGerar(true)
-        irParaEtapa(bloqueio[0].etapa)
+        apontarPendencia(bloqueio[0])
         return
       }
     }
@@ -106,8 +127,7 @@ export function NomenclaturaTool() {
 
   const gerar = () => {
     if (pendencias.length > 0) {
-      setTentouGerar(true)
-      irParaEtapa(pendencias[0].etapa)
+      apontarPendencia(pendencias[0])
       return
     }
     setTentouGerar(false)
@@ -140,7 +160,7 @@ export function NomenclaturaTool() {
   }
 
   const novoMesmaCampanha = () => {
-    setEstado((s) => ({ ...s, numero: '', produto: '', descricao: '', talentoNome: '' }))
+    setEstado((s) => ({ ...s, numero: '', produto: '', destaque: '', descricao: '', talentoNome: '' }))
     setNomeGerado('')
     setEtapa(1)
     rolarParaCaixa()
@@ -175,6 +195,15 @@ export function NomenclaturaTool() {
 
   return (
     <main className="min-h-screen bg-[#F7F7F7] pb-16">
+      <style>{`
+        @keyframes nom-shake {
+          0%, 100% { transform: translateX(0); }
+          20%, 60% { transform: translateX(-6px); }
+          40%, 80% { transform: translateX(6px); }
+        }
+        .nom-shake { animation: nom-shake 0.45s ease-in-out; }
+        @media (prefers-reduced-motion: reduce) { .nom-shake { animation: none; } }
+      `}</style>
       {/* Prévia fixa do nome sendo montado, cada bloco explicado no hover */}
       <div className="sticky top-0 z-10 bg-white border-b border-[#E5E7EB]">
         <div className="max-w-[720px] mx-auto px-4 py-3">
@@ -197,6 +226,29 @@ export function NomenclaturaTool() {
               {copiado ? 'copiado' : 'copiar'}
             </button>
           </div>
+          {destinoPrevia && (
+            <div className="flex items-center gap-3 mt-1">
+              <p className="font-mono text-[11px] text-[#666666] truncate flex-1" title={destinoPrevia}>
+                <span className="text-[#E8649A]">destino </span>
+                {destinoPrevia.replace('https://www.', '')}
+              </p>
+              <button
+                type="button"
+                onClick={() =>
+                  navigator.clipboard?.writeText(destinoPrevia).then(
+                    () => {
+                      setCopiadoLink(true)
+                      window.setTimeout(() => setCopiadoLink(false), 2000)
+                    },
+                    () => {},
+                  )
+                }
+                className="shrink-0 text-[11px] text-[#666666] hover:text-[#E8649A] underline underline-offset-2"
+              >
+                {copiadoLink ? 'copiado' : 'copiar link'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -228,8 +280,8 @@ export function NomenclaturaTool() {
           ref={caixaRef}
           className="scroll-mt-20 rounded-[12px] border border-[#E5E7EB] bg-white p-5 md:p-6"
         >
-          {etapa === 1 && <EtapaIdentificacao estado={estado} set={set} exemplo={exemplo} />}
-          {etapa === 2 && <EtapaPublicoProduto estado={estado} set={set} exemplo={exemplo} />}
+          {etapa === 1 && <EtapaIdentificacao estado={estado} set={set} exemplo={exemplo} faltando={faltando} />}
+          {etapa === 2 && <EtapaPublicoProduto estado={estado} set={set} exemplo={exemplo} faltando={faltando} />}
           {etapa === 3 && <EtapaProducao estado={estado} set={set} exemplo={exemplo} />}
           {etapa === 4 && <EtapaDescricao estado={estado} set={set} exemplo={exemplo} />}
           {etapa === 5 && (
@@ -262,7 +314,7 @@ export function NomenclaturaTool() {
                     onClick={() => navegar(etapa + 1)}
                     className="flex-1 min-h-[44px] rounded-[12px] border border-[#E8649A] text-[#E8649A] font-semibold hover:bg-[#FDF2F4] transition-colors"
                   >
-                    Avançar para {NOMES_ETAPAS[etapa]}
+                    Avançar para {NOMES_ETAPAS[etapa]} <span aria-hidden>→</span>
                   </button>
                 ) : null}
               </div>
@@ -298,6 +350,8 @@ export function NomenclaturaTool() {
         />
 
         <Legenda />
+
+        <CriacaoAnuncio />
       </div>
     </main>
   )

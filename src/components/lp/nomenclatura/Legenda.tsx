@@ -29,7 +29,9 @@ export function Legenda() {
       <h2 className="text-lg font-medium text-[#0D0C0D] mb-1">Legenda dos códigos</h2>
       <p className="text-[13px] text-[#666666] mb-6">
         Ordem do nome: ad + número | mídia | ciclo | público | linha | categoria | produto |
-        metodologia | quem aparece | do que se trata | mês (só pontual). Blocos em branco somem.
+        metodologia | quem aparece | do que se trata | destino | data. Blocos em branco somem, e
+        &ldquo;todas&rdquo; / &ldquo;todos&rdquo; também. Data: pontual = ate-28-out-26 (até quando roda);
+        contínuo = set-26 (mês em que o nome foi gerado).
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <Bloco titulo="Mídia" itens={OPCOES_MIDIA} />
@@ -37,6 +39,15 @@ export function Legenda() {
         <Bloco titulo="Público" itens={OPCOES_PUBLICO} />
         <Bloco titulo="Linha" itens={OPCOES_LINHA} />
         <Bloco titulo="Categoria" itens={OPCOES_CATEGORIA} />
+        <Bloco
+          titulo="Destino"
+          itens={[
+            { codigo: '(nada)', rotulo: 'site / loja' },
+            { codigo: 'wpp', rotulo: 'WhatsApp' },
+            { codigo: 'insta-visitas-ao-perfil', rotulo: 'perfil do Instagram' },
+            { codigo: 'lp-nome', rotulo: 'landing page' },
+          ]}
+        />
         <Bloco
           titulo="Metodologia e talento"
           itens={[

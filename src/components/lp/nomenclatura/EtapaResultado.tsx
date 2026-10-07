@@ -2,10 +2,13 @@
 import { useState } from 'react'
 import {
   camposEmBranco,
+  dataLimite,
+  paginaDestino,
   segmentosNome,
   type EstadoNomenclatura,
 } from '@/lib/nomenclatura'
 import { NomeSegmentado } from './ui'
+import { ComplementarInfo } from './ComplementarInfo'
 
 // Etapa 5: nome pronto, cópia e aviso suave do que ficou em branco (não bloqueia).
 export function EtapaResultado({
@@ -29,6 +32,16 @@ export function EtapaResultado({
   const faltando = camposEmBranco(estado)
   // Recria os segmentos a partir da data em que o nome foi gerado, para o mês bater.
   const segmentos = segmentosNome(estado, geradoEm ? new Date(geradoEm) : new Date())
+  const destino = paginaDestino(estado)
+  const [linkCopiado, setLinkCopiado] = useState(false)
+  const copiarLink = () =>
+    navigator.clipboard?.writeText(destino).then(
+      () => {
+        setLinkCopiado(true)
+        window.setTimeout(() => setLinkCopiado(false), 2000)
+      },
+      () => {},
+    )
 
   return (
     <div>
@@ -50,6 +63,28 @@ export function EtapaResultado({
       >
         {copiado ? 'Copiado!' : 'Copiar nome'}
       </button>
+
+      {destino && (
+        <div className="mt-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#E8649A] mb-2">Página de destino</p>
+          <button
+            type="button"
+            onClick={copiarLink}
+            title="Clique para copiar o link"
+            className="w-full text-left rounded-[12px] border border-[#E5E7EB] bg-white p-3 hover:border-[#E8649A] transition-colors"
+          >
+            <span className="block font-mono text-[13px] text-[#0D0C0D] break-all">{destino}</span>
+            <span className="block text-[12px] text-[#E8649A] mt-1">{linkCopiado ? 'Link copiado ✓' : 'Clique para copiar o link'}</span>
+          </button>
+        </div>
+      )}
+
+      <ComplementarInfo
+        destinoInicial={destino}
+        nome={segmentos.map((s) => s.texto).join('|')}
+        midia={estado.midia === 'outro' ? estado.midiaOutro : estado.midia}
+        dataFinalBR={estado.ciclo === 'pont' ? (dataLimite(estado)?.toLocaleDateString('pt-BR') ?? '') : ''}
+      />
 
       {faltando.length > 0 && !mantido && (
         <div className="mt-4 rounded-[12px] border border-[#F4A522] bg-[#FFF8EC] p-4">

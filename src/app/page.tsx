@@ -59,6 +59,11 @@ const pages = [
     description: 'Aula ao vivo de 28/09 com Jéssica Silva: acesso liberado para compras acima de R$ 399',
   },
   {
+    href: '/masterclass/coloracao-pet',
+    label: 'MasterClass Coloração Pet sem Mistério',
+    description: 'Aula ao vivo de 29/10 com Lari Stephanie: acesso liberado com qualquer produto Collora ou compras acima de R$ 399',
+  },
+  {
     href: '/nomenclatura',
     label: 'Gerador de Nomenclatura de Anúncios (interno)',
     description: 'Ferramenta da social media para padronizar o nome dos criativos de Meta Ads. Oculta, sem indexação.',
@@ -107,6 +112,12 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     href: '/distribuidor-agosto-2026-2',
     label: 'Relatório · Captação de Distribuidores · agosto 2026 (v2, em avaliação)',
     description: 'Nova estrutura mensal (consolidado Meta + Google, funil B2B, mapa por estado, ranking de criativos). Gerada por src/lib/relatorio-distribuidor/.',
+  },
+  {
+    tipo: 'rota',
+    href: '/distribuidor-setembro-2026',
+    label: 'Relatório · Captação de Distribuidores · setembro 2026',
+    description: 'Mesmo modelo mensal, com comparativo contra agosto. Dados do comercial ainda pendentes.',
   },
 ]
 
