@@ -149,17 +149,6 @@ export function AtendimentoRedirect() {
           <p className="text-sm md:text-base text-[#666666] leading-relaxed mb-6">{v?.subtitulo ?? ''}</p>
         </div>
 
-        <div className="relative w-full aspect-[16/10] rounded-[20px] overflow-hidden shadow-sm mb-6 bg-white">
-          <Image
-            src="/images/hero-produto-5l.jpg"
-            alt="Galões de 5L Bubbles para banho e tosa profissional"
-            fill
-            priority
-            sizes="(max-width: 767px) calc(100vw - 32px), 520px"
-            className="object-cover"
-          />
-        </div>
-
         <p className="flex items-center justify-center gap-1.5 text-sm font-semibold text-[#0D0C0D] mb-2">
           Toque no botão para iniciar a conversa
           <span aria-hidden className="atd-bounce inline-block text-[#3DB85C]">↓</span>
@@ -179,6 +168,17 @@ export function AtendimentoRedirect() {
               </button>
             </p>
           )}
+        </div>
+
+        <div className="relative w-full aspect-[16/10] rounded-[20px] overflow-hidden shadow-sm mt-4 bg-white">
+          <Image
+            src="/images/hero-produto-5l.jpg"
+            alt="Galões de 5L Bubbles para banho e tosa profissional"
+            fill
+            priority
+            sizes="(max-width: 767px) calc(100vw - 32px), 520px"
+            className="object-cover"
+          />
         </div>
 
         <div className="mt-6 grid grid-cols-3 gap-2 text-left">
