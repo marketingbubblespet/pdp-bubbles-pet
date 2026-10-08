@@ -44,6 +44,11 @@ const pages = [
     description: 'Live de 23/08 com Amanda e Ellen: captura para o grupo do WhatsApp',
   },
   {
+    href: '/atendimento',
+    label: 'Atendimento WhatsApp (ponte dos anúncios)',
+    description: 'Recebe o tráfego do Meta, gera um ID de atendimento e leva para o WhatsApp. Escondida do Google.',
+  },
+  {
     href: '/captacao',
     label: 'Captação de Distribuidores',
     description: 'Página de captação para quem quer se tornar distribuidor Bubbles',

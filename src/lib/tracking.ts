@@ -207,6 +207,32 @@ export function pushWhatsappGate(params: {
   })
 }
 
+/**
+ * Redirecionamento para o WhatsApp de atendimento (/atendimento). Nível 3, engajamento:
+ * não é lead, e sim o clique que leva ao atendimento. Leva o ID de atendimento, o mesmo
+ * que vai escrito na mensagem e gravado no Netlify, para ligar à compra depois
+ * (conversão offline). Sem dado pessoal: a página não pede nome nem telefone.
+ */
+export function pushWhatsappRedirect(params: {
+  atendimentoId: string
+  landingPage: string
+  ctaLocation: string
+  tipo: 'clique' | 'automatico'
+  variacao: string
+  segundosNaPagina: number
+}): void {
+  push({
+    event: 'whatsapp_redirect',
+    event_id: `atd.${params.atendimentoId}`,
+    atendimento_id: params.atendimentoId,
+    landing_page: params.landingPage,
+    cta_location: params.ctaLocation,
+    redirect_tipo: params.tipo,
+    variacao: params.variacao,
+    segundos_na_pagina: params.segundosNaPagina,
+  })
+}
+
 /** Divide um nome completo em first/last para o contrato de `user_data`. */
 export function splitFullName(fullName: string): { firstName?: string; lastName?: string } {
   return splitName(fullName)

@@ -33,6 +33,7 @@ Os eventos têm **níveis**, e o nível decide o que dispara no GTM:
 |---|---|---|---|
 | `lead_form_submitted` | 1 | `event_id`, `lead_id`, `form_name`, `lead_qualified`, `user_data{}` | Envio de formulário aceito |
 | `whatsapp_gate_submitted` | 2 | `event_id`, `gate_id`, `form_name`, `landing_page`, `cta_location` | Gate de WhatsApp enviado |
+| `whatsapp_redirect` | 3 | `event_id` (`atd.<ID>`), `atendimento_id`, `landing_page`, `cta_location`, `redirect_tipo` (clique/automatico), `variacao`, `segundos_na_pagina` | /atendimento leva a pessoa ao WhatsApp. Mesmo ID gravado no Netlify (form `atendimento-whatsapp`) para conversão offline |
 | `form_open` | `form_name` | Abertura do formulário/modal |
 | `form_step` | `form_name`, `step_number`, `step_name` | Avanço de etapa |
 | `form_abandon` | `form_name`, `step_number` | Fechamento sem enviar |
