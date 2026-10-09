@@ -50,6 +50,18 @@ Registro até agora: ad35 artes internas = `https://www.facebook.com/10006356594
 - Perguntar o **motivo** de "Entrada no Google Ads" não ter sido concluída (em agosto ficou sem motivo, por decisão do usuário) e reescrever para o comercial.
 - Pedir os links dos criativos das novas campanhas.
 
+### Anotações para o relatório de outubro/2026 (gerado em novembro)
+Eventos do mês informados pelo usuário. Entram na linha do tempo (`timeline.marcos`) e nas
+ações realizadas (`desafios`); usar para explicar variações de leads e CPL no mês.
+- **07/10:** alterações no formulário de captação para diminuir a quantidade de revendedores de e-commerce entre os leads.
+- **08/10:** exclusão da capital de São Paulo e da Baixada Santista da segmentação das campanhas.
+  Contexto para a leitura: o estado de SP era a região com mais impressões (em setembro,
+  82.149 impressões, cerca de 27% das impressões com estado identificado, ver `2026-09.ts`).
+  Tirar a capital reduz um público grande e barato de alcançar, então é esperado que o CPM e
+  o custo por lead (CPL) subam a partir de 08/10. O objetivo da exclusão foi diminuir a
+  captação em regiões onde já temos bastante distribuidores. Apresentar a alta
+  do CPL como efeito previsto da decisão, não como queda de performance.
+
 ### Regra de conduta
 Propostas que o usuário **não respondeu** não são aplicadas. Só aplicar o que ele aprovou explicitamente.
 
