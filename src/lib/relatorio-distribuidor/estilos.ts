@@ -257,16 +257,20 @@ export const CSS = `
 
   /* Timeline */
   .timeline-wrap { overflow-x: auto; padding: 8px 0 4px; }
-  .timeline { min-width: 560px; padding: 30px 0 10px; }
+  .timeline { min-width: 560px; padding: 4px 0 10px; }
   .timeline-eixo { position: relative; height: 6px; background: var(--borda); border-radius: 3px; margin-bottom: 6px; }
   .timeline-linha { position: absolute; top: 0; height: 6px; border-radius: 3px; background: var(--rosa-accent); }
   .timeline-linha.encerrada { background: var(--pendente-fg); opacity: 0.5; }
   .timeline-rotulo { font-size: 0.78rem; font-weight: 600; margin-bottom: 2px; }
   .timeline-datas { font-size: 0.72rem; color: var(--texto); margin-bottom: 14px; }
-  .timeline-marcos { position: relative; }
-  .timeline-marco { position: absolute; top: -26px; transform: translateX(-50%); text-align: center; font-size: 0.7rem; }
-  .timeline-marco .ponto { width: 10px; height: 10px; border-radius: 50%; background: var(--rosa-accent); margin: 0 auto 4px; }
-  .timeline-marco .rotulo { font-weight: 600; white-space: nowrap; }
+  .timeline-marcos { position: relative; height: 22px; margin-bottom: 10px; border-bottom: 1px dashed var(--borda); }
+  .timeline-marco { position: absolute; top: 0; transform: translateX(-50%); }
+  .timeline-marco .ponto, .timeline-legenda .num { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: var(--rosa-accent); color: #fff; font-size: 0.65rem; font-weight: 600; }
+  .timeline-legenda { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.75rem; }
+  .timeline-legenda li { display: inline-flex; align-items: center; gap: 6px; }
+  .ant-cel { display: block; font-size: 0.68rem; color: var(--texto); font-weight: 400; }
+  details.fechamentos { margin-top: 14px; }
+  details.fechamentos summary { cursor: pointer; font-weight: 600; font-size: 0.85rem; color: var(--rosa-accent); min-height: 44px; display: flex; align-items: center; }
 
   /* Desafios */
   .desafios { display: flex; flex-direction: column; gap: 10px; }

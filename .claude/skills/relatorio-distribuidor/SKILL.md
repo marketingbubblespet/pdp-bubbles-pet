@@ -137,7 +137,8 @@ O relatório é apresentado aos dois times juntos. Ele deve valorizar o trabalho
 nunca soar como cobrança.
 - **Seção "Novos distribuidores" fica OCULTA** enquanto o comercial não enviar os dados. Não listar nomes como pendência. O que pedir fica em `PEDIDO_COMERCIAL` (`secoes-texto.ts`) e no checklist da seção 1.
 - No funil, etapas comerciais sem número continuam como **"sem dado"** (decisão do usuário).
-- **Vendedores em ordem alfabética**, nunca em ranking. **Setas só no total do time**, nunca por pessoa.
+- **Vendedores em ordem alfabética**, nunca em ranking. **Setas só no total do time**; por pessoa, o mês anterior aparece em letra pequena abaixo de cada número (decisão de 10/10/2026: sempre mostrar mês anterior e atual em todas as etapas).
+- Tabela de fechamentos fica recolhida ("Ver os novos distribuidores do mês"), abre com clique.
 - Quem ficou zerado: observação sutil **"Sem leads de tráfego atribuídos no mês: X, Y."**
 - **Fechamentos em tabela compacta** (média de 9 a 10 por mês; cards ficariam extensos), com "Fechado por" (crédito do comercial) e "Campanha de origem" (crédito do marketing). Pedir a campanha de origem de cada fechamento.
 - **Plano anterior "Não implementado":** selo sutil, mas vermelho (sem ❌). O motivo segue a regra da seção 1 (perguntar e reescrever).

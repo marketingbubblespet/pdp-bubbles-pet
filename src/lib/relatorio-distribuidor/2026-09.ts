@@ -66,13 +66,12 @@ export const relatorioSetembro2026: RelatorioDistribuidor = {
     reunioes: null,
     novosDistribuidores: null,
   },
-  notaFunil: 'Pendente do time comercial, por vendedor: leads qualificados, reuniões e fechamentos; e, para cada fechamento, distribuidor, cidade/UF, campanha de origem, data da primeira compra e valor do primeiro pedido.',
+  notaFunil: 'Os leads qualificados aparecem como sem dado porque ainda estão pendentes: o time comercial ainda não faz essa classificação.',
 
   leituraHtml: 'Com a verba escalada, a Distribuidor Tradicional quase dobrou o investimento e trouxe <strong>196 leads</strong>, com CPL de <strong>R$ 38,81</strong>. A arte interna (ad35) segue como principal motor de leads, e o <strong>Vídeo 05</strong> foi o vídeo que melhor converteu nos testes, o que levou ele para o grupo campeão. Entre os estáticos que entraram em 25/09, o <strong>Estático 02</strong> teve o menor custo por lead do mês (R$ 18,62).',
 
   ufsZeroConhecido: [],
   impressoesNaoAtribuidas: 1005,
-  notaMapa: 'O mapa soma as duas campanhas do Meta. Os estados do Sul continuam fora da segmentação da Distribuidor Tradicional; as poucas impressões neles vêm da Linha Care.',
 
   criterioRanking: 'Anúncios com pelo menos 3 leads e 1.000 impressões no mês, ordenados por número de leads. O mesmo criativo rodando no grupo de teste e no grupo campeão é somado.',
   criativos: [
@@ -134,7 +133,7 @@ export const relatorioSetembro2026: RelatorioDistribuidor = {
     { titulo: 'Teste dos 6 novos vídeos', texto: 'Cada vídeo entrou primeiro em um grupo próprio, com verba de teste, a partir de 09/09. Os que trouxeram leads (Vídeos 01, 03 e 05) foram levados em 22/09 para o grupo campeão, junto com a arte interna; os Vídeos 02, 04 e 06 foram pausados.' },
     { titulo: 'Teste de 3 novos estáticos', texto: 'Estáticos 01, 02 e 03 subiram em 25/09, cada um em grupo próprio. Em 6 dias somaram 25 leads.' },
     { titulo: 'Escala da Distribuidor Tradicional', texto: 'Investimento de R$ 4,2 mil em agosto para R$ 7,6 mil em setembro, mantendo o CPL abaixo de R$ 40.' },
-    { titulo: 'Linha Care despriorizada', texto: 'A campanha foi pausada temporariamente em 10/09 para concentrar a verba na captação tradicional.' },
+    { titulo: 'Linha Care despriorizada', texto: 'A campanha foi pausada temporariamente em 10/09 para concentrar a verba na captação tradicional, até a reestruturação da estratégia.' },
   ],
 
   planoAnterior: {
@@ -142,7 +141,7 @@ export const relatorioSetembro2026: RelatorioDistribuidor = {
     itens: [
       { texto: 'Escalar as campanhas', status: 'implementado' },
       { texto: 'Iniciar as campanhas de PMax e Google Search', status: 'andamento', nota: 'As campanhas já estão criadas e entram no ar assim que as imagens do time de criação forem entregues.' },
-      { texto: 'Subir as campanhas Foco 1 e Foco 2', status: 'andamento', nota: 'Status a confirmar.' },
+      { texto: 'Subir as campanhas Foco 1 e Foco 2', status: 'andamento', nota: 'Previsão de início: 16/10.' },
       { texto: 'Acompanhar a landing page B da Linha Care contra a versão A', status: 'nao-implementado', nota: 'A página B foi pausada temporariamente, junto com a despriorização da Linha Care. O teste volta quando a campanha for retomada.' },
       { texto: 'Corrigir o fluxo de envio de leads para a Sellum', status: 'andamento', nota: 'Sem novos registros de falha no mês. Seguimos acompanhando para confirmar a correção.' },
       { texto: 'Estabelecer o fluxo mensal de dados comercial → marketing', status: 'andamento', nota: 'Fluxo combinado, aguardando o primeiro envio para completar o funil e a seção de novos distribuidores.' },
@@ -162,6 +161,7 @@ export const relatorioSetembro2026: RelatorioDistribuidor = {
           'Exportar o status por vendedor todo dia 02 ou 03 do mês, junto com reuniões e fechamentos',
         ],
       },
+      { texto: 'Gabriel e Juliana: reestruturar a estratégia de venda da Linha Care' },
       {
         texto: 'Definir como medir leads que fecham em um mês diferente do cadastro (ex: L8, cadastrada em agosto e faturada em setembro):',
         subitens: [

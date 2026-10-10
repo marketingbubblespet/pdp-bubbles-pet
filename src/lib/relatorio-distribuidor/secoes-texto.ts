@@ -44,9 +44,9 @@ function tabelaFechamentos(vendedores: ResultadoVendedor[]): string {
     + `<td>${f.dataPrimeiraCompra ? esc(f.dataPrimeiraCompra) : '<span class="tag-sem">pendente</span>'}</td>`
     + `<td class="num">${f.valorPrimeiraCompra == null ? '<span class="tag-sem">pendente</span>' : fmtBRL(f.valorPrimeiraCompra)}</td></tr>`))
   if (linhas.length === 0) return ''
-  return `<div class="tabela-wrap" style="margin-top:14px"><table class="tabela"><caption>Novos distribuidores do mês</caption>
+  return `<details class="fechamentos"><summary>Ver os novos distribuidores do mês (${linhas.length})</summary><div class="tabela-wrap" style="margin-top:10px"><table class="tabela">
     <thead><tr><th scope="col">Distribuidor</th><th scope="col">Cidade/UF</th><th scope="col">Fechado por</th><th scope="col">Campanha de origem</th><th scope="col">1ª compra</th><th scope="col" class="num">Valor do 1º pedido</th></tr></thead>
-    <tbody>${linhas.join('')}</tbody></table></div>`
+    <tbody>${linhas.join('')}</tbody></table></div></details>`
 }
 
 // Leads qualificados sem informação do comercial: "não informado", nunca zero.
@@ -67,9 +67,18 @@ export function secaoComercial(rel: RelatorioDistribuidor): string {
   const semDado = todos.filter(vazio).sort(alfa).map((v) => v.nome)
   const t = totaisComercial(rel)!
   const ta = totaisComercial(rel.anterior)
-  const linhas = comDado.map((v) => `<tr><td>${esc(v.nome)}</td><td class="num">${lq(v.leadsQualificados)}</td>`
-    + `<td class="num">${fmtInt(v.reunioes)}</td><td class="num">${fmtInt(v.novosDistribuidores)}</td>`
-    + `<td class="num">${celulaPedido(primeiroPedido(v), v.novosDistribuidores)}</td></tr>`).join('')
+  // Mês anterior de cada pessoa, em letra pequena abaixo do número (sem seta: não é ranking).
+  const mesAnt = rel.anterior ? nomeMes(rel.anterior.mes) : ''
+  const antPorNome = new Map((rel.anterior?.comercial ?? []).map((v) => [v.nome, v]))
+  const ant = (txt: string | null) => (rel.anterior?.comercial ? `<small class="ant-cel">${mesAnt}: ${txt ?? '·'}</small>` : '')
+  const linhas = comDado.map((v) => {
+    const a = antPorNome.get(v.nome)
+    return `<tr><td>${esc(v.nome)}</td>`
+      + `<td class="num">${lq(v.leadsQualificados)}${ant(a ? (a.leadsQualificados == null ? 'n/i' : fmtInt(a.leadsQualificados)) : null)}</td>`
+      + `<td class="num">${fmtInt(v.reunioes)}${ant(a ? fmtInt(a.reunioes) : null)}</td>`
+      + `<td class="num">${fmtInt(v.novosDistribuidores)}${ant(a ? fmtInt(a.novosDistribuidores) : null)}</td>`
+      + `<td class="num">${celulaPedido(primeiroPedido(v), v.novosDistribuidores)}${ant(a && a.novosDistribuidores > 0 ? fmtBRL(primeiroPedido(a).total) : a ? '·' : null)}</td></tr>`
+  }).join('')
   const pedidos = comDado.map(primeiroPedido)
   const pedidoTotal = { total: pedidos.reduce((s, p) => s + p.total, 0), pendente: pedidos.some((p, i) => p.pendente && comDado[i].novosDistribuidores > 0) }
   const total = `<tr class="total"><td>Total</td>`
@@ -89,14 +98,19 @@ export function secaoTimeline(rel: RelatorioDistribuidor): string {
   if (!rel.timeline) return ''
   const dias = new Date(rel.mes.ano, rel.mes.mes, 0).getDate()
   const pct = (n: number) => `${((n / dias) * 100).toFixed(1)}%`
-  const marcos = rel.timeline.marcos.map((m) =>
-    `<div class="timeline-marco" style="left:${pct(m.dia - 0.5)}"><div class="ponto"></div><div class="rotulo">${esc(m.rotulo)}</div></div>`).join('')
+  // Marcos numerados no trilho e explicados numa legenda: rótulos no trilho se sobrepõem
+  // quando as datas são próximas.
+  const marcos = rel.timeline.marcos.map((m, i) =>
+    `<div class="timeline-marco" style="left:${pct(m.dia - 0.5)}" title="${esc(m.rotulo)}"><div class="ponto">${i + 1}</div></div>`).join('')
+  const legenda = rel.timeline.marcos.length
+    ? `<ol class="timeline-legenda">${rel.timeline.marcos.map((m, i) => `<li><span class="num">${i + 1}</span>${esc(m.rotulo)}</li>`).join('')}</ol>`
+    : ''
   const itens = rel.timeline.itens.map((t) => `
     <div class="timeline-rotulo">${esc(t.nome)}</div>
     <div class="timeline-eixo"><div class="timeline-linha${t.encerrada ? ' encerrada' : ''}" style="left:${pct(t.diaInicio - 1)};width:${pct(t.diaFim - t.diaInicio + 1)}"></div></div>
     <div class="timeline-datas">${esc(t.descricao)}</div>`).join('')
   return `<section class="bloco" id="timeline">${cabecalho('Período', 'Linha do tempo das campanhas')}
-    <div class="timeline-wrap"><div class="timeline"><div class="timeline-marcos">${marcos}</div>${itens}</div></div></section>`
+    ${legenda}<div class="timeline-wrap"><div class="timeline"><div class="timeline-marcos">${marcos}</div>${itens}</div></div></section>`
 }
 
 export function secaoDesafios(rel: RelatorioDistribuidor): string {
