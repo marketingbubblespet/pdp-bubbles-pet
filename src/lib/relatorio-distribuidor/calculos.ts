@@ -105,13 +105,15 @@ export function valorPrimeirosPedidos(rel: RelatorioDistribuidor | null): number
 // Soma do resultado comercial de todos os vendedores. Sem dado do comercial: null.
 export function totaisComercial(rel: RelatorioDistribuidor | null) {
   if (!rel?.comercial) return null
+  // Leads qualificados: null se nenhum vendedor informou (não vira zero).
+  const lq = rel.comercial.map((v) => v.leadsQualificados).filter((x): x is number => x != null)
   return rel.comercial.reduce(
     (s, v) => ({
-      leadsQualificados: s.leadsQualificados + v.leadsQualificados,
+      leadsQualificados: s.leadsQualificados,
       reunioes: s.reunioes + v.reunioes,
       novosDistribuidores: s.novosDistribuidores + v.novosDistribuidores,
     }),
-    { leadsQualificados: 0, reunioes: 0, novosDistribuidores: 0 },
+    { leadsQualificados: lq.length ? lq.reduce((a, b) => a + b, 0) : null as number | null, reunioes: 0, novosDistribuidores: 0 },
   )
 }
 

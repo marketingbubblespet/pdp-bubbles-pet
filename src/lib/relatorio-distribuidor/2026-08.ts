@@ -100,9 +100,24 @@ export const relatorioAgosto2026: RelatorioDistribuidor = {
       link: null, conjuntos: ['adv+|são paulo', 'adv+|norte'] },
   ],
 
-  // Time comercial ainda não enviou. Quando enviar, preencher por vendedor, ex:
-  // [{ nome: 'Ivan', leadsQualificados: 10, reunioes: 4, novosDistribuidores: 1 }, ...]
-  comercial: null,
+  // Relatório do time comercial recebido em 10/10/2026. Fechamentos contados pelo mês da
+  // 1ª NF de venda (sem bonificação). Leads qualificados não informados.
+  comercial: [
+    { nome: 'Cláudio', leadsQualificados: null, reunioes: 6, novosDistribuidores: 1, fechamentos: [
+      { distribuidor: 'G4 Limpeza Atacado', cidadeUF: 'Anápolis/GO', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '31/08/2026', valorPrimeiraCompra: 10106.10 },
+    ] },
+    { nome: 'Guilherme', leadsQualificados: null, reunioes: 5, novosDistribuidores: 3, fechamentos: [
+      { distribuidor: 'PVMix Ecommerce', cidadeUF: 'São Paulo/SP', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '26/08/2026', valorPrimeiraCompra: 10636.17 },
+      { distribuidor: 'Grand Magasin', cidadeUF: 'São José dos Campos/SP', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '27/08/2026', valorPrimeiraCompra: 15223.68 },
+      { distribuidor: 'H D Soluções Agropecuárias (Vethelper)', cidadeUF: 'Patos de Minas/MG', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '31/08/2026', valorPrimeiraCompra: 16893.83 },
+    ] },
+    { nome: 'Paulo', leadsQualificados: null, reunioes: 17, novosDistribuidores: 4, fechamentos: [
+      { distribuidor: 'MSO Smart Comércio', cidadeUF: 'Salvador/BA', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '19/08/2026', valorPrimeiraCompra: 18279.31 },
+      { distribuidor: 'Meu Maskote Store', cidadeUF: 'Barueri/SP', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '21/08/2026', valorPrimeiraCompra: 10297.38 },
+      { distribuidor: 'Petisca Pet', cidadeUF: 'Içara/SC', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '28/08/2026', valorPrimeiraCompra: 10272.59 },
+      { distribuidor: 'Loja dos Animais', cidadeUF: 'Goiânia/GO', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '28/08/2026', valorPrimeiraCompra: 11429.14 },
+    ] },
+  ],
 
 
   timeline: {

@@ -49,36 +49,40 @@ function tabelaFechamentos(vendedores: ResultadoVendedor[]): string {
     <tbody>${linhas.join('')}</tbody></table></div>`
 }
 
+// Leads qualificados sem informação do comercial: "não informado", nunca zero.
+const lq = (n: number | null) => (n == null ? '<span class="tag-sem">não informado</span>' : fmtInt(n))
+
 // Sem dados do comercial no mês, a seção fica oculta (não expõe nomes como pendência).
 // O que pedir ao comercial fica registrado em PEDIDO_COMERCIAL e na skill do relatório.
 export function secaoComercial(rel: RelatorioDistribuidor): string {
   const topo = cabecalho('Time comercial', 'Novos distribuidores', 'Leads qualificados, reuniões, novos distribuidores e valor do primeiro pedido, por vendedor.')
   if (!rel.comercial) return ''
   const porNome = new Map(rel.comercial.map((v) => [v.nome, v]))
-  const todos = [...VENDEDORES.map((n) => porNome.get(n) ?? { nome: n, leadsQualificados: 0, reunioes: 0, novosDistribuidores: 0 }),
+  const todos = [...VENDEDORES.map((n) => porNome.get(n) ?? { nome: n, leadsQualificados: null, reunioes: 0, novosDistribuidores: 0 }),
     ...rel.comercial.filter((v) => !(VENDEDORES as readonly string[]).includes(v.nome))]
-  const vazio = (v: ResultadoVendedor) => v.leadsQualificados + v.reunioes + v.novosDistribuidores === 0
+  const vazio = (v: ResultadoVendedor) => (v.leadsQualificados ?? 0) + v.reunioes + v.novosDistribuidores === 0
   // Ordem alfabética, nunca ranking. Setas só no total do time, nunca por pessoa.
   const alfa = (a: ResultadoVendedor, b: ResultadoVendedor) => a.nome.localeCompare(b.nome, 'pt-BR')
   const comDado = todos.filter((v) => !vazio(v)).sort(alfa)
   const semDado = todos.filter(vazio).sort(alfa).map((v) => v.nome)
   const t = totaisComercial(rel)!
   const ta = totaisComercial(rel.anterior)
-  const linhas = comDado.map((v) => `<tr><td>${esc(v.nome)}</td><td class="num">${fmtInt(v.leadsQualificados)}</td>`
+  const linhas = comDado.map((v) => `<tr><td>${esc(v.nome)}</td><td class="num">${lq(v.leadsQualificados)}</td>`
     + `<td class="num">${fmtInt(v.reunioes)}</td><td class="num">${fmtInt(v.novosDistribuidores)}</td>`
     + `<td class="num">${celulaPedido(primeiroPedido(v), v.novosDistribuidores)}</td></tr>`).join('')
   const pedidos = comDado.map(primeiroPedido)
   const pedidoTotal = { total: pedidos.reduce((s, p) => s + p.total, 0), pendente: pedidos.some((p, i) => p.pendente && comDado[i].novosDistribuidores > 0) }
   const total = `<tr class="total"><td>Total</td>`
-    + `<td class="num">${fmtInt(t.leadsQualificados)} ${seta(t.leadsQualificados, ta?.leadsQualificados, 'maior')}</td>`
+    + `<td class="num">${lq(t.leadsQualificados)} ${seta(t.leadsQualificados, ta?.leadsQualificados, 'maior')}</td>`
     + `<td class="num">${fmtInt(t.reunioes)} ${seta(t.reunioes, ta?.reunioes, 'maior')}</td>`
     + `<td class="num">${fmtInt(t.novosDistribuidores)} ${seta(t.novosDistribuidores, ta?.novosDistribuidores, 'maior')}</td>`
     + `<td class="num">${celulaPedido(pedidoTotal, t.novosDistribuidores)}</td></tr>`
-  const obs = semDado.length > 0 ? `<p class="obs-pequena">Sem leads de tráfego atribuídos no mês: ${semDado.map(esc).join(', ')}.</p>` : ''
+  const obs = semDado.length > 0 ? `<p class="obs-pequena">Sem dados de leads de tráfego no mês: ${semDado.map(esc).join(', ')}.</p>` : ''
+  const nota = rel.notaComercial ? `<p class="obs-pequena">${esc(rel.notaComercial)}</p>` : ''
   return `<section class="bloco" id="comercial">${topo}
     <div class="tabela-wrap"><table class="tabela"><thead><tr><th scope="col">Vendedor</th><th scope="col" class="num">Leads qualificados</th>
       <th scope="col" class="num">Reuniões</th><th scope="col" class="num">Novos distribuidores</th><th scope="col" class="num">Valor do 1º pedido</th></tr></thead>
-      <tbody>${linhas}${total}</tbody></table></div>${obs}${tabelaFechamentos(comDado)}</section>`
+      <tbody>${linhas}${total}</tbody></table></div>${obs}${tabelaFechamentos(comDado)}${nota}</section>`
 }
 
 export function secaoTimeline(rel: RelatorioDistribuidor): string {

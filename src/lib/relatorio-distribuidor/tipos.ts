@@ -51,7 +51,7 @@ export interface FunilComercial {
 }
 
 // Time comercial que recebe os leads de tráfego (ordem de exibição).
-export const VENDEDORES = ['Ivan', 'Paulo', 'Claudio', 'Guilherme', 'Thainá'] as const
+export const VENDEDORES = ['Ivan', 'Paulo', 'Cláudio', 'Guilherme', 'Thainá'] as const
 
 // Cada novo distribuidor fechado com lead de tráfego.
 export interface Fechamento {
@@ -64,7 +64,8 @@ export interface Fechamento {
 
 export interface ResultadoVendedor {
   nome: string
-  leadsQualificados: number
+  // null = o comercial não informou (a página mostra "não informado", nunca zero).
+  leadsQualificados: number | null
   reunioes: number
   novosDistribuidores: number
   // Um item por novo distribuidor. Se faltar (ou vier com menos itens que
@@ -130,6 +131,8 @@ export interface RelatorioDistribuidor {
   // Resultado enviado pelo time comercial, por vendedor. Ainda não enviado: `null`.
   // Quando preenchido, os totais alimentam o funil B2B automaticamente.
   comercial?: ResultadoVendedor[] | null
+  // Observação curta abaixo da tabela de fechamentos (ex: lead de um mês que faturou no outro).
+  notaComercial?: string
   // Explica o recorte do mapa (ex: quais campanhas têm quebra por estado).
   notaMapa?: string
   // Estados fora da segmentação: zero conhecido (≠ sem dado). Os demais estados ausentes

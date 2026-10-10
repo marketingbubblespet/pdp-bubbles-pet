@@ -18,11 +18,11 @@ export function aviso(html: string): string {
 // Cartão de número: valor, seta de variação e, ao lado, o valor do mês anterior em miniatura.
 function kpi(
   rotulo: string, atual: number | null, anterior: number | null | undefined,
-  fmt: (n: number) => string, sentido: Sentido, mesAnt: string,
+  fmt: (n: number) => string, sentido: Sentido, mesAnt: string, semDado = 'sem dado',
 ): string {
   const badge = seta(atual, anterior, sentido)
   const ant = badge && anterior != null ? `<span class="ant">${mesAnt}: ${fmt(anterior)}</span>` : ''
-  return `<div class="kpi"><span class="valor">${atual == null ? '<span class="tag-sem">sem dado</span>' : fmt(atual)}</span>`
+  return `<div class="kpi"><span class="valor">${atual == null ? `<span class="tag-sem">${semDado}</span>` : fmt(atual)}</span>`
     + `<div class="linha">${badge}${ant}</div><span class="rotulo">${rotulo}</span></div>`
 }
 
@@ -69,7 +69,7 @@ function blocoDistribuidores(rel: RelatorioDistribuidor, mesAnt: string): string
   const b = rel.anterior ? dados(rel.anterior) : null
   const vezes = (n: number) => `${fmtPct(n).replace('%', '')}x`
   const cards = [
-    kpi('Leads qualificados', a.qual, b?.qual, fmtInt, 'maior', mesAnt),
+    kpi('Leads qualificados', a.qual, b?.qual, fmtInt, 'maior', mesAnt, 'não informado'),
     kpi('Reuniões', a.reun, b?.reun, fmtInt, 'maior', mesAnt),
     kpi('Novos distribuidores', a.novos, b?.novos, fmtInt, 'maior', mesAnt),
     kpi('Valor dos 1º pedidos', a.valor, b?.valor, fmtBRL, 'maior', mesAnt),

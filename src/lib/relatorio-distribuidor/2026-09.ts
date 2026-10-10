@@ -102,7 +102,18 @@ export const relatorioSetembro2026: RelatorioDistribuidor = {
       link: `${FB}1675876747874507/` },
   ],
 
-  comercial: null,
+  // Relatório do time comercial recebido em 10/10/2026. Fechamentos contados pelo mês da
+  // 1ª NF de venda (sem bonificação). Leads qualificados não informados.
+  comercial: [
+    { nome: 'Cláudio', leadsQualificados: null, reunioes: 6, novosDistribuidores: 1, fechamentos: [
+      { distribuidor: 'Julia Mauad Faggioni (L8)', cidadeUF: 'Barueri/SP', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '30/09/2026', valorPrimeiraCompra: 15149.05 },
+    ] },
+    { nome: 'Guilherme', leadsQualificados: null, reunioes: 9, novosDistribuidores: 1, fechamentos: [
+      { distribuidor: 'Michelle Carvalho Chagas', cidadeUF: 'São Paulo/SP', campanhaOrigem: 'Distribuidor Tradicional', dataPrimeiraCompra: '30/09/2026', valorPrimeiraCompra: 40310.68 },
+    ] },
+    { nome: 'Paulo', leadsQualificados: null, reunioes: 11, novosDistribuidores: 0 },
+  ],
+  notaComercial: 'A L8 é um lead cadastrado em agosto que fez a primeira compra em setembro: os fechamentos contam no mês da primeira nota fiscal de venda.',
 
   timeline: {
     marcos: [
@@ -141,7 +152,24 @@ export const relatorioSetembro2026: RelatorioDistribuidor = {
   planoProximo: {
     titulo: 'Plano de ação · Outubro',
     itens: [
-      { texto: 'A definir' },
+      {
+        texto: 'Estruturar a classificação de leads no CRM, para o relatório trazer os leads qualificados por vendedor:',
+        destaque: true,
+        subitens: [
+          'Criar no CRM um campo obrigatório de status do lead: novo, qualificado, desqualificado, reunião marcada, fechado',
+          'Definir juntos o que é um lead qualificado (ex: tem CNPJ, atua com revenda pet, região sem distribuidor, volume mínimo de compra)',
+          'Registrar o motivo quando o lead é desqualificado (ex: e-commerce, região já atendida, sem CNPJ, sem retorno)',
+          'Exportar o status por vendedor todo dia 02 ou 03 do mês, junto com reuniões e fechamentos',
+        ],
+      },
+      {
+        texto: 'Definir como medir leads que fecham em um mês diferente do cadastro (ex: L8, cadastrada em agosto e faturada em setembro):',
+        subitens: [
+          'Registrar no CRM a data de cadastro do lead e a data da primeira nota fiscal de cada fechamento',
+          'Mostrar no relatório as duas leituras: fechamentos pelo mês da nota fiscal e fechamentos pelo mês de cadastro do lead',
+          'Acompanhar o ciclo médio de venda (dias entre o cadastro e a primeira compra)',
+        ],
+      },
     ],
   },
 

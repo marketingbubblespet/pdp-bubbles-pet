@@ -62,6 +62,20 @@ ações realizadas (`desafios`); usar para explicar variações de leads e CPL n
   captação em regiões onde já temos bastante distribuidores. Apresentar a alta
   do CPL como efeito previsto da decisão, não como queda de performance.
 
+- **Comparativo:** setembro (`2026-09.ts`) já tem os dados do comercial (reuniões, fechamentos,
+  1º pedido). Outubro deve apontar `anterior: relatorioSetembro2026` e pedir ao comercial os
+  números de outubro no mesmo formato, para sempre comparar o mês com o anterior.
+- Leads qualificados ainda não são medidos pelo comercial: usar `leadsQualificados: null`
+  (aparece "não informado"). Conferir se os itens do plano de outubro sobre o CRM avançaram.
+- Ivan e Thainá atendem leads, mas estão com outras atribuições: sem dados deles, a página
+  mostra só a observação sutil "Sem dados de leads de tráfego no mês".
+- Fechamentos sempre com `campanhaOrigem: 'Distribuidor Tradicional'` quando o comercial disser
+  só "campanha". A tabela "Aberturas por origem" do comercial (feira, indicação, prospecção) é
+  controle interno deles e fica fora do relatório. Não mostrar press kits, nº de NF, data de
+  cadastro nem ciclo em dias (decisão do usuário, 10/10/2026).
+- Base de cálculo do custo por distribuidor e do retorno: investimento de TODAS as campanhas
+  de distribuidor (Meta + Google), não só a Tradicional.
+
 ### Regra de conduta
 Propostas que o usuário **não respondeu** não são aplicadas. Só aplicar o que ele aprovou explicitamente.
 
