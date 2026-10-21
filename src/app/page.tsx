@@ -124,6 +124,12 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Relatório · Captação de Distribuidores · setembro 2026',
     description: 'Mesmo modelo mensal, com comparativo contra agosto. Dados do comercial ainda pendentes.',
   },
+  {
+    tipo: 'rota',
+    href: '/estudos-distribuidor-care',
+    label: 'Estudos · Distribuidores da Linha Care',
+    description: 'Resumo de 5 estudos de mercado (concorrência, ICP, landing page, Meta Ads e cosméticos humanos). Página interna, escondida do Google.',
+  },
 ]
 
 const PASSWORD = 'mariane'
