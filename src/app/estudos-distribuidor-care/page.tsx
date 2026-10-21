@@ -8,6 +8,9 @@ import { Estudo2Icp } from '@/components/lp/estudos-care/Estudo2Icp'
 import { Estudo3Landing } from '@/components/lp/estudos-care/Estudo3Landing'
 import { Estudo4MetaAds } from '@/components/lp/estudos-care/Estudo4MetaAds'
 import { Estudo5Cosmeticos } from '@/components/lp/estudos-care/Estudo5Cosmeticos'
+import { Estudo6GoogleAds } from '@/components/lp/estudos-care/Estudo6GoogleAds'
+import { Estudo7Sla } from '@/components/lp/estudos-care/Estudo7Sla'
+import { Sintese } from '@/components/lp/estudos-care/Sintese'
 import { Callout, Lista } from '@/components/lp/estudos-care/ui'
 import { SenhaGate } from '@/components/lp/estudos-care/SenhaGate'
 
@@ -48,6 +51,18 @@ const ESTUDOS = [
     titulo: 'Expansão lateral',
     frase: 'Distribuidores de beleza para salões e perfumarias já têm a rota paga, e quase toda a margem vira lucro.',
   },
+  {
+    id: 'estudo-6',
+    curto: 'Google Ads',
+    titulo: 'Pesquisa paga para o varejo',
+    frase: 'Só palavras de fundo de funil, negativas pesadas e retorno da venda fechada ao Google.',
+  },
+  {
+    id: 'estudo-7',
+    curto: 'SLA e qualificação',
+    titulo: 'Do lead à oportunidade',
+    frase: 'Contato em até 5 minutos, triagem por CNAE e carteira, e scripts prontos para as 3 objeções comuns.',
+  },
 ]
 
 export default function EstudosDistribuidorCarePage() {
@@ -62,8 +77,9 @@ export default function EstudosDistribuidorCarePage() {
           Estudos de mercado, resumidos
         </h1>
         <p className="mt-4 max-w-[760px] text-sm text-[#666666] md:text-base">
-          Cinco pesquisas sobre como vender a Linha Care por distribuidores: concorrência, perfil ideal,
-          página de captura, anúncios e um canal alternativo. Cada estudo tem o resumo em primeiro lugar,
+          Sete pesquisas sobre como vender a Linha Care por distribuidores: concorrência, perfil ideal,
+          página de captura, anúncios no Meta e no Google, um canal alternativo e o processo comercial.
+          Cada estudo tem o resumo em primeiro lugar,
           com tabelas e gráficos no lugar dos textos longos.
         </p>
       </header>
@@ -84,6 +100,14 @@ export default function EstudosDistribuidorCarePage() {
               </a>
             </li>
           ))}
+          <li className="shrink-0">
+            <a
+              href="#sintese"
+              className="flex min-h-[44px] items-center rounded-[12px] bg-[#0D0C0D] px-4 text-sm font-medium text-white"
+            >
+              Síntese
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -113,6 +137,7 @@ export default function EstudosDistribuidorCarePage() {
                 'O ganho do distribuidor vem de cosmético leve na mesma rota (carga pequena, margem alta).',
                 'Exclusividade territorial e material de PDV desarmam as duas maiores objeções: guerra de preço e encalhe.',
                 'Resposta rápida do comercial (5 a 15 minutos) decide o fechamento.',
+                'Medir pelo contrato fechado, não pelo lead: o estudo 4 pede CRM integrado e o estudo 6 pede conversão offline no Google.',
               ]}
             />
           </Callout>
@@ -123,6 +148,9 @@ export default function EstudosDistribuidorCarePage() {
                 'Confirmar sobre qual preço incidem os 45%. O exemplo do estudo 4 (custo de R$ 21,94 para venda a R$ 39,90) é a faixa que o estudo 1 reserva ao lojista, não ao distribuidor.',
                 'Formato de captura divergente: o estudo 3 propõe landing page, o estudo 4 prefere formulário nativo do Meta (mais barato por lead, qualificação menor).',
                 'Público divergente: distribuidor tradicional de ração (estudo 2) contra distribuidor de cosméticos humanos (estudo 5).',
+                'Margem do distribuidor: 45% nos estudos 2 a 5, mas 25% a 32% no estudo 7. Definir o número real antes de abordar.',
+                'O estudo 6 sugere negativar "ração", que é a busca do distribuidor ideal do estudo 2.',
+                'Os tamanhos de mercado variam entre os estudos (R$ 75, 77 e 78 bi) e os estudos 6 e 7 miram também supermercado e farmácia.',
                 'Os enquadramentos de CNAE e de isenção no MAPA (estudo 5) merecem conferência com contador ou jurídico.',
               ]}
             />
@@ -135,6 +163,9 @@ export default function EstudosDistribuidorCarePage() {
       <Estudo3Landing />
       <Estudo4MetaAds />
       <Estudo5Cosmeticos />
+      <Estudo6GoogleAds />
+      <Estudo7Sla />
+      <Sintese />
 
       <footer className="border-t border-[#E5E7EB] py-10">
         <p className="mx-auto max-w-[1100px] px-4 text-sm text-[#666666]">

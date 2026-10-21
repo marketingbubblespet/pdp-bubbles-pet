@@ -128,7 +128,7 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     tipo: 'rota',
     href: '/estudos-distribuidor-care',
     label: 'Estudos · Distribuidores da Linha Care',
-    description: 'Resumo de 5 estudos de mercado (concorrência, ICP, landing page, Meta Ads e cosméticos humanos). Página interna, escondida do Google.',
+    description: 'Resumo de 7 estudos de mercado (concorrência, ICP, landing page, Meta Ads, cosméticos humanos, Google Ads e SLA comercial), com síntese para a diretoria. Página interna, escondida do Google.',
   },
 ]
 
