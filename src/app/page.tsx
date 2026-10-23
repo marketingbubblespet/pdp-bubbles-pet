@@ -141,6 +141,12 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Criativos · Meta Ads · Distribuidores da Linha Care',
     description: '8 anúncios (4 estáticos e 4 roteiros modulares Hook, Conteúdo e CTA), com montador de combinações para a editora. Página interna, escondida do Google.',
   },
+  {
+    tipo: 'rota',
+    href: '/criativos-black-november',
+    label: 'Criativos · Meta Ads · Black November 2026 (groomers)',
+    description: '22 estáticos e 16 vídeos (lacunas para a produção) em 8 grupos, mais remarketing com 2 carrosséis e 1 estático. Filtros por grupo e por formato. Página interna, escondida do Google.',
+  },
 ]
 
 const PASSWORD = 'mariane'
