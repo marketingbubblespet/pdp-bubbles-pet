@@ -24,7 +24,7 @@ Os eventos têm **níveis**, e o nível decide o que dispara no GTM:
 - **Nível 1 — conversão de mídia paga.** Só `lead_form_submitted`, e só para candidatura
   de distribuidor/revenda gravada no CRM. Dispara conversão no Google Ads e no Meta, o que
   alimenta lance de campanha real. `form_name` válidos: `captacao-lead`, `care-lead`,
-  `pet-south-lead`. **Na dúvida, não use este nome.**
+  `pet-south-lead`, `distribuidor-care-lead`. **Na dúvida, não use este nome.**
 - **Nível 2 — lead leve.** Captura de contato de menor intenção, só GA4, sem conversão de
   mídia. Hoje: `whatsapp_gate_submitted`.
 - **Nível 3 — engajamento.** Nenhuma conversão.
@@ -45,6 +45,11 @@ Os eventos têm **níveis**, e o nível decide o que dispara no GTM:
 | `exit_popup_click` | `popup_location` | Clique no exit popup |
 | `scroll_depth` | `percent_scrolled` | Marcos 25/50/75/90 |
 | `page_view` | `page_path`, `page_title` | Navegação client-side (ativo via `PageViewTracker`, ver abaixo) |
+| `lead_desviado` | 3 | `form_name`, `motivo` (`sem_cnpj` ou `sem_pedido_inicial`) | Lead não qualificado desviado ao e-commerce (/distribuidor-care), logo depois do `lead_form_submitted` com `lead_qualified: false` |
+| `share_whatsapp` | 3 | `origem` | Compartilhar a página pelo WhatsApp (/distribuidor-care: `simulador` ou `cta-final`) |
+| `faq_open` | 3 | `pergunta` | Abertura de pergunta do FAQ (/distribuidor-care, 1 a 9) |
+| `vitrine_aba` | 3 | `aba` | Troca de aba da vitrine por ação da pessoa (/distribuidor-care) |
+| `vitrine_produto_open` | 3 | `produto`, `aba` | Abertura do painel de produto da vitrine (/distribuidor-care) |
 
 **Importante:** `user_data` só existe em `lead_form_submitted`. Nos demais eventos, nunca.
 Adicionar um evento **novo** que não está nesta tabela exige criar o trigger
@@ -169,3 +174,11 @@ Vão junto de todo envio, via `src/lib/lead-context.ts`: `full_url` (com query s
 ⚠️ **Campo novo precisa ser declarado em `public/__forms.html`.** O Netlify descarta em
 silêncio qualquer campo não declarado lá: sem erro, sem aviso, o dado simplesmente não
 aparece no painel.
+
+## LP /distribuidor-care
+
+- `form_name` do dataLayer: `distribuidor-care-lead`. Formulários do Netlify: `distribuidor-care` (todo lead, qualificado ou não, com `qualificado` e `motivo_desvio`) e `falha-sellum` (cópia do qualificado quando a Sellum não confirmou; é o único com notificação por e-mail).
+- Lead qualificado (CNPJ, "Sim" ao pedido inicial e preferência de contato) vai ao CRM pela rota `src/app/api/distribuidor-care/lead/route.ts`, que também manda o `Lead` da API de Conversões do Meta com `event_id = lead.<leadId>`. A deduplicação só funciona se a tag Lead do Meta no GTM usar `eventID = {{event_id}}`.
+- `lead_form_submitted` sai com `lead_qualified: true` só para o qualificado; o desvio sai com `false` e, logo depois, `lead_desviado`.
+- `form_abandon` sai uma vez por carregamento quando a aba fica escondida com o cadastro começado. Nada é enviado ao Netlify no abandono.
+- Os eventos `lead_desviado`, `share_whatsapp`, `faq_open`, `vitrine_aba` e `vitrine_produto_open` só aparecem nos relatórios depois que alguém criar os acionadores no GTM (regra 44).

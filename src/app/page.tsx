@@ -73,6 +73,11 @@ const pages = [
     label: 'Gerador de Nomenclatura de Anúncios (interno)',
     description: 'Ferramenta da social media para padronizar o nome dos criativos de Meta Ads. Oculta, sem indexação.',
   },
+  {
+    href: '/distribuidor-care',
+    label: 'Captação de Distribuidores Linha Care',
+    description: 'Página de captação de distribuidores e atacadistas da Linha Care, para tráfego do Meta Ads. Sem indexação.',
+  },
 ]
 
 // Relatórios de mídia paga: dois tipos diferentes, por isso ficam numa seção à parte da

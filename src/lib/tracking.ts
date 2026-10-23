@@ -237,3 +237,32 @@ export function pushWhatsappRedirect(params: {
 export function splitFullName(fullName: string): { firstName?: string; lastName?: string } {
   return splitName(fullName)
 }
+
+// ---------------------------------------------------------------------------
+// LP /distribuidor-care: eventos de Nível 3 (engajamento), sem dado pessoal.
+// ---------------------------------------------------------------------------
+
+/** Lead não qualificado desviado ao e-commerce. Sai logo depois do lead_form_submitted com lead_qualified false. */
+export function pushLeadDesviado(params: { formName: string; motivo: 'sem_cnpj' | 'sem_pedido_inicial' }): void {
+  push({ event: 'lead_desviado', form_name: params.formName, motivo: params.motivo })
+}
+
+/** Clique no link de compartilhar pelo WhatsApp (wa.me sem número de destino). */
+export function pushShareWhatsapp(origem: string): void {
+  push({ event: 'share_whatsapp', origem })
+}
+
+/** Abertura de uma pergunta do FAQ. Fechar não dispara. */
+export function pushFaqOpen(pergunta: number): void {
+  push({ event: 'faq_open', pergunta })
+}
+
+/** Troca de aba da vitrine por ação da pessoa. Não dispara no carregamento. */
+export function pushVitrineAba(aba: string): void {
+  push({ event: 'vitrine_aba', aba })
+}
+
+/** Abertura do painel de detalhe de um produto da vitrine. */
+export function pushVitrineProdutoOpen(produto: string, aba: string): void {
+  push({ event: 'vitrine_produto_open', produto, aba })
+}
