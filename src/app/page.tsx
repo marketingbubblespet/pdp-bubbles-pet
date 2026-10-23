@@ -135,6 +135,12 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Estudos · Distribuidores da Linha Care',
     description: 'Resumo de 7 estudos de mercado (concorrência, ICP, landing page, Meta Ads, cosméticos humanos, Google Ads e SLA comercial), com síntese para a diretoria. Página interna, escondida do Google.',
   },
+  {
+    tipo: 'rota',
+    href: '/criativos-distribuidor-care',
+    label: 'Criativos · Meta Ads · Distribuidores da Linha Care',
+    description: '8 anúncios (4 estáticos e 4 roteiros modulares Hook, Conteúdo e CTA), com montador de combinações para a editora. Página interna, escondida do Google.',
+  },
 ]
 
 const PASSWORD = 'mariane'
