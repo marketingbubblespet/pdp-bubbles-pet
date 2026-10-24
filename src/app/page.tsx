@@ -147,6 +147,24 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Criativos · Meta Ads · Black November 2026 (groomers)',
     description: '22 estáticos e 16 vídeos (lacunas para a produção) em 8 grupos, mais remarketing com 2 carrosséis e 1 estático. Filtros por grupo e por formato. Página interna, escondida do Google.',
   },
+  {
+    tipo: 'rota',
+    href: '/apresentacao-black-november',
+    label: 'Apresentação · Plano da Black November 2026 (diretoria)',
+    description: 'Plano completo para a diretoria em formato de site: Black 2025, mercado, oferta, Meta, Google, site, projeção interativa, plano de ação, riscos e próximos passos. Modo apresentação com roteiro de fala e cronômetro. Com senha, escondida do Google.',
+  },
+  {
+    tipo: 'rota',
+    href: '/projecao-black-november',
+    label: 'Projeção de verba · Meta Ads · Black November 2026',
+    description: 'Cenários de R$ 30, 40, 45 e 50 mil com pedidos, receita e ROAS de último clique, retorno marginal, distribuição por campanha e por semana. Premissas editáveis. Página interna, escondida do Google.',
+  },
+  {
+    tipo: 'rota',
+    href: '/site-black-november',
+    label: 'Site · propostas para a Black November 2026',
+    description: '12 propostas para o site com protótipo no celular (hoje e proposta), motivo, esforço e impacto estimado em faturamento; marcar o que aplicar. Página interna, escondida do Google.',
+  },
 ]
 
 const PASSWORD = 'mariane'
