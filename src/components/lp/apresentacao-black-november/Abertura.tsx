@@ -12,8 +12,7 @@ export function Capa() {
         </p>
         <h1 className="mt-4 text-4xl font-medium leading-[1.1] md:text-6xl">Plano da Black November 2026</h1>
         <p className="mt-5 max-w-[760px] text-base text-white/80 md:text-lg">
-          O que a Black 2025 ensinou, o que vamos fazer de 01 a 30/11/2026 e quanto esperamos faturar. Apresentação à
-          diretoria, terça-feira, 27/10/2026.
+          O que a Black 2025 ensinou, o que vamos fazer de 01 a 30/11/2026 e quanto esperamos faturar.
         </p>
         <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
           {[
@@ -87,7 +86,7 @@ export function Resumo() {
               Aprovar uma reserva de até R$ 15 mil na Meta, liberada só se o retorno de último clique (ROAS LC) estiver
               em 2,0 ou mais nas checagens de 10/11 e 20/11.
             </li>
-            <li>Escolher as melhorias de site que entram até 31/10 (seção 7).</li>
+            <li>Escolher as propostas de site, implementadas no tema em 28/10 (seção 7).</li>
             <li>Ciência dos riscos e das decisões em aberto (seção 10).</li>
           </ol>
         </Callout>

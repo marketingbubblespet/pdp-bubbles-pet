@@ -96,6 +96,31 @@ export function MetaAds() {
         ]}
       />
       <Andromeda />
+      <Bloco
+        titulo="A referência que funcionou em 2025: o vídeo da bancada"
+        nota="Os outros anúncios de 2025 eram tradicionais ou reaproveitados; este foi o que se destacou. Roteiro completo em entregas/2026-11_black-november_roteiro-video-bancada.md."
+      >
+        <div className="grid gap-6 md:grid-cols-[200px_1fr]">
+          <Figura src={`${IMG}/ref-2025-video-bancada.png`} alt="Anúncio de vídeo da Black 2025 com a bancada de produtos" w={370} h={622} largura={200} legenda="vdeo|promo|black_friday_2025|black_geral|24nov (Oliver Pet)" />
+          <div className="space-y-4">
+            <Numeros
+              itens={[
+                { valor: '12', rotulo: 'compras nos últimos dias da Black 2025' },
+                { valor: '10,79', rotulo: 'ROAS Reportado (contagem da Meta)' },
+                { valor: 'R$ 65', rotulo: 'custo por compra' },
+                { valor: '34 s', rotulo: 'plano fixo, uma pessoa falando' },
+              ]}
+            />
+            <Cards
+              colunas={2}
+              itens={[
+                { titulo: 'Por que funcionou', texto: 'Pessoa real falando com o groomer; bancada com todas as linhas ("tudo está na Black"); argumento de negócio: estoque de fim de ano sem pesar no bolso; desconto e brinde juntos.' },
+                { titulo: 'Como fica em 2026', texto: 'Mesma bancada organizada por linha, faixa real de desconto (nada de "até 40%"), diluidor de brinde e Kit Experimentação em destaque. Uma gravação, três aberturas: mês todo (16/11), cashback em dobro (25/11) e último dia (30/11).' },
+              ]}
+            />
+          </div>
+        </div>
+      </Bloco>
       <Bloco titulo="Estrutura das campanhas">
         <Tabela
           cabecalho={['Campanha', 'Para quem', 'Período', 'Verba']}

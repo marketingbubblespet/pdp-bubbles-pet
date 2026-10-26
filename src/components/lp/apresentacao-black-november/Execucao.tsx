@@ -1,5 +1,6 @@
 // Seções 8 a 11: projeção, plano de ação, riscos e decisões, próximos passos.
-import { Bloco, Callout, Cards, LinkInterno, Lista, Passos, Secao, Tabela } from './ui'
+import { IMG } from '@/lib/apresentacao-black-november'
+import { Bloco, Callout, Cards, Figura, LinkInterno, Lista, Passos, Secao, Tabela } from './ui'
 import { Simulador } from './Simulador'
 
 export function Projecao() {
@@ -24,6 +25,17 @@ export function Projecao() {
         r: 'De R$ 30 para R$ 50 mil a projeção sobe cerca de 7% no cenário base. Liberamos o extra só se o retorno de último clique provar 2,0 nas checagens de 10 e 20/11.',
       }}
     >
+      <div className="rounded-[20px] border-4 border-[#E8649A] bg-[#0D0C0D] p-6 text-white md:p-8">
+        <p className="text-sm font-semibold uppercase tracking-widest text-[#F4CDD4]">⚠ Atenção: a projeção pode variar</p>
+        <p className="mt-3 text-xl font-medium md:text-2xl">
+          O ponto mais crítico, que pode prejudicar muito a estratégia e a projeção, é a quebra de estoque dos produtos.
+        </p>
+        <p className="mt-3 text-sm text-white/80 md:text-base">
+          A Black 2025 foi puxada por poucos produtos: o Kit Completo Essential, os galões Essential e PRO e os kits. Se
+          um deles esgotar no meio do mês, os anúncios param, a verba precisa mudar de lugar e o faturamento cai junto. Os
+          números abaixo também mudam com o leilão, o site e a medição: servem para comparar cenários, não como promessa.
+        </p>
+      </div>
       <Simulador />
       <div className="grid gap-4 md:grid-cols-2">
         <Callout titulo="Como a projeção foi feita">
@@ -69,11 +81,32 @@ export function PlanoAcao() {
         'Disparos de e-mail e WhatsApp: execução fora da agência, calendário sugerido.',
       ]}
     >
-      <Bloco titulo="Calendário de checagens">
+      <Bloco
+        titulo="Antes da Black: do dia 26/10 à estreia"
+        nota="As campanhas da Black começam às 00h de domingo, 01/11. O tema do site é publicado às 23h de sexta, 30/10, pelo gestor."
+      >
+        <Tabela
+          minimo={640}
+          cabecalho={['Data', 'Atividade', 'Quem']}
+          destaque={[2, 4, 6]}
+          linhas={[
+            ['seg 26/10', 'Aprovações: estrutura, nomes, atribuição, N01 e novos anúncios baseados nos campeões de 2025', 'Gestor'],
+            ['ter 27/10', 'Diretoria: verba, reserva condicionada e propostas de site; decisão da roleta (Mariane)', 'Diretoria'],
+            ['qua 28/10', 'Site: implementar no tema duplicado todos os banners e ajustes (abas, faixas, tags pretas, coleção Black, carrinho) e deixar aguardando publicação', 'Dev e marketing'],
+            ['qua 28/10', 'Tráfego: reduzir as campanhas usuais da Meta ao mínimo (só a principal com R$ 50 por dia; remarketing a R$ 7 por dia), criar as campanhas, conjuntos e públicos da Black pausados, lista de clientes atualizada, Merchant (promoções e rótulo)', 'Mídia'],
+            ['qui 29/10', 'Medição: com o tema pronto, compras reais de teste (Pix e cartão) chegando à Shopify e à Nemu com a UTM completa; pedir ao Claude Code testes completos do site e do rastreamento (modo ultracode)', 'Marketing e Claude Code'],
+            ['sex 30/10', 'Entrega de todos os estáticos; anúncios subidos e aprovados; campanhas programadas para iniciar às 00h de 01/11', 'Criação e mídia'],
+            ['sex 30/10, 23h', 'Publicação do tema da Black (já validado)', 'Gestor'],
+            ['sáb 31/10', 'Conferência final: preços, brindes (BOGO), cupons sem somar, prévia de cada anúncio; plantão de 01 e 02/11', 'Mídia e loja'],
+            ['dom 01/11, 00h', 'Início das campanhas da Black; disparo de abertura às 9h', 'Automático'],
+          ]}
+        />
+      </Bloco>
+      <Bloco titulo="Calendário de checagens durante a Black">
         <Tabela
           minimo={640}
           cabecalho={['Data', 'Momento', 'O que se decide']}
-          destaque={[2, 5, 7, 9]}
+          destaque={[2, 5, 8, 10]}
           linhas={[
             ['02/11 seg', 'Feriado, dia seguinte à estreia', 'Entrega, ritmo, medição, site e catálogo: só correção'],
             ['04 e 06/11', 'Primeira semana', 'Funil alto, vídeos e concentração de verba: marcar, sem cortar'],
@@ -81,7 +114,8 @@ export function PlanoAcao() {
             ['13/11 sex', 'Preparação', 'Quem sai, quem entra e o teste de criativo da 2ª onda'],
             ['16 e 17/11', 'Segunda onda', 'Peças novas e teste de criativo no ar; decisão do catálogo'],
             ['20/11 sex', '2/3 da Black', 'Leitura completa, estoque até 30/11, verba economizada e 2º extra'],
-            ['23 e 24/11', 'Véspera da Black Week', 'Prospecção congela; conjuntos de cashback em dobro programados'],
+            ['20/11 sex', 'Pedido à criação', 'Banners principais com o selo "cashback em dobro" prontos para 25/11'],
+            ['23 e 24/11', 'Véspera da Black Week', 'Prospecção congela; conjuntos de cashback em dobro programados; banners do dobro agendados'],
             ['25/11 qua', 'Cashback em dobro', 'Checagens às 9h, 14h e 19h: só correção e estoque'],
             ['26/11 qui', 'Véspera', 'Luz verde do degrau de 27/11'],
             ['27/11 sex', 'Black Friday', 'Checagens às 9h, 13h, 18h e 22h: pausa imediata por estoque'],
@@ -102,7 +136,10 @@ export function PlanoAcao() {
           ]}
         />
       </Bloco>
-      <Bloco titulo="Disparos de e-mail e WhatsApp (sugestão)" nota="Excluir dos disparos de oferta quem comprou nas últimas 48 horas.">
+      <Bloco
+        titulo="Disparos de e-mail e WhatsApp (sugestão)"
+        nota="Excluir dos disparos de oferta quem comprou nas últimas 48 horas. Recuperação de carrinho, boas práticas: 1ª mensagem de 30 a 60 minutos depois do abandono (no Pix, antes de expirar), 2ª em 24 horas e no máximo uma 3ª em 48 a 72 horas; parar quando a pessoa comprar; sem desconto extra (lembrar preço da Black, brinde e cashback); só para quem autorizou o contato (LGPD), com opção de sair."
+      >
         <Tabela
           minimo={560}
           cabecalho={['Quando', 'Mensagem', 'Por quê']}
@@ -136,26 +173,49 @@ export function Riscos() {
         <Tabela
           cabecalho={['Risco', 'Efeito', 'O que está previsto']}
           linhas={[
-            ['Site deixar venda no caminho', 'Em 2025, metade do clique não abriu a página', 'Propostas da seção 7, com as 5 essenciais até 31/10'],
+            ['Site deixar venda no caminho', 'Em 2025, metade do clique não abriu a página. Atenção: pode ser erro de medição (clique contado pela Meta sem a página registrar a visita), não uma conclusão', 'Propostas da seção 7; conferir a medição na compra de teste de 29/10'],
             ['Leilão mais caro na Black Week', 'O mesmo real compra menos anúncio (CPM +20% em 2025)', 'Julgar por custo por compra e retorno, nunca pelo CPM'],
+            ['Imposto da Meta desde 01/2026', 'A Meta passou a cobrar 12,15% de PIS/Cofins e ISS por cima do valor dos anúncios. Se os R$ 30 mil forem o total pago na fatura, viram cerca de R$ 26.750 de anúncio, 16% acima dos R$ 23.006 de 2025, e não 30%. Se forem o orçamento no Gerenciador, a fatura fica em cerca de R$ 33.645', 'Definir se os R$ 30 mil são orçamento ou valor da fatura; a projeção usa R$ 30 mil de orçamento no Gerenciador'],
             ['Brinde sem controle de estoque no cadastro da loja', 'A loja continua dando brinde que não existe', 'Resolvido internamente até 28/10'],
             ['Produto acabar no meio do caminho', 'Anúncio levando para produto esgotado', 'Estoque garantido; regra pronta para trocar anúncio e mover verba'],
             ['Meta e loja contando diferente', 'A Meta mostra muito mais venda que o último clique', 'Decisão pelo último clique (Nemu) com a venda da loja por dia ao lado'],
-            ['Campanhas de fora da Black disputando o mesmo público', 'Preço ou cupom antigo no ar', 'Revisão em 26/10'],
+            ['Campanhas de fora da Black disputando o mesmo público', 'Preço ou cupom antigo no ar e verba dividida', 'Em 28/10 as campanhas usuais da Meta caem ao mínimo para não perder o aprendizado: só a principal fica com R$ 50 por dia (mandando para a coleção com o produto em destaque) e o remarketing usual com R$ 7 por dia. No Google, as reduções do documento 06'],
           ]}
         />
+      </Bloco>
+      <Bloco titulo="Pendências para fechar antes de 01/11">
+        <Tabela
+          minimo={620}
+          cabecalho={['#', 'Pendência', 'Quem', 'Até']}
+          linhas={[
+            ['1', 'Material dos anúncios campeões de 2025 para criar os novos (o vídeo da bancada já chegou e tem roteiro)', 'Gestor', '26/10'],
+            ['2', 'Roleta "Gire e ganhe": escolher entre as 4 opções', 'Mariane', '27/10'],
+            ['3', 'R$ 30 mil na Meta: orçamento no Gerenciador ou valor da fatura (imposto de 12,15%)', 'Diretoria', '27/10'],
+            ['4', 'Validade do crédito do cashback em dobro', 'Diretoria', '13/11'],
+            ['5', 'Rodapé das peças: "Promoção não cumulativa" ou "Não acumula com cupons"', 'Gestor', '27/10'],
+            ['6', 'Preço do Neutralizador PRO 5L: R$ 439,90', 'Gestor', '27/10'],
+            ['7', 'Tag da galeria: BLACK, BLACK 26, SÓ NA BLACK, OFERTA BLACK ou BLACK NOV', 'Gestor', '27/10'],
+            ['8', 'Publicar o projeto de ofertas (git)', 'Gestor', '27/10'],
+            ['9', 'Banner da coleção Black: briefing e simulação prontos; arte final com a criação', 'Criação', '28/10'],
+          ]}
+        />
+        <div className="mt-4 grid gap-3 md:grid-cols-[2fr_1fr]">
+          <Figura src={`${IMG}/bn26_banner-colecao-black_desktop-1920x400.jpg`} alt="Simulação do banner da coleção Black, desktop" w={1920} h={400} largura={700} legenda="Banner da coleção Black · desktop 1920x400 (simulação Gemini)" />
+          <Figura src={`${IMG}/bn26_banner-colecao-black_mobile-745x400.jpg`} alt="Simulação do banner da coleção Black, mobile" w={745} h={400} largura={340} legenda="Mobile 745x400 (simulação Gemini)" />
+        </div>
       </Bloco>
       <Bloco titulo="Decisões em aberto">
         <Tabela
           cabecalho={['Decisão', 'Recomendação', 'Quem', 'Até']}
           linhas={[
             ['Reserva de até R$ 15 mil na Meta', 'Aprovar condicionada ao ROAS de último clique de 2,0', 'Diretoria', '27/10'],
-            ['Melhorias de site', 'As 5 essenciais até 31/10', 'Diretoria e gestor', '27/10'],
-            ['N01 (réplica do campeão de 2025)', 'Aprovar no lugar do criativo 24', 'Gestor', '28/10'],
+            ['Propostas de site', 'As 8 propostas da página do site, implementadas no tema em 28/10', 'Diretoria e gestor', '27/10'],
+            ['Roleta "Gire e ganhe"', 'Temática de Black, prêmios sem desconto, abrindo depois de 30 segundos', 'Mariane', '27/10'],
+            ['Imposto da Meta', 'Definir se os R$ 30 mil são orçamento no Gerenciador ou valor da fatura', 'Diretoria', '27/10'],
+            ['N01 e novos anúncios dos campeões de 2025', 'Criar a partir dos anúncios originais (prints e vídeos)', 'Gestor', '28/10'],
             ['Rodapé das peças', '"Não acumula com cupons" no lugar de "Promoção não cumulativa" (perfumes e cashback acumulam)', 'Gestor', '27/10'],
             ['Preço do Neutralizador PRO 5L', 'R$ 439,90 (padrão ,90 e mantém os 15% off)', 'Gestor', '27/10'],
             ['Validade do crédito do cashback em dobro', 'Definir antes das peças de 25/11', 'Diretoria', '13/11'],
-            ['Selo de cashback nos banners', 'Trocar para o dobro em 25/11 ou tirar a porcentagem', 'Gestor', '28/10'],
           ]}
         />
       </Bloco>
@@ -168,13 +228,13 @@ export function Proximos() {
     <Secao id="proximos" resumo={<>O que precisa acontecer até a estreia de domingo, 01/11, às 00h.</>}>
       <Passos
         itens={[
-          { marca: 'seg 26/10', titulo: 'Aprovações do gestor', texto: 'Estrutura, nomes, atribuição, N01; revisão das campanhas de fora da Black.' },
-          { marca: 'ter 27/10', titulo: 'Diretoria', texto: 'Verba, reserva condicionada e melhorias de site. Rodapé e preço do Neutralizador decididos.' },
-          { marca: 'qua 28/10', titulo: 'Contas e loja', texto: 'Lista de clientes atualizada, públicos criados, Merchant (promoções e rótulo), cadastros de brinde, "Mostrar produtos" desligado.' },
-          { marca: 'qui 29/10', titulo: 'Medição', texto: 'Compra de teste com Pix e cartão: a venda precisa chegar à Shopify e à Nemu com a UTM completa.' },
-          { marca: 'sex 30/10', titulo: 'Anúncios e site', texto: 'Anúncios do lançamento aprovados com data de início; site da Black pronto no tema duplicado.' },
-          { marca: 'sáb 31/10', titulo: 'Conferência final', texto: 'Prévia de cada anúncio, orçamentos, datas, públicos; plantão de 01 e 02/11 definido.' },
-          { marca: 'dom 01/11', titulo: 'Estreia às 00h', texto: 'Preços da Black no site, anúncios no ar, disparo de abertura às 9h.' },
+          { marca: 'seg 26/10', titulo: 'Aprovações do gestor', texto: 'Estrutura, nomes, atribuição e novos anúncios baseados nos campeões de 2025.' },
+          { marca: 'ter 27/10', titulo: 'Diretoria', texto: 'Verba, reserva condicionada, imposto da Meta, propostas de site e roleta.' },
+          { marca: 'qua 28/10', titulo: 'Site e tráfego', texto: 'Banners e ajustes no tema duplicado, aguardando publicação. Campanhas usuais reduzidas ao mínimo; campanhas da Black criadas pausadas; públicos, lista de clientes e Merchant.' },
+          { marca: 'qui 29/10', titulo: 'Testes', texto: 'Com o tema pronto, compras reais de teste e testes completos do site e do rastreamento pelo Claude Code (modo ultracode).' },
+          { marca: 'sex 30/10', titulo: 'Anúncios e tema', texto: 'Todos os estáticos entregues; anúncios aprovados e programados para 00h de 01/11. Às 23h, publicação do tema da Black.' },
+          { marca: 'sáb 31/10', titulo: 'Conferência final', texto: 'Preços, brindes, cupons, prévia de cada anúncio; plantão de 01 e 02/11 definido.' },
+          { marca: 'dom 01/11', titulo: 'Início às 00h', texto: 'Campanhas da Black no ar; disparo de abertura às 9h.' },
         ]}
       />
       <Bloco titulo="Material de apoio">
