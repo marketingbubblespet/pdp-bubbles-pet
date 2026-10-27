@@ -91,7 +91,7 @@ export function PlanoAcao() {
           destaque={[2, 4, 6]}
           linhas={[
             ['seg 26/10', 'Aprovações: estrutura, nomes, atribuição, N01 e novos anúncios baseados nos campeões de 2025', 'Gestor'],
-            ['ter 27/10', 'Diretoria: verba, reserva condicionada e propostas de site; decisão da roleta (Mariane)', 'Diretoria'],
+            ['ter 27/10', 'Diretoria: verba, reserva condicionada e propostas de site; decisão da roleta', 'Diretoria'],
             ['qua 28/10', 'Site: implementar no tema duplicado todos os banners e ajustes (abas, faixas, tags pretas, coleção Black, carrinho) e deixar aguardando publicação', 'Dev e marketing'],
             ['qua 28/10', 'Tráfego: reduzir as campanhas usuais da Meta ao mínimo (só a principal com R$ 50 por dia; remarketing a R$ 7 por dia), criar as campanhas, conjuntos e públicos da Black pausados, lista de clientes atualizada, Merchant (promoções e rótulo)', 'Mídia'],
             ['qui 29/10', 'Medição: com o tema pronto, compras reais de teste (Pix e cartão) chegando à Shopify e à Nemu com a UTM completa; pedir ao Claude Code testes completos do site e do rastreamento (modo ultracode)', 'Marketing e Claude Code'],
@@ -149,8 +149,9 @@ export function PlanoAcao() {
             ['ter 17/11', 'Segunda onda com os mais vendidos', 'Junto com a renovação dos anúncios'],
             ['qua 25/11, 8h', 'Cashback em dobro começou', 'Argumento novo da reta final'],
             ['sex 27/11, 8h', 'Black Friday', 'Pico de procura'],
+            ['dom 29/11', 'Amanhã termina a Black November e o cashback em dobro', 'Escassez real, um dia antes do fim'],
             ['seg 30/11, 10h e 18h', 'Último dia da Black e do cashback em dobro', 'Urgência real, com data verdadeira'],
-            ['ter 01/12', 'Só para quem comprou: seu cashback está disponível', 'Dezembro caiu 70% em 2025'],
+            ['ter 15/12', 'Lembrete só para quem comprou: seu cashback está disponível, hora de repor o estoque', 'Os itens são insumos: a reposição vem perto da metade de dezembro, que caiu 70% em 2025'],
           ]}
         />
       </Bloco>
@@ -188,8 +189,8 @@ export function Riscos() {
           minimo={620}
           cabecalho={['#', 'Pendência', 'Quem', 'Até']}
           linhas={[
-            ['1', 'Material dos anúncios campeões de 2025 para criar os novos (o vídeo da bancada já chegou e tem roteiro)', 'Gestor', '26/10'],
-            ['2', 'Roleta "Gire e ganhe": escolher entre as 4 opções', 'Mariane', '27/10'],
+            ['1', 'Estrutura das campanhas da Meta: refinar (1 conjunto amplo ou mais) e definir as páginas de destino', 'Gestor', '28/10'],
+            ['2', 'Roleta "Gire e ganhe": escolher entre as 4 opções', 'Gestor', '27/10'],
             ['3', 'R$ 30 mil na Meta: orçamento no Gerenciador ou valor da fatura (imposto de 12,15%)', 'Diretoria', '27/10'],
             ['4', 'Validade do crédito do cashback em dobro', 'Diretoria', '13/11'],
             ['5', 'Rodapé das peças: "Promoção não cumulativa" ou "Não acumula com cupons"', 'Gestor', '27/10'],
@@ -209,8 +210,8 @@ export function Riscos() {
           cabecalho={['Decisão', 'Recomendação', 'Quem', 'Até']}
           linhas={[
             ['Reserva de até R$ 15 mil na Meta', 'Aprovar condicionada ao ROAS de último clique de 2,0', 'Diretoria', '27/10'],
-            ['Propostas de site', 'As 8 propostas da página do site, implementadas no tema em 28/10', 'Diretoria e gestor', '27/10'],
-            ['Roleta "Gire e ganhe"', 'Temática de Black, prêmios sem desconto, abrindo depois de 30 segundos', 'Mariane', '27/10'],
+            ['Propostas de site', 'As 7 propostas da página do site, implementadas no tema em 28/10', 'Diretoria e gestor', '27/10'],
+            ['Roleta "Gire e ganhe"', 'Temática de Black, prêmios sem desconto, abrindo depois de 30 segundos', 'Gestor', '27/10'],
             ['Imposto da Meta', 'Definir se os R$ 30 mil são orçamento no Gerenciador ou valor da fatura', 'Diretoria', '27/10'],
             ['N01 e novos anúncios dos campeões de 2025', 'Criar a partir dos anúncios originais (prints e vídeos)', 'Gestor', '28/10'],
             ['Rodapé das peças', '"Não acumula com cupons" no lugar de "Promoção não cumulativa" (perfumes e cashback acumulam)', 'Gestor', '27/10'],

@@ -96,7 +96,7 @@ export function Resumo() {
               'Na loja, a Black 2025 foi de volume e de ticket: pedidos +112% e receita +188% contra outubro.',
               'Um anúncio simples da Linha Essential com 10% off carregou a Meta: 41% das compras.',
               'O meio do mês perdeu eficiência na Meta com testes; a loja não caiu.',
-              'Metade do clique pago não chegava a abrir a página, e 79% dos checkouts não viravam compra.',
+              'Metade do clique pago não chegava a abrir a página, e 79% dos checkouts não viravam compra (possível erro de medição, a confirmar nos testes de compra).',
               'Dezembro caiu 70%: o cashback em dobro no fim de novembro vira crédito para a recompra.',
             ]}
           />
@@ -106,7 +106,7 @@ export function Resumo() {
         itens={[
           { valor: '+34%', rotulo: 'faturamento projetado contra 2025 (cenário base, R$ 30 mil na Meta)' },
           { valor: '868', rotulo: 'pedidos projetados na loja em novembro (2025: 694)' },
-          { valor: '2', rotulo: 'conjuntos de prospecção e remarketing que aprendem o mês todo (2025: 30)' },
+          { valor: '2', rotulo: 'conjuntos que aprendem o mês todo, um de prospecção e um de remarketing (2025: 30). Estrutura em refinamento' },
           { valor: '15', rotulo: 'checagens datadas de 02/11 a 01/12, com regra escrita para pausar e escalar' },
         ]}
       />

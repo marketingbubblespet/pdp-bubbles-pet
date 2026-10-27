@@ -23,7 +23,7 @@ export function Estrategia() {
     >
       <Bloco
         titulo="Ofertas oficiais da Black November 2026"
-        nota="Em todas as compras: cashback (em dobro de 25 a 30/11, em todos os pedidos) e 6x sem juros. As ofertas não acumulam com cupons (PRIMEIRA10 e BEMVINDO10). Enquanto durarem os estoques."
+        nota="Em todas as compras: cashback (em dobro de 25 a 30/11, em todos os pedidos) e 6x sem juros. As ofertas não acumulam com cupons (PRIMEIRA10 e BEMVINDO10). Enquanto durarem os estoques. Diferente de 2025, quando a Linha Essential foi a mais trabalhada (e a que mais vendeu), em 2026 o foco é a Linha PRO, puxada principalmente pelo Kit Experimentação."
       >
         <Tabela
           cabecalho={['Linha', 'Produto', 'Oferta']}
@@ -58,7 +58,7 @@ export function Estrategia() {
             { marca: 'S2 · 09 a 15/11', titulo: 'Manter, sem escalar', texto: 'Semana em que a Meta perdeu eficiência em 2025. Mensagem: "o preço da Black já está valendo". Primeira leitura de conversão em 10/11.' },
             { marca: 'S3 · 16 a 22/11', titulo: 'Segunda onda', texto: 'Teste de criativo com 5 peças novas em 16/11 (15% da verba por 7 dias). Leitura completa em 20/11 (2/3 da Black).' },
             { marca: 'S4 · 23 a 30/11', titulo: 'Black Week', texto: 'Cashback em dobro na quarta 25/11; Black Friday na sexta 27/11; Cyber Monday e último dia na segunda 30/11. Verba sobe em degraus de 20%.' },
-            { marca: '01/12', titulo: 'Saída', texto: 'Preços voltam às 00h. E-mail para quem comprou: "seu cashback está disponível".' },
+            { marca: '01/12', titulo: 'Saída', texto: 'Preços voltam às 00h. Em 15/12, lembrete para quem comprou: "seu cashback está disponível, hora de repor o estoque".' },
           ]}
         />
       </Bloco>
@@ -90,7 +90,7 @@ export function MetaAds() {
       <Numeros
         itens={[
           { valor: 'R$ 30 mil', rotulo: 'verba da Black na Meta (2025: R$ 23 mil)' },
-          { valor: '2', rotulo: 'conjuntos que aprendem o mês todo (2025: 30 conjuntos)' },
+          { valor: '2', rotulo: 'conjuntos que aprendem o mês todo (2025: 30). Estrutura em refinamento' },
           { valor: '41 + 6', rotulo: 'criativos aprovados e peças novas (réplica do campeão, "preço já valendo" e 4 de cashback em dobro)' },
           { valor: '2,0', rotulo: 'ROAS de último clique: régua para escalar ou cortar' },
         ]}
@@ -121,11 +121,20 @@ export function MetaAds() {
           </div>
         </div>
       </Bloco>
+      <Callout titulo="Em refinamento: estrutura das campanhas">
+        <Lista
+          itens={[
+            'A estrutura abaixo ainda está sendo refinada. A dúvida principal: deixar só 1 conjunto amplo com tudo terá boa performance no Andromeda, com 8 grupos de promoção diferentes?',
+            'Página de destino: cada promoção pode levar para a coleção com o produto em destaque ou para a página tradicional do produto. A escolha muda a leitura de cada grupo e precisa ser definida por grupo.',
+            'Pergunta em aberto: de todos os itens em promoção, qual é o melhor para puxar as vendas sem risco de quebra de estoque? O Kit Experimentação é um forte candidato, mas o ticket dele é baixo e pode reduzir o faturamento.',
+          ]}
+        />
+      </Callout>
       <Bloco titulo="Estrutura das campanhas">
         <Tabela
           cabecalho={['Campanha', 'Para quem', 'Período', 'Verba']}
           linhas={[
-            ['C1 · Prospecção', 'Público amplo (Brasil). Conjunto de cashback em dobro com as peças que mais venderam, de 25 a 30/11', '01 a 30/11', 'R$ 24.120 (80%)'],
+            ['C1 · Prospecção', 'Público amplo: Brasil inteiro ou só os estados-chave usados desde março (em decisão). Conjunto de cashback em dobro com as peças que mais venderam, de 25 a 30/11', '01 a 30/11', 'R$ 24.120 (80%)'],
             ['C2 · Remarketing Quente', 'Visitou o site ou pôs no carrinho nos últimos 14 dias', '01 a 30/11', 'R$ 4.020 (13%)'],
             ['C2 · Remarketing Impactados', 'Assistiu a 75% ou 95% dos vídeos, seguidores, engajou com a marca, visitou o site em 60 dias, leads e clientes', '25 a 30/11', 'R$ 1.160 (4%)'],
             ['C3 · Teste de catálogo', 'Viu produto no site nos últimos 60 dias; carrossel com o preço da Black puxado da loja', '03 a 16/11', 'R$ 700 (2%)'],
@@ -210,7 +219,7 @@ export function GoogleAds() {
             ['Manter', 'PMax principal (PMAX_TP)', 'R$ 2.490', 'Única PMax acima da régua'],
             ['Criar', 'PMax da Black', 'R$ 5.410', 'Produtos, textos, imagens e vídeos da Black; começa e termina sozinha'],
             ['Reduzir', 'PMax de cobertura', 'R$ 2.100', 'Retorno abaixo de 1; a PMax da Black mostra os mesmos produtos com a oferta'],
-            ['Reduzir', 'Buscas de produto e de meio de funil', 'R$ 2.700', 'Retorno de 0,34 a 0,64; é por onde entra a busca de tutor'],
+            ['Reduzir', 'Buscas de produto e de meio de funil', 'R$ 2.700', 'Retorno de 0,34 a 0,64'],
             ['Reserva', 'Antecipar degraus da marca', 'R$ 1.330', 'Só se a busca de marca estiver limitada pela verba'],
           ]}
         />

@@ -22,7 +22,7 @@ export default function SiteBlackNovemberPage() {
             </a>
             <h1 className="mt-4 text-3xl font-medium md:text-5xl">Site na Black November</h1>
             <p className="mt-3 max-w-[760px] text-base text-white/80">
-              O que já existe, o que não vamos fazer e as 8 propostas para decidir, com simulação no celular feita a partir
+              O que já existe, o que não vamos fazer e as 7 propostas para decidir, com simulação no celular feita a partir
               de prints reais do site (24/10/2026). As simulações são referência de layout, não arte final.
             </p>
           </div>

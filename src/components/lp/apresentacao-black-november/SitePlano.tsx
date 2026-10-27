@@ -55,9 +55,9 @@ export function SitePlano() {
       <Numeros
         itens={[
           { valor: '87%', rotulo: 'das sessões no celular (novembro/25)' },
-          { valor: '8', rotulo: 'propostas abertas para decisão' },
+          { valor: '7', rotulo: 'propostas abertas para decisão' },
           { valor: '5', rotulo: 'itens que já existem ou já foram feitos' },
-          { valor: '+4% a +11%', rotulo: 'de faturamento estimado se as 8 forem aplicadas (com desconto de sobreposição)' },
+          { valor: '+4% a +10%', rotulo: 'de faturamento estimado se as 7 forem aplicadas (com desconto de sobreposição)' },
         ]}
       />
 
@@ -205,22 +205,6 @@ export function SitePlano() {
 
       <Proposta
         n={6}
-        titulo="Carrinho com selo de pedido Black e economia em reais"
-        imgs={[{ src: 'carrinho-emblema-proposta', legenda: 'Proposta' }]}
-        texto={
-          <>
-            <p>
-              O brinde já entra pelo BOGO. Para reforçar no carrinho: faixa &quot;Pedido Black November&quot; no topo,
-              caixa &quot;Você economizou R$ X na Black November&quot; e a linha &quot;Este pedido gera R$ X de
-              cashback&quot; (em dobro de 25 a 30/11).
-            </p>
-          </>
-        }
-        extra={<p className="mt-3 text-sm font-semibold text-[#0D0C0D]">Impacto estimado: {fx(0.5, 1.5)}</p>}
-      />
-
-      <Proposta
-        n={7}
         titulo="Cashback em reais e selo dos banners no dobro"
         imgs={[]}
         texto={
@@ -239,8 +223,8 @@ export function SitePlano() {
       />
 
       <Proposta
-        n={8}
-        titulo='Roleta "Gire e ganhe": decisão da Mariane'
+        n={7}
+        titulo='Roleta "Gire e ganhe": 4 opções para decidir'
         imgs={[
           { src: 'home-chegada', legenda: 'Hoje', hoje: true },
           { src: 'roleta-tematica-proposta', legenda: 'Opção B' },

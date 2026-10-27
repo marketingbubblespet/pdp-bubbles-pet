@@ -1,4 +1,4 @@
-// Seção 7: site. Resumo das decisões e das 8 propostas; o detalhe abre em /site-black-november.
+// Seção 7: site. Resumo das decisões e das 7 propostas; o detalhe abre em /site-black-november.
 import { IMG } from '@/lib/apresentacao-black-november'
 import { Bloco, Callout, Figura, LinkInterno, Lista, Numeros, Secao } from './ui'
 
@@ -16,20 +16,20 @@ export function Site() {
       roteiro={[
         'Começar pelo que já está pronto: banners, brinde automático (BOGO), barra fixa e imagens comprimidas.',
         'Mostrar as simulações: Black November como primeira aba, faixa preta no topo, tag BLACK nas fotos.',
-        'Roleta: apresentar as 4 opções; a decisão é da Mariane.',
+        'Roleta: apresentar as 4 opções para decisão.',
         'Abrir a página do site para o detalhe de cada proposta.',
       ]}
       pergunta={{
         p: 'Vamos mexer na roleta, que está dando resultado?',
-        r: 'Não é obrigatório. A recomendação é deixá-la com cara de Black, com prêmios sem desconto e abrindo depois de 30 segundos. A Mariane decide entre 4 opções.',
+        r: 'Não é obrigatório. A recomendação é deixá-la com cara de Black, com prêmios sem desconto e abrindo depois de 30 segundos.',
       }}
     >
       <Numeros
         itens={[
           { valor: '87%', rotulo: 'das sessões no celular (novembro/25)' },
-          { valor: '8', rotulo: 'propostas para decidir' },
+          { valor: '7', rotulo: 'propostas para decidir' },
           { valor: '5', rotulo: 'itens que já existem ou já foram feitos' },
-          { valor: '+4% a +11%', rotulo: 'de faturamento estimado com as 8 propostas' },
+          { valor: '+4% a +10%', rotulo: 'de faturamento estimado com as 7 propostas' },
         ]}
       />
       <Bloco titulo="Como fica no celular (simulações feitas com o Gemini a partir de prints reais)">
@@ -39,7 +39,6 @@ export function Site() {
             ['colecao-faixa-proposta', 'Faixa rotativa abaixo do banner da coleção'],
             ['pdp-tag-proposta', 'Tag BLACK na foto e selos de desconto em preto'],
             ['colecao-black-banner-proposta', 'Coleção Black com banner baixo'],
-            ['carrinho-emblema-proposta', 'Carrinho com selo do pedido Black e economia'],
             ['roleta-tematica-proposta', 'Roleta temática (uma das 4 opções)'],
           ].map(([src, leg]) => (
             <Figura key={src} src={`${IMG}/${src}.png`} alt={leg} w={704} h={1520} largura={170} legenda={leg} destaque />
@@ -47,7 +46,7 @@ export function Site() {
         </div>
       </Bloco>
       <div className="grid gap-4 md:grid-cols-2">
-        <Callout titulo="As 8 propostas">
+        <Callout titulo="As 7 propostas">
           <Lista
             itens={[
               'Abas da home: Black November · Galões 5L · Kits PRO · Perfumes · Collora (Care e Promoções saem no mês).',
@@ -55,9 +54,8 @@ export function Site() {
               'Tag BLACK na galeria e nos cards; selos de desconto em preto em novembro.',
               'Faixa rotativa abaixo do banner de cada coleção, sem trocar os banners.',
               'Coleção Black November com banner baixo (briefing pronto).',
-              'Carrinho com selo "Pedido Black November" e economia em reais.',
               'Cashback em reais dobrado de 25 a 30/11 e troca do selo dos banners.',
-              'Roleta: manter, deixar temática, mudar o momento ou pausar (decisão da Mariane).',
+              'Roleta: manter, deixar temática, mudar o momento ou pausar (em decisão).',
             ]}
           />
         </Callout>
