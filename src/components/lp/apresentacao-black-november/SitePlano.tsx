@@ -1,4 +1,4 @@
-// Plano de site da Black November (página /site-black-november), já com as decisões do gestor de 24/10/2026.
+// Plano de site da Black November (página /site-black-november), com as decisões do gestor de 24/10 e de 28/10/2026.
 // Simulações feitas com o Gemini a partir de prints reais do site; referência de layout, não arte final.
 import { IMG, brl } from '@/lib/apresentacao-black-november'
 import { Bloco, Callout, Cards, Figura, Lista, Numeros, Tabela } from './ui'
@@ -55,9 +55,9 @@ export function SitePlano() {
       <Numeros
         itens={[
           { valor: '87%', rotulo: 'das sessões no celular (novembro/25)' },
-          { valor: '7', rotulo: 'propostas abertas para decisão' },
+          { valor: '10', rotulo: 'propostas decididas em 28/10' },
           { valor: '5', rotulo: 'itens que já existem ou já foram feitos' },
-          { valor: '+4% a +10%', rotulo: 'de faturamento estimado se as 7 forem aplicadas (com desconto de sobreposição)' },
+          { valor: '+4% a +10%', rotulo: 'de faturamento estimado com as 7 propostas originais (com desconto de sobreposição)' },
         ]}
       />
 
@@ -70,7 +70,7 @@ export function SitePlano() {
             ['Barra fixa de compra no celular', 'Já existe, também nas coleções'],
             ['Compressão de imagens e velocidade', 'Já feito'],
             ['3 banners principais da home', 'Briefados; mantêm a rotação atual'],
-            ['Cupons PRIMEIRA10 e BEMVINDO10', 'Mantidos: não somam com a Black e funcionam bem'],
+            ['Cupons PRIMEIRA10 e BEMVINDO10', 'Mantidos: não somam com a Black. A seção do BEMVINDO10 sai da página do produto no template da Black (proposta 9)'],
             ['Bloco "Sua oferta Black November" na página do produto', 'Não vamos fazer: troca pela tag na galeria (proposta 3)'],
             ['Frete e prazo por CEP antes do botão', 'Não vamos fazer'],
           ]}
@@ -96,6 +96,11 @@ export function SitePlano() {
               <strong className="font-semibold text-[#0D0C0D]">Black November · Galões 5L · Kits PRO · Perfumes · Collora</strong>.
               Care sai das abas no mês (não tem desconto) e volta em dezembro.
             </p>
+            <p>
+              Decisão de 28/10: as abas ficam <strong className="font-semibold text-[#0D0C0D]">Black November (destacada) ·
+              Kits · Shampoos · Collora · Care</strong>; Promoções sai. No menu do topo, &quot;Promoções&quot; vira
+              &quot;Black November&quot;, apontando para a coleção Black (ajuste manual no painel).
+            </p>
           </>
         }
         extra={<p className="mt-3 text-sm font-semibold text-[#0D0C0D]">Impacto estimado: {fx(1, 2)}</p>}
@@ -103,18 +108,22 @@ export function SitePlano() {
 
       <Proposta
         n={2}
-        titulo="Faixa de avisos do topo: preta, rotativa e clicável"
+        titulo="Faixa de avisos do topo: fica a atual, com o cronômetro acima"
         imgs={[{ src: 'home-faixa-abas-proposta', legenda: 'Faixa no topo' }]}
         texto={
           <>
-            <p>Uma frase por vez, cada uma levando para a oferta:</p>
+            <p>
+              Decisão de 28/10: a faixa atual <strong className="font-semibold text-[#0D0C0D]">não sai</strong>. O cronômetro
+              (proposta 10) entra acima dela, e as duas ficam juntas pelo contraste. O que muda são as mensagens de
+              parcelamento e cashback, lidas de uma configuração central do tema:
+            </p>
             <Tabela
               minimo={420}
               cabecalho={['Quando', 'Mensagens']}
               linhas={[
-                ['01 a 08/11', '"Black November: diluidor de brinde nos galões 5L ›" · "Kit Experimentação Linha PRO com 40% off ›" · "6x sem juros em tudo ›"'],
+                ['01 a 08/11', '"Black November: diluidor de brinde nos galões 5L ›" · "Kit Experimentação Linha PRO com 40% off ›" · "Até 10x sem juros ›"'],
                 ['09 a 22/11', 'Troca a 3ª por "O preço da Black já está valendo ›" (semana em que a Meta perdeu eficiência em 2025)'],
-                ['25 a 30/11', '"Cashback em dobro em todas as compras ›" passa a ser a 1ª mensagem'],
+                ['23 a 30/11', '"Cashback em dobro em todas as compras ›" passa a ser a 1ª mensagem'],
               ]}
             />
           </>
@@ -124,7 +133,7 @@ export function SitePlano() {
 
       <Proposta
         n={3}
-        titulo="Tag na galeria e selos de desconto em preto"
+        titulo="Tag OFERTA BLACK na galeria e selos de desconto em preto"
         imgs={[
           { src: 'pdp-1a-tela', legenda: 'Hoje', hoje: true },
           { src: 'pdp-tag-proposta', legenda: 'Proposta' },
@@ -132,19 +141,15 @@ export function SitePlano() {
         texto={
           <>
             <p>
-              Tag pequena no canto da foto, aplicada pelo tema (não gravada na imagem, porque o Google Merchant reprova
-              selo na foto), nos produtos com desconto da Black: aparece na galeria do produto e nos cards das coleções.
+              Decisão de 28/10: a tag é <strong className="font-semibold text-[#0D0C0D]">OFERTA BLACK</strong>. Fica no canto
+              da foto, aplicada pelo tema (não gravada na imagem, porque o Google Merchant reprova selo na foto), só nos
+              produtos da Black: aparece na galeria do produto e nos cards das coleções.
             </p>
-            <Tabela
-              minimo={380}
-              cabecalho={['Opção de tag', 'Leitura']}
-              destaque={[0]}
-              linhas={[
-                ['BLACK', 'Recomendada: 5 letras, cabe em qualquer card no celular'],
-                ['BLACK 26', 'Marca o ano; um pouco maior'],
-                ['SÓ NA BLACK', 'Urgência, sem prometer data'],
-                ['OFERTA BLACK', 'Mais clara, mas ocupa o dobro no celular'],
-                ['BLACK NOV', 'Liga ao nome da campanha'],
+            <Lista
+              itens={[
+                'Os produtos da Black recebem uma etiqueta interna no painel; o tema mostra a tag só de 01/11 a 30/11 e ela some sozinha depois.',
+                'Lista dos produtos que recebem a tag: no plano de tarefas da Black (tarefa SHOP-06).',
+                'No fundo escuro, a tag ganha uma borda rosa fina para continuar visível.',
               ]}
             />
             <Callout titulo="Observação para novembro">
@@ -160,7 +165,7 @@ export function SitePlano() {
 
       <Proposta
         n={4}
-        titulo="Faixa rotativa abaixo do banner das coleções"
+        titulo="Faixa nova abaixo do banner (home e coleções)"
         imgs={[
           { src: 'colecao-1a-tela', legenda: 'Hoje', hoje: true },
           { src: 'colecao-faixa-proposta', legenda: 'Proposta' },
@@ -168,15 +173,15 @@ export function SitePlano() {
         texto={
           <>
             <p>
-              Os banners das coleções ficam como estão. Logo abaixo entra uma faixa preta fina com as condições da Black,
-              trocando a cada 4 segundos e parando no toque:
+              Os banners ficam como estão. Logo abaixo do banner da home e do banner de cada coleção entra uma faixa preta
+              fina com as condições da Black, trocando a cada 4 segundos e parando no toque:
             </p>
             <Lista
               itens={[
-                'Galões e Essential: "Diluidor de brinde nos galões 5L · Cashback em todas as compras · 6x sem juros"',
+                'Galões e Essential: "Diluidor de brinde nos galões 5L · Cashback em todas as compras · até 10x sem juros"',
                 'Linha PRO: "Kit Experimentação com 40% off · Kits PRO com 20% off · Perfumes: compre 3, leve 4"',
-                'Collora e Xperience: "Kits com 15% off · Cashback em todas as compras · 6x sem juros"',
-                'De 25 a 30/11, em todas: "Cashback em dobro em todas as compras" vira a 1ª frase',
+                'Collora e Xperience: "Kits com 15% off · Cashback em todas as compras · até 10x sem juros"',
+                'De 23 a 30/11, em todas: "Cashback em dobro em todas as compras" vira a 1ª frase',
               ]}
             />
           </>
@@ -191,11 +196,13 @@ export function SitePlano() {
         texto={
           <>
             <p>
-              A coleção nova (/collections/black-november), destino dos anúncios gerais, ganha um banner de altura
-              reduzida para os produtos aparecerem já na primeira tela do celular, a faixa da proposta 4, filtros por linha
-              e ordem manual dos mais vendidos.
+              A coleção nova (/collections/black-november), destino dos anúncios de todos os produtos menos o Kit
+              Experimentação e o Kit Completo Essential (que vão para a página do produto), usa o{' '}
+              <strong className="font-semibold text-[#0D0C0D]">mesmo sistema de destaque por item da coleção da Linha PRO</strong>:
+              cada anúncio abre a coleção com o seu produto em destaque. Banner de altura reduzida para os produtos
+              aparecerem já na primeira tela do celular, a faixa da proposta 4, filtros por linha e ordem manual.
             </p>
-            <p>Briefing do banner (1920x400 e 745x400) em `entregas/2026-11_black-november_briefing-banner-colecao-black.md`. Simulação do banner:</p>
+            <p>Briefing do banner em HTML (desktop 1920x400 e mobile mais baixo, 745x400), no mesmo estilo do briefing da home. Simulação do banner:</p>
             <Figura src={`${IMG}/bn26_banner-colecao-black_desktop-1920x400.jpg`} alt="Banner da coleção Black, desktop" w={1920} h={400} largura={620} legenda="Desktop 1920x400" />
             <Figura src={`${IMG}/bn26_banner-colecao-black_mobile-745x400.jpg`} alt="Banner da coleção Black, mobile" w={745} h={400} largura={300} legenda="Mobile 745x400" />
           </>
@@ -205,17 +212,24 @@ export function SitePlano() {
 
       <Proposta
         n={6}
-        titulo="Cashback em reais e selo dos banners no dobro"
+        titulo="Cashback e parcelamento num lugar só: 5% vira 10% em 23/11"
         imgs={[]}
         texto={
           <>
             <p>
-              O produto já mostra &quot;Ganhe R$ X de cashback&quot;. De 25 a 30/11 o valor exibido precisa dobrar no
-              produto, no carrinho e na página de obrigado (com a validade do crédito, quando definida).
+              O produto já mostra &quot;Ganhe R$ X de cashback&quot;. O percentual passa a morar numa configuração central
+              do tema: <strong className="font-semibold text-[#0D0C0D]">5% até 22/11 e 10% de 23/11 00h a 30/11</strong>, com
+              a troca automática no produto, no carrinho, nas faixas e na página de obrigado. A validade do crédito (60
+              dias) não aparece: citar o prazo tira valor.
             </p>
             <p>
-              Os 3 banners principais têm o selo &quot;5% de cashback&quot;: em 25/11, 00h, sobem as versões com
-              &quot;cashback em dobro&quot; (pedido à criação até 20/11; está no plano de ação).
+              A mesma configuração guarda o parcelamento: <strong className="font-semibold text-[#0D0C0D]">até 10x sem juros
+              em novembro, com parcela mínima de R$ 25</strong> (no lugar do 6x). Todo &quot;6x&quot; do site é levantado e
+              trocado; em 01/12, um botão desliga a Black e volta tudo.
+            </p>
+            <p>
+              Os 3 banners principais têm o selo &quot;5% de cashback&quot;: em 23/11, 00h, sobem as versões com
+              &quot;cashback em dobro&quot; (pedido à criação em 16/11, entrega até 20/11).
             </p>
           </>
         }
@@ -224,34 +238,116 @@ export function SitePlano() {
 
       <Proposta
         n={7}
-        titulo='Roleta "Gire e ganhe": 4 opções para decidir'
+        titulo='Roleta "Gire e ganhe": tema escuro e prêmios novos'
         imgs={[
           { src: 'home-chegada', legenda: 'Hoje', hoje: true },
-          { src: 'roleta-tematica-proposta', legenda: 'Opção B' },
+          { src: 'roleta-tematica-proposta', legenda: 'Referência' },
         ]}
         texto={
           <>
-            <p>
-              A roleta tem trazido resultado, e não haverá outros descontos de Black além dos já definidos. Hoje ela dá 5%
-              ou 10% off e frete grátis, que não somam com a Black. As opções:
-            </p>
+            <p>Decisão de 28/10: a roleta fica, em tema escuro, com 4 opções.</p>
             <Tabela
-              minimo={640}
-              cabecalho={['Opção', 'A favor', 'Contra']}
+              minimo={420}
+              cabecalho={['Opção da roleta', 'Observação']}
               linhas={[
-                ['A · Manter como está', 'Nada muda; segue captando e-mails; os cupons valem fora dos produtos da Black', 'Abre em tela cheia antes da oferta para quem vem do anúncio; 5% ou 10% parecem pouco perto da Black e confundem'],
-                ['B · Roleta temática Black (simulação)', 'Mantém a captação com cara de campanha; prêmios sem desconto (amostra, brinde surpresa, e-book)', 'Precisa definir e ter estoque dos prêmios; ainda abre antes da oferta'],
-                ['C · Mudar o momento', 'Mantém a roleta, mas abre só depois de 30 segundos, na 2ª página ou ao tentar sair', 'Configuração do app; capta um pouco menos e-mails'],
-                ['D · Pausar em novembro', 'Chegada limpa: a oferta da Black aparece primeiro', 'Perde a captação de e-mails no mês de maior tráfego'],
+                ['5% no Pix', ''],
+                ['50% no site', 'Confirmar a chance real de sair: prêmio que nunca sai é risco de propaganda enganosa'],
+                ['10% na Linha Care', 'Care está fora da Black: o prêmio não disputa com a oferta'],
+                ['Tente de novo', ''],
               ]}
             />
             <p className="text-sm">
-              Recomendação: <strong className="font-semibold text-[#0D0C0D]">B com o momento de C</strong>: roleta com
-              cara de Black, prêmios sem desconto e abrindo depois de 30 segundos ou na 2ª página.
+              Momento de abrir: a Mariane verifica com a equipe da Brexa se a roleta pode abrir só depois de 30 segundos
+              (ou na 2ª página, ou ao tentar sair), para quem chega do anúncio ver a oferta primeiro.
             </p>
           </>
         }
         extra={<p className="mt-3 text-sm font-semibold text-[#0D0C0D]">Impacto estimado: de neutro a {fx(1, 3)}</p>}
+      />
+
+      <Proposta
+        n={8}
+        titulo="Blocos do site em tons escuros, como na Black 2025"
+        imgs={[]}
+        texto={
+          <>
+            <p>
+              Em novembro os blocos de conteúdo do site ficam escuros, como na Black November de 2025;{' '}
+              <strong className="font-semibold text-[#0D0C0D]">o topo (header) e o rodapé mantêm a cor atual</strong>. O
+              checkout ganha fundo e logo da Black. Os tons vêm do próprio tema de 2025 (versão arquivada de 28/11/2025),
+              variando entre eles para separar os blocos:
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {[
+                ['#0D0C0D', 'Blocos de fundo e contador'],
+                ['#181818', 'Cards de produto e seções alternadas'],
+                ['#F4CDD4', 'Botões e destaques'],
+              ].map(([cor, uso]) => (
+                <div key={cor} className="flex items-center gap-2 rounded-[12px] border border-[#E5E7EB] p-2 pr-3">
+                  <span className="h-8 w-8 rounded-[8px] border border-[#E5E7EB]" style={{ background: cor }} />
+                  <span className="text-xs">
+                    <strong className="font-semibold text-[#0D0C0D]">{cor}</strong>
+                    <br />
+                    {uso}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <Lista
+              itens={[
+                'Texto branco; contraste mínimo de leitura conferido no preço, no preço riscado, nos selos, nas avaliações e nos formulários.',
+                'Página do produto: a descrição longa e a tabela de diluição continuam legíveis; fotos de produto ficam como estão, sem filtro.',
+                'Feito pelos esquemas de cor do tema, registrado no "antes e depois" e revertido em 01/12.',
+              ]}
+            />
+          </>
+        }
+      />
+
+      <Proposta
+        n={9}
+        titulo="Página de produto da Black (variante groomer)"
+        imgs={[]}
+        texto={
+          <>
+            <p>
+              Um modelo de página de produto só para os itens em promoção, aplicado produto por produto. É o destino direto
+              dos anúncios do Kit Experimentação e do Kit Completo Essential.
+            </p>
+            <Lista
+              itens={[
+                'Sai a seção do cupom BEMVINDO10 (o cupom não soma com a Black e confunde).',
+                'Entram: tag OFERTA BLACK, linha com "até 10x sem juros" e o cashback em reais, o brinde do item e "Não acumula com cupons".',
+                'Ficam como estão: avaliações, compre junto, vídeo, ficha técnica e barra fixa de compra.',
+                'Em 01/12 cada produto volta ao modelo padrão (tarefa já no plano).',
+              ]}
+            />
+          </>
+        }
+      />
+
+      <Proposta
+        n={10}
+        titulo="Faixa com cronômetro no topo do site todo"
+        imgs={[]}
+        texto={
+          <>
+            <p>
+              Acima da faixa de avisos, em todo o site, como o contador &quot;Últimas horas de Black November&quot; de 2025
+              (fundo rosa, número preto). A Mariane planeja a sequência por semanas. O contador sempre conta para uma data
+              real:
+            </p>
+            <Tabela
+              minimo={420}
+              cabecalho={['Semana', 'Conta até']}
+              linhas={[
+                ['01 a 08/11', 'Fim da Black (30/11)'],
+                ['09 a 22/11', 'Início do cashback em dobro (23/11)'],
+                ['23 a 30/11', 'Fim da Black e do cashback em dobro (30/11, 23h59)'],
+              ]}
+            />
+          </>
+        }
       />
 
       <Cards
@@ -259,7 +355,7 @@ export function SitePlano() {
         itens={[
           {
             titulo: 'Recuperação de carrinho: boas práticas (CRM)',
-            selo: 'execução fora da agência',
+            selo: 'copys com a Viviane (CRM)',
             texto: (
               <Lista
                 itens={[

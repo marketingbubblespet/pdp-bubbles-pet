@@ -37,7 +37,7 @@ export function Andromeda() {
             ['Coleção Black', 'Visão geral da oferta para quem não sabe o que quer', '', 'vídeo 38', '35, 36 e 37'],
             ['Xperience', 'Serviço diferenciado; vende melhor para quem já conhece', '', '', '31 a 34 (33 entra se faltar o 38)'],
             ['Collora', 'Novo serviço no banho; curiosidade alta, precisa de educação', '', '', '27 a 30'],
-            ['Remarketing (campanha própria)', 'Fechar quem visitou e quem pôs no carrinho', '39 e 40 (carrosséis) e 41', '"preço já valendo" de 09 a 22/11', 'cashback em dobro em 25/11'],
+            ['Remarketing (campanha própria)', 'Fechar quem visitou e quem pôs no carrinho', '39 e 40 (carrosséis) e 41', '"preço já valendo" de 09 a 22/11', 'cashback em dobro em 23/11'],
           ]}
         />
       </Bloco>

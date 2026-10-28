@@ -1,4 +1,4 @@
-// Seção 7: site. Resumo das decisões e das 7 propostas; o detalhe abre em /site-black-november.
+// Seção 7: site. Resumo das decisões e das 10 propostas (versão de 28/10); o detalhe abre em /site-black-november.
 import { IMG } from '@/lib/apresentacao-black-november'
 import { Bloco, Callout, Figura, LinkInterno, Lista, Numeros, Secao } from './ui'
 
@@ -15,21 +15,21 @@ export function Site() {
       }
       roteiro={[
         'Começar pelo que já está pronto: banners, brinde automático (BOGO), barra fixa e imagens comprimidas.',
-        'Mostrar as simulações: Black November como primeira aba, faixa preta no topo, tag BLACK nas fotos.',
-        'Roleta: apresentar as 4 opções para decisão.',
+        'Mostrar as simulações: Black November como primeira aba, faixa no topo com cronômetro, tag OFERTA BLACK nas fotos.',
+        'Decidido em 28/10: fundo escuro com os tons de 2025, página de produto da Black, roleta em tema escuro.',
         'Abrir a página do site para o detalhe de cada proposta.',
       ]}
       pergunta={{
         p: 'Vamos mexer na roleta, que está dando resultado?',
-        r: 'Não é obrigatório. A recomendação é deixá-la com cara de Black, com prêmios sem desconto e abrindo depois de 30 segundos.',
+        r: 'Ela fica, em tema escuro, com 5% no Pix, 50% no site, 10% na Linha Care e Tente de novo. A abertura depois de 30 segundos está em análise com a Brexa.',
       }}
     >
       <Numeros
         itens={[
           { valor: '87%', rotulo: 'das sessões no celular (novembro/25)' },
-          { valor: '7', rotulo: 'propostas para decidir' },
+          { valor: '10', rotulo: 'propostas decididas em 28/10' },
           { valor: '5', rotulo: 'itens que já existem ou já foram feitos' },
-          { valor: '+4% a +10%', rotulo: 'de faturamento estimado com as 7 propostas' },
+          { valor: '+4% a +10%', rotulo: 'de faturamento estimado com as 7 propostas originais' },
         ]}
       />
       <Bloco titulo="Como fica no celular (simulações feitas com o Gemini a partir de prints reais)">
@@ -37,25 +37,28 @@ export function Site() {
           {[
             ['home-faixa-abas-proposta', 'Faixa preta no topo e Black November como 1ª aba'],
             ['colecao-faixa-proposta', 'Faixa rotativa abaixo do banner da coleção'],
-            ['pdp-tag-proposta', 'Tag BLACK na foto e selos de desconto em preto'],
-            ['colecao-black-banner-proposta', 'Coleção Black com banner baixo'],
-            ['roleta-tematica-proposta', 'Roleta temática (uma das 4 opções)'],
+            ['pdp-tag-proposta', 'Tag OFERTA BLACK na foto e selos de desconto em preto'],
+            ['colecao-black-banner-proposta', 'Coleção Black com banner baixo e destaque por item'],
+            ['roleta-tematica-proposta', 'Roleta em tema escuro (referência)'],
           ].map(([src, leg]) => (
             <Figura key={src} src={`${IMG}/${src}.png`} alt={leg} w={704} h={1520} largura={170} legenda={leg} destaque />
           ))}
         </div>
       </Bloco>
       <div className="grid gap-4 md:grid-cols-2">
-        <Callout titulo="As 7 propostas">
+        <Callout titulo="As 10 propostas (28/10)">
           <Lista
             itens={[
-              'Abas da home: Black November · Galões 5L · Kits PRO · Perfumes · Collora (Care e Promoções saem no mês).',
-              'Faixa do topo preta, rotativa e clicável, com mensagem por semana.',
-              'Tag BLACK na galeria e nos cards; selos de desconto em preto em novembro.',
-              'Faixa rotativa abaixo do banner de cada coleção, sem trocar os banners.',
-              'Coleção Black November com banner baixo (briefing pronto).',
-              'Cashback em reais dobrado de 25 a 30/11 e troca do selo dos banners.',
-              'Roleta: manter, deixar temática, mudar o momento ou pausar (em decisão).',
+              'Abas da home: Black November (destacada) · Kits · Shampoos · Collora · Care; Promoções sai; no menu, "Black November".',
+              'Faixa do topo atual mantida, com mensagens de até 10x e cashback, e o cronômetro acima.',
+              'Tag OFERTA BLACK na galeria e nos cards, sumindo sozinha depois de 30/11; selos de desconto em preto.',
+              'Faixa rotativa nova abaixo do banner da home e das coleções.',
+              'Coleção Black November com banner baixo e destaque por item, como na coleção PRO.',
+              'Cashback num lugar só (5%, e 10% a partir de 23/11) e até 10x sem juros no lugar do 6x.',
+              'Roleta em tema escuro: 5% no Pix, 50% no site, 10% Linha Care, Tente de novo.',
+              'Blocos escuros com os tons de 2025 (header e rodapé como estão) e checkout da Black.',
+              'Página de produto da Black, sem a seção do BEMVINDO10.',
+              'Faixa com cronômetro por semanas, em todo o site.',
             ]}
           />
         </Callout>

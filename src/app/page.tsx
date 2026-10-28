@@ -165,6 +165,12 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Site · propostas para a Black November 2026',
     description: '12 propostas para o site com protótipo no celular (hoje e proposta), motivo, esforço e impacto estimado em faturamento; marcar o que aplicar. Página interna, escondida do Google.',
   },
+  {
+    tipo: 'rota',
+    href: '/plano-tarefas-black-november',
+    label: 'Plano de tarefas · Black November 2026',
+    description: 'Todas as tarefas da Black por grupo, com descrição completa, prompts, data e responsável, e botões para copiar nome, descrição e prompt. Página interna, escondida do Google.',
+  },
 ]
 
 const PASSWORD = 'mariane'
