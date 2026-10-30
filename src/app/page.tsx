@@ -171,6 +171,18 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     label: 'Plano de tarefas · Black November 2026',
     description: 'Todas as tarefas da Black por grupo, com descrição completa, prompts, data e responsável, e botões para copiar nome, descrição e prompt. Página interna, escondida do Google.',
   },
+  {
+    tipo: 'rota',
+    href: '/plano-meta-black-november',
+    label: 'Plano Meta Ads · Black November 2026',
+    description: 'Plano da campanha na Meta: 4 campanhas em ABO, públicos com os nomes da conta, verba por dia e semana, criativos que sobem e pendentes, calendário e operação. Página interna, escondida do Google.',
+  },
+  {
+    tipo: 'rota',
+    href: '/anuncios-black-november',
+    label: 'Subir anúncios · Meta Ads · Black November 2026',
+    description: 'Anúncios prontos com nome, texto, título e destino para copiar, artes para baixar, marcação de "no ar" por conjunto e lista de pendentes. Página interna, escondida do Google.',
+  },
 ]
 
 const PASSWORD = 'mariane'
