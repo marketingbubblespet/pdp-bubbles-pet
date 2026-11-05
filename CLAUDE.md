@@ -39,3 +39,12 @@ Em caso de conflito entre uma regra técnica do framework e o `CONVENCOES.md` de
 (estilo de trabalho, escopo, confirmação antes de agir), **CONVENCOES.md sempre prevalece**.
 Os hooks em `.claude/hooks/` foram copiados mas não estão ativados (não estão registrados em
 nenhum `settings.json`) — não rodam automaticamente a menos que você peça para ativá-los.
+
+# ⛔ Favicon: sempre a patinha da Bubbles
+
+Regra do gestor (04/11/26). Toda página do site, inclusive as rotas que devolvem HTML pronto (`route.ts`), mostra **a patinha da Bubbles** (preta sobre rosa #F4CDD4). Nunca o triângulo da Vercel, o logo do Next ou qualquer outro símbolo padrão.
+
+- **Fonte única:** `src/app/icon.svg`. O `src/app/favicon.ico` é gerado a partir dele (16 a 256 px) e precisa ser **o mesmo desenho**. Mudou o `icon.svg`, regerar o `.ico`.
+- **Por que deu errado antes:** o projeto nasceu do `create-next-app`, que traz um `favicon.ico` padrão da Vercel. Em 25/06/26 entrou o `icon.svg` da marca, mas o `.ico` antigo ficou. As páginas do Next usam o `icon.svg` pelo layout. As rotas `route.ts` (planos, anúncios, relatórios, validação) não passam pelo layout, então o navegador busca `/favicon.ico` e recebia o da Vercel.
+- **Página nova em `route.ts`:** não precisa declarar ícone, o `/favicon.ico` já é a patinha. Não criar outro `favicon.ico`, `icon.png` ou `apple-icon` com outro desenho.
+- **Conferir antes de dar a página como pronta:** abrir `/favicon.ico` e a página nova; se aparecer outro símbolo, corrigir antes do commit.
