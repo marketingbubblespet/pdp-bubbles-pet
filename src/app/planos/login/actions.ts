@@ -33,7 +33,8 @@ export async function entrar(formData: FormData): Promise<void> {
     redirect(`/planos/login?next=${encodeURIComponent(rotaSegura)}&erro=config`)
   }
 
-  if (!senhaCorreta(senha, senhaEsperada)) {
+  // Maiúsculas e minúsculas não importam ("Mariane" = "mariane"), a pedido do Gabriel.
+  if (!senhaCorreta(senha.trim().toLowerCase(), senhaEsperada.trim().toLowerCase())) {
     registrarTentativa(ip)
     redirect(`/planos/login?next=${encodeURIComponent(rotaSegura)}&erro=senha`)
   }
