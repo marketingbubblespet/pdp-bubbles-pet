@@ -123,7 +123,7 @@ mais é preciso dar git para atualizar os números.**
 |---|---|---|
 | `aoEditar` (x2) | quando alguém edita a planilha B2B ou a B2C | grava a hora e avisa o site 1 min depois |
 | `verificarDeHoraEmHora` | de hora em hora | avisa o site se algo mudou; manda o resumo atrasado |
-| `atualizacaoNoturna` | todo dia, entre 1h e 2h | pega os dados automáticos do Adveronix |
+| `atualizacaoNoturna` | todo dia, entre 11h e 12h | pega os dados automáticos do Adveronix (importa às 10h30) |
 | `enviarResumoDiario` | todo dia, entre 12h e 13h | e-mail de resumo ou de "aguardando" (só em dias úteis) |
 
 ## Passo 10 · Testar o e-mail

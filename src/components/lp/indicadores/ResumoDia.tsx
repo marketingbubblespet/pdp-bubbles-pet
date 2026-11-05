@@ -3,7 +3,7 @@
 // Comparações usam a receita do Groomer (a planilha do Tutor ainda chega incompleta).
 import { formatMoney, formatPct } from '@/lib/planos/format'
 import { detectarAnomalias, ehPositiva, menos7 } from '@/lib/planos/anomalias'
-import { ritmoMeta, type Indicadores } from '@/lib/planos/indicadores'
+import { metricas, ritmoMeta, type Indicadores } from '@/lib/planos/indicadores'
 
 const dataBR = (d: string) => `${d.slice(8)}/${d.slice(5, 7)}`
 
@@ -30,6 +30,18 @@ export function ResumoDia({ dados, hoje }: { dados: Indicadores; hoje: string })
   // Só os negativos: variação boa não é alerta.
   const alertas = detectarAnomalias(dados.dias).filter((a) => a.data === ref.data && !ehPositiva(a))
   const fortes = alertas.filter((a) => a.severidade === 'forte').length
+  // Até que dia cada grupo de dado está preenchido (preenchimento manual x automático).
+  const ultimo = (f: (d: (typeof dados.dias)[number]) => unknown) => {
+    const ds = dados.dias.filter((d) => d.data < hoje && f(d) != null)
+    return ds.length ? dataBR(ds[ds.length - 1].data) : '—'
+  }
+  const m = metricas(dados.dias)
+  const ate = [
+    `Receita e pedidos até ${ultimo((d) => d.receitaB2B)}`,
+    `Sessões até ${ultimo((d) => d.sessoes)}`,
+    `Investimento até ${ultimo((d) => d.investMeta)}`,
+    `ROAS e conversão até ${m.ate.roas ? dataBR(m.ate.roas) : '—'}`,
+  ]
 
   return (
     <section className="rounded-[12px] border border-[#E5E7EB] bg-white p-4 md:px-6 shadow-[0_2px_8px_rgba(0,0,0,0.07)]">
@@ -46,6 +58,7 @@ export function ResumoDia({ dados, hoje }: { dados: Indicadores; hoje: string })
           · <span className="font-semibold text-[#0D0C0D]">{alertas.length}</span> {alertas.length === 1 ? 'alerta' : 'alertas'} no dia{fortes ? ` (${fortes} forte${fortes > 1 ? 's' : ''})` : ''}
         </span>
       </p>
+      <p className="mt-2 text-xs text-[#666666]">Dados preenchidos: {ate.join(' · ')}</p>
     </section>
   )
 }

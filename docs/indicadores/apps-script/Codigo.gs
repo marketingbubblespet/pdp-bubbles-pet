@@ -12,7 +12,7 @@
  *  2. Quando alguém edita a aba NOV26: grava a hora da edição e avisa o site (atualiza em segundos).
  *  3. De hora em hora: confere se os dados mudaram (inclusive os automáticos do Adveronix)
  *     e avisa o site. Também envia o resumo atrasado se o preenchimento acontecer depois das 12h.
- *  4. Todo dia à 1h: avisa o site para pegar os dados automáticos importados à meia-noite.
+ *  4. Todo dia às 11h: avisa o site para pegar os dados automáticos (o Adveronix importa às 10h30).
  *  5. Dias úteis às 12h: e-mail para a equipe com
  *       - "aguardando preenchimento" (lista o que falta), ou
  *       - resumo do dia anterior + alertas negativos.
@@ -519,7 +519,7 @@ function instalarGatilhos() {
     ScriptApp.newTrigger('aoEditar').forSpreadsheet(CONFIG.PLANILHAS[loja].id).onEdit().create();
   });
   ScriptApp.newTrigger('verificarDeHoraEmHora').timeBased().everyHours(1).create();
-  ScriptApp.newTrigger('atualizacaoNoturna').timeBased().atHour(1).everyDays(1).inTimezone(CONFIG.FUSO).create();
+  ScriptApp.newTrigger('atualizacaoNoturna').timeBased().atHour(11).everyDays(1).inTimezone(CONFIG.FUSO).create();
   ScriptApp.newTrigger('enviarResumoDiario').timeBased().atHour(CONFIG.HORA_RESUMO).everyDays(1).inTimezone(CONFIG.FUSO).create();
   console.log('Gatilhos instalados: ' + ScriptApp.getProjectTriggers().length + ' (esperado 5).');
 }
