@@ -140,9 +140,12 @@ function montarPayload_() {
 // ============================================================================
 function lerPlanilha_(loja, avisos) {
   const cfg = CONFIG.PLANILHAS[loja];
-  let aba;
+  let aba, fusoPlanilha;
   try {
-    aba = SpreadsheetApp.openById(cfg.id).getSheetByName(cfg.aba);
+    const ss = SpreadsheetApp.openById(cfg.id);
+    aba = ss.getSheetByName(cfg.aba);
+    // As datas da planilha valem meia-noite NO FUSO DA PLANILHA. Ler em outro fuso desloca 1 dia.
+    fusoPlanilha = ss.getSpreadsheetTimeZone() || CONFIG.FUSO;
   } catch (err) {
     avisos.push(cfg.nome + ': sem acesso à planilha.');
     console.error(cfg.nome + ' openById falhou: ' + err);
@@ -163,7 +166,7 @@ function lerPlanilha_(loja, avisos) {
   const porData = {};
   for (let r = mapa.linhaCabecalho + 1; r < valores.length; r++) {
     const linha = valores[r];
-    const data = paraDataISO_(linha[mapa.colunas.data]);
+    const data = paraDataISO_(linha[mapa.colunas.data], fusoPlanilha);
     if (!data) continue; // linha TOTAL, vazia ou de outro mês
     const registro = {};
     COLUNAS.forEach(function (c) {
@@ -591,9 +594,10 @@ function paraNumero_(v) {
 }
 
 // Date ou "01/11/2026" -> "2026-11-01", só se for do mês configurado.
-function paraDataISO_(v) {
+// fuso = fuso da PLANILHA (Arquivo > Configurações), não o do script.
+function paraDataISO_(v, fuso) {
   let iso = null;
-  if (v instanceof Date && !isNaN(v)) iso = Utilities.formatDate(v, CONFIG.FUSO, 'yyyy-MM-dd');
+  if (v instanceof Date && !isNaN(v)) iso = Utilities.formatDate(v, fuso || CONFIG.FUSO, 'yyyy-MM-dd');
   else if (typeof v === 'string') {
     const m = v.trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
     if (m) iso = m[3] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[1]).slice(-2);
