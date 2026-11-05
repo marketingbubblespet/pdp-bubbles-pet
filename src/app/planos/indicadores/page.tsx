@@ -3,7 +3,8 @@
 // (src/proxy.ts). Sem GTM: é painel interno, não página de anúncio.
 import Image from 'next/image'
 import { connection } from 'next/server'
-import { getIndicadores, hojeSP } from '@/lib/planos/indicadores'
+import { hojeSP } from '@/lib/planos/indicadores'
+import { getIndicadores } from '@/lib/planos/indicadores-fonte'
 import { Cards } from '@/components/lp/indicadores/Cards'
 import { MetaFaturamento } from '@/components/lp/indicadores/MetaFaturamento'
 import { GraficoDiario } from '@/components/lp/indicadores/GraficoDiario'
@@ -28,9 +29,24 @@ function formatDataHora(iso: string | null): string {
   return `${v('day')}/${v('month')} às ${v('hour')}:${v('minute')}`
 }
 
+// Planilha fora do ar ou mal configurada: mensagem clara em vez de página quebrada.
+function ErroPainel({ erro }: { erro: string }) {
+  return (
+    <main className="min-h-screen bg-[#F7F7F7] px-4 py-10">
+      <div className="mx-auto max-w-[760px] rounded-[12px] border-2 border-[#F4A522] bg-[#FFF8EB] p-6">
+        <p className="text-lg font-medium text-[#0D0C0D]">Não foi possível carregar os indicadores agora.</p>
+        <p className="mt-2 text-sm text-[#4A3A1A]">{erro}</p>
+        <p className="mt-2 text-sm text-[#4A3A1A]">Tente de novo em alguns minutos. Se continuar, avise o Gabriel.</p>
+      </div>
+    </main>
+  )
+}
+
 export default async function IndicadoresPage() {
   await connection() // renderiza a cada acesso: "hoje" precisa ser o dia real
-  const dados = await getIndicadores()
+  const resultado = await getIndicadores()
+  if (!resultado.ok) return <ErroPainel erro={resultado.erro} />
+  const { dados, avisos } = resultado
   const hoje = hojeSP()
 
   return (
@@ -51,7 +67,7 @@ export default async function IndicadoresPage() {
             </p>
           </div>
           <p className="mt-1 text-sm text-[#666666]">
-            Receita, faturamento, pedidos, ticket, sessões, conversão, investimento e clientes somam Groomer e Tutor (Care); ROAS, CPA e % de aprovação são do Groomer.
+            Todos os números somam Groomer e Tutor (Care), menos a % de aprovação, que é do Groomer. Passe o mouse nos cards para ver cada loja.
           </p>
         </header>
 
@@ -91,6 +107,12 @@ export default async function IndicadoresPage() {
             Receita (faturamento) e pedidos são preenchidos manualmente todos os dias pelo Gabriel,
             a partir dos dados extraídos da Shopify.
           </p>
+          {avisos.length > 0 && (
+            <div className="mt-2">
+              <p className="font-semibold text-[#0D0C0D]">Avisos da planilha</p>
+              <ul className="mt-1 list-disc pl-5">{avisos.map((a) => <li key={a}>{a}</li>)}</ul>
+            </div>
+          )}
           <p className="mt-2">
             <span className="font-semibold text-[#0D0C0D]">Sobre a % de aprovação:</span> pagamentos por PIX e boleto levam até 3 dias
             para compensar. Por isso a aprovação dos últimos 3 dias tende a aparecer mais baixa e sobe sozinha conforme os pagamentos entram.

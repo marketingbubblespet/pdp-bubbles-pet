@@ -8,12 +8,12 @@ type Diagnostico = { hipoteses: string[]; plano: string[] }
 export const NOME_INDICADOR: Record<Indicador, string> = {
   receita: 'Receita captada (Groomer)',
   pedidos: 'Pedidos (Groomer)',
-  sessoes: 'Sessões',
-  aprovacao: '% de aprovação',
-  conversao: 'Taxa de conversão',
-  investimento: 'Investimento em mídia',
-  roas: 'ROAS captado',
-  ticket: 'Ticket médio',
+  sessoes: 'Sessões (Groomer)',
+  aprovacao: '% de aprovação (Groomer)',
+  conversao: 'Taxa de conversão (Groomer)',
+  investimento: 'Investimento em mídia (Groomer)',
+  roas: 'ROAS captado (Groomer)',
+  ticket: 'Ticket médio (Groomer)',
 }
 
 const CHECAGEM_BASE = 'Confirmar na planilha se o dia foi preenchido por completo (preenchimento parcial parece queda).'

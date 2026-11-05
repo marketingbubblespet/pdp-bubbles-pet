@@ -6,6 +6,17 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 3000
+    },
+    {
+      "name": "dev-mock-planilha",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "env": {
+        "SHEETS_SCRIPT_URL": "http://localhost:4555/exec",
+        "SHEETS_SCRIPT_KEY": "teste",
+        "INDICADORES_WEBHOOK_SECRET": "teste-webhook"
+      }
     }
   ]
 }

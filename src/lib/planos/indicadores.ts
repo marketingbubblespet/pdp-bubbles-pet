@@ -4,9 +4,8 @@
 // Totais do mês são SEMPRE recalculados a partir dos dias preenchidos (nunca da linha TOTAL
 // da planilha, que já veio errada uma vez por célula digitada como texto).
 //
-// PROVISÓRIO: dados de exemplo para validar o visual no localhost. Dias 01 e 02 vieram da
-// planilha; 03 e 04 do CSV atualizado (sem dado fictício). Na conexão,
-// `getIndicadores()` passa a buscar do Apps Script e este bloco é apagado.
+// Os dados chegam do Apps Script (ver src/lib/planos/indicadores-fonte.ts). Este arquivo só
+// tem tipos e cálculos, sem acesso a rede nem a variáveis de ambiente.
 
 export type Dia = {
   data: string // AAAA-MM-DD
@@ -36,37 +35,6 @@ export type Indicadores = {
   dias: Dia[]
 }
 
-const exemplo: Record<string, Partial<Dia>> = {
-  '2026-11-01': { receitaB2B: 15959.09, receitaB2C: 285.5, faturadaB2B: 15666.12, faturadaB2C: 263.77, pedidosB2B: 22, pedidosB2C: 3, sessoes: 2167, investMeta: 1098.39, investGoogle: 395.45, sessoesB2C: 244, investMetaB2C: 762.24, investGoogleB2C: 0 },
-  '2026-11-02': { receitaB2B: 6922.53, receitaB2C: 1457, faturadaB2B: 6729.36, faturadaB2C: 1334.82, pedidosB2B: 16, pedidosB2C: 10, sessoes: 872, investMeta: 900.81, investGoogle: 464.2, sessoesB2C: 240, investMetaB2C: 870.75, investGoogleB2C: 0 },
-  // 03 e 04: CSVs da aba NOV26 exportados em 05/11 às 11:35 (B2C e Meta Ads ainda vazios)
-  '2026-11-03': { receitaB2B: 17527.4, faturadaB2B: 16719.93, pedidosB2B: 31, sessoes: 977, investGoogle: 542.41, sessoesB2C: 208, investMetaB2C: 754.99, investGoogleB2C: 0 },
-  '2026-11-04': { receitaB2B: 15100.19, faturadaB2B: 14048.87, pedidosB2B: 19, sessoesB2C: 200, investMetaB2C: 882.05, investGoogleB2C: 0 },
-}
-
-const VAZIO: Omit<Dia, 'data'> = {
-  receitaB2B: null, receitaB2C: null, faturadaB2B: null, faturadaB2C: null, pedidosB2B: null,
-  pedidosB2C: null, sessoes: null, sessoesB2C: null, investMeta: null, investGoogle: null,
-  investMetaB2C: null, investGoogleB2C: null,
-  novosB2B: null, novosB2C: null, recorrentesB2B: null, recorrentesB2C: null,
-}
-
-function diasDoMes(ano: number, mes: number): string[] {
-  const total = new Date(ano, mes, 0).getDate()
-  return Array.from({ length: total }, (_, i) =>
-    `${ano}-${String(mes).padStart(2, '0')}-${String(i + 1).padStart(2, '0')}`,
-  )
-}
-
-export async function getIndicadores(): Promise<Indicadores> {
-  return {
-    mes: 'Novembro 2026',
-    ultimaEdicaoManual: '2026-11-05T10:42:00-03:00', // exemplo
-    metaFaturamento: 560000,
-    dias: diasDoMes(2026, 11).map((data) => ({ data, ...VAZIO, ...exemplo[data] })),
-  }
-}
-
 // ---------- Cálculos (valem para um dia ou para o mês inteiro) ----------
 
 type CampoNum = Exclude<keyof Dia, 'data'>
@@ -85,6 +53,9 @@ export function taxasDoDia(d: Dia) {
   const pedidos = somaOuNull(d.pedidosB2B, d.pedidosB2C)
   const investMeta = somaOuNull(d.investMeta, d.investMetaB2C)
   const investGoogle = somaOuNull(d.investGoogle, d.investGoogleB2C)
+  // Investimento total do dia só quando as duas lojas já têm investimento (Google da Care pode faltar = 0).
+  const investTotalDia = invest != null && d.investMetaB2C != null && d.receitaB2C != null
+    ? invest + d.investMetaB2C + (d.investGoogleB2C ?? 0) : null
   // Conversão global só quando pedidos e sessões das DUAS lojas estão preenchidos.
   const convOk = [d.pedidosB2B, d.sessoes, d.pedidosB2C, d.sessoesB2C].every((x) => x != null)
   return {
@@ -96,10 +67,10 @@ export function taxasDoDia(d: Dia) {
     investParcial: somaOuNull(investMeta, investGoogle), // Groomer + Tutor
     aprovacao: d1(d.faturadaB2B, d.receitaB2B),
     conversao: convOk ? d1(pedidos, somaOuNull(d.sessoes, d.sessoesB2C)) : null,
-    roas: d1(d.receitaB2B, invest),
+    roas: investTotalDia != null ? d1(receita, investTotalDia) : null, // global
     ticket: d1(receita, pedidos), // global: Groomer + Tutor
 
-    cpa: d1(invest, d.pedidosB2B),
+    cpa: investTotalDia != null && d.pedidosB2C != null ? d1(investTotalDia, pedidos) : null, // global
   }
 }
 
@@ -116,8 +87,14 @@ export function metricas(dias: Dia[]) {
   const dConv = com('pedidosB2B', 'sessoes', 'pedidosB2C', 'sessoesB2C')
   const dConvB = com('pedidosB2B', 'sessoes')
   const dConvC = com('pedidosB2C', 'sessoesB2C')
-  const dRoas = com('receitaB2B', 'investMeta', 'investGoogle')
+  const dRoasB = com('receitaB2B', 'investMeta', 'investGoogle')
+  const dRoasC = com('receitaB2C', 'investMetaB2C')
+  // Global: dias em que as duas lojas têm receita e investimento (Google da Care pode vir vazio = 0).
+  const dRoas = com('receitaB2B', 'investMeta', 'investGoogle', 'receitaB2C', 'investMetaB2C')
+  const dCpa = com('pedidosB2B', 'investMeta', 'investGoogle', 'pedidosB2C', 'investMetaB2C')
   const dTicket = com('receitaB2B', 'pedidosB2B')
+  const investDe = (ds: Dia[]) => somar(ds, 'investMeta') + somar(ds, 'investGoogle') + somar(ds, 'investMetaB2C') + somar(ds, 'investGoogleB2C')
+  const ultimo = (ds: Dia[]) => (ds.length ? ds[ds.length - 1].data : null)
   const clientes = (c: CampoNum[]) => (dias.some((d) => c.some((k) => d[k] != null)) ? c.reduce((a, k) => a + somar(dias, k), 0) : null)
   return {
     receitaB2B: rB, receitaB2C: rC, receita: rB + rC,
@@ -132,7 +109,14 @@ export function metricas(dias: Dia[]) {
     conversao: div(somar(dConv, 'pedidosB2B') + somar(dConv, 'pedidosB2C'), somar(dConv, 'sessoes') + somar(dConv, 'sessoesB2C')),
     conversaoB2B: div(somar(dConvB, 'pedidosB2B'), somar(dConvB, 'sessoes')),
     conversaoB2C: div(somar(dConvC, 'pedidosB2C'), somar(dConvC, 'sessoesB2C')),
-    roas: div(somar(dRoas, 'receitaB2B'), somar(dRoas, 'investMeta') + somar(dRoas, 'investGoogle')), // AN
+    // AN: receita captada ÷ investimento. Global (Groomer + Tutor) e de cada loja para o hover.
+    roas: div(somar(dRoas, 'receitaB2B') + somar(dRoas, 'receitaB2C'), investDe(dRoas)),
+    roasB2B: div(somar(dRoasB, 'receitaB2B'), somar(dRoasB, 'investMeta') + somar(dRoasB, 'investGoogle')),
+    roasB2C: div(somar(dRoasC, 'receitaB2C'), somar(dRoasC, 'investMetaB2C') + somar(dRoasC, 'investGoogleB2C')),
+    // CPA global: investimento total ÷ pedidos totais
+    cpa: div(investDe(dCpa), somar(dCpa, 'pedidosB2B') + somar(dCpa, 'pedidosB2C')),
+    // Último dia que entrou em cada taxa (para o aviso "considera até dd/mm")
+    ate: { aprovacao: ultimo(dAprov), conversao: ultimo(dConv), roas: ultimo(dRoas), cpa: ultimo(dCpa), ultimoComDado: ultimo(ok) },
     // Ticket global (Groomer + Tutor), com a divisão de cada um para o hover do card.
     ticket: div(rB + rC, pB + pC),
     ticketB2B: div(somar(dTicket, 'receitaB2B'), somar(dTicket, 'pedidosB2B')), // Y

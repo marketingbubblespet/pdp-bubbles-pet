@@ -21,13 +21,13 @@ const COLUNAS: { nome: string; info?: string }[] = [
   { nome: 'Receita', info: 'Receita captada do dia (pedidos feitos, antes de aprovação), somando Groomer e Tutor (Care). Passe o mouse no valor para ver a divisão. Preenchida manualmente a partir da Shopify.' },
   { nome: 'Pedidos', info: 'Pedidos captados no dia, somando Groomer e Tutor (Care). Passe o mouse no valor para ver a divisão. Preenchido manualmente a partir da Shopify.' },
   { nome: 'Sessões', info: 'Visitas ao site no dia, somando Groomer e Tutor (Care), pagas e orgânicas. Passe o mouse no valor para ver cada loja. Entra automaticamente na planilha à meia-noite.' },
-  { nome: '% Aprov.', info: `Receita faturada ÷ receita captada (Groomer e Tutor). Mostra quanto dos pedidos foi aprovado/pago. Meta: ${formatPct(METAS_B2B.aprovacao * 100, 1)} ou mais. Abaixo: até 5 pontos da meta. Muito abaixo: mais que isso.` },
+  { nome: '% Aprov.', info: `Receita faturada ÷ receita captada (Groomer). Mostra quanto dos pedidos foi aprovado/pago. Meta: ${formatPct(METAS_B2B.aprovacao * 100, 1)} ou mais. Abaixo: até 5 pontos da meta. Muito abaixo: mais que isso.` },
   { nome: 'Tx. conv.', info: `Pedidos ÷ sessões, somando Groomer e Tutor (Care). Só aparece quando as duas lojas já têm pedidos e sessões do dia. De cada 100 visitas, quantas viram pedido. Meta: ${formatPct(METAS_B2B.conversao * 100, 1)} ou mais. ${FAIXAS}` },
   { nome: 'Invest.', info: 'Investimento total em mídia paga no dia (Meta Ads + Google Ads), somando Groomer e Tutor (Care).' },
   { nome: 'Meta', info: 'Investimento em Meta Ads (Facebook e Instagram) no dia, Groomer + Tutor (Care). Coluna AT das duas planilhas.' },
   { nome: 'Google', info: 'Investimento em Google Ads no dia, Groomer + Tutor (Care). Coluna BH das duas planilhas. A Care ainda não tem Google Ads.' },
-  { nome: 'CPA', info: 'Custo por pedido: investimento em anúncios ÷ pedidos (Groomer). Quanto custou, em mídia, cada venda do dia. Quanto menor, melhor. Referência da planilha: R$ 74,29.' },
-  { nome: 'ROAS', info: `Receita captada ÷ investimento (Groomer). Quantos reais voltam para cada R$ 1 investido. Meta: ${formatRoas(METAS_B2B.roas)} ou mais. ${FAIXAS}` },
+  { nome: 'CPA', info: 'Custo por pedido: investimento em anúncios ÷ pedidos, somando Groomer e Tutor (Care). Só aparece quando as duas lojas já têm investimento e pedidos do dia. Quanto custou, em mídia, cada venda do dia. Quanto menor, melhor. Referência da planilha: R$ 74,29.' },
+  { nome: 'ROAS', info: `Receita captada ÷ investimento, somando Groomer e Tutor (Care). Só aparece quando as duas lojas já têm receita e investimento do dia. Quantos reais voltam para cada R$ 1 investido. Meta: ${formatRoas(METAS_B2B.roas)} ou mais. ${FAIXAS}` },
   { nome: 'Ticket', info: `Receita captada ÷ pedidos, somando Groomer e Tutor (Care). Valor médio de cada pedido. Meta: ${formatMoney(METAS_B2B.ticket)} ou mais. ${FAIXAS}` },
 ]
 const DEPOIS_DE_HOJE = 1

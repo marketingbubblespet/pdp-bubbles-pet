@@ -16,10 +16,10 @@ const INFO = {
   receita: 'Soma do valor de todos os pedidos feitos no mês, antes de saber se foram pagos. Junta a loja Groomer (profissional) e a Tutor (Care).',
   pedidos: 'Quantidade de compras feitas no mês, somando Groomer e Tutor (Care).',
   sessoes: 'Quantas visitas o site recebeu no mês, somando Groomer e Tutor (Care). Uma pessoa que entra 2 vezes conta como 2 visitas. Passe o mouse para ver cada loja.',
-  aprovacao: `De cada R$ 100 em pedidos, quanto foi realmente pago (PIX, boleto ou cartão aprovado). Meta: ${formatPct(METAS_B2B.aprovacao * 100, 1)} ou mais.`,
+  aprovacao: `De cada R$ 100 em pedidos do Groomer, quanto foi realmente pago (PIX, boleto ou cartão aprovado). Meta: ${formatPct(METAS_B2B.aprovacao * 100, 1)} ou mais.`,
   conversao: `De cada 100 visitas ao site, quantas viraram compra, somando Groomer e Tutor (Care). Passe o mouse para ver cada loja. Meta: ${formatPct(METAS_B2B.conversao * 100, 1)} ou mais.`,
   investimento: 'Quanto foi gasto em anúncios pagos no mês, somando Groomer e Tutor (Care): Meta Ads (Facebook e Instagram) e Google Ads. Passe o mouse para ver cada um. A Care ainda não tem Google Ads.',
-  roas: `Retorno dos anúncios: para cada R$ 1 investido, quantos reais voltaram em vendas. Meta: ${formatRoas(METAS_B2B.roas)} ou mais.`,
+  roas: `Retorno dos anúncios: para cada R$ 1 investido, quantos reais voltaram em vendas, somando Groomer e Tutor (Care). Passe o mouse para ver cada loja. Meta: ${formatRoas(METAS_B2B.roas)} ou mais.`,
   clientes: 'Clientes que compraram no mês: novos (primeira compra) e recorrentes (já tinham comprado antes), somando Groomer e Tutor (Care). Mostra se a Black está trazendo gente nova ou só antecipando a compra de quem já compraria.',
   ticket: `Valor médio de cada pedido (receita ÷ pedidos), somando Groomer e Tutor (Care). Passe o mouse para ver cada um. Meta: ${formatMoney(METAS_B2B.ticket)} ou mais.`,
 }
@@ -43,6 +43,9 @@ export function Cards({ dados }: { dados: Indicadores }) {
   const novos = m.novosB2B == null && m.novosB2C == null ? null : (m.novosB2B ?? 0) + (m.novosB2C ?? 0)
   const recorr = m.recorrentesB2B == null && m.recorrentesB2C == null ? null : (m.recorrentesB2B ?? 0) + (m.recorrentesB2C ?? 0)
   const fmtInt = (v: number | null) => formatOuTraco(v, int)
+  // Aviso quando a taxa ainda não usa todos os dias com dado (falta algum número da conta).
+  const ate = (d: string | null) =>
+    d && m.ate.ultimoComDado && d < m.ate.ultimoComDado ? ` · considera até ${d.slice(8)}/${d.slice(5, 7)}` : ''
 
   return (
     <div>
@@ -76,10 +79,10 @@ export function Cards({ dados }: { dados: Indicadores }) {
         { rotulo: 'Groomer', valor: formatOuTraco(m.conversaoB2B, pct(2)), cor: COR.b2b },
         { rotulo: 'Tutor (Care)', valor: formatOuTraco(m.conversaoB2C, pct(2)), cor: COR.b2c },
       ]}>
-        <Card rotulo="Tx. de conversão" valor={formatOuTraco(m.conversao, pct(2))} nota="Groomer & Tutor (Care) · pedidos ÷ sessões" dica info={INFO.conversao}
+        <Card rotulo="Tx. de conversão" valor={formatOuTraco(m.conversao, pct(2))} nota={`Groomer & Tutor (Care)${ate(m.ate.conversao)}`} dica info={INFO.conversao}
           alerta={<SeloAlerta nivel={avaliar('conversao', m.conversao)} meta={pct(1)(METAS_B2B.conversao)} />} />
       </Detalhe>
-      <Card rotulo="% Aprovação" valor={formatOuTraco(m.aprovacao, pct(2))} nota="Groomer & Tutor (Care) · faturada ÷ captada" info={INFO.aprovacao} direita
+      <Card rotulo="% Aprovação" valor={formatOuTraco(m.aprovacao, pct(2))} nota={`Groomer${ate(m.ate.aprovacao)}`} info={INFO.aprovacao} direita
         alerta={<SeloAlerta nivel={avaliar('aprovacao', m.aprovacao)} meta={pct(1)(METAS_B2B.aprovacao)} />} />
       <Detalhe linhas={[
         { rotulo: 'Meta Ads · Groomer', valor: formatMoney(m.investMeta), cor: COR.meta },
@@ -89,8 +92,13 @@ export function Cards({ dados }: { dados: Indicadores }) {
       ]}>
         <Card rotulo="Investimento" valor={formatMoney(m.investimento)} nota="Groomer & Tutor (Care)" dica info={INFO.investimento} />
       </Detalhe>
-      <Card rotulo="ROAS captado" valor={formatOuTraco(m.roas, formatRoas)} nota="Groomer" info={INFO.roas} direita
-        alerta={<SeloAlerta nivel={avaliar('roas', m.roas)} meta={formatRoas(METAS_B2B.roas)} />} />
+      <Detalhe linhas={[
+        { rotulo: 'Groomer', valor: formatOuTraco(m.roasB2B, formatRoas), cor: COR.b2b },
+        { rotulo: 'Tutor (Care)', valor: formatOuTraco(m.roasB2C, formatRoas), cor: COR.b2c },
+      ]}>
+        <Card rotulo="ROAS captado" valor={formatOuTraco(m.roas, formatRoas)} nota={`Groomer & Tutor (Care)${ate(m.ate.roas)}`} dica info={INFO.roas} direita
+          alerta={<SeloAlerta nivel={avaliar('roas', m.roas)} meta={formatRoas(METAS_B2B.roas)} />} />
+      </Detalhe>
       <Detalhe className="col-span-2 md:col-span-1" linhas={[
         { rotulo: 'Novos · Groomer', valor: fmtInt(m.novosB2B), cor: COR.b2b },
         { rotulo: 'Novos · Tutor (Care)', valor: fmtInt(m.novosB2C), cor: COR.b2c },
