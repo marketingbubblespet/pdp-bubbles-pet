@@ -2,7 +2,7 @@
 // Lista as anomalias do mês com comparação ao dia anterior e à média, hipóteses e plano.
 import { ChevronDown } from 'lucide-react'
 import { formatMoney, formatPct, formatRoas } from '@/lib/planos/format'
-import { detectarAnomalias, type Anomalia, type Indicador } from '@/lib/planos/anomalias'
+import { detectarAnomalias, ehPositiva, type Anomalia, type Indicador } from '@/lib/planos/anomalias'
 import { DIAGNOSTICO, NOME_INDICADOR } from '@/lib/planos/anomalias-diagnostico'
 import type { Dia } from '@/lib/planos/indicadores'
 
@@ -31,10 +31,14 @@ function Item({ a }: { a: Anomalia }) {
   const f = FORMATO[a.indicador]
   const diag = DIAGNOSTICO[a.indicador][a.direcao]
   const forte = a.severidade === 'forte'
+  const boa = ehPositiva(a)
+  // Verde = variação boa; vermelho = queda forte; âmbar = queda moderada ou investimento.
+  const caixa = boa ? 'border-[#bbf7d0] bg-[#f0fdf4]' : forte ? 'border-red-400 bg-[#FDF2F4]' : 'border-[#F4A522] bg-[#FFF8EB]'
+  const selo = boa ? 'bg-[#166534] text-white' : forte ? 'bg-red-400 text-white' : 'bg-[#F4A522] text-[#0D0C0D]'
   return (
-    <li className={`rounded-[12px] border p-4 ${forte ? 'border-red-400 bg-[#FDF2F4]' : 'border-[#F4A522] bg-[#FFF8EB]'}`}>
+    <li className={`rounded-[12px] border p-4 ${caixa}`}>
       <div className="flex flex-wrap items-center gap-2">
-        <span className={`rounded-[4px] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${forte ? 'bg-red-400 text-white' : 'bg-[#F4A522] text-[#0D0C0D]'}`}>
+        <span className={`rounded-[4px] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${selo}`}>
           {a.direcao === 'queda' ? 'Queda' : 'Alta'} {forte ? 'forte' : 'moderada'}
         </span>
         <span className="text-sm font-semibold text-[#0D0C0D]">{NOME_INDICADOR[a.indicador]} · {dataBR(a.data)}</span>
@@ -68,7 +72,9 @@ function Item({ a }: { a: Anomalia }) {
 
 export function DetalhesAlerta({ dias }: { dias: Dia[] }) {
   const anomalias = detectarAnomalias(dias)
-  const fortes = anomalias.filter((a) => a.severidade === 'forte').length
+  const negativas = anomalias.filter((a) => !ehPositiva(a))
+  const positivas = anomalias.length - negativas.length
+  const fortes = negativas.filter((a) => a.severidade === 'forte').length
 
   return (
     <details className="group rounded-[12px] border border-[#E5E7EB] bg-white shadow-[0_2px_8px_rgba(0,0,0,0.07)]">
@@ -76,7 +82,7 @@ export function DetalhesAlerta({ dias }: { dias: Dia[] }) {
         <span className="flex flex-wrap items-center gap-2">
           <span className="text-base md:text-lg font-medium text-[#0D0C0D]">Detalhes de alerta</span>
           <span className="rounded-[4px] bg-[#F7F7F7] px-2 py-0.5 text-xs text-[#666666]">
-            {anomalias.length === 0 ? 'nenhuma anomalia' : `${anomalias.length} ${anomalias.length === 1 ? 'anomalia' : 'anomalias'}${fortes ? ` · ${fortes} forte${fortes > 1 ? 's' : ''}` : ''}`}
+            {anomalias.length === 0 ? 'nenhuma anomalia' : `${negativas.length} ${negativas.length === 1 ? 'alerta' : 'alertas'}${fortes ? ` (${fortes} forte${fortes > 1 ? 's' : ''})` : ''} · ${positivas} ${positivas === 1 ? 'positiva' : 'positivas'}`}
           </span>
         </span>
         <ChevronDown size={18} className="shrink-0 text-[#666666] transition-transform duration-150 group-open:rotate-180 motion-reduce:transition-none" />

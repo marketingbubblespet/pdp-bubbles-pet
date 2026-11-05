@@ -2,7 +2,7 @@
 // Dia de referência = último dia antes de hoje com receita preenchida.
 // Comparações usam a receita do Groomer (a planilha do Tutor ainda chega incompleta).
 import { formatMoney, formatPct } from '@/lib/planos/format'
-import { detectarAnomalias, menos7 } from '@/lib/planos/anomalias'
+import { detectarAnomalias, ehPositiva, menos7 } from '@/lib/planos/anomalias'
 import { ritmoMeta, type Indicadores } from '@/lib/planos/indicadores'
 
 const dataBR = (d: string) => `${d.slice(8)}/${d.slice(5, 7)}`
@@ -27,7 +27,8 @@ export function ResumoDia({ dados, hoje }: { dados: Indicadores; hoje: string })
   const semana = dados.dias.find((d) => d.data === menos7(ref.data))?.receitaB2B ?? null
   const rel = (b: number | null) => (b != null && b > 0 ? (ref.receitaB2B! - b) / b : null)
   const r = ritmoMeta(dados, hoje)
-  const alertas = detectarAnomalias(dados.dias).filter((a) => a.data === ref.data)
+  // Só os negativos: variação boa não é alerta.
+  const alertas = detectarAnomalias(dados.dias).filter((a) => a.data === ref.data && !ehPositiva(a))
   const fortes = alertas.filter((a) => a.severidade === 'forte').length
 
   return (

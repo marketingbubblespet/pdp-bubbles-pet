@@ -30,6 +30,10 @@ export function menos7(data: string): string {
   return t.toISOString().slice(0, 10)
 }
 
+// Variação boa para o negócio: alta em qualquer indicador, menos investimento (gastar mais
+// não é bom por si só; alta ou queda de investimento sempre pede verificação).
+export const ehPositiva = (a: Anomalia) => a.direcao === 'alta' && a.indicador !== 'investimento'
+
 const div = (a: number | null, b: number | null) => (a != null && b != null && b > 0 ? a / b : null)
 
 // Valor de cada indicador num dia (null = ainda sem os números necessários).
