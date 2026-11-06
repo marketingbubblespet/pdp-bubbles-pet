@@ -1,9 +1,11 @@
 // Índice da Black November 2026: todas as páginas internas da Black num lugar só, com senha (lembrada no navegador).
 // Mesmo padrão de /anuncios-black-november: rota que devolve um HTML pronto, fora do Google.
 // A senha só esconde a lista de quem cair no link; as páginas em si continuam acessíveis pelo endereço.
+import { comFavicon } from '@/lib/favicon-html'
 
 const PRINCIPAIS = [
   ['/apresentacao-black-november', 'Planejamento Black November', 'Plano completo da Black 2026 (apresentação à diretoria, com senha própria).'],
+  ['/plano-aplicacao-google-black-november', 'Google Ads · plano de aplicação (temporário)', 'Passo a passo com checklist para subir tudo em 07/11: Merchant, Editor, ajustes à mão e PMax da Black.'],
   ['/estrategia-google-ads', 'Estratégia Google Ads', 'Execução, campanhas, textos, Merchant e o porquê de cada decisão.'],
   ['/estrategia-meta-ads', 'Estratégia Meta Ads', 'Campanhas em ABO, públicos, verba por semana, criativos e calendário.'],
 ]
@@ -60,7 +62,7 @@ else document.getElementById('erro').textContent='Senha incorreta.'});
 </script></body></html>`
 
 export async function GET() {
-  return new Response(HTML, {
+  return new Response(comFavicon(HTML), {
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Robots-Tag': 'noindex, nofollow' },
   })
 }

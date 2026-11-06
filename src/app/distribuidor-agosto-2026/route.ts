@@ -1,5 +1,6 @@
+import { comFavicon } from '@/lib/favicon-html'
 export async function GET() {
-  return new Response(HTML, {
+  return new Response(comFavicon(HTML), {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
       'X-Robots-Tag': 'noindex, nofollow',

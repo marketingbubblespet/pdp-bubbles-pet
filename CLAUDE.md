@@ -46,5 +46,8 @@ Regra do gestor (04/11/26). Toda página do site, inclusive as rotas que devolve
 
 - **Fonte única:** `src/app/icon.svg`. O `src/app/favicon.ico` é gerado a partir dele (16 a 256 px) e precisa ser **o mesmo desenho**. Mudou o `icon.svg`, regerar o `.ico`.
 - **Por que deu errado antes:** o projeto nasceu do `create-next-app`, que traz um `favicon.ico` padrão da Vercel. Em 25/06/26 entrou o `icon.svg` da marca, mas o `.ico` antigo ficou. As páginas do Next usam o `icon.svg` pelo layout. As rotas `route.ts` (planos, anúncios, relatórios, validação) não passam pelo layout, então o navegador busca `/favicon.ico` e recebia o da Vercel.
-- **Página nova em `route.ts`:** não precisa declarar ícone, o `/favicon.ico` já é a patinha. Não criar outro `favicon.ico`, `icon.png` ou `apple-icon` com outro desenho.
-- **Conferir antes de dar a página como pronta:** abrir `/favicon.ico` e a página nova; se aparecer outro símbolo, corrigir antes do commit.
+- **Por que voltou depois de corrigido (06/11/26):** trocar o `/favicon.ico` não basta. Página sem `<link rel="icon">` faz o navegador usar o ícone que guardou em cache para o site, e o Chrome não renova esse cache sozinho: quem já tinha visto o triângulo continuava vendo.
+- **Página nova em `route.ts`:** passar o HTML por `comFavicon()` de `src/lib/favicon-html.ts`, ex.: `new Response(comFavicon(MEU_HTML), {...})`. A função tira qualquer `<link rel="icon">` do HTML e põe o da patinha com `?v=`, que obriga o navegador a buscar de novo. Os geradores do projeto `bubbles-gerador-de-ads` que escrevem `route.ts` já fazem isso. HTML estático em `public/` declara o mesmo bloco no `<head>`.
+- **Trocou o desenho do ícone:** subir o número em `?v=bubbles-N` no `favicon-html.ts` (e nos HTML de `public/relatorios/`), senão o navegador mantém o antigo.
+- Não criar outro `favicon.ico`, `icon.png` ou `apple-icon` com outro desenho.
+- **Conferir antes de dar a página como pronta:** abrir a página nova e ver a patinha na aba; se aparecer outro símbolo, corrigir antes do commit.
