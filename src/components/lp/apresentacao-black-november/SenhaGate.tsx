@@ -3,7 +3,7 @@
 // É uma trava de navegação, não segurança de verdade: a senha fica no código.
 import { useState, useSyncExternalStore, type FormEvent, type ReactNode } from 'react'
 
-const PASSWORD = 'black2026'
+const PASSWORD = 'mariane'
 const SESSION_KEY = 'apresentacao_black_unlocked'
 
 function subscribe() {
@@ -13,7 +13,7 @@ function subscribe() {
 export function SenhaGate({ children }: { children: ReactNode }) {
   const stored = useSyncExternalStore(
     subscribe,
-    () => sessionStorage.getItem(SESSION_KEY) === '1',
+    () => localStorage.getItem(SESSION_KEY) === '1',
     () => null,
   )
   const [manualUnlock, setManualUnlock] = useState(false)
@@ -23,7 +23,7 @@ export function SenhaGate({ children }: { children: ReactNode }) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (input === PASSWORD) {
-      sessionStorage.setItem(SESSION_KEY, '1')
+      localStorage.setItem(SESSION_KEY, '1')
       setManualUnlock(true)
     } else {
       setError(true)
