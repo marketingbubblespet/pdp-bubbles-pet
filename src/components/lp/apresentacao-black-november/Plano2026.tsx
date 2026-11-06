@@ -161,7 +161,7 @@ export function MetaAds() {
       </Bloco>
       <Bloco titulo="Criativos e banners" nota="Banners do site já briefados: 3 principais (1920x500 e 745x850) e 3 secundários (500x500).">
         <div className="mb-4 flex flex-wrap gap-3">
-          <LinkInterno href="/criativos-black-november">Ver os 41 criativos e o N01</LinkInterno>
+          <LinkInterno href="/anuncios-black-november">Ver os anúncios da Meta</LinkInterno>
         </div>
         <Cards
           colunas={3}

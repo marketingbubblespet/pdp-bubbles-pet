@@ -91,6 +91,14 @@ const nextConfig: NextConfig = {
         destination: '/masterclass/penteados-que-encantam',
         permanent: false,
       },
+      // Black November 2026: páginas renomeadas e páginas de apoio encerradas (06/11/26)
+      { source: '/plano-meta-black-november', destination: '/estrategia-meta-ads', permanent: true },
+      { source: '/plano-google-black-november', destination: '/estrategia-google-ads', permanent: true },
+      { source: '/criativos-black-november', destination: '/anuncios-black-november', permanent: true },
+      { source: '/tarefa-imagens-pmax-black-november', destination: '/anuncios-black-november', permanent: true },
+      { source: '/validacao-imagens-black-november', destination: '/anuncios-black-november', permanent: true },
+      { source: '/validacao-video-bancada-black-november', destination: '/roteiros-pendentes-black-november', permanent: true },
+      { source: '/validacao-video-bancada-black-november-2', destination: '/roteiros-pendentes-black-november', permanent: true },
     ]
   },
   images: {

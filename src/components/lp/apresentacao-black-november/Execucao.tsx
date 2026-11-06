@@ -260,7 +260,7 @@ export function Proximos() {
       />
       <Bloco titulo="Material de apoio">
         <div className="flex flex-wrap gap-3">
-          <LinkInterno href="/criativos-black-november">Criativos da Meta</LinkInterno>
+          <LinkInterno href="/anuncios-black-november">Anúncios da Meta</LinkInterno>
           <LinkInterno href="/site-black-november">Propostas de site</LinkInterno>
           <LinkInterno href="/projecao-black-november">Projeção completa</LinkInterno>
         </div>

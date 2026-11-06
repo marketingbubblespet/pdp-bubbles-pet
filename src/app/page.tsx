@@ -143,12 +143,6 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
   },
   {
     tipo: 'rota',
-    href: '/criativos-black-november',
-    label: 'Criativos · Meta Ads · Black November 2026 (groomers)',
-    description: '22 estáticos e 16 vídeos (lacunas para a produção) em 8 grupos, mais remarketing com 2 carrosséis e 1 estático. Filtros por grupo e por formato. Página interna, escondida do Google.',
-  },
-  {
-    tipo: 'rota',
     href: '/apresentacao-black-november',
     label: 'Apresentação · Plano da Black November 2026 (diretoria)',
     description: 'Plano completo para a diretoria em formato de site: Black 2025, mercado, oferta, Meta, Google, site, projeção interativa, plano de ação, riscos e próximos passos. Modo apresentação com roteiro de fala e cronômetro. Com senha, escondida do Google.',
@@ -173,8 +167,8 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
   },
   {
     tipo: 'rota',
-    href: '/plano-meta-black-november',
-    label: 'Plano Meta Ads · Black November 2026',
+    href: '/estrategia-meta-ads',
+    label: 'Estratégia Meta Ads · Black November 2026',
     description: 'Plano da campanha na Meta: 4 campanhas em ABO, públicos com os nomes da conta, verba por dia e semana, criativos que sobem e pendentes, calendário e operação. Página interna, escondida do Google.',
   },
   {
@@ -182,6 +176,18 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
     href: '/anuncios-black-november',
     label: 'Subir anúncios · Meta Ads · Black November 2026',
     description: 'Anúncios prontos com nome, texto, título e destino para copiar, artes para baixar, marcação de "no ar" por conjunto e lista de pendentes. Página interna, escondida do Google.',
+  },
+  {
+    tipo: 'rota',
+    href: '/roteiros-pendentes-black-november',
+    label: 'Roteiros pendentes · vídeos · Black November 2026',
+    description: 'Um card por anúncio de vídeo (cada gancho é um anúncio), com roteiro, falas, elementos de tela e texto do anúncio, e âncora #adNN para as tarefas. Página interna, escondida do Google.',
+  },
+  {
+    tipo: 'rota',
+    href: '/estrategia-google-ads',
+    label: 'Estratégia Google Ads · Black November 2026',
+    description: 'Plano da campanha no Google Ads da Black November. Página interna, escondida do Google.',
   },
 ]
 

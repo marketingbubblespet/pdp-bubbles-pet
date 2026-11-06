@@ -1,4 +1,4 @@
-// Validação Meta: rota que devolve HTML pronto, fora do Google (mesmo padrão de /validacao-imagens-black-november).
+// Validação Meta: rota que devolve HTML pronto, fora do Google (mesmo padrão de /anuncios-black-november).
 import { VALIDACAOCRIATIVOS1111BLACKNOVEMBER2_HTML } from '@/lib/validacao-criativos-1111-black-november-2'
 
 export async function GET() {
