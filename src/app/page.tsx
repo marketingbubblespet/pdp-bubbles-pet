@@ -143,6 +143,12 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
   },
   {
     tipo: 'rota',
+    href: '/black-november-26',
+    label: 'Black November 2026 · índice de todas as páginas',
+    description: 'Planejamento, estratégias Google e Meta, todos os anúncios e as páginas de apoio num lugar só. Com senha, escondida do Google.',
+  },
+  {
+    tipo: 'rota',
     href: '/apresentacao-black-november',
     label: 'Apresentação · Plano da Black November 2026 (diretoria)',
     description: 'Plano completo para a diretoria em formato de site: Black 2025, mercado, oferta, Meta, Google, site, projeção interativa, plano de ação, riscos e próximos passos. Modo apresentação com roteiro de fala e cronômetro. Com senha, escondida do Google.',

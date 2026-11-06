@@ -99,6 +99,8 @@ const nextConfig: NextConfig = {
       { source: '/validacao-imagens-black-november', destination: '/anuncios-black-november', permanent: true },
       { source: '/validacao-video-bancada-black-november', destination: '/roteiros-pendentes-black-november', permanent: true },
       { source: '/validacao-video-bancada-black-november-2', destination: '/roteiros-pendentes-black-november', permanent: true },
+      { source: '/validacao-criativos-1111-black-november', destination: '/roteiros-pendentes-black-november', permanent: true },
+      { source: '/validacao-criativos-1111-black-november-2', destination: '/roteiros-pendentes-black-november', permanent: true },
     ]
   },
   images: {
