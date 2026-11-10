@@ -38,13 +38,13 @@
 // ============================================================================
 const CONFIG = {
   PLANILHAS: {
-    B2B: { nome: 'Groomer (B2B)', id: '1FQv40SQNB5iIG2sh-FTnASGYVqYs0qANW7_KRPRdNPg', aba: 'NOV26' },
-    B2C: { nome: 'Tutor (Care/B2C)', id: '1YwORrKs1goSxIxaLBZAPI3nwci1HmERs6cgqe0Z_XRI', aba: 'NOV26' },
+    B2B: { nome: 'Groomer (B2B)', id: '1FQv40SQNB5iIG2sh-FTnASGYVqYs0qANW7_KRPRdNPg', aba: 'NOV/26' },
+    B2C: { nome: 'Tutor (Care/B2C)', id: '1YwORrKs1goSxIxaLBZAPI3nwci1HmERs6cgqe0Z_XRI', aba: 'NOV/26' },
   },
   ANO: 2026,
   MES: 11,
   NOME_MES: 'Novembro 2026',
-  META_FATURAMENTO: 560000, // Groomer + Tutor
+  META_FATURAMENTO: 560000, // meta do mês para o faturamento SOMADO de Groomer + Tutor (decisão do Gabriel)
   DATA_FIM: '2026-12-02', // a partir deste dia o script não faz mais nada (01/12 ainda manda o resumo de 30/11)
   FUSO: 'America/Sao_Paulo',
   EMAILS: ['gabriel@bubbles.com.br', 'mariane@bubbles.com.br'],
@@ -76,7 +76,7 @@ const NOME_NO_SITE = {
   B2C: { receita: 'receitaB2C', faturada: 'faturadaB2C', pedidos: 'pedidosB2C', novos: 'novosB2C', recorrentes: 'recorrentesB2C', sessoes: 'sessoesB2C', investMeta: 'investMetaB2C', investGoogle: 'investGoogleB2C' },
 };
 
-const VERSAO = 1;
+const VERSAO = 2; // v2: data lida pelo texto exibido (corrige o deslocamento de 1 dia da v1)
 const CACHE_CHAVE = 'payload_v' + VERSAO;
 const CACHE_SEGUNDOS = 120;
 
@@ -158,15 +158,27 @@ function lerPlanilha_(loja, avisos) {
 
   // Lê só as primeiras 60 linhas (o mês tem 30 dias + cabeçalhos) e todas as colunas usadas.
   const ultimaColuna = Math.min(aba.getLastColumn(), 200);
-  const valores = aba.getRange(1, 1, Math.min(aba.getLastRow(), 60), ultimaColuna).getValues();
+  const faixa = aba.getRange(1, 1, Math.min(aba.getLastRow(), 60), ultimaColuna);
+  const valores = faixa.getValues();
+  // Texto exibido nas células: usado para a DATA, que assim é lida exatamente como a pessoa vê
+  // ("01/11/2026"), sem depender de fuso horário (foi o fuso que deslocou os dias na v1).
+  const exibidos = faixa.getDisplayValues();
 
   const mapa = mapearColunas_(valores, cfg.nome, avisos);
   if (!mapa) return {};
 
   const porData = {};
+  let avisouFuso = false;
   for (let r = mapa.linhaCabecalho + 1; r < valores.length; r++) {
     const linha = valores[r];
-    const data = paraDataISO_(linha[mapa.colunas.data], fusoPlanilha);
+    const colData = mapa.colunas.data;
+    const dataExibida = paraDataISO_(String(exibidos[r][colData]), fusoPlanilha);
+    const dataValor = paraDataISO_(linha[colData], fusoPlanilha);
+    const data = dataExibida || dataValor;
+    if (dataExibida && dataValor && dataExibida !== dataValor && !avisouFuso) {
+      avisos.push(cfg.nome + ': data exibida (' + dataExibida + ') difere da data interna (' + dataValor + '); usando a exibida.');
+      avisouFuso = true;
+    }
     if (!data) continue; // linha TOTAL, vazia ou de outro mês
     const registro = {};
     COLUNAS.forEach(function (c) {

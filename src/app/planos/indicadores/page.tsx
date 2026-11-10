@@ -13,6 +13,7 @@ import { COR } from '@/components/lp/indicadores/cores'
 import { Animacoes } from '@/components/lp/indicadores/Animacoes'
 import { DetalhesAlerta } from '@/components/lp/indicadores/DetalhesAlerta'
 import { ResumoDia } from '@/components/lp/indicadores/ResumoDia'
+import { Pendencias } from '@/components/lp/indicadores/Pendencias'
 
 export const metadata = {
   title: 'Indicadores · Mídia paga',
@@ -65,6 +66,7 @@ export default async function IndicadoresPage() {
             <p className="text-sm text-[#666666]">
               Atualização manual feita: <span className="font-semibold text-[#0D0C0D]">{formatDataHora(dados.ultimaEdicaoManual)}</span>
             </p>
+            <Pendencias dias={dados.dias} hoje={hoje} />
           </div>
           <p className="mt-1 text-sm text-[#666666]">
             Todos os números somam Groomer e Tutor (Care), menos a % de aprovação, que é do Groomer. Passe o mouse nos cards para ver cada loja.
