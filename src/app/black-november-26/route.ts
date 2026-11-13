@@ -4,6 +4,7 @@
 import { comFavicon } from '@/lib/favicon-html'
 
 const PRINCIPAIS = [
+  ['/relatorio-1111-black-november', 'Relatório 11.11 (pico)', 'O dia de pico: receita, pedidos, hora a hora, produtos, Meta, Google, a ressaca pós-11.11 e a live.'],
   ['/apresentacao-black-november', 'Planejamento Black November', 'Plano completo da Black 2026 (apresentação à diretoria, com senha própria).'],
   ['/plano-aplicacao-google-black-november', 'Google Ads · plano de aplicação (temporário)', 'Passo a passo com checklist para subir tudo em 07/11: Merchant, Editor, ajustes à mão e PMax da Black.'],
   ['/estrategia-google-ads', 'Estratégia Google Ads', 'Execução, campanhas, textos, Merchant e o porquê de cada decisão.'],
