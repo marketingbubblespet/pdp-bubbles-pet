@@ -24,7 +24,7 @@ button small{display:block;font-weight:400;opacity:.75;font-size:12px}button.ver
 ol{margin:6px 0 0 20px;padding:0}label{font-size:14px}select,input{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--li);background:var(--bg);color:var(--tx)}
 </style>
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','${PIXEL}');fbq('track','PageView',{},{eventID:'teste-pv-'+Date.now()});</script>
+fbq('init','${PIXEL}');fbq('track','PageView',{},{eventID:'pageview-'+Date.now()});</script>
 </head><body>
 <header><div class="in"><span class="selo">VERSÃO 2 · DISPARO REAL</span><h1>Teste do pixel · Linha Care</h1><p>Pixel ${PIXEL}. Um botão por evento, com produto, valor e event_id de teste.</p></div></header>
 <main>
@@ -62,10 +62,10 @@ function escreve(t){var d=new Date();log.textContent=d.toLocaleTimeString('pt-BR
 escreve('PageView enviado ao carregar a página');
 document.querySelectorAll('button[data-ev]').forEach(function(b){b.addEventListener('click',function(){
   var ev=b.getAttribute('data-ev'),p=document.getElementById('prod').value.split('|'),q=Math.max(1,parseInt(document.getElementById('qtd').value,10)||1);
-  var preco=parseFloat(p[2]),valor=Math.round(preco*q*100)/100,eid='teste-'+ev.toLowerCase()+'-'+Date.now();
+  var preco=parseFloat(p[2]),valor=Math.round(preco*q*100)/100,eid=ev.toLowerCase()+'-'+Date.now()+'-'+Math.floor(Math.random()*1e6);
   var dados={content_ids:[p[0]],content_type:'product',content_name:p[1],contents:[{id:p[0],quantity:q,item_price:preco}],value:valor,currency:'BRL',num_items:q};
   if(ev==='Search'){dados={search_string:'shampoo care',content_ids:[p[0]],value:valor,currency:'BRL'}}
-  if(ev==='Lead'||ev==='CompleteRegistration'){dados={value:0,currency:'BRL',content_name:'teste pixel care'}}
+  if(ev==='Lead'||ev==='CompleteRegistration'){dados={value:0,currency:'BRL',content_name:'Linha Care'}}
   if(ev==='PageView'){dados={}}
   if(typeof fbq!=='function'){escreve('ERRO: o pixel não carregou (bloqueador de anúncios?)');return}
   fbq('track',ev,dados,{eventID:eid});
