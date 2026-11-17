@@ -5,6 +5,7 @@ import { comFavicon } from '@/lib/favicon-html'
 
 const PRINCIPAIS = [
   ['/roteiros-black-week', 'Black Week · roteiros e criativos (23 a 30/11)', 'Estratégia da última semana, grupos, estáticos, roteiros com ganchos e motions para validar e gerar o prompt de ajuste.'],
+  ['/roteiros-black-week-ajustes', 'Black Week · antes e depois dos ajustes', 'Só o que mudou nos criativos depois dos comentários da Mariane, com espaço para novos comentários.'],
   ['/relatorio-black-november', 'Relatório de acompanhamento', 'Edição mais recente (01 a 14/11), com botão para as edições anteriores.'],
   ['/relatorio-1111-black-november', 'Relatório 11.11 (pico)', 'O dia de pico: receita, pedidos, hora a hora, produtos, Meta, Google, a ressaca pós-11.11 e a live.'],
   ['/apresentacao-black-november', 'Planejamento Black November', 'Plano completo da Black 2026 (apresentação à diretoria, com senha própria).'],
