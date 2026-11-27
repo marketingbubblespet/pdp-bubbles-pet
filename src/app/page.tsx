@@ -131,6 +131,24 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
   },
   {
     tipo: 'rota',
+    href: '/distribuidor-outubro-2026',
+    label: 'Relatório · Captação de Distribuidores · outubro 2026 (estrutura padrão)',
+    description: 'Estrutura padrão desde 27/11/26: metas no topo (6 novos e R$ 70 mil), 9 seções, navegação por mês, mapa por estado e criativos com foto. Gerada por src/lib/relatorio-distribuidor/render-v3.ts.',
+  },
+  {
+    tipo: 'rota',
+    href: '/distribuidor-setembro-2026-2',
+    label: 'Relatório · Captação de Distribuidores · setembro 2026 (estrutura padrão)',
+    description: 'Setembro refeito na estrutura padrão, com a campanha de WhatsApp e o mapa por estado completo.',
+  },
+  {
+    tipo: 'rota',
+    href: '/distribuidor-agosto-2026-4',
+    label: 'Relatório · Captação de Distribuidores · agosto 2026 (estrutura padrão)',
+    description: 'Agosto na estrutura padrão. A versão de 16 seções, usada na comparação, segue em /distribuidor-agosto-2026-3.',
+  },
+  {
+    tipo: 'rota',
     href: '/estudos-distribuidor-care',
     label: 'Estudos · Distribuidores da Linha Care',
     description: 'Resumo de 7 estudos de mercado (concorrência, ICP, landing page, Meta Ads, cosméticos humanos, Google Ads e SLA comercial), com síntese para a diretoria. Página interna, escondida do Google.',
