@@ -1,5 +1,5 @@
 // src/lib/relatorio-distribuidor/2026-09-v2.ts
-// Setembro de 2026 na estrutura nova (/distribuidor-setembro-2026-2). Parte do arquivo de
+// Setembro de 2026 na estrutura nova (/relatorio-distribuidor-setembro26). Parte do arquivo de
 // setembro (2026-09.ts, que segue alimentando /distribuidor-setembro-2026 sem mudança) e
 // acrescenta o que a extração de 27/11/2026 trouxe:
 // - a campanha de mensagem no WhatsApp, que gastou em setembro e não estava no arquivo original;

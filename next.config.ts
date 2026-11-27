@@ -101,6 +101,10 @@ const nextConfig: NextConfig = {
       { source: '/validacao-video-bancada-black-november-2', destination: '/roteiros-pendentes-black-november', permanent: true },
       { source: '/validacao-criativos-1111-black-november', destination: '/roteiros-pendentes-black-november', permanent: true },
       { source: '/validacao-criativos-1111-black-november-2', destination: '/roteiros-pendentes-black-november', permanent: true },
+      // Relatório de distribuidores: endereços da estrutura padrão renomeados em 27/11/26
+      { source: '/distribuidor-outubro-2026', destination: '/relatorio-distribuidor-outubro26', permanent: true },
+      { source: '/distribuidor-setembro-2026-2', destination: '/relatorio-distribuidor-setembro26', permanent: true },
+      { source: '/distribuidor-agosto-2026-4', destination: '/relatorio-distribuidor-agosto26', permanent: true },
     ]
   },
   images: {

@@ -131,19 +131,25 @@ const relatorios: Array<{ tipo: 'rota' | 'gerado'; href: string; label: string; 
   },
   {
     tipo: 'rota',
-    href: '/distribuidor-outubro-2026',
+    href: '/relatorio-distribuidor',
+    label: 'Relatório · Captação de Distribuidores · mês mais novo',
+    description: 'Endereço fixo: mostra sempre o último relatório publicado (o primeiro mês de MESES_V3 em src/lib/relatorio-distribuidor/v3.ts).',
+  },
+  {
+    tipo: 'rota',
+    href: '/relatorio-distribuidor-outubro26',
     label: 'Relatório · Captação de Distribuidores · outubro 2026 (estrutura padrão)',
     description: 'Estrutura padrão desde 27/11/26: metas no topo (6 novos e R$ 70 mil), 9 seções, navegação por mês, mapa por estado e criativos com foto. Gerada por src/lib/relatorio-distribuidor/render-v3.ts.',
   },
   {
     tipo: 'rota',
-    href: '/distribuidor-setembro-2026-2',
+    href: '/relatorio-distribuidor-setembro26',
     label: 'Relatório · Captação de Distribuidores · setembro 2026 (estrutura padrão)',
     description: 'Setembro refeito na estrutura padrão, com a campanha de WhatsApp e o mapa por estado completo.',
   },
   {
     tipo: 'rota',
-    href: '/distribuidor-agosto-2026-4',
+    href: '/relatorio-distribuidor-agosto26',
     label: 'Relatório · Captação de Distribuidores · agosto 2026 (estrutura padrão)',
     description: 'Agosto na estrutura padrão. A versão de 16 seções, usada na comparação, segue em /distribuidor-agosto-2026-3.',
   },

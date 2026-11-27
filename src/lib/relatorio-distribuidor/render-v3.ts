@@ -10,7 +10,7 @@
 // - "Definições e fontes" recolhida no fim;
 // - seções numeradas e, no celular, barra fixa com o nome da seção que está na tela.
 // A opção `estrutura: 'enxuta'` monta a mesma página em 9 seções (prévia em
-// /distribuidor-agosto-2026-4), para comparar com as 16 da estrutura completa.
+// /relatorio-distribuidor-agosto26), para comparar com as 16 da estrutura completa.
 import type { Campanha, Criativo, MesRef, Rede, RelatorioDistribuidor } from './tipos'
 import { CSS } from './estilos'
 import {
@@ -50,7 +50,7 @@ export interface Pendencia {
 export interface OpcoesV3 {
   meses: MesRelatorio[]
   // 'completa' (padrão): as 16 seções, uma por assunto (/distribuidor-agosto-2026-3).
-  // 'enxuta': 9 seções, juntando as que tratam do mesmo assunto (/distribuidor-agosto-2026-4).
+  // 'enxuta': 9 seções, juntando as que tratam do mesmo assunto (/relatorio-distribuidor-agosto26).
   estrutura?: 'completa' | 'enxuta'
   // Só na estrutura enxuta. Sem lista, a página monta as pendências do que o mês deixou em aberto.
   pendencias?: Pendencia[]
@@ -641,6 +641,29 @@ const CSS_V3 = `
   }
   @media print { .barra-secao { display: none !important; } }
 
+  /* Ajustes da checagem de UX de 27/11/26 (celular e tablet). */
+  /* Grupo de 5 cartões da visão geral: 3 + 2 (o último ocupa 2) em vez de deixar um sozinho. */
+  @media (min-width: 641px) and (max-width: 1239px) {
+    .pagina main .kpis:has(> .kpi:nth-child(5):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pagina main .kpis:has(> .kpi:nth-child(5):last-child) > .kpi:last-child { grid-column: span 2; }
+  }
+  @media (max-width: 640px) {
+    .pagina main .kpis:has(> .kpi:nth-child(5):last-child) > .kpi:last-child { grid-column: span 2; }
+    /* Plano anterior: o selo em cima do texto, para o texto usar a largura toda. */
+    .pagina main .status-item { flex-direction: column; gap: 6px; }
+    /* "Ver anúncio" com área de toque maior. */
+    .pagina main .ad-c .ver { padding: 8px 0 6px; margin-top: 0; }
+  }
+  /* Tabela mais larga que a tela: aviso de que dá para arrastar (o JS marca .rola). */
+  .dica-rolar { display: none; font-size: 0.74rem; color: var(--texto); margin: 0 0 6px; }
+  .dica-rolar.ativa { display: block; }
+  /* Placar do topo no tablet: 3 + 2 em vez de 2 + 2 + 1. */
+  @media (min-width: 560px) and (max-width: 900px) { .pt-nums.cinco { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  /* Letras pequenas demais para ler no celular. */
+  .pagina main .kpi .ant { font-size: 0.68rem; }
+  .pagina main .kpis.distribuidores .tag-sem { font-size: 0.62rem; }
+  .pagina main .ad .sem-foto { font-size: 0.68rem; }
+
   /* Vai bem, vai mal e atenção. */
   .tres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
   @media (max-width: 760px) { .tres { grid-template-columns: 1fr; } }
@@ -815,6 +838,24 @@ ${secoes.join('\n')}
       secao.querySelectorAll('.painel').forEach(function (p) { p.hidden = p.dataset.painel !== b.dataset.painel; });
     });
   });
+  // Tabela mais larga que a tela: mostra o aviso "arraste para o lado" logo acima dela.
+  var tabelas = document.querySelectorAll('main .tabela-wrap');
+  function avisarRolagem() {
+    tabelas.forEach(function (t) {
+      var dica = t.previousElementSibling;
+      if (!dica || !dica.classList.contains('dica-rolar')) {
+        dica = document.createElement('p');
+        dica.className = 'dica-rolar';
+        dica.textContent = 'Arraste a tabela para o lado para ver todas as colunas →';
+        t.parentNode.insertBefore(dica, t);
+      }
+      dica.classList.toggle('ativa', t.scrollWidth > t.clientWidth + 2);
+    });
+  }
+  avisarRolagem();
+  window.addEventListener('resize', avisarRolagem);
+  // As abas Meta/Google mostram tabelas que estavam escondidas.
+  document.addEventListener('click', function () { setTimeout(avisarRolagem, 0); });
   // Sumário: destaca a seção que está na tela e, no celular, escreve o nome dela na barra.
   var linksSumario = document.querySelectorAll('.toc__list a');
   var secaoAtual = document.getElementById('secao-atual');
@@ -825,7 +866,7 @@ ${secoes.join('\n')}
         linksSumario.forEach(function (a) {
           var ativo = a.dataset.tocAlvo === en.target.id;
           a.classList.toggle('is-active', ativo);
-          if (ativo) { a.setAttribute('aria-current', 'true'); secaoAtual.textContent = a.textContent; } else a.removeAttribute('aria-current');
+          if (ativo) { a.setAttribute('aria-current', 'true'); secaoAtual.textContent = (a.querySelector('.toc__texto') || a).textContent; } else a.removeAttribute('aria-current');
         });
       });
     }, { rootMargin: '-20% 0px -70% 0px' });
